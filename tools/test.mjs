@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { startCore } from "@rich-netlist/runtime";
-import { validateEntry } from "./lib/entry.mjs";
+import { validateEntry, authorList } from "./lib/entry.mjs";
 import { checkLicense } from "./lib/license.mjs";
 import { LocalSource } from "./lib/sources.mjs";
 import { resolveEntry, searchCandidates } from "./lib/resolve.mjs";
@@ -43,6 +43,16 @@ test("entries: the fields and their limits", () => {
   bad({ ...base, cover: { cell: "amp", view: "layout" } });
   bad({ ...base, cover: { cell: "amp", extra: 1 } });
   bad({ ...base, tags: ["Upper"] });
+  // authors: a name, or a list of names with an optional https link
+  validateEntry("ota", { ...base, author: [{ name: "Ada", url: "https://github.com/ada" }, { name: "Gemini" }] });
+  bad({ ...base, author: [] });
+  bad({ ...base, author: [{ url: "https://x.org" }] });
+  bad({ ...base, author: [{ name: "Ada", url: "http://x.org" }] });
+  bad({ ...base, author: [{ name: "Ada", url: "javascript:alert(1)" }] });
+  bad({ ...base, author: [{ name: "Ada", mail: "a@b.c" }] });
+  bad({ ...base, author: ["Ada"] });
+  assert.deepEqual(authorList("Ada"), [{ name: "Ada" }]);
+  assert.deepEqual(authorList([{ name: "A", url: "https://a.org" }, { name: "B" }]), [{ name: "A", url: "https://a.org" }, { name: "B" }]);
   validateEntry("ota", { ...base, formats: { "lib/models.inc": "spice" } });
   bad({ ...base, formats: ["top.sp"] });
   bad({ ...base, formats: { "../x.inc": "spice" } });
