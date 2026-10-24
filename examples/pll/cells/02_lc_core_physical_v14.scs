@@ -1,0 +1,216 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt lc_core_physical_v14_pdk110_2 (vp vn b3 b4 b5 b6 b7 vdd vss)
+XP (vdd vp vss) tx_inductor_pi_pdk110_3
+XN (vdd vn vss) tx_inductor_pi_pdk110_3
+CP (vp vss) capacitor c=1e-14
+CN (vn vss) capacitor c=1e-14
+MN0 (vp vn tail vss) nch w=0.00012 l=1.8e-07 ad=5.76e-11 as=5.76e-11 pd=0.00024096 ps=0.00024096 nrd=0.00225 nrs=0.00225 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MN1 (vn vp tail vss) nch w=0.00012 l=1.8e-07 ad=5.76e-11 as=5.76e-11 pd=0.00024096 ps=0.00024096 nrd=0.00225 nrs=0.00225 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MT (tail nfilt vss vss) nch w=0.0003 l=1e-06 ad=1.44e-10 as=1.44e-10 pd=0.00060096 ps=0.00060096 nrd=0.0009 nrs=0.0009 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MR (nb nb vss vss) nch w=2e-05 l=1e-06 ad=9.599999999999999e-12 as=9.599999999999999e-12 pd=4.096e-05 ps=4.096e-05 nrd=0.0135 nrs=0.0135 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+RREF (vdd nb) resistor r=2500
+RF (nb nfilt) resistor r=1000000
+CF (nfilt vss) capacitor c=9.999999999999999e-12
+MA3 (tail nfilt s3 vss) nch w=5e-06 l=1e-06 ad=2.4e-12 as=2.4e-12 pd=1.096e-05 ps=1.096e-05 nrd=0.054 nrs=0.054 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+ME3 (s3 b3 vss vss) nch w=2e-05 l=1.8e-07 ad=9.599999999999999e-12 as=9.599999999999999e-12 pd=4.096e-05 ps=4.096e-05 nrd=0.0135 nrs=0.0135 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MA4 (tail nfilt s4 vss) nch w=9.999999999999999e-06 l=1e-06 ad=4.8e-12 as=4.8e-12 pd=2.096e-05 ps=2.096e-05 nrd=0.027 nrs=0.027 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+ME4 (s4 b4 vss vss) nch w=4e-05 l=1.8e-07 ad=1.92e-11 as=1.92e-11 pd=8.096e-05 ps=8.096e-05 nrd=0.00675 nrs=0.00675 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MA5 (tail nfilt s5 vss) nch w=2e-05 l=1e-06 ad=9.599999999999999e-12 as=9.599999999999999e-12 pd=4.096e-05 ps=4.096e-05 nrd=0.0135 nrs=0.0135 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+ME5 (s5 b5 vss vss) nch w=7.999999999999999e-05 l=1.8e-07 ad=3.84e-11 as=3.84e-11 pd=0.00016096 ps=0.00016096 nrd=0.003375 nrs=0.003375 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MA6 (tail nfilt s6 vss) nch w=4e-05 l=1e-06 ad=1.92e-11 as=1.92e-11 pd=8.096e-05 ps=8.096e-05 nrd=0.00675 nrs=0.00675 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+ME6 (s6 b6 vss vss) nch w=0.00016 l=1.8e-07 ad=7.68e-11 as=7.68e-11 pd=0.00032096 ps=0.00032096 nrd=0.0016875 nrs=0.0016875 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MA7 (tail nfilt s7 vss) nch w=7.999999999999999e-05 l=1e-06 ad=3.84e-11 as=3.84e-11 pd=0.00016096 ps=0.00016096 nrd=0.003375 nrs=0.003375 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+ME7 (s7 b7 vss vss) nch w=0.00032 l=1.8e-07 ad=1.536e-10 as=1.536e-10 pd=0.00064096 ps=0.00064096 nrd=0.00084375 nrs=0.00084375 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $LC_CORE_SYM;
+//
+//   /* --- 1. Circuit Semantics & Static DC Currents --- */
+//   %cc = #MN0(m_pos) #MN1(m_neg) {#MT #MA3 #MA4 #MA5 #MA6 #MA7}(tail_sink) @AS(topology="NMOS_negative_gm") $CROSS_COUPLED_PAIR;
+//   %dp = #MN0(in_p) #MN1(in_n) {#MT}(tail) @AS $DIFFERENTIAL_PAIR;
+//   %cm = {#MR}(ref) {#MT #MA3 #MA4 #MA5 #MA6 #MA7}(out) @AS $CURRENT_MIRROR;
+//   %tbank = #MT(startup_source) {#MA3 #MA4 #MA5 #MA6 #MA7}(switched_sources) {#ME3 #ME4 #ME5 #ME6 #ME7}(enable_switches) @AS(control_bits=5) $TAIL_CURRENT_BANK;
+//   %rcf = {#RREF #RF}(resistors) {#CF}(capacitors) @AS(cutoff_role="16Hz_tail_bias_noise_filter") $RC_NOISE_FILTER;
+//   {#XP #XN}   @AS $MATCHED;
+//   {#CP #CN}   @AS $MATCHED;
+//   {#MN0 #MN1} @AS $MATCHED;
+//   %ax = (32, _);
+//   #XP(a)  #XN(b)  %ax(axis) @AS $MIRRORED;
+//   #CP(a)  #CN(b)  %ax(axis) @AS $MIRRORED;
+//   #MN0(a) #MN1(b) %ax(axis) @AS $MIRRORED;
+//
+//   /* Static DC Bias Currents */
+//   #RREF:1 @CURRENT("in"); #RREF:2 @CURRENT("out");
+//   #MR:d   @CURRENT("in"); #MR:s   @CURRENT("out");
+//   #XP:p   @CURRENT("in"); #XP:n   @CURRENT("out");
+//   #XN:p   @CURRENT("in"); #XN:n   @CURRENT("out");
+//   #MN0:d  @CURRENT("in"); #MN0:s  @CURRENT("out");
+//   #MN1:d  @CURRENT("in"); #MN1:s  @CURRENT("out");
+//   #MT:d   @CURRENT("in"); #MT:s   @CURRENT("out");
+//   #MA3:d  @CURRENT("in"); #MA3:s  @CURRENT("out"); #ME3:d @CURRENT("in"); #ME3:s @CURRENT("out");
+//   #MA4:d  @CURRENT("in"); #MA4:s  @CURRENT("out"); #ME4:d @CURRENT("in"); #ME4:s @CURRENT("out");
+//   #MA5:d  @CURRENT("in"); #MA5:s  @CURRENT("out"); #ME5:d @CURRENT("in"); #ME5:s @CURRENT("out");
+//   #MA6:d  @CURRENT("in"); #MA6:s  @CURRENT("out"); #ME6:d @CURRENT("in"); #ME6:s @CURRENT("out");
+//   #MA7:d  @CURRENT("in"); #MA7:s  @CURRENT("out"); #ME7:d @CURRENT("in"); #ME7:s @CURRENT("out");
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   {&b4 &b5 &b6 &b7} @REMOVE-FROM $PORT_FILL_SET;
+//   %pvp = $IO_PORT @ATTACH &vp => @PLACE(12, 25) => @ORIENT("R0");
+//   %pvn = $IO_PORT @ATTACH &vn => @PLACE(52, 25) => @ORIENT("MY");
+//   %pb  = $IO_PORT @ATTACH &b3 => @PLACE(6, -3)  => @ORIENT("R0");
+//   %pb @TEXT("b<7:3>", key="name");
+//
+//   %sup_bias = $SUPPLY @ATTACH &vdd => @PLACE(6, 22);
+//   %sup_tank = $SUPPLY @ATTACH &vdd => @PLACE(32, 36);
+//   %gnd_cp   = $GROUND @ATTACH &vss => @PLACE(18, 22);
+//   %gnd_cn   = $GROUND @ATTACH &vss => @PLACE(46, 22);
+//   %gnd_main = $GROUND @ATTACH &vss => @PLACE(32, -2);
+//
+//   /* Bias & RC Noise Filter (Left Section) */
+//   #RREF @PLACE(6, 16)  => @ORIENT("R0");
+//   #MR   @PLACE(6, 6)   => @ORIENT("MY");
+//   #RF   @PLACE(13, 11) => @ORIENT("R90");
+//   #CF   @PLACE(18, 6)  => @ORIENT("R0");
+//
+//   /* LC Tank & Cross-Coupled Core (Center Symmetry Axis x=32) */
+//   #XP  @PLACE(26, 30) => @ORIENT("R0");
+//   #XN  @PLACE(38, 30) => @ORIENT("R0");
+//   #CP  @PLACE(18, 28) => @ORIENT("R0");
+//   #CN  @PLACE(46, 28) => @ORIENT("R0");
+//   #MN0 @PLACE(26, 20) => @ORIENT("MY");
+//   #MN1 @PLACE(38, 20) => @ORIENT("R0");
+//
+//   /* Tail Current Bank (Bottom Array: MT at x=32, MA3..MA7 at x=42..82) */
+//   #MT  @PLACE(32, 6)  => @ORIENT("R0");
+//   #MA3 @PLACE(42, 10) => @ORIENT("R0");
+//   #ME3 @PLACE(42, 4)  => @ORIENT("R0");
+//   #MA4 @PLACE(52, 10) => @ORIENT("R0");
+//   #ME4 @PLACE(52, 4)  => @ORIENT("R0");
+//   #MA5 @PLACE(62, 10) => @ORIENT("R0");
+//   #ME5 @PLACE(62, 4)  => @ORIENT("R0");
+//   #MA6 @PLACE(72, 10) => @ORIENT("R0");
+//   #ME6 @PLACE(72, 4)  => @ORIENT("R0");
+//   #MA7 @PLACE(82, 10) => @ORIENT("R0");
+//   #ME7 @PLACE(82, 4)  => @ORIENT("R0");
+//
+//   /* --- 3. Explicit Manhattan Wiring & Bus / Flying-Wire Labels --- */
+//   %jvdd_t = (32, 34);
+//   $JUNCTION @ATTACH %jvdd_t;
+//   &vdd @WIRE { %sup_tank:p %jvdd_t };
+//   &vdd @WIRE { %jvdd_t (26, 34) #XP:p };
+//   &vdd @WIRE { %jvdd_t (38, 34) #XN:p };
+//   &vdd @WIRE { %sup_bias:p #RREF:1 };
+//
+//   /* Differential Tank Nodes VP and VN */
+//   %jvp1 = (18, 25);
+//   %jvp2 = (26, 25);
+//   $JUNCTION @ATTACH %jvp1;
+//   $JUNCTION @ATTACH %jvp2;
+//   &vp @WIRE { %pvp:p %jvp1 %jvp2 #XP:n };
+//   &vp @WIRE { %jvp1 (18, 30) #CP:1 };
+//   &vp @WIRE { %jvp2 #MN0:d };
+//   &vp @WIRE { %jvp2 (30, 25) (30, 23) (34, 23) (34, 20) #MN1:g };
+//
+//   %jvn1 = (38, 25);
+//   %jvn2 = (46, 25);
+//   $JUNCTION @ATTACH %jvn1;
+//   $JUNCTION @ATTACH %jvn2;
+//   &vn @WIRE { #XN:n %jvn1 %jvn2 %pvn:p };
+//   &vn @WIRE { %jvn2 (46, 30) #CN:1 };
+//   &vn @WIRE { %jvn1 #MN1:d };
+//   &vn @WIRE { %jvn1 (34, 25) (34, 24) (30, 24) (30, 20) #MN0:g };
+//
+//   &vss @WIRE { #CP:2 %gnd_cp:p };
+//   &vss @WIRE { #CN:2 %gnd_cn:p };
+//
+//   /* Bias & Filter Wiring */
+//   %jnb1 = (6, 11);
+//   %jnb2 = (9, 11);
+//   $JUNCTION @ATTACH %jnb1;
+//   $JUNCTION @ATTACH %jnb2;
+//   &nb @WIRE { #RREF:2 %jnb1 #MR:d };
+//   &nb @WIRE { %jnb1 %jnb2 #RF:1 };
+//   &nb @WIRE { %jnb2 (9, 6) #MR:g };
+//
+//   %jnf0 = (18, 11);
+//   %jnf1 = (28, 11);
+//   %jnf3 = (38, 11);
+//   %jnf4 = (48, 11);
+//   %jnf5 = (58, 11);
+//   %jnf6 = (68, 11);
+//   $JUNCTION @ATTACH %jnf0;
+//   $JUNCTION @ATTACH %jnf1;
+//   $JUNCTION @ATTACH %jnf3;
+//   $JUNCTION @ATTACH %jnf4;
+//   $JUNCTION @ATTACH %jnf5;
+//   $JUNCTION @ATTACH %jnf6;
+//   &nfilt @WIRE { #RF:2 %jnf0 #CF:1 };
+//   &nfilt @WIRE { %jnf0 %jnf1 (28, 6) #MT:g };
+//   &nfilt @WIRE { %jnf1 %jnf3 %jnf4 %jnf5 %jnf6 (78, 11) (78, 10) #MA7:g };
+//   &nfilt @WIRE { %jnf3 (38, 10) #MA3:g };
+//   &nfilt @WIRE { %jnf4 (48, 10) #MA4:g };
+//   &nfilt @WIRE { %jnf5 (58, 10) #MA5:g };
+//   &nfilt @WIRE { %jnf6 (68, 10) #MA6:g };
+//
+//   /* Common Tail Node */
+//   %jtail0 = (32, 15);
+//   %jtail3 = (42, 15);
+//   %jtail4 = (52, 15);
+//   %jtail5 = (62, 15);
+//   %jtail6 = (72, 15);
+//   $JUNCTION @ATTACH %jtail0;
+//   $JUNCTION @ATTACH %jtail3;
+//   $JUNCTION @ATTACH %jtail4;
+//   $JUNCTION @ATTACH %jtail5;
+//   $JUNCTION @ATTACH %jtail6;
+//   &tail @WIRE { #MN0:s (26, 15) %jtail0 (38, 15) #MN1:s };
+//   &tail @WIRE { %jtail0 #MT:d };
+//   &tail @WIRE { (38, 15) %jtail3 %jtail4 %jtail5 %jtail6 (82, 15) #MA7:d };
+//   &tail @WIRE { %jtail3 #MA3:d };
+//   &tail @WIRE { %jtail4 #MA4:d };
+//   &tail @WIRE { %jtail5 #MA5:d };
+//   &tail @WIRE { %jtail6 #MA6:d };
+//
+//   /* Single-Line Bus Trunk B<7:3> & Flying-Wire Enable Gate Labels */
+//   {&b3 &b4 &b5 &b6 &b7} @WIRE { %pb:p (18, -3) } => @TEXT("B<7:3>") => @SET-STYLE $bus_label_style;
+//   &s3 @WIRE { #MA3:s #ME3:d }; #ME3:g @TEXT("b3", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &s4 @WIRE { #MA4:s #ME4:d }; #ME4:g @TEXT("b4", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &s5 @WIRE { #MA5:s #ME5:d }; #ME5:g @TEXT("b5", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &s6 @WIRE { #MA6:s #ME6:d }; #ME6:g @TEXT("b6", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &s7 @WIRE { #MA7:s #ME7:d }; #ME7:g @TEXT("b7", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   /* Ground Rail */
+//   %jg0 = (18, 0);
+//   %jg1 = (32, 0);
+//   %jg3 = (42, 0);
+//   %jg4 = (52, 0);
+//   %jg5 = (62, 0);
+//   %jg6 = (72, 0);
+//   $JUNCTION @ATTACH %jg0;
+//   $JUNCTION @ATTACH %jg1;
+//   $JUNCTION @ATTACH %jg3;
+//   $JUNCTION @ATTACH %jg4;
+//   $JUNCTION @ATTACH %jg5;
+//   $JUNCTION @ATTACH %jg6;
+//   &vss @WIRE { #MR:s (6, 0) %jg0 %jg1 %jg3 %jg4 %jg5 %jg6 (82, 0) #ME7:s };
+//   &vss @WIRE { %jg0 #CF:2 };
+//   &vss @WIRE { %jg1 #MT:s };
+//   &vss @WIRE { %jg1 %gnd_main:p };
+//   &vss @WIRE { %jg3 #ME3:s };
+//   &vss @WIRE { %jg4 #ME4:s };
+//   &vss @WIRE { %jg5 #ME5:s };
+//   &vss @WIRE { %jg6 #ME6:s };
+//
+//   /* --- 4. Annotations --- */
+//   #RREF @TEXT("2.5 k\Omega", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #RF   @TEXT("1 M\Omega",   key="value", dy=1.8, halign="middle") => @SET-STYLE $param_style;
+//   #CF   @TEXT("10 pF",        key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #CP   @TEXT("10 fF",        key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #CN   @TEXT("10 fF",        key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   (44, 42) @TEXT("lc_core_physical_v14_pdk110_2: Differential NMOS Cross-Coupled LC Core with 5-Bit Switched Tail Bank", halign="middle") => @SET-STYLE $title_style;
+//   (44, 40.2) @TEXT("1 MOhm/10 pF Bias Noise Filter (RF, CF) + Startup Tail (MT: 300u) + Binary Tail Array (MA3..MA7: 5u..80u) Tracking Coarse Cap Code B<7:3>", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends lc_core_physical_v14_pdk110_2

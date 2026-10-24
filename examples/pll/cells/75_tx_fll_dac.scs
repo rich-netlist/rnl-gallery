@@ -1,0 +1,128 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt tx_fll_dac_pdk110_75 (d0 d1 d2 d3 d4 d5 enable out vdd vss)
+MP (vd enable vdd vdd) pch w=2e-05 l=1.8e-07 ad=9.599999999999999e-12 as=9.599999999999999e-12 pd=4.096e-05 ps=4.096e-05 nrd=0.0135 nrs=0.0135 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+XI0 (d0 b0 vd vss) pll_inv_pdk110_59
+XO0 (b0 v0 vd vss) pll_inv_pdk110_76
+RB0 (v0 r0) resistor r=10000
+XI1 (d1 b1 vd vss) pll_inv_pdk110_59
+XO1 (b1 v1 vd vss) pll_inv_pdk110_76
+RB1 (v1 r1) resistor r=10000
+RS1 (r0 r1) resistor r=5000
+XI2 (d2 b2 vd vss) pll_inv_pdk110_59
+XO2 (b2 v2 vd vss) pll_inv_pdk110_76
+RB2 (v2 r2) resistor r=10000
+RS2 (r1 r2) resistor r=5000
+XI3 (d3 b3 vd vss) pll_inv_pdk110_59
+XO3 (b3 v3 vd vss) pll_inv_pdk110_76
+RB3 (v3 r3) resistor r=10000
+RS3 (r2 r3) resistor r=5000
+XI4 (d4 b4 vd vss) pll_inv_pdk110_59
+XO4 (b4 v4 vd vss) pll_inv_pdk110_76
+RB4 (v4 r4) resistor r=10000
+RS4 (r3 r4) resistor r=5000
+XI5 (d5 b5 vd vss) pll_inv_pdk110_59
+XO5 (b5 v5 vd vss) pll_inv_pdk110_76
+RB5 (v5 out) resistor r=10000
+RS5 (r4 out) resistor r=5000
+RT (r0 vss) resistor r=10000
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $FLL_DAC_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %dac = #MP(power_gate) {#XI0 #XI1 #XI2 #XI3 #XI4 #XI5}(input_buffers) {#XO0 #XO1 #XO2 #XO3 #XO4 #XO5}(drive_buffers) {#RS1 #RS2 #RS3 #RS4 #RS5}(series_r) {#RB0 #RB1 #RB2 #RB3 #RB4 #RB5}(shunt_2r) #RT(termination_r) @AS(bits=6, unit_r="5kOhm") $R2R_LADDER_DAC;
+//   {#RB0 #RB1 #RB2 #RB3 #RB4 #RB5 #RT} @AS $MATCHED;
+//   {#RS1 #RS2 #RS3 #RS4 #RS5}         @AS $MATCHED;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   {&d1 &d2 &d3 &d4 &d5} @REMOVE-FROM $PORT_FILL_SET;
+//   %pd   = $IO_PORT @ATTACH &d0     => @PLACE(12, 30) => @ORIENT("R0");
+//   %pd @TEXT("d<5:0>", key="name");
+//   %pen  = $IO_PORT @ATTACH &enable => @PLACE(2, 22)  => @ORIENT("R0");
+//   %pout = $IO_PORT @ATTACH &out    => @PLACE(84, 2)  => @ORIENT("MY");
+//   %sup  = $SUPPLY  @ATTACH &vdd    => @PLACE(6, 26);
+//   %svd  = $SUPPLY  @ATTACH &vd     => @PLACE(6, 16)  => @ORIENT("R180");
+//   %gnd  = $GROUND  @ATTACH &vss    => @PLACE(6, -2);
+//
+//   #MP @PLACE(6, 22) => @ORIENT("R0");
+//   #RT @PLACE(10, 2) => @ORIENT("R270");
+//   #XI0 @PLACE(16, 22) => @ORIENT("R270");
+//   #XO0 @PLACE(16, 14) => @ORIENT("R270");
+//   #RB0 @PLACE(16, 6)  => @ORIENT("R0");
+//   #XI1 @PLACE(28, 22) => @ORIENT("R270");
+//   #XO1 @PLACE(28, 14) => @ORIENT("R270");
+//   #RB1 @PLACE(28, 6)  => @ORIENT("R0");
+//   #RS1 @PLACE(22, 2) => @ORIENT("R90");
+//   #XI2 @PLACE(40, 22) => @ORIENT("R270");
+//   #XO2 @PLACE(40, 14) => @ORIENT("R270");
+//   #RB2 @PLACE(40, 6)  => @ORIENT("R0");
+//   #RS2 @PLACE(34, 2) => @ORIENT("R90");
+//   #XI3 @PLACE(52, 22) => @ORIENT("R270");
+//   #XO3 @PLACE(52, 14) => @ORIENT("R270");
+//   #RB3 @PLACE(52, 6)  => @ORIENT("R0");
+//   #RS3 @PLACE(46, 2) => @ORIENT("R90");
+//   #XI4 @PLACE(64, 22) => @ORIENT("R270");
+//   #XO4 @PLACE(64, 14) => @ORIENT("R270");
+//   #RB4 @PLACE(64, 6)  => @ORIENT("R0");
+//   #RS4 @PLACE(58, 2) => @ORIENT("R90");
+//   #XI5 @PLACE(76, 22) => @ORIENT("R270");
+//   #XO5 @PLACE(76, 14) => @ORIENT("R270");
+//   #RB5 @PLACE(76, 6)  => @ORIENT("R0");
+//   #RS5 @PLACE(70, 2) => @ORIENT("R90");
+//
+//   /* --- 3. Explicit Manhattan & Single-Line Bus Wiring --- */
+//   {&d0 &d1 &d2 &d3 &d4 &d5} @WIRE { %pd:p (76, 30) } => @TEXT("D<5:0>") => @SET-STYLE $bus_label_style;
+//   &enable @WIRE { %pen:p #MP:g };
+//   &vdd    @WIRE { %sup:p #MP:s };
+//   &vd     @WIRE { #MP:d  %svd:p };
+//   &vss    @WIRE { #RT:2 (6, 2) %gnd:p };
+//
+//   %jr0 = (16, 2); %jr1 = (28, 2); %jr2 = (40, 2);
+//   %jr3 = (52, 2); %jr4 = (64, 2); %jout = (76, 2);
+//   $JUNCTION @ATTACH %jr0; $JUNCTION @ATTACH %jr1; $JUNCTION @ATTACH %jr2;
+//   $JUNCTION @ATTACH %jr3; $JUNCTION @ATTACH %jr4; $JUNCTION @ATTACH %jout;
+//   &r0  @WIRE { #RT:1 %jr0 #RB0:2 }; &r0  @WIRE { %jr0 #RS1:1 };
+//   &r1  @WIRE { #RS1:2 %jr1 #RB1:2 }; &r1 @WIRE { %jr1 #RS2:1 };
+//   &r2  @WIRE { #RS2:2 %jr2 #RB2:2 }; &r2 @WIRE { %jr2 #RS3:1 };
+//   &r3  @WIRE { #RS3:2 %jr3 #RB3:2 }; &r3 @WIRE { %jr3 #RS4:1 };
+//   &r4  @WIRE { #RS4:2 %jr4 #RB4:2 }; &r4 @WIRE { %jr4 #RS5:1 };
+//   &out @WIRE { #RS5:2 %jout #RB5:2 }; &out @WIRE { %jout %pout:p };
+//   #RT  @TEXT("10 k\Omega", key="value", dy=-2.2, halign="middle") => @SET-STYLE $param_style;
+//   &d0 @WIRE { (16, 30) #XI0:a } => @TEXT("d0") => @SET-STYLE $fly_label_style;
+//   &b0 @WIRE { #XI0:y #XO0:a };
+//   &v0 @WIRE { #XO0:y #RB0:1 };
+//   #RB0 @TEXT("10 k\Omega", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   &d1 @WIRE { (28, 30) #XI1:a } => @TEXT("d1") => @SET-STYLE $fly_label_style;
+//   &b1 @WIRE { #XI1:y #XO1:a };
+//   &v1 @WIRE { #XO1:y #RB1:1 };
+//   #RB1 @TEXT("10 k\Omega", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #RS1 @TEXT("5 k\Omega", key="value", dy=-2.2, halign="middle") => @SET-STYLE $param_style;
+//   &d2 @WIRE { (40, 30) #XI2:a } => @TEXT("d2") => @SET-STYLE $fly_label_style;
+//   &b2 @WIRE { #XI2:y #XO2:a };
+//   &v2 @WIRE { #XO2:y #RB2:1 };
+//   #RB2 @TEXT("10 k\Omega", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #RS2 @TEXT("5 k\Omega", key="value", dy=-2.2, halign="middle") => @SET-STYLE $param_style;
+//   &d3 @WIRE { (52, 30) #XI3:a } => @TEXT("d3") => @SET-STYLE $fly_label_style;
+//   &b3 @WIRE { #XI3:y #XO3:a };
+//   &v3 @WIRE { #XO3:y #RB3:1 };
+//   #RB3 @TEXT("10 k\Omega", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #RS3 @TEXT("5 k\Omega", key="value", dy=-2.2, halign="middle") => @SET-STYLE $param_style;
+//   &d4 @WIRE { (64, 30) #XI4:a } => @TEXT("d4") => @SET-STYLE $fly_label_style;
+//   &b4 @WIRE { #XI4:y #XO4:a };
+//   &v4 @WIRE { #XO4:y #RB4:1 };
+//   #RB4 @TEXT("10 k\Omega", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #RS4 @TEXT("5 k\Omega", key="value", dy=-2.2, halign="middle") => @SET-STYLE $param_style;
+//   &d5 @WIRE { (76, 30) #XI5:a } => @TEXT("d5") => @SET-STYLE $fly_label_style;
+//   &b5 @WIRE { #XI5:y #XO5:a };
+//   &v5 @WIRE { #XO5:y #RB5:1 };
+//   #RB5 @TEXT("10 k\Omega", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #RS5 @TEXT("5 k\Omega", key="value", dy=-2.2, halign="middle") => @SET-STYLE $param_style;
+//
+//   /* --- 4. Annotations --- */
+//   (44, 34) @TEXT("tx_fll_dac_pdk110_75: Power-Gated 6-Bit R-2R Ladder DAC for FLL Loop-Filter Coarse Voltage Preset", halign="middle") => @SET-STYLE $title_style;
+//   (44, 32.2) @TEXT("Header Switch MP Powers Virtual Supply Rail vd When enable=0 (During FLL Acquisition) and Power-Gates DAC When Acquired (enable=1)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends tx_fll_dac_pdk110_75

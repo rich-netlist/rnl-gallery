@@ -1,0 +1,113 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt ff_fbdelay50_v14_pdk110_22 (d ck qb vdd vss)
+MP0 (p0 d vdd vdd) pch w=2e-06 l=1.8e-07 ad=9.599999999999999e-13 as=9.599999999999999e-13 pd=4.96e-06 ps=4.96e-06 nrd=0.135 nrs=0.135 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MPC0 (b ck p0 vdd) pch w=2e-06 l=1.8e-07 ad=9.599999999999999e-13 as=9.599999999999999e-13 pd=4.96e-06 ps=4.96e-06 nrd=0.135 nrs=0.135 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MN0 (b dn vss vss) nch w=8e-07 l=1.8e-07 ad=3.84e-13 as=3.84e-13 pd=2.56e-06 ps=2.56e-06 nrd=0.3375 nrs=0.3375 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MP1 (a ck vdd vdd) pch w=2e-06 l=1.8e-07 ad=9.599999999999999e-13 as=9.599999999999999e-13 pd=4.96e-06 ps=4.96e-06 nrd=0.135 nrs=0.135 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MN1 (a b n1 vss) nch w=1.6e-06 l=1.8e-07 ad=7.68e-13 as=7.68e-13 pd=4.16e-06 ps=4.16e-06 nrd=0.16875 nrs=0.16875 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MNC1 (n1 ck vss vss) nch w=1.6e-06 l=1.8e-07 ad=7.68e-13 as=7.68e-13 pd=4.16e-06 ps=4.16e-06 nrd=0.16875 nrs=0.16875 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MP2 (qb a vdd vdd) pch w=2e-06 l=1.8e-07 ad=9.599999999999999e-13 as=9.599999999999999e-13 pd=4.96e-06 ps=4.96e-06 nrd=0.135 nrs=0.135 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MNC2 (qb ck n2 vss) nch w=1.6e-06 l=1.8e-07 ad=7.68e-13 as=7.68e-13 pd=4.16e-06 ps=4.16e-06 nrd=0.16875 nrs=0.16875 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MN2 (n2 a vss vss) nch w=1.6e-06 l=1.8e-07 ad=7.68e-13 as=7.68e-13 pd=4.16e-06 ps=4.16e-06 nrd=0.16875 nrs=0.16875 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+RD (d dn) resistor r=50000
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $D_FLIP_FLOP_Q_ONLY;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %tspc = {#MP0 #MPC0 #MN0}(stage1_input) {#MP1 #MN1 #MNC1}(stage2_precharge) {#MP2 #MNC2 #MN2}(stage3_output) {#RD}(feedback_element) @AS(edge="rising", topology="9T_TSPC_with_50k_RC_hold_delay") $TSPC_STAGE;
+//   {#MP0 #MPC0 #MN0} @AS $BRANCH;
+//   {#MP1 #MN1 #MNC1} @AS $BRANCH;
+//   {#MP2 #MNC2 #MN2} @AS $BRANCH;
+//   {#MP0:s #MP1:s #MP2:s} @AS $SUPPLY_HIGH;
+//   {#MN0:s #MNC1:s #MN2:s} @AS $SUPPLY_LOW;
+//   {%pd #MP0 #MP1 #MP2 %pqb} @AS(direction="left-to-right") $FLOW;
+//   /* Dynamic TSPC flip-flop has no static DC bias current; no static DC current annotated */
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pd  = $IO_PORT @ATTACH &d   => @PLACE(-2, 14) => @ORIENT("R0");
+//   %pck = $IO_PORT @ATTACH &ck  => @PLACE(-2, 0)  => @ORIENT("R0");
+//   %pqb = $IO_PORT @ATTACH &qb  => @PLACE(42, 17) => @ORIENT("MY");
+//   %sup = $SUPPLY  @ATTACH &vdd => @PLACE(24, 28);
+//   %gnd = $GROUND  @ATTACH &vss => @PLACE(24, -2);
+//
+//   /* Stage 1 (x=12) */
+//   #MP0  @PLACE(12, 22) => @ORIENT("R0");
+//   #MPC0 @PLACE(12, 16) => @ORIENT("R0");
+//   #MN0  @PLACE(12, 6)  => @ORIENT("R0");
+//   #RD   @PLACE(4, 6)   => @ORIENT("R270");
+//
+//   /* Stage 2 (x=24) */
+//   #MP1  @PLACE(24, 22) => @ORIENT("R0");
+//   #MN1  @PLACE(24, 12) => @ORIENT("R0");
+//   #MNC1 @PLACE(24, 6)  => @ORIENT("R0");
+//
+//   /* Stage 3 (x=36) */
+//   #MP2  @PLACE(36, 22) => @ORIENT("R0");
+//   #MNC2 @PLACE(36, 12) => @ORIENT("R0");
+//   #MN2  @PLACE(36, 6)  => @ORIENT("R0");
+//
+//   /* --- 3. Explicit Manhattan Wiring --- */
+//   %jvdd = (24, 26);
+//   $JUNCTION @ATTACH %jvdd;
+//   &vdd @WIRE { %sup:p %jvdd #MP1:s };
+//   &vdd @WIRE { %jvdd (12, 26) #MP0:s };
+//   &vdd @WIRE { %jvdd (36, 26) #MP2:s };
+//
+//   %jgnd = (24, 2);
+//   $JUNCTION @ATTACH %jgnd;
+//   &vss @WIRE { #MNC1:s %jgnd %gnd:p };
+//   &vss @WIRE { #MN0:s (12, 2) %jgnd };
+//   &vss @WIRE { #MN2:s (36, 2) %jgnd };
+//
+//   /* Internal Stage Nodes */
+//   &p0 @WIRE { #MP0:d #MPC0:s };
+//   &n1 @WIRE { #MN1:s #MNC1:d };
+//   &n2 @WIRE { #MNC2:s #MN2:d };
+//
+//   %jb = (12, 12);
+//   $JUNCTION @ATTACH %jb;
+//   &b @WIRE { #MPC0:d %jb #MN0:d };
+//   &b @WIRE { %jb #MN1:g };
+//
+//   %ja  = (24, 17);
+//   %ja2 = (31, 17);
+//   $JUNCTION @ATTACH %ja;
+//   $JUNCTION @ATTACH %ja2;
+//   &a @WIRE { #MP1:d %ja #MN1:d };
+//   &a @WIRE { %ja %ja2 };
+//   &a @WIRE { %ja2 (31, 22) #MP2:g };
+//   &a @WIRE { %ja2 (31, 6)  #MN2:g };
+//
+//   %jqb = (36, 17);
+//   $JUNCTION @ATTACH %jqb;
+//   &qb @WIRE { #MP2:d %jqb #MNC2:d };
+//   &qb @WIRE { %jqb %pqb:p };
+//
+//   /* Input D and Clock Distribution */
+//   %jd = (1, 14);
+//   $JUNCTION @ATTACH %jd;
+//   &d  @WIRE { %pd:p %jd (1, 22) #MP0:g };
+//   &d  @WIRE { %jd (1, 6) #RD:1 };
+//   &dn @WIRE { #RD:2 #MN0:g };
+//   #RD @TEXT("50 k\Omega", key="value", dy=-2, halign="middle") => @SET-STYLE $param_style;
+//
+//   %jck1 = (8, 0);
+//   %jck2 = (19, 0);
+//   %jck3 = (19, 6);
+//   $JUNCTION @ATTACH %jck1;
+//   $JUNCTION @ATTACH %jck2;
+//   $JUNCTION @ATTACH %jck3;
+//   &ck @WIRE { %pck:p %jck1 (8, 16) #MPC0:g };
+//   &ck @WIRE { %jck1 %jck2 (32, 0) (32, 12) #MNC2:g };
+//   &ck @WIRE { %jck2 %jck3 #MNC1:g };
+//   &ck @WIRE { %jck3 (19, 22) #MP1:g };
+//
+//   /* --- 4. Annotations & Stage Framing --- */
+//   (22, 33) @TEXT("ff_fbdelay50_v14_pdk110_22: 9T TSPC Flip-Flop with 50 kOhm Hold-Delay Resistor", halign="middle") => @SET-STYLE $title_style;
+//   (22, 31.3) @TEXT("Stage 1 (MP0/MPC0/MN0 + RD=50k) -> Stage 2 Precharge (MP1/MN1/MNC1) -> Stage 3 Clocked Inverter (MP2/MNC2/MN2)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends ff_fbdelay50_v14_pdk110_22

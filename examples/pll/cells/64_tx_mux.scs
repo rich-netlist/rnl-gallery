@@ -1,0 +1,56 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt tx_mux_pdk110_64 (a b s y vdd vss)
+XI (s sb vdd vss) pll_inv_pdk110_48
+XT0 (a z sb s vdd vss) pll_tg_pdk110_65
+XT1 (b z s sb vdd vss) pll_tg_pdk110_65
+XB0 (z zb vdd vss) pll_inv_pdk110_48
+XB1 (zb y vdd vss) pll_inv_pdk110_48
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $MUX2_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %mux = {#XT0 #XT1}(mux_cells) @AS(role="2to1_tg_mux_with_buffered_out") $MULTIPLEXER_BANK;
+//   {#XT0 #XT1} @AS $MATCHED;
+//   {#XT0 #XB0 #XB1 %py} @AS(direction="left-to-right") $FLOW;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pa = $IO_PORT @ATTACH &a => @PLACE(2, 18)  => @ORIENT("R0");
+//   %pb = $IO_PORT @ATTACH &b => @PLACE(2, 8)   => @ORIENT("R0");
+//   %ps = $IO_PORT @ATTACH &s => @PLACE(2, 2)   => @ORIENT("R0");
+//   %py = $IO_PORT @ATTACH &y => @PLACE(36, 13) => @ORIENT("MY");
+//
+//   #XI  @PLACE(9, 2)   => @ORIENT("R0");
+//   #XT0 @PLACE(14, 18) => @ORIENT("R0");
+//   #XT1 @PLACE(14, 8)  => @ORIENT("R0");
+//   #XB0 @PLACE(23, 13) => @ORIENT("R0");
+//   #XB1 @PLACE(31, 13) => @ORIENT("R0");
+//
+//   /* --- 3. Primary Datapath Wiring & Flying-Wire Select Labels --- */
+//   &a @WIRE { %pa:p #XT0:a };
+//   &b @WIRE { %pb:p #XT1:a };
+//
+//   %jz = (18, 13);
+//   $JUNCTION @ATTACH %jz;
+//   &z @WIRE { #XT0:b (18, 18) %jz #XB0:a };
+//   &z @WIRE { #XT1:b (18, 8)  %jz };
+//
+//   &zb @WIRE { #XB0:y #XB1:a };
+//   &y  @WIRE { #XB1:y %py:p };
+//
+//   &s  @WIRE { %ps:p #XI:a };
+//   &sb @WIRE { #XI:y (15, 2) } => @TEXT("sb") => @SET-STYLE $fly_label_style;
+//
+//   #XT0:on  @TEXT("sb", dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XT0:off @TEXT("s",  dx=0, dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//   #XT1:on  @TEXT("s",  dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XT1:off @TEXT("sb", dx=0, dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//
+//   /* --- 4. Annotations --- */
+//   (19, 25) @TEXT("tx_mux_pdk110_64: Buffered 2-to-1 Transmission-Gate Multiplexer (772 Instances)", halign="middle") => @SET-STYLE $title_style;
+//   (19, 23.3) @TEXT("Selects a when s=0 (XT0 ON) or b when s=1 (XT1 ON), Restored by Double Inverter Buffer (XB0, XB1)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends tx_mux_pdk110_64

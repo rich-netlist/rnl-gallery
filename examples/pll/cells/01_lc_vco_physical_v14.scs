@@ -1,0 +1,74 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt lc_vco_physical_v14_pdk110_1 (vp vn ctrl b0 b1 b2 b3 b4 b5 b6 b7 vdd vss)
+XL (vp vn b3 b4 b5 b6 b7 vdd vss) lc_core_physical_v14_pdk110_2
+XBP (vp b0 b1 b2 b3 b4 b5 b6 b7 vdd vss) tx_cap_bank_switched_v4_pdk110_4
+XBN (vn b0 b1 b2 b3 b4 b5 b6 b7 vdd vss) tx_cap_bank_switched_v4_pdk110_4
+CVP (vp ctrl) nmoscap lr=2e-06 wr=4.5e-06 mr=1
+CVN (vn ctrl) nmoscap lr=2e-06 wr=4.5e-06 mr=1
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $LC_VCO_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %tank = {#XL}(inductors) {#CVP #CVN}(varactors) {#XBP #XBN}(switched_banks) @AS(mode="differential_LC", tuning_bits=8) $LC_RESONANT_TANK;
+//   {#CVP #CVN} @AS $MATCHED;
+//   {#XBP #XBN} @AS $MATCHED;
+//   %ax = (32, _);
+//   #XBP(a) #XBN(b) %ax(axis) @AS $MIRRORED;
+//   #CVP(a) #CVN(b) %ax(axis) @AS $MIRRORED;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   {&b1 &b2 &b3 &b4 &b5 &b6 &b7} @REMOVE-FROM $PORT_FILL_SET;
+//   %pvp   = $IO_PORT @ATTACH &vp   => @PLACE(4, 28)  => @ORIENT("R0");
+//   %pvn   = $IO_PORT @ATTACH &vn   => @PLACE(60, 28) => @ORIENT("MY");
+//   %pctrl = $IO_PORT @ATTACH &ctrl => @PLACE(4, 18)  => @ORIENT("R0");
+//   %pb    = $IO_PORT @ATTACH &b0   => @PLACE(4, 6)   => @ORIENT("R0");
+//   %pb @TEXT("b<7:0>", key="name");
+//
+//   #XBP @PLACE(14, 14) => @ORIENT("R0");
+//   #CVP @PLACE(23, 22) => @ORIENT("R0");
+//   #XL  @PLACE(32, 14) => @ORIENT("R0");
+//   #CVN @PLACE(41, 22) => @ORIENT("R0");
+//   #XBN @PLACE(50, 14) => @ORIENT("R0");
+//
+//   /* --- 3. Explicit Manhattan & Single-Line Bus Wiring --- */
+//   %jvp1 = (14, 28);
+//   %jvp2 = (23, 28);
+//   $JUNCTION @ATTACH %jvp1;
+//   $JUNCTION @ATTACH %jvp2;
+//   &vp @WIRE { %pvp:p %jvp1 %jvp2 (28, 28) #XL:vp };
+//   &vp @WIRE { %jvp1 #XBP:tank };
+//   &vp @WIRE { %jvp2 #CVP:p };
+//
+//   %jvn1 = (41, 28);
+//   %jvn2 = (50, 28);
+//   $JUNCTION @ATTACH %jvn1;
+//   $JUNCTION @ATTACH %jvn2;
+//   &vn @WIRE { #XL:vn (36, 28) %jvn1 %jvn2 %pvn:p };
+//   &vn @WIRE { %jvn1 #CVN:p };
+//   &vn @WIRE { %jvn2 #XBN:tank };
+//
+//   %jctrl = (23, 18);
+//   $JUNCTION @ATTACH %jctrl;
+//   &ctrl @WIRE { %pctrl:p %jctrl #CVP:n };
+//   &ctrl @WIRE { %jctrl (41, 18) #CVN:n };
+//
+//   /* Single-Line Coarse Tuning Bus B<7:0> and Tail Bank Sub-Bus B<7:3> */
+//   %jb_bp = (14, 6);
+//   %jb_xl = (32, 6);
+//   $JUNCTION @ATTACH %jb_bp;
+//   $JUNCTION @ATTACH %jb_xl;
+//   {&b0 &b1 &b2 &b3 &b4 &b5 &b6 &b7} @WIRE { %pb:p %jb_bp #XBP:b0 } => @TEXT("B<7:0>") => @SET-STYLE $bus_label_style;
+//   {&b0 &b1 &b2 &b3 &b4 &b5 &b6 &b7} @WIRE { %jb_bp %jb_xl (50, 6) #XBN:b0 } => @TEXT("B<7:0>") => @SET-STYLE $bus_label_style;
+//   {&b3 &b4 &b5 &b6 &b7} @WIRE { %jb_xl #XL:b3 } => @TEXT("B<7:3>") => @SET-STYLE $bus_label_style;
+//
+//   /* --- 4. Annotations --- */
+//   #CVP @TEXT("4.5u/2u", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #CVN @TEXT("4.5u/2u", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   (32, 33) @TEXT("lc_vco_physical_v14_pdk110_1: Differential LC-VCO with 8-Bit Coarse Cap Bank & Fine Accumulation Varactors", halign="middle") => @SET-STYLE $title_style;
+//   (32, 31.2) @TEXT("Symmetric Tank: Dual 8-Bit Switched MIM Banks (XBP, XBN) + NMOS Varactors (CVP, CVN) + Active Negative-gm Core (XL)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends lc_vco_physical_v14_pdk110_1

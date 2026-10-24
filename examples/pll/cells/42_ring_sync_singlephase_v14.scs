@@ -1,0 +1,53 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt ring_sync_singlephase_v14_pdk110_42 (d clk clkb load loadb init q vdd vss)
+XDATA (d din loadb load vdd vss) pll_tg_pdk110_43
+XINIT (init din load loadb vdd vss) pll_tg_pdk110_43
+XF (din clk clkb q vdd vss) ff_singlephase_v14_pdk110_44
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $RING_SYNC_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %mux = {#XDATA #XINIT}(mux_cells) @AS(role="preset_load_2to1_tg_mux") $MULTIPLEXER_BANK;
+//   {#XDATA #XINIT} @AS $MATCHED;
+//   {#XDATA #XF %pq} @AS(direction="left-to-right") $FLOW;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pd     = $IO_PORT @ATTACH &d     => @PLACE(2, 18)  => @ORIENT("R0");
+//   %pinit  = $IO_PORT @ATTACH &init  => @PLACE(2, 8)   => @ORIENT("R0");
+//   %pload  = $IO_PORT @ATTACH &load  => @PLACE(2, 4)   => @ORIENT("R0");
+//   %ploadb = $IO_PORT @ATTACH &loadb => @PLACE(2, 2)   => @ORIENT("R0");
+//   %pclk   = $IO_PORT @ATTACH &clk   => @PLACE(18, 12) => @ORIENT("R0");
+//   %pclkb  = $IO_PORT @ATTACH &clkb  => @PLACE(18, 10) => @ORIENT("R0");
+//   %pq     = $IO_PORT @ATTACH &q     => @PLACE(34, 12) => @ORIENT("MY");
+//
+//   #XDATA @PLACE(10, 18) => @ORIENT("R0");
+//   #XINIT @PLACE(10, 8)  => @ORIENT("R0");
+//   #XF    @PLACE(26, 12) => @ORIENT("R0");
+//
+//   /* --- 3. Primary Signal Flow & Flying-Wire Control Labels --- */
+//   &d    @WIRE { %pd:p #XDATA:a };
+//   &init @WIRE { %pinit:p #XINIT:a };
+//
+//   %jdin = (14, 14);
+//   $JUNCTION @ATTACH %jdin;
+//   &din @WIRE { #XDATA:b (14, 18) %jdin #XF:d };
+//   &din @WIRE { #XINIT:b (14, 8)  %jdin };
+//
+//   &clk  @WIRE { %pclk:p  #XF:clk };
+//   &clkb @WIRE { %pclkb:p #XF:clkb };
+//   &q    @WIRE { #XF:q    %pq:p };
+//
+//   #XDATA:on  @TEXT("loadb", dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XDATA:off @TEXT("load",  dx=0, dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//   #XINIT:on  @TEXT("load",  dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XINIT:off @TEXT("loadb", dx=0, dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//
+//   /* --- 4. Annotations --- */
+//   (18, 25) @TEXT("ring_sync_singlephase_v14_pdk110_42: Presettable Ring-Counter Synchronizer Stage", halign="middle") => @SET-STYLE $title_style;
+//   (18, 23.3) @TEXT("Transmission-Gate Preset Mux (XDATA/XINIT) Feeding Single-Phase TSPC Flip-Flop (XF)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends ring_sync_singlephase_v14_pdk110_42

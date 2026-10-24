@@ -1,0 +1,137 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt tx_cp_timing_pdk110_78 (ref enable reset pulse vdd vss)
+XI (ref refb vdd vss) pll_inv_pdk110_7
+XR (reset resetb vdd vss) pll_inv_pdk110_7
+XE (enable refb ref resetb en_hold vdd vss) tx_latch_r_pdk110_60
+XD0 (ref d1 vdd vss) pll_inv_pdk110_79
+XD1 (d1 d2 vdd vss) pll_inv_pdk110_79
+XD2 (d2 d3 vdd vss) pll_inv_pdk110_79
+XD3 (d3 d4 vdd vss) pll_inv_pdk110_79
+XD4 (d4 d5 vdd vss) pll_inv_pdk110_79
+XD5 (d5 d6 vdd vss) pll_inv_pdk110_79
+XD6 (d6 d7 vdd vss) pll_inv_pdk110_79
+XD7 (d7 d8 vdd vss) pll_inv_pdk110_79
+XD8 (d8 d9 vdd vss) pll_inv_pdk110_79
+XD9 (d9 d10 vdd vss) pll_inv_pdk110_79
+XD10 (d10 d11 vdd vss) pll_inv_pdk110_79
+XD11 (d11 d12 vdd vss) pll_inv_pdk110_79
+XD12 (d12 d13 vdd vss) pll_inv_pdk110_79
+XD13 (d13 d14 vdd vss) pll_inv_pdk110_79
+XD14 (d14 d15 vdd vss) pll_inv_pdk110_79
+XD15 (d15 d16 vdd vss) pll_inv_pdk110_79
+XD16 (d16 d17 vdd vss) pll_inv_pdk110_79
+XD17 (d17 d18 vdd vss) pll_inv_pdk110_79
+XD18 (d18 d19 vdd vss) pll_inv_pdk110_79
+XD19 (d19 d20 vdd vss) pll_inv_pdk110_79
+XD20 (d20 d21 vdd vss) pll_inv_pdk110_79
+XD21 (d21 d22 vdd vss) pll_inv_pdk110_79
+XD22 (d22 d23 vdd vss) pll_inv_pdk110_79
+XD23 (d23 d24 vdd vss) pll_inv_pdk110_79
+XN (d24 d24b vdd vss) pll_inv_pdk110_7
+XP (d12 d24b raw vdd vss) tx_and_pdk110_47
+XS (raw ref held vdd vss) tx_and_pdk110_47
+XEN (held en_hold enabled vdd vss) tx_and_pdk110_47
+XRESET (enabled resetb pulse vdd vss) tx_and_pdk110_47
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $CP_TIMING_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %pgen = {#XD0 #XD1 #XD2 #XD3 #XD4 #XD5 #XD6 #XD7 #XD8 #XD9 #XD10 #XD11 #XD12 #XD13 #XD14 #XD15 #XD16 #XD17 #XD18 #XD19 #XD20 #XD21 #XD22 #XD23 #XN}(delay_chain) {#XI #XR #XE #XP #XS #XEN}(gating_logic) {#XRESET}(output_buffers) @AS(delay_stages=24, stage_length="1000nm") $PULSE_GENERATOR_DELAY_LINE;
+//   {%pref #XD0 #XD11 #XP #XS #XEN #XRESET %ppulse} @AS(direction="left-to-right") $FLOW;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pref   = $IO_PORT @ATTACH &ref    => @PLACE(2, 26)   => @ORIENT("R0");
+//   %pen    = $IO_PORT @ATTACH &enable => @PLACE(2, 10)   => @ORIENT("R0");
+//   %prst   = $IO_PORT @ATTACH &reset  => @PLACE(2, 2)    => @ORIENT("R0");
+//   %ppulse = $IO_PORT @ATTACH &pulse  => @PLACE(132, 16) => @ORIENT("MY");
+//
+//   #XI @PLACE(12, 8)  => @ORIENT("R0");
+//   #XR @PLACE(12, 2)  => @ORIENT("R0");
+//   #XE @PLACE(24, 8)  => @ORIENT("R0");
+//   #XD0 @PLACE(12, 26) => @ORIENT("R0");
+//   #XD1 @PLACE(18, 26) => @ORIENT("R0");
+//   #XD2 @PLACE(24, 26) => @ORIENT("R0");
+//   #XD3 @PLACE(30, 26) => @ORIENT("R0");
+//   #XD4 @PLACE(36, 26) => @ORIENT("R0");
+//   #XD5 @PLACE(42, 26) => @ORIENT("R0");
+//   #XD6 @PLACE(48, 26) => @ORIENT("R0");
+//   #XD7 @PLACE(54, 26) => @ORIENT("R0");
+//   #XD8 @PLACE(60, 26) => @ORIENT("R0");
+//   #XD9 @PLACE(66, 26) => @ORIENT("R0");
+//   #XD10 @PLACE(72, 26) => @ORIENT("R0");
+//   #XD11 @PLACE(78, 26) => @ORIENT("R0");
+//   #XD12 @PLACE(12, 18) => @ORIENT("R0");
+//   #XD13 @PLACE(18, 18) => @ORIENT("R0");
+//   #XD14 @PLACE(24, 18) => @ORIENT("R0");
+//   #XD15 @PLACE(30, 18) => @ORIENT("R0");
+//   #XD16 @PLACE(36, 18) => @ORIENT("R0");
+//   #XD17 @PLACE(42, 18) => @ORIENT("R0");
+//   #XD18 @PLACE(48, 18) => @ORIENT("R0");
+//   #XD19 @PLACE(54, 18) => @ORIENT("R0");
+//   #XD20 @PLACE(60, 18) => @ORIENT("R0");
+//   #XD21 @PLACE(66, 18) => @ORIENT("R0");
+//   #XD22 @PLACE(72, 18) => @ORIENT("R0");
+//   #XD23 @PLACE(78, 18) => @ORIENT("R0");
+//   #XN     @PLACE(84, 18)  => @ORIENT("R0");
+//   #XP     @PLACE(92, 19)  => @ORIENT("R0");
+//   #XS     @PLACE(102, 18) => @ORIENT("R0");
+//   #XEN    @PLACE(112, 17) => @ORIENT("R0");
+//   #XRESET @PLACE(122, 16) => @ORIENT("R0");
+//
+//   /* --- 3. Delay Chain Wiring & Flying-Wire Control Labels --- */
+//   &ref    @WIRE { %pref:p #XD0:a };
+//   &enable @WIRE { %pen:p (20, 10) #XE:d };
+//   &refb   @WIRE { #XI:y #XE:gate };
+//   &reset  @WIRE { %prst:p #XR:a };
+//   &resetb @WIRE { #XR:y (24, 2) #XE:resetb } => @TEXT("resetb") => @SET-STYLE $fly_label_style;
+//   &en_hold @WIRE { #XE:q (30, 8) } => @TEXT("en_hold") => @SET-STYLE $fly_label_style;
+//
+//   #XI:a       @TEXT("ref",     dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XE:gateb   @TEXT("ref",     dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XS:b       @TEXT("ref",     dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XEN:b      @TEXT("en_hold", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XRESET:b   @TEXT("resetb",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   &d1 @WIRE { #XD0:y #XD1:a };
+//   &d2 @WIRE { #XD1:y #XD2:a };
+//   &d3 @WIRE { #XD2:y #XD3:a };
+//   &d4 @WIRE { #XD3:y #XD4:a };
+//   &d5 @WIRE { #XD4:y #XD5:a };
+//   &d6 @WIRE { #XD5:y #XD6:a };
+//   &d7 @WIRE { #XD6:y #XD7:a };
+//   &d8 @WIRE { #XD7:y #XD8:a };
+//   &d9 @WIRE { #XD8:y #XD9:a };
+//   &d10 @WIRE { #XD9:y #XD10:a };
+//   &d11 @WIRE { #XD10:y #XD11:a };
+//   &d13 @WIRE { #XD12:y #XD13:a };
+//   &d14 @WIRE { #XD13:y #XD14:a };
+//   &d15 @WIRE { #XD14:y #XD15:a };
+//   &d16 @WIRE { #XD15:y #XD16:a };
+//   &d17 @WIRE { #XD16:y #XD17:a };
+//   &d18 @WIRE { #XD17:y #XD18:a };
+//   &d19 @WIRE { #XD18:y #XD19:a };
+//   &d20 @WIRE { #XD19:y #XD20:a };
+//   &d21 @WIRE { #XD20:y #XD21:a };
+//   &d22 @WIRE { #XD21:y #XD22:a };
+//   &d23 @WIRE { #XD22:y #XD23:a };
+//   %jd12 = (82, 26);
+//   $JUNCTION @ATTACH %jd12;
+//   &d12 @WIRE { #XD11:y %jd12 (87, 26) (87, 20) #XP:a };
+//   &d12 @WIRE { %jd12 (82, 22) (8, 22) (8, 18) #XD12:a };
+//
+//   &d24     @WIRE { #XD23:y #XN:a };
+//   &d24b    @WIRE { #XN:y #XP:b };
+//   &raw     @WIRE { #XP:y #XS:a };
+//   &held    @WIRE { #XS:y #XEN:a };
+//   &enabled @WIRE { #XEN:y #XRESET:a };
+//   &pulse   @WIRE { #XRESET:y %ppulse:p };
+//
+//   /* --- 4. Annotations --- */
+//   (66, 32) @TEXT("tx_cp_timing_pdk110_78: Non-Overlapping Sub-Sampling Charge-Pump Pulse Window Generator", halign="middle") => @SET-STYLE $title_style;
+//   (66, 30.2) @TEXT("24-Stage Long-Channel Delay Line (XD0..XD23, L=1um) Generates Delayed Window [t_d12, t_d24] After Sampler Track-and-Hold Settling", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends tx_cp_timing_pdk110_78

@@ -1,0 +1,71 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt pll_nand2_pdk110_15 (a b y vdd vss)
+MN0 (y a x vss) nch w=1e-06 l=1.8e-07 ad=4.8e-13 as=4.8e-13 pd=2.96e-06 ps=2.96e-06 nrd=0.27 nrs=0.27 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MN1 (x b vss vss) nch w=1e-06 l=1.8e-07 ad=4.8e-13 as=4.8e-13 pd=2.96e-06 ps=2.96e-06 nrd=0.27 nrs=0.27 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MP0 (y a vdd vdd) pch w=1.25e-06 l=1.8e-07 ad=6e-13 as=6e-13 pd=3.46e-06 ps=3.46e-06 nrd=0.216 nrs=0.216 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MP1 (y b vdd vdd) pch w=1.25e-06 l=1.8e-07 ad=6e-13 as=6e-13 pd=3.46e-06 ps=3.46e-06 nrd=0.216 nrs=0.216 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $NAND_2INPUT;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %nand = {#MP0 #MP1}(pull_up_parallel) {#MN0 #MN1}(pull_down_series) @AS(role="static_cmos_nand2") $CMOS_NAND2;
+//   {#MP0 #MP1} @AS $MATCHED;
+//   {#MN0 #MN1} @AS $MATCHED;
+//   {#MN0 #MN1} @AS $BRANCH;
+//   {#MP0:s #MP1:s} @AS $SUPPLY_HIGH;
+//   #MN1:s @AS $SUPPLY_LOW;
+//   {%pa #MN0 %py} @AS(direction="left-to-right") $FLOW;
+//   /* Static CMOS NAND2 has zero quiescent DC current; no static DC current annotated */
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pa  = $IO_PORT @ATTACH &a   => @PLACE(2, 12) => @ORIENT("R0");
+//   %pb  = $IO_PORT @ATTACH &b   => @PLACE(2, 6)  => @ORIENT("R0");
+//   %py  = $IO_PORT @ATTACH &y   => @PLACE(24, 14) => @ORIENT("MY");
+//   %sup = $SUPPLY  @ATTACH &vdd => @PLACE(14, 24);
+//   %gnd = $GROUND  @ATTACH &vss => @PLACE(14, 2);
+//
+//   #MP0 @PLACE(10, 18) => @ORIENT("R0");
+//   #MP1 @PLACE(18, 18) => @ORIENT("R0");
+//   #MN0 @PLACE(14, 12) => @ORIENT("R0");
+//   #MN1 @PLACE(14, 6)  => @ORIENT("R0");
+//
+//   /* --- 3. Explicit Manhattan Wiring --- */
+//   %jvdd = (14, 22);
+//   $JUNCTION @ATTACH %jvdd;
+//   &vdd @WIRE { %sup:p %jvdd };
+//   &vdd @WIRE { %jvdd (10, 22) #MP0:s };
+//   &vdd @WIRE { %jvdd (18, 22) #MP1:s };
+//
+//   %jy1 = (14, 14);
+//   %jy2 = (18, 14);
+//   $JUNCTION @ATTACH %jy1;
+//   $JUNCTION @ATTACH %jy2;
+//   &y @WIRE { #MP0:d (10, 14) %jy1 #MN0:d };
+//   &y @WIRE { %jy1 %jy2 #MP1:d };
+//   &y @WIRE { %jy2 %py:p };
+//
+//   &x   @WIRE { #MN0:s #MN1:d };
+//   &vss @WIRE { #MN1:s %gnd:p };
+//
+//   %ja = (5, 12);
+//   %jb = (6, 6);
+//   $JUNCTION @ATTACH %ja;
+//   $JUNCTION @ATTACH %jb;
+//   &a @WIRE { %pa:p %ja #MN0:g };
+//   &a @WIRE { %ja (5, 18) #MP0:g };
+//   &b @WIRE { %pb:p %jb #MN1:g };
+//   &b @WIRE { %jb (6, 15) (14, 15) (14, 18) #MP1:g };
+//
+//   /* --- 4. Annotations & Parameter Labels --- */
+//   #MP0 @TEXT("1.25u/0.18u", key="wl", dx=-1.5, dy=1.5, halign="end") => @SET-STYLE $param_style;
+//   #MP1 @TEXT("1.25u/0.18u", key="wl", dx=1.5, dy=1.5, halign="start") => @SET-STYLE $param_style;
+//   #MN0 @TEXT("1.0u/0.18u", key="wl", dx=1.5, dy=0, halign="start") => @SET-STYLE $param_style;
+//   #MN1 @TEXT("1.0u/0.18u", key="wl", dx=1.5, dy=0, halign="start") => @SET-STYLE $param_style;
+//   (14, 29) @TEXT("pll_nand2_pdk110_15: 2-Input Static CMOS NAND Gate", halign="middle") => @SET-STYLE $title_style;
+//   (14, 27.3) @TEXT("Parallel PMOS Pull-Up (MP0, MP1) + Series NMOS Pull-Down Stack (MN0, MN1)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends pll_nand2_pdk110_15

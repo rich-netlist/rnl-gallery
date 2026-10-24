@@ -1,0 +1,42 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt ff_static_fast_v14_pdk110_33 (d clk clkb q vdd vss)
+XM (d clkb clk qm vdd vss) ring_inv_latch_v14_pdk110_34
+XS (qm clk clkb q vdd vss) ring_inv_latch_v14_pdk110_34
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $FF_2CLK_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %dff = {#XM}(master_latch) {#XS}(slave_latch) @AS(edge="rising", async_reset="none") $MASTER_SLAVE_DFF;
+//   {#XM #XS} @AS $MATCHED;
+//   {%pd #XM #XS %pq} @AS(direction="left-to-right") $FLOW;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pd    = $IO_PORT @ATTACH &d    => @PLACE(2, 14) => @ORIENT("R0");
+//   %pclk  = $IO_PORT @ATTACH &clk  => @PLACE(2, 6)  => @ORIENT("R0");
+//   %pclkb = $IO_PORT @ATTACH &clkb => @PLACE(2, 3)  => @ORIENT("R0");
+//   %pq    = $IO_PORT @ATTACH &q    => @PLACE(36, 12) => @ORIENT("MY");
+//
+//   #XM @PLACE(14, 12) => @ORIENT("R0");
+//   #XS @PLACE(28, 12) => @ORIENT("R0");
+//
+//   /* --- 3. Primary Data Path Wiring & Flying-Wire Clock Labels --- */
+//   &d  @WIRE { %pd:p #XM:d };
+//   &qm @WIRE { #XM:qb (20, 12) (20, 14) #XS:d };
+//   &q  @WIRE { #XS:qb %pq:p };
+//
+//   #XM:ck  @TEXT("clkb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XM:ckb @TEXT("clk",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XS:ck  @TEXT("clk",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XS:ckb @TEXT("clkb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   /* --- 4. Annotations --- */
+//   #XM @TEXT("Master Latch (transparent low)", key="role", dy=4.5, halign="middle") => @SET-STYLE $param_style;
+//   #XS @TEXT("Slave Latch (transparent high)", key="role", dy=4.5, halign="middle") => @SET-STYLE $param_style;
+//   (19, 21) @TEXT("ff_static_fast_v14_pdk110_33: High-Speed Dual-Phase Static Master-Slave D Flip-Flop", halign="middle") => @SET-STYLE $title_style;
+//   (19, 19.3) @TEXT("Cascaded Inverting Ring Latches (XM, XS) Restoring Non-Inverted Output Q on Rising Clock Edge", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends ff_static_fast_v14_pdk110_33

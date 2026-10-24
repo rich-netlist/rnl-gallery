@@ -1,0 +1,719 @@
+// RNL cell RISCA_JL/L3_CDAC_V1
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// }
+subckt L3_CDAC_V1 COM LSB_5 LSB_4 LSB_3 LSB_2 LSB_1 LSB_0 MSB_4 MSB_3 \
+        MSB_2 MSB_1 MSB_0 VREFN
+    I11_7 (VREFN COM) LB_DAC_cunit
+    I11_6 (VREFN COM) LB_DAC_cunit
+    I11_5 (VREFN COM) LB_DAC_cunit
+    I11_4 (VREFN COM) LB_DAC_cunit
+    I11_3 (VREFN COM) LB_DAC_cunit
+    I11_2 (VREFN COM) LB_DAC_cunit
+    I11_1 (VREFN COM) LB_DAC_cunit
+    I11_0 (VREFN COM) LB_DAC_cunit
+    I0_256 (MSB_4 COM) LB_DAC_cunit
+    I0_255 (MSB_4 COM) LB_DAC_cunit
+    I0_254 (MSB_4 COM) LB_DAC_cunit
+    I0_253 (MSB_4 COM) LB_DAC_cunit
+    I0_252 (MSB_4 COM) LB_DAC_cunit
+    I0_251 (MSB_4 COM) LB_DAC_cunit
+    I0_250 (MSB_4 COM) LB_DAC_cunit
+    I0_249 (MSB_4 COM) LB_DAC_cunit
+    I0_248 (MSB_4 COM) LB_DAC_cunit
+    I0_247 (MSB_4 COM) LB_DAC_cunit
+    I0_246 (MSB_4 COM) LB_DAC_cunit
+    I0_245 (MSB_4 COM) LB_DAC_cunit
+    I0_244 (MSB_4 COM) LB_DAC_cunit
+    I0_243 (MSB_4 COM) LB_DAC_cunit
+    I0_242 (MSB_4 COM) LB_DAC_cunit
+    I0_241 (MSB_4 COM) LB_DAC_cunit
+    I0_240 (MSB_4 COM) LB_DAC_cunit
+    I0_239 (MSB_4 COM) LB_DAC_cunit
+    I0_238 (MSB_4 COM) LB_DAC_cunit
+    I0_237 (MSB_4 COM) LB_DAC_cunit
+    I0_236 (MSB_4 COM) LB_DAC_cunit
+    I0_235 (MSB_4 COM) LB_DAC_cunit
+    I0_234 (MSB_4 COM) LB_DAC_cunit
+    I0_233 (MSB_4 COM) LB_DAC_cunit
+    I0_232 (MSB_4 COM) LB_DAC_cunit
+    I0_231 (MSB_4 COM) LB_DAC_cunit
+    I0_230 (MSB_4 COM) LB_DAC_cunit
+    I0_229 (MSB_4 COM) LB_DAC_cunit
+    I0_228 (MSB_4 COM) LB_DAC_cunit
+    I0_227 (MSB_4 COM) LB_DAC_cunit
+    I0_226 (MSB_4 COM) LB_DAC_cunit
+    I0_225 (MSB_4 COM) LB_DAC_cunit
+    I0_224 (MSB_4 COM) LB_DAC_cunit
+    I0_223 (MSB_4 COM) LB_DAC_cunit
+    I0_222 (MSB_4 COM) LB_DAC_cunit
+    I0_221 (MSB_4 COM) LB_DAC_cunit
+    I0_220 (MSB_4 COM) LB_DAC_cunit
+    I0_219 (MSB_4 COM) LB_DAC_cunit
+    I0_218 (MSB_4 COM) LB_DAC_cunit
+    I0_217 (MSB_4 COM) LB_DAC_cunit
+    I0_216 (MSB_4 COM) LB_DAC_cunit
+    I0_215 (MSB_4 COM) LB_DAC_cunit
+    I0_214 (MSB_4 COM) LB_DAC_cunit
+    I0_213 (MSB_4 COM) LB_DAC_cunit
+    I0_212 (MSB_4 COM) LB_DAC_cunit
+    I0_211 (MSB_4 COM) LB_DAC_cunit
+    I0_210 (MSB_4 COM) LB_DAC_cunit
+    I0_209 (MSB_4 COM) LB_DAC_cunit
+    I0_208 (MSB_4 COM) LB_DAC_cunit
+    I0_207 (MSB_4 COM) LB_DAC_cunit
+    I0_206 (MSB_4 COM) LB_DAC_cunit
+    I0_205 (MSB_4 COM) LB_DAC_cunit
+    I0_204 (MSB_4 COM) LB_DAC_cunit
+    I0_203 (MSB_4 COM) LB_DAC_cunit
+    I0_202 (MSB_4 COM) LB_DAC_cunit
+    I0_201 (MSB_4 COM) LB_DAC_cunit
+    I0_200 (MSB_4 COM) LB_DAC_cunit
+    I0_199 (MSB_4 COM) LB_DAC_cunit
+    I0_198 (MSB_4 COM) LB_DAC_cunit
+    I0_197 (MSB_4 COM) LB_DAC_cunit
+    I0_196 (MSB_4 COM) LB_DAC_cunit
+    I0_195 (MSB_4 COM) LB_DAC_cunit
+    I0_194 (MSB_4 COM) LB_DAC_cunit
+    I0_193 (MSB_4 COM) LB_DAC_cunit
+    I0_192 (MSB_4 COM) LB_DAC_cunit
+    I0_191 (MSB_4 COM) LB_DAC_cunit
+    I0_190 (MSB_4 COM) LB_DAC_cunit
+    I0_189 (MSB_4 COM) LB_DAC_cunit
+    I0_188 (MSB_4 COM) LB_DAC_cunit
+    I0_187 (MSB_4 COM) LB_DAC_cunit
+    I0_186 (MSB_4 COM) LB_DAC_cunit
+    I0_185 (MSB_4 COM) LB_DAC_cunit
+    I0_184 (MSB_4 COM) LB_DAC_cunit
+    I0_183 (MSB_4 COM) LB_DAC_cunit
+    I0_182 (MSB_4 COM) LB_DAC_cunit
+    I0_181 (MSB_4 COM) LB_DAC_cunit
+    I0_180 (MSB_4 COM) LB_DAC_cunit
+    I0_179 (MSB_4 COM) LB_DAC_cunit
+    I0_178 (MSB_4 COM) LB_DAC_cunit
+    I0_177 (MSB_4 COM) LB_DAC_cunit
+    I0_176 (MSB_4 COM) LB_DAC_cunit
+    I0_175 (MSB_4 COM) LB_DAC_cunit
+    I0_174 (MSB_4 COM) LB_DAC_cunit
+    I0_173 (MSB_4 COM) LB_DAC_cunit
+    I0_172 (MSB_4 COM) LB_DAC_cunit
+    I0_171 (MSB_4 COM) LB_DAC_cunit
+    I0_170 (MSB_4 COM) LB_DAC_cunit
+    I0_169 (MSB_4 COM) LB_DAC_cunit
+    I0_168 (MSB_4 COM) LB_DAC_cunit
+    I0_167 (MSB_4 COM) LB_DAC_cunit
+    I0_166 (MSB_4 COM) LB_DAC_cunit
+    I0_165 (MSB_4 COM) LB_DAC_cunit
+    I0_164 (MSB_4 COM) LB_DAC_cunit
+    I0_163 (MSB_4 COM) LB_DAC_cunit
+    I0_162 (MSB_4 COM) LB_DAC_cunit
+    I0_161 (MSB_4 COM) LB_DAC_cunit
+    I0_160 (MSB_4 COM) LB_DAC_cunit
+    I0_159 (MSB_4 COM) LB_DAC_cunit
+    I0_158 (MSB_4 COM) LB_DAC_cunit
+    I0_157 (MSB_4 COM) LB_DAC_cunit
+    I0_156 (MSB_4 COM) LB_DAC_cunit
+    I0_155 (MSB_4 COM) LB_DAC_cunit
+    I0_154 (MSB_4 COM) LB_DAC_cunit
+    I0_153 (MSB_4 COM) LB_DAC_cunit
+    I0_152 (MSB_4 COM) LB_DAC_cunit
+    I0_151 (MSB_4 COM) LB_DAC_cunit
+    I0_150 (MSB_4 COM) LB_DAC_cunit
+    I0_149 (MSB_4 COM) LB_DAC_cunit
+    I0_148 (MSB_4 COM) LB_DAC_cunit
+    I0_147 (MSB_4 COM) LB_DAC_cunit
+    I0_146 (MSB_4 COM) LB_DAC_cunit
+    I0_145 (MSB_4 COM) LB_DAC_cunit
+    I0_144 (MSB_4 COM) LB_DAC_cunit
+    I0_143 (MSB_4 COM) LB_DAC_cunit
+    I0_142 (MSB_4 COM) LB_DAC_cunit
+    I0_141 (MSB_4 COM) LB_DAC_cunit
+    I0_140 (MSB_4 COM) LB_DAC_cunit
+    I0_139 (MSB_4 COM) LB_DAC_cunit
+    I0_138 (MSB_4 COM) LB_DAC_cunit
+    I0_137 (MSB_4 COM) LB_DAC_cunit
+    I0_136 (MSB_4 COM) LB_DAC_cunit
+    I0_135 (MSB_4 COM) LB_DAC_cunit
+    I0_134 (MSB_4 COM) LB_DAC_cunit
+    I0_133 (MSB_4 COM) LB_DAC_cunit
+    I0_132 (MSB_4 COM) LB_DAC_cunit
+    I0_131 (MSB_4 COM) LB_DAC_cunit
+    I0_130 (MSB_4 COM) LB_DAC_cunit
+    I0_129 (MSB_4 COM) LB_DAC_cunit
+    I0_128 (MSB_4 COM) LB_DAC_cunit
+    I0_127 (MSB_4 COM) LB_DAC_cunit
+    I0_126 (MSB_4 COM) LB_DAC_cunit
+    I0_125 (MSB_4 COM) LB_DAC_cunit
+    I0_124 (MSB_4 COM) LB_DAC_cunit
+    I0_123 (MSB_4 COM) LB_DAC_cunit
+    I0_122 (MSB_4 COM) LB_DAC_cunit
+    I0_121 (MSB_4 COM) LB_DAC_cunit
+    I0_120 (MSB_4 COM) LB_DAC_cunit
+    I0_119 (MSB_4 COM) LB_DAC_cunit
+    I0_118 (MSB_4 COM) LB_DAC_cunit
+    I0_117 (MSB_4 COM) LB_DAC_cunit
+    I0_116 (MSB_4 COM) LB_DAC_cunit
+    I0_115 (MSB_4 COM) LB_DAC_cunit
+    I0_114 (MSB_4 COM) LB_DAC_cunit
+    I0_113 (MSB_4 COM) LB_DAC_cunit
+    I0_112 (MSB_4 COM) LB_DAC_cunit
+    I0_111 (MSB_4 COM) LB_DAC_cunit
+    I0_110 (MSB_4 COM) LB_DAC_cunit
+    I0_109 (MSB_4 COM) LB_DAC_cunit
+    I0_108 (MSB_4 COM) LB_DAC_cunit
+    I0_107 (MSB_4 COM) LB_DAC_cunit
+    I0_106 (MSB_4 COM) LB_DAC_cunit
+    I0_105 (MSB_4 COM) LB_DAC_cunit
+    I0_104 (MSB_4 COM) LB_DAC_cunit
+    I0_103 (MSB_4 COM) LB_DAC_cunit
+    I0_102 (MSB_4 COM) LB_DAC_cunit
+    I0_101 (MSB_4 COM) LB_DAC_cunit
+    I0_100 (MSB_4 COM) LB_DAC_cunit
+    I0_99 (MSB_4 COM) LB_DAC_cunit
+    I0_98 (MSB_4 COM) LB_DAC_cunit
+    I0_97 (MSB_4 COM) LB_DAC_cunit
+    I0_96 (MSB_4 COM) LB_DAC_cunit
+    I0_95 (MSB_4 COM) LB_DAC_cunit
+    I0_94 (MSB_4 COM) LB_DAC_cunit
+    I0_93 (MSB_4 COM) LB_DAC_cunit
+    I0_92 (MSB_4 COM) LB_DAC_cunit
+    I0_91 (MSB_4 COM) LB_DAC_cunit
+    I0_90 (MSB_4 COM) LB_DAC_cunit
+    I0_89 (MSB_4 COM) LB_DAC_cunit
+    I0_88 (MSB_4 COM) LB_DAC_cunit
+    I0_87 (MSB_4 COM) LB_DAC_cunit
+    I0_86 (MSB_4 COM) LB_DAC_cunit
+    I0_85 (MSB_4 COM) LB_DAC_cunit
+    I0_84 (MSB_4 COM) LB_DAC_cunit
+    I0_83 (MSB_4 COM) LB_DAC_cunit
+    I0_82 (MSB_4 COM) LB_DAC_cunit
+    I0_81 (MSB_4 COM) LB_DAC_cunit
+    I0_80 (MSB_4 COM) LB_DAC_cunit
+    I0_79 (MSB_4 COM) LB_DAC_cunit
+    I0_78 (MSB_4 COM) LB_DAC_cunit
+    I0_77 (MSB_4 COM) LB_DAC_cunit
+    I0_76 (MSB_4 COM) LB_DAC_cunit
+    I0_75 (MSB_4 COM) LB_DAC_cunit
+    I0_74 (MSB_4 COM) LB_DAC_cunit
+    I0_73 (MSB_4 COM) LB_DAC_cunit
+    I0_72 (MSB_4 COM) LB_DAC_cunit
+    I0_71 (MSB_4 COM) LB_DAC_cunit
+    I0_70 (MSB_4 COM) LB_DAC_cunit
+    I0_69 (MSB_4 COM) LB_DAC_cunit
+    I0_68 (MSB_4 COM) LB_DAC_cunit
+    I0_67 (MSB_4 COM) LB_DAC_cunit
+    I0_66 (MSB_4 COM) LB_DAC_cunit
+    I0_65 (MSB_4 COM) LB_DAC_cunit
+    I0_64 (MSB_4 COM) LB_DAC_cunit
+    I0_63 (MSB_4 COM) LB_DAC_cunit
+    I0_62 (MSB_4 COM) LB_DAC_cunit
+    I0_61 (MSB_4 COM) LB_DAC_cunit
+    I0_60 (MSB_4 COM) LB_DAC_cunit
+    I0_59 (MSB_4 COM) LB_DAC_cunit
+    I0_58 (MSB_4 COM) LB_DAC_cunit
+    I0_57 (MSB_4 COM) LB_DAC_cunit
+    I0_56 (MSB_4 COM) LB_DAC_cunit
+    I0_55 (MSB_4 COM) LB_DAC_cunit
+    I0_54 (MSB_4 COM) LB_DAC_cunit
+    I0_53 (MSB_4 COM) LB_DAC_cunit
+    I0_52 (MSB_4 COM) LB_DAC_cunit
+    I0_51 (MSB_4 COM) LB_DAC_cunit
+    I0_50 (MSB_4 COM) LB_DAC_cunit
+    I0_49 (MSB_4 COM) LB_DAC_cunit
+    I0_48 (MSB_4 COM) LB_DAC_cunit
+    I0_47 (MSB_4 COM) LB_DAC_cunit
+    I0_46 (MSB_4 COM) LB_DAC_cunit
+    I0_45 (MSB_4 COM) LB_DAC_cunit
+    I0_44 (MSB_4 COM) LB_DAC_cunit
+    I0_43 (MSB_4 COM) LB_DAC_cunit
+    I0_42 (MSB_4 COM) LB_DAC_cunit
+    I0_41 (MSB_4 COM) LB_DAC_cunit
+    I0_40 (MSB_4 COM) LB_DAC_cunit
+    I0_39 (MSB_4 COM) LB_DAC_cunit
+    I0_38 (MSB_4 COM) LB_DAC_cunit
+    I0_37 (MSB_4 COM) LB_DAC_cunit
+    I0_36 (MSB_4 COM) LB_DAC_cunit
+    I0_35 (MSB_4 COM) LB_DAC_cunit
+    I0_34 (MSB_4 COM) LB_DAC_cunit
+    I0_33 (MSB_4 COM) LB_DAC_cunit
+    I0_32 (MSB_4 COM) LB_DAC_cunit
+    I0_31 (MSB_4 COM) LB_DAC_cunit
+    I0_30 (MSB_4 COM) LB_DAC_cunit
+    I0_29 (MSB_4 COM) LB_DAC_cunit
+    I0_28 (MSB_4 COM) LB_DAC_cunit
+    I0_27 (MSB_4 COM) LB_DAC_cunit
+    I0_26 (MSB_4 COM) LB_DAC_cunit
+    I0_25 (MSB_4 COM) LB_DAC_cunit
+    I0_24 (MSB_4 COM) LB_DAC_cunit
+    I0_23 (MSB_4 COM) LB_DAC_cunit
+    I0_22 (MSB_4 COM) LB_DAC_cunit
+    I0_21 (MSB_4 COM) LB_DAC_cunit
+    I0_20 (MSB_4 COM) LB_DAC_cunit
+    I0_19 (MSB_4 COM) LB_DAC_cunit
+    I0_18 (MSB_4 COM) LB_DAC_cunit
+    I0_17 (MSB_4 COM) LB_DAC_cunit
+    I0_16 (MSB_4 COM) LB_DAC_cunit
+    I0_15 (MSB_4 COM) LB_DAC_cunit
+    I0_14 (MSB_4 COM) LB_DAC_cunit
+    I0_13 (MSB_4 COM) LB_DAC_cunit
+    I0_12 (MSB_4 COM) LB_DAC_cunit
+    I0_11 (MSB_4 COM) LB_DAC_cunit
+    I0_10 (MSB_4 COM) LB_DAC_cunit
+    I0_9 (MSB_4 COM) LB_DAC_cunit
+    I0_8 (MSB_4 COM) LB_DAC_cunit
+    I0_7 (MSB_4 COM) LB_DAC_cunit
+    I0_6 (MSB_4 COM) LB_DAC_cunit
+    I0_5 (MSB_4 COM) LB_DAC_cunit
+    I0_4 (MSB_4 COM) LB_DAC_cunit
+    I0_3 (MSB_4 COM) LB_DAC_cunit
+    I0_2 (MSB_4 COM) LB_DAC_cunit
+    I0_1 (MSB_4 COM) LB_DAC_cunit
+    I10 (LSB_0 COM) LB_DAC_cunit
+    I9_2 (LSB_1 COM) LB_DAC_cunit
+    I9_1 (LSB_1 COM) LB_DAC_cunit
+    I8_4 (LSB_2 COM) LB_DAC_cunit
+    I8_3 (LSB_2 COM) LB_DAC_cunit
+    I8_2 (LSB_2 COM) LB_DAC_cunit
+    I8_1 (LSB_2 COM) LB_DAC_cunit
+    I7_4 (LSB_3 COM) LB_DAC_cunit
+    I7_3 (LSB_3 COM) LB_DAC_cunit
+    I7_2 (LSB_3 COM) LB_DAC_cunit
+    I7_1 (LSB_3 COM) LB_DAC_cunit
+    I6_8 (LSB_4 COM) LB_DAC_cunit
+    I6_7 (LSB_4 COM) LB_DAC_cunit
+    I6_6 (LSB_4 COM) LB_DAC_cunit
+    I6_5 (LSB_4 COM) LB_DAC_cunit
+    I6_4 (LSB_4 COM) LB_DAC_cunit
+    I6_3 (LSB_4 COM) LB_DAC_cunit
+    I6_2 (LSB_4 COM) LB_DAC_cunit
+    I6_1 (LSB_4 COM) LB_DAC_cunit
+    I5_16 (LSB_5 COM) LB_DAC_cunit
+    I5_15 (LSB_5 COM) LB_DAC_cunit
+    I5_14 (LSB_5 COM) LB_DAC_cunit
+    I5_13 (LSB_5 COM) LB_DAC_cunit
+    I5_12 (LSB_5 COM) LB_DAC_cunit
+    I5_11 (LSB_5 COM) LB_DAC_cunit
+    I5_10 (LSB_5 COM) LB_DAC_cunit
+    I5_9 (LSB_5 COM) LB_DAC_cunit
+    I5_8 (LSB_5 COM) LB_DAC_cunit
+    I5_7 (LSB_5 COM) LB_DAC_cunit
+    I5_6 (LSB_5 COM) LB_DAC_cunit
+    I5_5 (LSB_5 COM) LB_DAC_cunit
+    I5_4 (LSB_5 COM) LB_DAC_cunit
+    I5_3 (LSB_5 COM) LB_DAC_cunit
+    I5_2 (LSB_5 COM) LB_DAC_cunit
+    I5_1 (LSB_5 COM) LB_DAC_cunit
+    I4_16 (MSB_0 COM) LB_DAC_cunit
+    I4_15 (MSB_0 COM) LB_DAC_cunit
+    I4_14 (MSB_0 COM) LB_DAC_cunit
+    I4_13 (MSB_0 COM) LB_DAC_cunit
+    I4_12 (MSB_0 COM) LB_DAC_cunit
+    I4_11 (MSB_0 COM) LB_DAC_cunit
+    I4_10 (MSB_0 COM) LB_DAC_cunit
+    I4_9 (MSB_0 COM) LB_DAC_cunit
+    I4_8 (MSB_0 COM) LB_DAC_cunit
+    I4_7 (MSB_0 COM) LB_DAC_cunit
+    I4_6 (MSB_0 COM) LB_DAC_cunit
+    I4_5 (MSB_0 COM) LB_DAC_cunit
+    I4_4 (MSB_0 COM) LB_DAC_cunit
+    I4_3 (MSB_0 COM) LB_DAC_cunit
+    I4_2 (MSB_0 COM) LB_DAC_cunit
+    I4_1 (MSB_0 COM) LB_DAC_cunit
+    I3_32 (MSB_1 COM) LB_DAC_cunit
+    I3_31 (MSB_1 COM) LB_DAC_cunit
+    I3_30 (MSB_1 COM) LB_DAC_cunit
+    I3_29 (MSB_1 COM) LB_DAC_cunit
+    I3_28 (MSB_1 COM) LB_DAC_cunit
+    I3_27 (MSB_1 COM) LB_DAC_cunit
+    I3_26 (MSB_1 COM) LB_DAC_cunit
+    I3_25 (MSB_1 COM) LB_DAC_cunit
+    I3_24 (MSB_1 COM) LB_DAC_cunit
+    I3_23 (MSB_1 COM) LB_DAC_cunit
+    I3_22 (MSB_1 COM) LB_DAC_cunit
+    I3_21 (MSB_1 COM) LB_DAC_cunit
+    I3_20 (MSB_1 COM) LB_DAC_cunit
+    I3_19 (MSB_1 COM) LB_DAC_cunit
+    I3_18 (MSB_1 COM) LB_DAC_cunit
+    I3_17 (MSB_1 COM) LB_DAC_cunit
+    I3_16 (MSB_1 COM) LB_DAC_cunit
+    I3_15 (MSB_1 COM) LB_DAC_cunit
+    I3_14 (MSB_1 COM) LB_DAC_cunit
+    I3_13 (MSB_1 COM) LB_DAC_cunit
+    I3_12 (MSB_1 COM) LB_DAC_cunit
+    I3_11 (MSB_1 COM) LB_DAC_cunit
+    I3_10 (MSB_1 COM) LB_DAC_cunit
+    I3_9 (MSB_1 COM) LB_DAC_cunit
+    I3_8 (MSB_1 COM) LB_DAC_cunit
+    I3_7 (MSB_1 COM) LB_DAC_cunit
+    I3_6 (MSB_1 COM) LB_DAC_cunit
+    I3_5 (MSB_1 COM) LB_DAC_cunit
+    I3_4 (MSB_1 COM) LB_DAC_cunit
+    I3_3 (MSB_1 COM) LB_DAC_cunit
+    I3_2 (MSB_1 COM) LB_DAC_cunit
+    I3_1 (MSB_1 COM) LB_DAC_cunit
+    I2_64 (MSB_2 COM) LB_DAC_cunit
+    I2_63 (MSB_2 COM) LB_DAC_cunit
+    I2_62 (MSB_2 COM) LB_DAC_cunit
+    I2_61 (MSB_2 COM) LB_DAC_cunit
+    I2_60 (MSB_2 COM) LB_DAC_cunit
+    I2_59 (MSB_2 COM) LB_DAC_cunit
+    I2_58 (MSB_2 COM) LB_DAC_cunit
+    I2_57 (MSB_2 COM) LB_DAC_cunit
+    I2_56 (MSB_2 COM) LB_DAC_cunit
+    I2_55 (MSB_2 COM) LB_DAC_cunit
+    I2_54 (MSB_2 COM) LB_DAC_cunit
+    I2_53 (MSB_2 COM) LB_DAC_cunit
+    I2_52 (MSB_2 COM) LB_DAC_cunit
+    I2_51 (MSB_2 COM) LB_DAC_cunit
+    I2_50 (MSB_2 COM) LB_DAC_cunit
+    I2_49 (MSB_2 COM) LB_DAC_cunit
+    I2_48 (MSB_2 COM) LB_DAC_cunit
+    I2_47 (MSB_2 COM) LB_DAC_cunit
+    I2_46 (MSB_2 COM) LB_DAC_cunit
+    I2_45 (MSB_2 COM) LB_DAC_cunit
+    I2_44 (MSB_2 COM) LB_DAC_cunit
+    I2_43 (MSB_2 COM) LB_DAC_cunit
+    I2_42 (MSB_2 COM) LB_DAC_cunit
+    I2_41 (MSB_2 COM) LB_DAC_cunit
+    I2_40 (MSB_2 COM) LB_DAC_cunit
+    I2_39 (MSB_2 COM) LB_DAC_cunit
+    I2_38 (MSB_2 COM) LB_DAC_cunit
+    I2_37 (MSB_2 COM) LB_DAC_cunit
+    I2_36 (MSB_2 COM) LB_DAC_cunit
+    I2_35 (MSB_2 COM) LB_DAC_cunit
+    I2_34 (MSB_2 COM) LB_DAC_cunit
+    I2_33 (MSB_2 COM) LB_DAC_cunit
+    I2_32 (MSB_2 COM) LB_DAC_cunit
+    I2_31 (MSB_2 COM) LB_DAC_cunit
+    I2_30 (MSB_2 COM) LB_DAC_cunit
+    I2_29 (MSB_2 COM) LB_DAC_cunit
+    I2_28 (MSB_2 COM) LB_DAC_cunit
+    I2_27 (MSB_2 COM) LB_DAC_cunit
+    I2_26 (MSB_2 COM) LB_DAC_cunit
+    I2_25 (MSB_2 COM) LB_DAC_cunit
+    I2_24 (MSB_2 COM) LB_DAC_cunit
+    I2_23 (MSB_2 COM) LB_DAC_cunit
+    I2_22 (MSB_2 COM) LB_DAC_cunit
+    I2_21 (MSB_2 COM) LB_DAC_cunit
+    I2_20 (MSB_2 COM) LB_DAC_cunit
+    I2_19 (MSB_2 COM) LB_DAC_cunit
+    I2_18 (MSB_2 COM) LB_DAC_cunit
+    I2_17 (MSB_2 COM) LB_DAC_cunit
+    I2_16 (MSB_2 COM) LB_DAC_cunit
+    I2_15 (MSB_2 COM) LB_DAC_cunit
+    I2_14 (MSB_2 COM) LB_DAC_cunit
+    I2_13 (MSB_2 COM) LB_DAC_cunit
+    I2_12 (MSB_2 COM) LB_DAC_cunit
+    I2_11 (MSB_2 COM) LB_DAC_cunit
+    I2_10 (MSB_2 COM) LB_DAC_cunit
+    I2_9 (MSB_2 COM) LB_DAC_cunit
+    I2_8 (MSB_2 COM) LB_DAC_cunit
+    I2_7 (MSB_2 COM) LB_DAC_cunit
+    I2_6 (MSB_2 COM) LB_DAC_cunit
+    I2_5 (MSB_2 COM) LB_DAC_cunit
+    I2_4 (MSB_2 COM) LB_DAC_cunit
+    I2_3 (MSB_2 COM) LB_DAC_cunit
+    I2_2 (MSB_2 COM) LB_DAC_cunit
+    I2_1 (MSB_2 COM) LB_DAC_cunit
+    I1_128 (MSB_3 COM) LB_DAC_cunit
+    I1_127 (MSB_3 COM) LB_DAC_cunit
+    I1_126 (MSB_3 COM) LB_DAC_cunit
+    I1_125 (MSB_3 COM) LB_DAC_cunit
+    I1_124 (MSB_3 COM) LB_DAC_cunit
+    I1_123 (MSB_3 COM) LB_DAC_cunit
+    I1_122 (MSB_3 COM) LB_DAC_cunit
+    I1_121 (MSB_3 COM) LB_DAC_cunit
+    I1_120 (MSB_3 COM) LB_DAC_cunit
+    I1_119 (MSB_3 COM) LB_DAC_cunit
+    I1_118 (MSB_3 COM) LB_DAC_cunit
+    I1_117 (MSB_3 COM) LB_DAC_cunit
+    I1_116 (MSB_3 COM) LB_DAC_cunit
+    I1_115 (MSB_3 COM) LB_DAC_cunit
+    I1_114 (MSB_3 COM) LB_DAC_cunit
+    I1_113 (MSB_3 COM) LB_DAC_cunit
+    I1_112 (MSB_3 COM) LB_DAC_cunit
+    I1_111 (MSB_3 COM) LB_DAC_cunit
+    I1_110 (MSB_3 COM) LB_DAC_cunit
+    I1_109 (MSB_3 COM) LB_DAC_cunit
+    I1_108 (MSB_3 COM) LB_DAC_cunit
+    I1_107 (MSB_3 COM) LB_DAC_cunit
+    I1_106 (MSB_3 COM) LB_DAC_cunit
+    I1_105 (MSB_3 COM) LB_DAC_cunit
+    I1_104 (MSB_3 COM) LB_DAC_cunit
+    I1_103 (MSB_3 COM) LB_DAC_cunit
+    I1_102 (MSB_3 COM) LB_DAC_cunit
+    I1_101 (MSB_3 COM) LB_DAC_cunit
+    I1_100 (MSB_3 COM) LB_DAC_cunit
+    I1_99 (MSB_3 COM) LB_DAC_cunit
+    I1_98 (MSB_3 COM) LB_DAC_cunit
+    I1_97 (MSB_3 COM) LB_DAC_cunit
+    I1_96 (MSB_3 COM) LB_DAC_cunit
+    I1_95 (MSB_3 COM) LB_DAC_cunit
+    I1_94 (MSB_3 COM) LB_DAC_cunit
+    I1_93 (MSB_3 COM) LB_DAC_cunit
+    I1_92 (MSB_3 COM) LB_DAC_cunit
+    I1_91 (MSB_3 COM) LB_DAC_cunit
+    I1_90 (MSB_3 COM) LB_DAC_cunit
+    I1_89 (MSB_3 COM) LB_DAC_cunit
+    I1_88 (MSB_3 COM) LB_DAC_cunit
+    I1_87 (MSB_3 COM) LB_DAC_cunit
+    I1_86 (MSB_3 COM) LB_DAC_cunit
+    I1_85 (MSB_3 COM) LB_DAC_cunit
+    I1_84 (MSB_3 COM) LB_DAC_cunit
+    I1_83 (MSB_3 COM) LB_DAC_cunit
+    I1_82 (MSB_3 COM) LB_DAC_cunit
+    I1_81 (MSB_3 COM) LB_DAC_cunit
+    I1_80 (MSB_3 COM) LB_DAC_cunit
+    I1_79 (MSB_3 COM) LB_DAC_cunit
+    I1_78 (MSB_3 COM) LB_DAC_cunit
+    I1_77 (MSB_3 COM) LB_DAC_cunit
+    I1_76 (MSB_3 COM) LB_DAC_cunit
+    I1_75 (MSB_3 COM) LB_DAC_cunit
+    I1_74 (MSB_3 COM) LB_DAC_cunit
+    I1_73 (MSB_3 COM) LB_DAC_cunit
+    I1_72 (MSB_3 COM) LB_DAC_cunit
+    I1_71 (MSB_3 COM) LB_DAC_cunit
+    I1_70 (MSB_3 COM) LB_DAC_cunit
+    I1_69 (MSB_3 COM) LB_DAC_cunit
+    I1_68 (MSB_3 COM) LB_DAC_cunit
+    I1_67 (MSB_3 COM) LB_DAC_cunit
+    I1_66 (MSB_3 COM) LB_DAC_cunit
+    I1_65 (MSB_3 COM) LB_DAC_cunit
+    I1_64 (MSB_3 COM) LB_DAC_cunit
+    I1_63 (MSB_3 COM) LB_DAC_cunit
+    I1_62 (MSB_3 COM) LB_DAC_cunit
+    I1_61 (MSB_3 COM) LB_DAC_cunit
+    I1_60 (MSB_3 COM) LB_DAC_cunit
+    I1_59 (MSB_3 COM) LB_DAC_cunit
+    I1_58 (MSB_3 COM) LB_DAC_cunit
+    I1_57 (MSB_3 COM) LB_DAC_cunit
+    I1_56 (MSB_3 COM) LB_DAC_cunit
+    I1_55 (MSB_3 COM) LB_DAC_cunit
+    I1_54 (MSB_3 COM) LB_DAC_cunit
+    I1_53 (MSB_3 COM) LB_DAC_cunit
+    I1_52 (MSB_3 COM) LB_DAC_cunit
+    I1_51 (MSB_3 COM) LB_DAC_cunit
+    I1_50 (MSB_3 COM) LB_DAC_cunit
+    I1_49 (MSB_3 COM) LB_DAC_cunit
+    I1_48 (MSB_3 COM) LB_DAC_cunit
+    I1_47 (MSB_3 COM) LB_DAC_cunit
+    I1_46 (MSB_3 COM) LB_DAC_cunit
+    I1_45 (MSB_3 COM) LB_DAC_cunit
+    I1_44 (MSB_3 COM) LB_DAC_cunit
+    I1_43 (MSB_3 COM) LB_DAC_cunit
+    I1_42 (MSB_3 COM) LB_DAC_cunit
+    I1_41 (MSB_3 COM) LB_DAC_cunit
+    I1_40 (MSB_3 COM) LB_DAC_cunit
+    I1_39 (MSB_3 COM) LB_DAC_cunit
+    I1_38 (MSB_3 COM) LB_DAC_cunit
+    I1_37 (MSB_3 COM) LB_DAC_cunit
+    I1_36 (MSB_3 COM) LB_DAC_cunit
+    I1_35 (MSB_3 COM) LB_DAC_cunit
+    I1_34 (MSB_3 COM) LB_DAC_cunit
+    I1_33 (MSB_3 COM) LB_DAC_cunit
+    I1_32 (MSB_3 COM) LB_DAC_cunit
+    I1_31 (MSB_3 COM) LB_DAC_cunit
+    I1_30 (MSB_3 COM) LB_DAC_cunit
+    I1_29 (MSB_3 COM) LB_DAC_cunit
+    I1_28 (MSB_3 COM) LB_DAC_cunit
+    I1_27 (MSB_3 COM) LB_DAC_cunit
+    I1_26 (MSB_3 COM) LB_DAC_cunit
+    I1_25 (MSB_3 COM) LB_DAC_cunit
+    I1_24 (MSB_3 COM) LB_DAC_cunit
+    I1_23 (MSB_3 COM) LB_DAC_cunit
+    I1_22 (MSB_3 COM) LB_DAC_cunit
+    I1_21 (MSB_3 COM) LB_DAC_cunit
+    I1_20 (MSB_3 COM) LB_DAC_cunit
+    I1_19 (MSB_3 COM) LB_DAC_cunit
+    I1_18 (MSB_3 COM) LB_DAC_cunit
+    I1_17 (MSB_3 COM) LB_DAC_cunit
+    I1_16 (MSB_3 COM) LB_DAC_cunit
+    I1_15 (MSB_3 COM) LB_DAC_cunit
+    I1_14 (MSB_3 COM) LB_DAC_cunit
+    I1_13 (MSB_3 COM) LB_DAC_cunit
+    I1_12 (MSB_3 COM) LB_DAC_cunit
+    I1_11 (MSB_3 COM) LB_DAC_cunit
+    I1_10 (MSB_3 COM) LB_DAC_cunit
+    I1_9 (MSB_3 COM) LB_DAC_cunit
+    I1_8 (MSB_3 COM) LB_DAC_cunit
+    I1_7 (MSB_3 COM) LB_DAC_cunit
+    I1_6 (MSB_3 COM) LB_DAC_cunit
+    I1_5 (MSB_3 COM) LB_DAC_cunit
+    I1_4 (MSB_3 COM) LB_DAC_cunit
+    I1_3 (MSB_3 COM) LB_DAC_cunit
+    I1_2 (MSB_3 COM) LB_DAC_cunit
+    I1_1 (MSB_3 COM) LB_DAC_cunit
+// @RNL(author="rnl-virtuoso") {
+//   %block_symbol = @DEFINE-SYMBOL(box=[-9, -4, 13, 4]) {
+//     @LINE {(13, 0) (11, 0)};
+//     @LINE {(-5, -4) (-5, -2)};
+//     @LINE {(3, -4) (3, -2)};
+//     @RECTANGLE {(-9, -2) (11, 2)};
+//     @LINE {(-5, 4) (-5, 2)};
+//     ? @TEXT("${name}", size=1, halign="start", valign="middle", key="name") => @PLACE(9, 3);
+//     ? @TEXT("${model}", size=1, halign="middle", valign="middle", key="model") => @PLACE(10, -3.5);
+//     (13, 0) @PIN(terminal="COM");
+//     (7.6, 0) @TEXT("COM", size=1, halign="start", valign="middle");
+//     (-5, -4) @PIN(terminal=["MSB_4", "MSB_3", "MSB_2", "MSB_1", "MSB_0"]);
+//     (-0.6, 0) @TEXT("MSB<4:0>", size=1, halign="end", valign="middle");
+//     (3, -4) @PIN(terminal=["LSB_5", "LSB_4", "LSB_3", "LSB_2", "LSB_1", "LSB_0"]);
+//     (7.4, 0) @TEXT("LSB<5:0>", size=1, halign="end", valign="middle");
+//     (-5, 4) @PIN(terminal="VREFN");
+//     (-5.6, 3) @TEXT("VREFN", size=1, halign="end", valign="middle")
+//   };
+//   # @SET-SYMBOL %block_symbol;
+//   %bundle_0 = {#"I11_7" #"I11_6" #"I11_5" #"I11_4" #"I11_3" #"I11_2" #"I11_1" #"I11_0"} @BUNDLE;
+//   %bundle_0 @PLACE(76, 3) => @ORIENT("R0");
+//   %bundle_0 @TEXT("I11<7:0>", key="name");
+//   %bundle_1 = {#"I6_8" #"I6_7" #"I6_6" #"I6_5" #"I6_4" #"I6_3" #"I6_2" #"I6_1"} @BUNDLE;
+//   %bundle_1 @PLACE(35, 3) => @ORIENT("R0");
+//   %bundle_1 @TEXT("I6<8:1>", key="name");
+//   #"I10" @PLACE(68, 3) => @ORIENT("R0");
+//   %bundle_2 = {#"I1_128" #"I1_127" #"I1_126" #"I1_125" #"I1_124" #"I1_123" #"I1_122" #"I1_121" #"I1_120" #"I1_119" #"I1_118" #"I1_117" #"I1_116" #"I1_115" #"I1_114" #"I1_113" #"I1_112" #"I1_111" #"I1_110" #"I1_109" #"I1_108" #"I1_107" #"I1_106" #"I1_105" #"I1_104" #"I1_103" #"I1_102" #"I1_101" #"I1_100" #"I1_99" #"I1_98" #"I1_97" #"I1_96" #"I1_95" #"I1_94" #"I1_93" #"I1_92" #"I1_91" #"I1_90" #"I1_89" #"I1_88" #"I1_87" #"I1_86" #"I1_85" #"I1_84" #"I1_83" #"I1_82" #"I1_81" #"I1_80" #"I1_79" #"I1_78" #"I1_77" #"I1_76" #"I1_75" #"I1_74" #"I1_73" #"I1_72" #"I1_71" #"I1_70" #"I1_69" #"I1_68" #"I1_67" #"I1_66" #"I1_65" #"I1_64" #"I1_63" #"I1_62" #"I1_61" #"I1_60" #"I1_59" #"I1_58" #"I1_57" #"I1_56" #"I1_55" #"I1_54" #"I1_53" #"I1_52" #"I1_51" #"I1_50" #"I1_49" #"I1_48" #"I1_47" #"I1_46" #"I1_45" #"I1_44" #"I1_43" #"I1_42" #"I1_41" #"I1_40" #"I1_39" #"I1_38" #"I1_37" #"I1_36" #"I1_35" #"I1_34" #"I1_33" #"I1_32" #"I1_31" #"I1_30" #"I1_29" #"I1_28" #"I1_27" #"I1_26" #"I1_25" #"I1_24" #"I1_23" #"I1_22" #"I1_21" #"I1_20" #"I1_19" #"I1_18" #"I1_17" #"I1_16" #"I1_15" #"I1_14" #"I1_13" #"I1_12" #"I1_11" #"I1_10" #"I1_9" #"I1_8" #"I1_7" #"I1_6" #"I1_5" #"I1_4" #"I1_3" #"I1_2" #"I1_1"} @BUNDLE;
+//   %bundle_2 @PLACE(-10, 3) => @ORIENT("R0");
+//   %bundle_2 @TEXT("I1<128:1>", key="name");
+//   %bundle_3 = {#"I9_2" #"I9_1"} @BUNDLE;
+//   %bundle_3 @PLACE(59, 3) => @ORIENT("R0");
+//   %bundle_3 @TEXT("I9<2:1>", key="name");
+//   %bundle_4 = {#"I5_16" #"I5_15" #"I5_14" #"I5_13" #"I5_12" #"I5_11" #"I5_10" #"I5_9" #"I5_8" #"I5_7" #"I5_6" #"I5_5" #"I5_4" #"I5_3" #"I5_2" #"I5_1"} @BUNDLE;
+//   %bundle_4 @PLACE(27, 3) => @ORIENT("R0");
+//   %bundle_4 @TEXT("I5<16:1>", key="name");
+//   %bundle_5 = {#"I3_32" #"I3_31" #"I3_30" #"I3_29" #"I3_28" #"I3_27" #"I3_26" #"I3_25" #"I3_24" #"I3_23" #"I3_22" #"I3_21" #"I3_20" #"I3_19" #"I3_18" #"I3_17" #"I3_16" #"I3_15" #"I3_14" #"I3_13" #"I3_12" #"I3_11" #"I3_10" #"I3_9" #"I3_8" #"I3_7" #"I3_6" #"I3_5" #"I3_4" #"I3_3" #"I3_2" #"I3_1"} @BUNDLE;
+//   %bundle_5 @PLACE(9, 3) => @ORIENT("R0");
+//   %bundle_5 @TEXT("I3<32:1>", key="name");
+//   %bundle_6 = {#"I2_64" #"I2_63" #"I2_62" #"I2_61" #"I2_60" #"I2_59" #"I2_58" #"I2_57" #"I2_56" #"I2_55" #"I2_54" #"I2_53" #"I2_52" #"I2_51" #"I2_50" #"I2_49" #"I2_48" #"I2_47" #"I2_46" #"I2_45" #"I2_44" #"I2_43" #"I2_42" #"I2_41" #"I2_40" #"I2_39" #"I2_38" #"I2_37" #"I2_36" #"I2_35" #"I2_34" #"I2_33" #"I2_32" #"I2_31" #"I2_30" #"I2_29" #"I2_28" #"I2_27" #"I2_26" #"I2_25" #"I2_24" #"I2_23" #"I2_22" #"I2_21" #"I2_20" #"I2_19" #"I2_18" #"I2_17" #"I2_16" #"I2_15" #"I2_14" #"I2_13" #"I2_12" #"I2_11" #"I2_10" #"I2_9" #"I2_8" #"I2_7" #"I2_6" #"I2_5" #"I2_4" #"I2_3" #"I2_2" #"I2_1"} @BUNDLE;
+//   %bundle_6 @PLACE(0, 3) => @ORIENT("R0");
+//   %bundle_6 @TEXT("I2<64:1>", key="name");
+//   %bundle_7 = {#"I7_4" #"I7_3" #"I7_2" #"I7_1"} @BUNDLE;
+//   %bundle_7 @PLACE(43, 3) => @ORIENT("R0");
+//   %bundle_7 @TEXT("I7<4:1>", key="name");
+//   %bundle_8 = {#"I8_4" #"I8_3" #"I8_2" #"I8_1"} @BUNDLE;
+//   %bundle_8 @PLACE(51, 3) => @ORIENT("R0");
+//   %bundle_8 @TEXT("I8<4:1>", key="name");
+//   %bundle_9 = {#"I0_256" #"I0_255" #"I0_254" #"I0_253" #"I0_252" #"I0_251" #"I0_250" #"I0_249" #"I0_248" #"I0_247" #"I0_246" #"I0_245" #"I0_244" #"I0_243" #"I0_242" #"I0_241" #"I0_240" #"I0_239" #"I0_238" #"I0_237" #"I0_236" #"I0_235" #"I0_234" #"I0_233" #"I0_232" #"I0_231" #"I0_230" #"I0_229" #"I0_228" #"I0_227" #"I0_226" #"I0_225" #"I0_224" #"I0_223" #"I0_222" #"I0_221" #"I0_220" #"I0_219" #"I0_218" #"I0_217" #"I0_216" #"I0_215" #"I0_214" #"I0_213" #"I0_212" #"I0_211" #"I0_210" #"I0_209" #"I0_208" #"I0_207" #"I0_206" #"I0_205" #"I0_204" #"I0_203" #"I0_202" #"I0_201" #"I0_200" #"I0_199" #"I0_198" #"I0_197" #"I0_196" #"I0_195" #"I0_194" #"I0_193" #"I0_192" #"I0_191" #"I0_190" #"I0_189" #"I0_188" #"I0_187" #"I0_186" #"I0_185" #"I0_184" #"I0_183" #"I0_182" #"I0_181" #"I0_180" #"I0_179" #"I0_178" #"I0_177" #"I0_176" #"I0_175" #"I0_174" #"I0_173" #"I0_172" #"I0_171" #"I0_170" #"I0_169" #"I0_168" #"I0_167" #"I0_166" #"I0_165" #"I0_164" #"I0_163" #"I0_162" #"I0_161" #"I0_160" #"I0_159" #"I0_158" #"I0_157" #"I0_156" #"I0_155" #"I0_154" #"I0_153" #"I0_152" #"I0_151" #"I0_150" #"I0_149" #"I0_148" #"I0_147" #"I0_146" #"I0_145" #"I0_144" #"I0_143" #"I0_142" #"I0_141" #"I0_140" #"I0_139" #"I0_138" #"I0_137" #"I0_136" #"I0_135" #"I0_134" #"I0_133" #"I0_132" #"I0_131" #"I0_130" #"I0_129" #"I0_128" #"I0_127" #"I0_126" #"I0_125" #"I0_124" #"I0_123" #"I0_122" #"I0_121" #"I0_120" #"I0_119" #"I0_118" #"I0_117" #"I0_116" #"I0_115" #"I0_114" #"I0_113" #"I0_112" #"I0_111" #"I0_110" #"I0_109" #"I0_108" #"I0_107" #"I0_106" #"I0_105" #"I0_104" #"I0_103" #"I0_102" #"I0_101" #"I0_100" #"I0_99" #"I0_98" #"I0_97" #"I0_96" #"I0_95" #"I0_94" #"I0_93" #"I0_92" #"I0_91" #"I0_90" #"I0_89" #"I0_88" #"I0_87" #"I0_86" #"I0_85" #"I0_84" #"I0_83" #"I0_82" #"I0_81" #"I0_80" #"I0_79" #"I0_78" #"I0_77" #"I0_76" #"I0_75" #"I0_74" #"I0_73" #"I0_72" #"I0_71" #"I0_70" #"I0_69" #"I0_68" #"I0_67" #"I0_66" #"I0_65" #"I0_64" #"I0_63" #"I0_62" #"I0_61" #"I0_60" #"I0_59" #"I0_58" #"I0_57" #"I0_56" #"I0_55" #"I0_54" #"I0_53" #"I0_52" #"I0_51" #"I0_50" #"I0_49" #"I0_48" #"I0_47" #"I0_46" #"I0_45" #"I0_44" #"I0_43" #"I0_42" #"I0_41" #"I0_40" #"I0_39" #"I0_38" #"I0_37" #"I0_36" #"I0_35" #"I0_34" #"I0_33" #"I0_32" #"I0_31" #"I0_30" #"I0_29" #"I0_28" #"I0_27" #"I0_26" #"I0_25" #"I0_24" #"I0_23" #"I0_22" #"I0_21" #"I0_20" #"I0_19" #"I0_18" #"I0_17" #"I0_16" #"I0_15" #"I0_14" #"I0_13" #"I0_12" #"I0_11" #"I0_10" #"I0_9" #"I0_8" #"I0_7" #"I0_6" #"I0_5" #"I0_4" #"I0_3" #"I0_2" #"I0_1"} @BUNDLE;
+//   %bundle_9 @PLACE(-21, 3) => @ORIENT("R0");
+//   %bundle_9 @TEXT("I0<256:1>", key="name");
+//   %bundle_10 = {#"I4_16" #"I4_15" #"I4_14" #"I4_13" #"I4_12" #"I4_11" #"I4_10" #"I4_9" #"I4_8" #"I4_7" #"I4_6" #"I4_5" #"I4_4" #"I4_3" #"I4_2" #"I4_1"} @BUNDLE;
+//   %bundle_10 @PLACE(18, 3) => @ORIENT("R0");
+//   %bundle_10 @TEXT("I4<16:1>", key="name");
+//   %port_0 = $IO_PORT @ATTACH &"COM" => @PLACE(-29, 7) => @ORIENT("R0");
+//   %bus_port_type_1 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"], ["p3", "net"], ["p4", "net"], ["p5", "net"]]) {};
+//   %bus_port_type_1_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3, 4, 5, 6])};
+//   {&"LSB_5" &"LSB_4" &"LSB_3" &"LSB_2" &"LSB_1" &"LSB_0"} @REMOVE-FROM $PORT_FILL_SET;
+//   %port_1 = %bus_port_type_1 @ATTACH &"LSB_5" &"LSB_4" &"LSB_3" &"LSB_2" &"LSB_1" &"LSB_0" => @PLACE(-29, -3) => @ORIENT("R0");
+//   %port_1 @SET-SYMBOL %bus_port_type_1_symbol;
+//   %port_1_marker = $IO_PORT @ATTACH &"LSB_5" => @PLACE(-29, -3) => @ORIENT("R0");
+//   %port_1_marker @TEXT("LSB<5:0>", key="name");
+//   %port_2 = $IO_PORT @ATTACH &"VREFN" => @PLACE(-29, -6) => @ORIENT("R0");
+//   %bus_port_type_3 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"], ["p3", "net"], ["p4", "net"]]) {};
+//   %bus_port_type_3_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3, 4, 5])};
+//   {&"MSB_4" &"MSB_3" &"MSB_2" &"MSB_1" &"MSB_0"} @REMOVE-FROM $PORT_FILL_SET;
+//   %port_3 = %bus_port_type_3 @ATTACH &"MSB_4" &"MSB_3" &"MSB_2" &"MSB_1" &"MSB_0" => @PLACE(-29, 0) => @ORIENT("R0");
+//   %port_3 @SET-SYMBOL %bus_port_type_3_symbol;
+//   %port_3_marker = $IO_PORT @ATTACH &"MSB_4" => @PLACE(-29, 0) => @ORIENT("R0");
+//   %port_3_marker @TEXT("MSB<4:0>", key="name");
+//   %p0 = (76, -9);
+//   %wire_0 = &"VREFN" @WIRE(mode="straight") {%p0 %bundle_0:1};
+//   %wire_0 @TEXT("VREFN", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(75.3, -6);
+//   %p1 = (18, -9);
+//   %wire_1 = &"MSB_0" @WIRE(mode="straight") {%p1 %bundle_10:1};
+//   %wire_1 @TEXT("MSB\_0", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(17.3, -6);
+//   %p2 = (68, -9);
+//   %wire_2 = &"LSB_0" @WIRE(mode="straight") {%p2 #"I10":1};
+//   %wire_2 @TEXT("LSB\_0", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(67.3, -6);
+//   %p3 = (59, -9);
+//   %wire_3 = &"LSB_1" @WIRE(mode="straight") {%p3 %bundle_3:1};
+//   %wire_3 @TEXT("LSB\_1", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(58.3, -6);
+//   %p4 = (51, -9);
+//   %wire_4 = &"LSB_2" @WIRE(mode="straight") {%p4 %bundle_8:1};
+//   %wire_4 @TEXT("LSB\_2", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(50.3, -6);
+//   %p5 = (43, -9);
+//   %wire_5 = &"LSB_3" @WIRE(mode="straight") {%p5 %bundle_7:1};
+//   %wire_5 @TEXT("LSB\_3", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(42.3, -6);
+//   %p6 = (35, -9);
+//   %wire_6 = &"LSB_4" @WIRE(mode="straight") {%p6 %bundle_1:1};
+//   %wire_6 @TEXT("LSB\_4", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(34.3, -6);
+//   %p7 = (27, -9);
+//   %wire_7 = &"LSB_5" @WIRE(mode="straight") {%p7 %bundle_4:1};
+//   %wire_7 @TEXT("LSB\_5", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(26.3, -6);
+//   %p8 = (9, -9);
+//   %wire_8 = &"MSB_1" @WIRE(mode="straight") {%p8 %bundle_5:1};
+//   %wire_8 @TEXT("MSB\_1", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(8.3, -6);
+//   %p9 = (0, -9);
+//   %wire_9 = &"MSB_2" @WIRE(mode="straight") {%p9 %bundle_6:1};
+//   %wire_9 @TEXT("MSB\_2", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-0.7, -6);
+//   %p10 = (-10, -9);
+//   %wire_10 = &"MSB_3" @WIRE(mode="straight") {%p10 %bundle_2:1};
+//   %wire_10 @TEXT("MSB\_3", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-10.7, -6);
+//   %p11 = (-21, -9);
+//   %wire_11 = &"MSB_4" @WIRE(mode="straight") {%p11 %bundle_9:1};
+//   %wire_11 @TEXT("MSB\_4", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-21.7, -6);
+//   %p12 = (68, 7);
+//   %p13 = (76, 7);
+//   %wire_12 = &"COM" @WIRE(mode="straight") {%p12 %p13};
+//   %p14 = (-21, 7);
+//   %p15 = (-10, 7);
+//   %wire_13 = &"COM" @WIRE(mode="straight") {%p14 %p15};
+//   %wire_14 = &"COM" @WIRE(mode="straight") {%bundle_9:2 %p14};
+//   %p16 = (-28, 7);
+//   %wire_15 = &"COM" @WIRE(mode="straight") {%p16 %p14};
+//   %p17 = (0, 7);
+//   %wire_16 = &"COM" @WIRE(mode="straight") {%bundle_6:2 %p17};
+//   %p18 = (43, 7);
+//   %wire_17 = &"COM" @WIRE(mode="straight") {%bundle_7:2 %p18};
+//   %p19 = (35, 7);
+//   %wire_18 = &"COM" @WIRE(mode="straight") {%bundle_1:2 %p19};
+//   %p20 = (27, 7);
+//   %wire_19 = &"COM" @WIRE(mode="straight") {%p20 %p19};
+//   %p21 = (9, 7);
+//   %wire_20 = &"COM" @WIRE(mode="straight") {%bundle_5:2 %p21};
+//   %p22 = (18, 7);
+//   %wire_21 = &"COM" @WIRE(mode="straight") {%p22 %p20};
+//   %wire_22 = &"COM" @WIRE(mode="straight") {%p17 %p21};
+//   %wire_23 = &"COM" @WIRE(mode="straight") {%p15 %p17};
+//   %wire_24 = &"COM" @WIRE(mode="straight") {%p19 %p18};
+//   %wire_25 = &"COM" @WIRE(mode="straight") {%bundle_10:2 %p22};
+//   %wire_26 = &"COM" @WIRE(mode="straight") {%p21 %p22};
+//   %p23 = (51, 7);
+//   %wire_27 = &"COM" @WIRE(mode="straight") {%bundle_8:2 %p23};
+//   %p24 = (59, 7);
+//   %wire_28 = &"COM" @WIRE(mode="straight") {%p23 %p24};
+//   %wire_29 = &"COM" @WIRE(mode="straight") {%p18 %p23};
+//   %wire_30 = &"COM" @WIRE(mode="straight") {#"I10":2 %p12};
+//   %wire_31 = &"COM" @WIRE(mode="straight") {%bundle_2:2 %p15};
+//   %wire_32 = &"COM" @WIRE(mode="straight") {%bundle_0:2 %p13};
+//   %wire_33 = &"COM" @WIRE(mode="straight") {%bundle_4:2 %p20};
+//   %wire_34 = &"COM" @WIRE(mode="straight") {%p24 %p12};
+//   %wire_35 = &"COM" @WIRE(mode="straight") {%bundle_3:2 %p24};
+//   $JUNCTION @ATTACH %p12;
+//   $JUNCTION @ATTACH %p14;
+//   $JUNCTION @ATTACH %p15;
+//   $JUNCTION @ATTACH %p17;
+//   $JUNCTION @ATTACH %p18;
+//   $JUNCTION @ATTACH %p19;
+//   $JUNCTION @ATTACH %p20;
+//   $JUNCTION @ATTACH %p21;
+//   $JUNCTION @ATTACH %p22;
+//   $JUNCTION @ATTACH %p23;
+//   $JUNCTION @ATTACH %p24;
+//   (0, 11) @TEXT("256, 128, 64, 32, 16; 16, 8, 4, 4, 2, 1", size=1, halign="middle", valign="baseline")
+// }
+// @RNL(author="gemini-4-argon") {
+//   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
+//   /* L3_CDAC_V1: 11-Bit-Control (9-Bit Effective, 520C = 572fF) Dual-Redundant Binary Unit-Capacitor Array */
+//   {%bundle_9 %bundle_2 %bundle_6 %bundle_5 %bundle_10}(msb_binary_array) %bundle_4(interstage_redundancy) {%bundle_1 %bundle_7 %bundle_3 #"I10"}(lsb_sub_array) %bundle_8(intrastage_redundancy) %bundle_0(termination_caps) @AS(role="split_redundant_unit_capacitor_CDAC", total_unit_caps="520C_572fF", unit_c="1.1fF") $CDAC_WEIGHTED_ARRAY;
+//   {%bundle_9 %bundle_2 %bundle_6 %bundle_5 %bundle_10 %bundle_4 %bundle_1 %bundle_7 %bundle_8 %bundle_3 #"I10" %bundle_0}(members) @AS $MATCHED;
+//   {%bundle_9 %bundle_2 %bundle_6 %bundle_5 %bundle_10 %bundle_4 %bundle_1 %bundle_7 %bundle_8 %bundle_3 #"I10" %bundle_0}(path) @AS(direction="left-to-right") $FLOW;
+//   %bundle_9(members) @AS $BRANCH; %bundle_2(members) @AS $BRANCH; %bundle_6(members) @AS $BRANCH; %bundle_5(members) @AS $BRANCH; %bundle_10(members) @AS $BRANCH; %bundle_4(members) @AS $BRANCH;
+//   %bundle_1(members) @AS $BRANCH; %bundle_7(members) @AS $BRANCH; %bundle_8(members) @AS $BRANCH; %bundle_3(members) @AS $BRANCH; #"I10"(members) @AS $BRANCH; %bundle_0(members) @AS $BRANCH;
+//   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
+//   (-46, 54.89) @TEXT("Comment by Gemini-4-Argon", size=2) => @SET-STYLE $risca_author_style;
+//   @RECTANGLE {(-46, 34.02) (117.26, 52.89)} => @SET-STYLE $risca_note_box;
+//   (-43, 47.84) @TEXT("L3_CDAC_V1: 11-Control-Bit (9-Bit Effective, 520 x 1.1fF = 572fF) Dual-Redundant Binary Unit-Capacitor Array", size=2.2) => @SET-STYLE $risca_title_style;
+//   (-43, 44.24) @TEXT("1. 5-Bit MSB Segment (496C): MSB_4=256C (I0), MSB_3=128C (I1), MSB_2=64C (I2), MSB_1=32C (I3), MSB_0=16C (I4).", size=1.8) => @SET-STYLE $risca_swcap_style;
+//   (-43, 40.64) @TEXT("2. Dual Redundancy: LSB_5=16C (I5, inter-stage redundancy at MSB/LSB boundary) + LSB_2=4C (I8, intra-LSB settling redundancy).", size=1.8) => @SET-STYLE $risca_swcap_style;
+//   (-43, 37.04) @TEXT("3. 6-Bit LSB Segment (35C) + Termination (8C): LSB_5=16C, LSB_4=8C, LSB_3=4C, LSB_2=4C, LSB_1=2C, LSB_0=1C (I10), plus VREFN dummy=8C (I11<7:0>).", size=1.8) => @SET-STYLE $risca_swcap_style
+// }
+ends L3_CDAC_V1

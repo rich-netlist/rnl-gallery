@@ -1,0 +1,70 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt nor_fast_v14_pdk110_32 (a b out vdd vss)
+MP0 (p a vdd vdd) pch w=8e-06 l=1.8e-07 ad=3.84e-12 as=3.84e-12 pd=1.696e-05 ps=1.696e-05 nrd=0.03375 nrs=0.03375 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MP1 (out b p vdd) pch w=8e-06 l=1.8e-07 ad=3.84e-12 as=3.84e-12 pd=1.696e-05 ps=1.696e-05 nrd=0.03375 nrs=0.03375 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MN0 (out a vss vss) nch w=2e-06 l=1.8e-07 ad=9.599999999999999e-13 as=9.599999999999999e-13 pd=4.96e-06 ps=4.96e-06 nrd=0.135 nrs=0.135 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MN1 (out b vss vss) nch w=2e-06 l=1.8e-07 ad=9.599999999999999e-13 as=9.599999999999999e-13 pd=4.96e-06 ps=4.96e-06 nrd=0.135 nrs=0.135 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $NOR_2INPUT;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %nor = {#MP0 #MP1}(pull_up_series) {#MN0 #MN1}(pull_down_parallel) @AS(role="static_cmos_nor2", skew="PMOS_4x_series_compensated") $CMOS_NOR2;
+//   {#MP0 #MP1} @AS $MATCHED;
+//   {#MN0 #MN1} @AS $MATCHED;
+//   {#MP0 #MP1} @AS $BRANCH;
+//   #MP0:s @AS $SUPPLY_HIGH;
+//   {#MN0:s #MN1:s} @AS $SUPPLY_LOW;
+//   {%pa #MP0 %py} @AS(direction="left-to-right") $FLOW;
+//   /* Static CMOS NOR2 has zero quiescent DC current; no static DC current annotated */
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pa  = $IO_PORT @ATTACH &a   => @PLACE(2, 20) => @ORIENT("R0");
+//   %pb  = $IO_PORT @ATTACH &b   => @PLACE(2, 14) => @ORIENT("R0");
+//   %py  = $IO_PORT @ATTACH &out => @PLACE(24, 10) => @ORIENT("MY");
+//   %sup = $SUPPLY  @ATTACH &vdd => @PLACE(14, 24);
+//   %gnd = $GROUND  @ATTACH &vss => @PLACE(14, 0);
+//
+//   #MP0 @PLACE(14, 20) => @ORIENT("R0");
+//   #MP1 @PLACE(14, 14) => @ORIENT("R0");
+//   #MN0 @PLACE(10, 6)  => @ORIENT("R0");
+//   #MN1 @PLACE(18, 6)  => @ORIENT("R0");
+//
+//   /* --- 3. Explicit Manhattan Wiring --- */
+//   &vdd @WIRE { %sup:p #MP0:s };
+//   &p   @WIRE { #MP0:d #MP1:s };
+//
+//   %jy1 = (14, 10);
+//   %jy2 = (18, 10);
+//   $JUNCTION @ATTACH %jy1;
+//   $JUNCTION @ATTACH %jy2;
+//   &out @WIRE { #MN0:d (10, 10) %jy1 #MP1:d };
+//   &out @WIRE { %jy1 %jy2 #MN1:d };
+//   &out @WIRE { %jy2 %py:p };
+//
+//   %jgnd = (14, 2);
+//   $JUNCTION @ATTACH %jgnd;
+//   &vss @WIRE { #MN0:s (10, 2) %jgnd %gnd:p };
+//   &vss @WIRE { #MN1:s (18, 2) %jgnd };
+//
+//   %ja = (5, 20);
+//   %jb = (6, 14);
+//   $JUNCTION @ATTACH %ja;
+//   $JUNCTION @ATTACH %jb;
+//   &a @WIRE { %pa:p %ja #MP0:g };
+//   &a @WIRE { %ja (5, 6) #MN0:g };
+//   &b @WIRE { %pb:p %jb #MP1:g };
+//   &b @WIRE { %jb (6, 11) (14, 11) (14, 6) #MN1:g };
+//
+//   /* --- 4. Annotations & Parameter Labels --- */
+//   #MP0 @TEXT("8.0u/0.18u", key="wl", dx=1.5, dy=0, halign="start") => @SET-STYLE $param_style;
+//   #MP1 @TEXT("8.0u/0.18u", key="wl", dx=1.5, dy=0, halign="start") => @SET-STYLE $param_style;
+//   #MN0 @TEXT("2.0u/0.18u", key="wl", dx=-1.5, dy=-1.5, halign="end") => @SET-STYLE $param_style;
+//   #MN1 @TEXT("2.0u/0.18u", key="wl", dx=1.5, dy=-1.5, halign="start") => @SET-STYLE $param_style;
+//   (14, 29) @TEXT("nor_fast_v14_pdk110_32: High-Speed 2-Input NOR Gate for Divide-by-3 State Machine", halign="middle") => @SET-STYLE $title_style;
+//   (14, 27.3) @TEXT("Series PMOS Stack (8.0u) + Parallel NMOS Pull-Down (2.0u)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends nor_fast_v14_pdk110_32

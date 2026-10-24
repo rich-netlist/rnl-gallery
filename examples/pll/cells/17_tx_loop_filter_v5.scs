@@ -1,0 +1,74 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt tx_loop_filter_v5_pdk110_17 (ctrl vc1 enable preset vdd vss)
+R (ctrl vc1) resistor r=100000
+C1 (vc1 vss) capacitor c=7.1619724391353e-12
+C2 (ctrl vss) capacitor c=4.77464829275685e-13
+XI (enable enb vdd vss) pll_inv_pdk110_7
+XP0 (preset ctrl enb enable vdd vss) pll_tg_pdk110_18
+XP1 (preset vc1 enb enable vdd vss) pll_tg_pdk110_18
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $LOOP_FILTER_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %lf = {#R}(loop_resistors) {#C1 #C2}(loop_capacitors) {#XP0 #XP1}(preset_switches) {#XI}(control_inverter) @AS(order=2, type="Type-II_passive_RC_with_dual_node_FLL_preset") $LOOP_FILTER_WITH_PRESET;
+//   %rc = {#R}(resistors) {#C1 #C2}(capacitors) @AS(cutoff_role="222kHz_zero_loop_filter") $RC_NOISE_FILTER;
+//   {#XP0 #XP1} @AS $MATCHED;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %ppre  = $IO_PORT @ATTACH &preset => @PLACE(2, 16)  => @ORIENT("R0");
+//   %pen   = $IO_PORT @ATTACH &enable => @PLACE(2, 24)  => @ORIENT("R0");
+//   %pctrl = $IO_PORT @ATTACH &ctrl   => @PLACE(36, 16) => @ORIENT("MY");
+//   %pvc1  = $IO_PORT @ATTACH &vc1    => @PLACE(36, 8)  => @ORIENT("MY");
+//   %gnd1  = $GROUND  @ATTACH &vss    => @PLACE(22, 0);
+//   %gnd2  = $GROUND  @ATTACH &vss    => @PLACE(32, 0);
+//
+//   #XI  @PLACE(9, 24)  => @ORIENT("R0");
+//   #XP0 @PLACE(14, 16) => @ORIENT("R0");
+//   #XP1 @PLACE(14, 8)  => @ORIENT("R0");
+//   #R   @PLACE(22, 12) => @ORIENT("R0");
+//   #C2  @PLACE(32, 12) => @ORIENT("R0");
+//   #C1  @PLACE(22, 4)  => @ORIENT("R0");
+//
+//   /* --- 3. Passive RC & Preset Wiring + Flying-Wire Switch Enable Labels --- */
+//   %jpre = (6, 16);
+//   $JUNCTION @ATTACH %jpre;
+//   &preset @WIRE { %ppre:p %jpre #XP0:a };
+//   &preset @WIRE { %jpre (6, 8) #XP1:a };
+//
+//   &enable @WIRE { %pen:p #XI:a };
+//   &enb    @WIRE { #XI:y (15, 24) } => @TEXT("enb") => @SET-STYLE $fly_label_style;
+//
+//   #XP0:on  @TEXT("enb",    dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XP0:off @TEXT("enable", dx=0, dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//   #XP1:on  @TEXT("enb",    dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XP1:off @TEXT("enable", dx=0, dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//
+//   %jctrl1 = (22, 16);
+//   %jctrl2 = (32, 16);
+//   $JUNCTION @ATTACH %jctrl1;
+//   $JUNCTION @ATTACH %jctrl2;
+//   &ctrl @WIRE { #XP0:b %jctrl1 %jctrl2 %pctrl:p };
+//   &ctrl @WIRE { %jctrl1 #R:1 };
+//   &ctrl @WIRE { %jctrl2 #C2:1 };
+//
+//   %jvc1 = (22, 8);
+//   $JUNCTION @ATTACH %jvc1;
+//   &vc1 @WIRE { #XP1:b %jvc1 #R:2 };
+//   &vc1 @WIRE { %jvc1 #C1:1 };
+//   &vc1 @WIRE { %jvc1 (28, 8) %pvc1:p };
+//
+//   &vss @WIRE { #C1:2 %gnd1:p };
+//   &vss @WIRE { #C2:2 (32, 0) %gnd2:p };
+//
+//   /* --- 4. Annotations --- */
+//   #R  @TEXT("100 k\Omega", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #C1 @TEXT("7.16 pF",      key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #C2 @TEXT("477 fF",       key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   (19, 30) @TEXT("tx_loop_filter_v5_pdk110_17: 2nd-Order Passive RC Loop Filter with Dual-Node FLL Preset Switches", halign="middle") => @SET-STYLE $title_style;
+//   (19, 28.2) @TEXT("XP0 & XP1 Simultaneously Precharge Both ctrl (C2=477fF) and Zero Cap Node vc1 (C1=7.16pF) to DAC Voltage preset When enable=0", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends tx_loop_filter_v5_pdk110_17

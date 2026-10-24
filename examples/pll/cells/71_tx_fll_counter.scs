@@ -1,0 +1,119 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt tx_fll_counter_pdk110_71 (clk gate reset q0 q1 q2 q3 q4 q5 q6 q7 q8 q9 q10 q11 q12 q13 vdd vss)
+XCI (clk clkb vdd vss) pll_inv_pdk110_59
+XGE (gate clkb clk safe_gate vdd vss) pll_latch_pdk110_72
+XG (clk safe_gate gclk vdd vss) tx_and_pdk110_47
+XF0 (gclk reset q0 qb0 vdd vss) tx_tff_pdk110_73
+XF1 (qb0 reset q1 qb1 vdd vss) tx_tff_pdk110_73
+XF2 (qb1 reset q2 qb2 vdd vss) tx_tff_pdk110_73
+XF3 (qb2 reset q3 qb3 vdd vss) tx_tff_pdk110_73
+XF4 (qb3 reset q4 qb4 vdd vss) tx_tff_pdk110_73
+XF5 (qb4 reset q5 qb5 vdd vss) tx_tff_pdk110_73
+XF6 (qb5 reset q6 qb6 vdd vss) tx_tff_pdk110_73
+XF7 (qb6 reset q7 qb7 vdd vss) tx_tff_pdk110_73
+XF8 (qb7 reset q8 qb8 vdd vss) tx_tff_pdk110_73
+XF9 (qb8 reset q9 qb9 vdd vss) tx_tff_pdk110_73
+XF10 (qb9 reset q10 qb10 vdd vss) tx_tff_pdk110_73
+XF11 (qb10 reset q11 qb11 vdd vss) tx_tff_pdk110_73
+XF12 (qb11 reset q12 qb12 vdd vss) tx_tff_pdk110_73
+XF13 (qb12 reset q13 qb13 vdd vss) tx_tff_pdk110_73
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $FLL_CNT_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %cnt = {#XCI #XGE #XG}(clock_gating) {#XF0 #XF1 #XF2 #XF3 #XF4 #XF5 #XF6 #XF7 #XF8 #XF9 #XF10 #XF11 #XF12 #XF13}(toggle_stages) @AS(bits=14, architecture="asynchronous_ripple_carry") $RIPPLE_COUNTER;
+//   {%pclk #XG #XF0 #XF1 #XF2 #XF3 #XF4 #XF5 #XF6 #XF7 #XF8 #XF9 #XF10 #XF11 #XF12 #XF13 %pq} @AS(direction="left-to-right") $FLOW;
+//   $NO_CONNECT @ATTACH #XF13:qb;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   {&q1 &q2 &q3 &q4 &q5 &q6 &q7 &q8 &q9 &q10 &q11 &q12 &q13} @REMOVE-FROM $PORT_FILL_SET;
+//   %pclk   = $IO_PORT @ATTACH &clk   => @PLACE(2, 16)   => @ORIENT("R0");
+//   %pgate  = $IO_PORT @ATTACH &gate  => @PLACE(2, 12)   => @ORIENT("R0");
+//   %preset = $IO_PORT @ATTACH &reset => @PLACE(2, 5)    => @ORIENT("R0");
+//   %pq     = $IO_PORT @ATTACH &q0    => @PLACE(204, 22) => @ORIENT("MY");
+//   %pq @TEXT("q<13:0>", key="name");
+//
+//   #XCI @PLACE(8, 10)  => @ORIENT("R0");
+//   #XGE @PLACE(16, 10) => @ORIENT("R0");
+//   #XG  @PLACE(25, 15) => @ORIENT("R0");
+//   #XF0 @PLACE(36, 14) => @ORIENT("R0");
+//   #XF1 @PLACE(48, 14) => @ORIENT("R0");
+//   #XF2 @PLACE(60, 14) => @ORIENT("R0");
+//   #XF3 @PLACE(72, 14) => @ORIENT("R0");
+//   #XF4 @PLACE(84, 14) => @ORIENT("R0");
+//   #XF5 @PLACE(96, 14) => @ORIENT("R0");
+//   #XF6 @PLACE(108, 14) => @ORIENT("R0");
+//   #XF7 @PLACE(120, 14) => @ORIENT("R0");
+//   #XF8 @PLACE(132, 14) => @ORIENT("R0");
+//   #XF9 @PLACE(144, 14) => @ORIENT("R0");
+//   #XF10 @PLACE(156, 14) => @ORIENT("R0");
+//   #XF11 @PLACE(168, 14) => @ORIENT("R0");
+//   #XF12 @PLACE(180, 14) => @ORIENT("R0");
+//   #XF13 @PLACE(192, 14) => @ORIENT("R0");
+//
+//   /* --- 3. Explicit Manhattan, Single-Line Bus & Flying-Wire Wiring --- */
+//   {&q0 &q1 &q2 &q3 &q4 &q5 &q6 &q7 &q8 &q9 &q10 &q11 &q12 &q13} @WIRE { (40, 22) %pq:p } => @TEXT("Q<13:0>") => @SET-STYLE $bus_label_style;
+//   %jclk1 = (5, 16);
+//   %jclk2 = (5, 10);
+//   $JUNCTION @ATTACH %jclk1;
+//   $JUNCTION @ATTACH %jclk2;
+//   &clk @WIRE { %pclk:p %jclk1 (22, 16) #XG:a };
+//   &clk @WIRE { %jclk1 %jclk2 #XCI:a };
+//   &clk @WIRE { %jclk2 (5, 8) (12, 8) #XGE:gateb };
+//
+//   &clkb      @WIRE { #XCI:y #XGE:gate };
+//   &gate      @WIRE { %pgate:p (12, 12) #XGE:d };
+//   &reset     @WIRE { %preset:p (8, 5) } => @TEXT("reset") => @SET-STYLE $fly_label_style;
+//   &safe_gate @WIRE { #XGE:q (21, 10) (21, 14) #XG:b };
+//   &gclk      @WIRE { #XG:y #XF0:clk };
+//   &q0 @WIRE { #XF0:q (40, 22) } => @TEXT("q0") => @SET-STYLE $fly_label_style;
+//   #XF0:reset @TEXT("reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &qb0 @WIRE { #XF0:qb (42, 13) (42, 15) #XF1:clk };
+//   &q1 @WIRE { #XF1:q (52, 22) } => @TEXT("q1") => @SET-STYLE $fly_label_style;
+//   #XF1:reset @TEXT("reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &qb1 @WIRE { #XF1:qb (54, 13) (54, 15) #XF2:clk };
+//   &q2 @WIRE { #XF2:q (64, 22) } => @TEXT("q2") => @SET-STYLE $fly_label_style;
+//   #XF2:reset @TEXT("reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &qb2 @WIRE { #XF2:qb (66, 13) (66, 15) #XF3:clk };
+//   &q3 @WIRE { #XF3:q (76, 22) } => @TEXT("q3") => @SET-STYLE $fly_label_style;
+//   #XF3:reset @TEXT("reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &qb3 @WIRE { #XF3:qb (78, 13) (78, 15) #XF4:clk };
+//   &q4 @WIRE { #XF4:q (88, 22) } => @TEXT("q4") => @SET-STYLE $fly_label_style;
+//   #XF4:reset @TEXT("reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &qb4 @WIRE { #XF4:qb (90, 13) (90, 15) #XF5:clk };
+//   &q5 @WIRE { #XF5:q (100, 22) } => @TEXT("q5") => @SET-STYLE $fly_label_style;
+//   #XF5:reset @TEXT("reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &qb5 @WIRE { #XF5:qb (102, 13) (102, 15) #XF6:clk };
+//   &q6 @WIRE { #XF6:q (112, 22) } => @TEXT("q6") => @SET-STYLE $fly_label_style;
+//   #XF6:reset @TEXT("reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &qb6 @WIRE { #XF6:qb (114, 13) (114, 15) #XF7:clk };
+//   &q7 @WIRE { #XF7:q (124, 22) } => @TEXT("q7") => @SET-STYLE $fly_label_style;
+//   #XF7:reset @TEXT("reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &qb7 @WIRE { #XF7:qb (126, 13) (126, 15) #XF8:clk };
+//   &q8 @WIRE { #XF8:q (136, 22) } => @TEXT("q8") => @SET-STYLE $fly_label_style;
+//   #XF8:reset @TEXT("reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &qb8 @WIRE { #XF8:qb (138, 13) (138, 15) #XF9:clk };
+//   &q9 @WIRE { #XF9:q (148, 22) } => @TEXT("q9") => @SET-STYLE $fly_label_style;
+//   #XF9:reset @TEXT("reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &qb9 @WIRE { #XF9:qb (150, 13) (150, 15) #XF10:clk };
+//   &q10 @WIRE { #XF10:q (160, 22) } => @TEXT("q10") => @SET-STYLE $fly_label_style;
+//   #XF10:reset @TEXT("reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &qb10 @WIRE { #XF10:qb (162, 13) (162, 15) #XF11:clk };
+//   &q11 @WIRE { #XF11:q (172, 22) } => @TEXT("q11") => @SET-STYLE $fly_label_style;
+//   #XF11:reset @TEXT("reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &qb11 @WIRE { #XF11:qb (174, 13) (174, 15) #XF12:clk };
+//   &q12 @WIRE { #XF12:q (184, 22) } => @TEXT("q12") => @SET-STYLE $fly_label_style;
+//   #XF12:reset @TEXT("reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &qb12 @WIRE { #XF12:qb (186, 13) (186, 15) #XF13:clk };
+//   &q13 @WIRE { #XF13:q (196, 22) } => @TEXT("q13") => @SET-STYLE $fly_label_style;
+//   #XF13:reset @TEXT("reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   /* --- 4. Annotations --- */
+//   (104, 28) @TEXT("tx_fll_counter_pdk110_71: 14-Bit Glitch-Free Gated Asynchronous Ripple Counter", halign="middle") => @SET-STYLE $title_style;
+//   (104, 26.2) @TEXT("Low-Phase Latch Synchronizer (XCI, XGE, XG) + 14 Toggle Flip-Flops (XF0..XF13) Feeding Single Output Bus Q<13:0>", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends tx_fll_counter_pdk110_71

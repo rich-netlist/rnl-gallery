@@ -1,0 +1,188 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt pll_capture_rt4_r48_recenter109_v14_pdk110_0 (ref reset apply k0 k1 k2 k3 k4 k5 out qualified range_error cfg_ready frequency_good phase_good amp_good vdd vss)
+VVCO (vco_vdd vdd) vsource dc=0
+VRX (rx_vdd vdd) vsource dc=0
+VRT (rt_vdd vdd) vsource dc=0
+XV (vp vn ctrl b0 b1 b2 b3 b4 b5 b6 b7 vco_vdd vss) lc_vco_physical_v14_pdk110_1
+XBM (vdd vss vmid) tx_bias_mid_v5_pdk110_5
+CCP (vp sp) capacitor c=1.2e-13
+CCN (vn sn) capacitor c=1.2e-13
+RBP (sp vmid) resistor r=10000
+RBN (sn vmid) resistor r=10000
+XREF (ref refb vdd vss) tx_reference_buffer_pdk110_6
+CR (refb vss) capacitor c=6.000000000000001e-14
+XS (refb sp sn hp hn vdd vss) tx_sampler_pdk110_11
+XCP (hp hn pulse en ctrl vdd vss) cp_physical_v14_pdk110_14
+XLF (ctrl vc1 en preset vdd vss) tx_loop_filter_v5_pdk110_17
+XRX (vp clk rx_vdd vss) rf_light24s12_v14_pdk110_19
+XD (clk divider_reset s0 s1 s2 s3 s4 s5 q1 data acqclk vdd vss) bank_pulsetrip_v14_pdk110_21
+XR (data clk out rt_vdd vss) rt_noise_scale4_v14_pdk110_49
+XDET (vp hp hn amp_good phase_good vdd vss) validity_physical_v14_pdk110_53
+XC (refb reset apply k0 k1 k2 k3 k4 k5 out acqclk phase_good frequency_good b0 b1 b2 b3 b4 b5 b6 b7 s0 s1 s2 s3 s4 s5 divider_reset en pulse preset qualified range_error cfg_ready cfg_invalid restart count_gate count_reset vdd vss) pll_control_recenter109_v14_pdk110_56
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $PLL_TOP_SYM;
+//
+//   /* --- 1. Circuit Semantics & Design Defect Annotation --- */
+//   %pll = #XV(vco) #XS(sampler_pd) #XCP(charge_pump) #XLF(loop_filter) #XRX(rf_buffer) #XD(divider_bank) #XR(retimer) #XDET(validity_monitor) #XC(digital_controller) {#XBM #CCP #CCN #RBP #RBN #XREF #CR}(bias_and_coupling) {#VVCO #VRX #VRT}(supply_probes) @AS(architecture="sub_sampling_PLL_with_FLL_recenter") $HYBRID_FLL_SSPLL_SYSTEM;
+//   %ac_net = {#RBP #RBN}(isolation_resistors) {#CCP #CCN}(coupling_caps) @AS(bias_level="0.500_VDD") $AC_COUPLED_BIAS_NETWORK;
+//   {#CCP #CCN} @AS $MATCHED;
+//   {#RBP #RBN} @AS $MATCHED;
+//
+//   %defect_load = {#XV #XRX #XDET #CCP #CCN}(culprit_devices) {&vp &vn}(affected_nets) @AS(
+//     severity="high",
+//     category="asymmetric_VCO_differential_tank_loading",
+//     mechanism="Positive VCO tank node vp drives single-ended RF receiver XRX (4 pF AC cap + wide inverter Cg) AND validity rectifier XDET (MD diode-connected NMOS) in addition to sampler AC cap CCP (120 fF), whereas negative tank node vn only drives CCN (120 fF). This ~50 fF single-ended load imbalance skews differential tank capacitance, degrades phase noise/CMRR, and shifts oscillation amplitude between vp and vn",
+//     recommendation="Add a matched dummy RF load (or differential RF buffer) on vn so vp and vn see identical capacitive and resistive tank loading"
+//   ) $DESIGN_DEFECT;
+//
+//   $NO_CONNECT @ATTACH #XLF:vc1;
+//   $NO_CONNECT @ATTACH #XD:q1;
+//   $NO_CONNECT @ATTACH #XC:config_invalid;
+//   $NO_CONNECT @ATTACH #XC:restart;
+//   $NO_CONNECT @ATTACH #XC:count_gate;
+//   $NO_CONNECT @ATTACH #XC:count_reset;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   {&k1 &k2 &k3 &k4 &k5} @REMOVE-FROM $PORT_FILL_SET;
+//   %pref   = $IO_PORT @ATTACH &ref            => @PLACE(2, 42)   => @ORIENT("R0");
+//   %prst   = $IO_PORT @ATTACH &reset          => @PLACE(2, 16)   => @ORIENT("R0");
+//   %papply = $IO_PORT @ATTACH &apply          => @PLACE(2, 14)   => @ORIENT("R0");
+//   %pk     = $IO_PORT @ATTACH &k0             => @PLACE(2, 11)   => @ORIENT("R0");
+//   %pk @TEXT("k<5:0>", key="name");
+//
+//   %pout   = $IO_PORT @ATTACH &out            => @PLACE(124, 34) => @ORIENT("MY");
+//   %pamp   = $IO_PORT @ATTACH &amp_good       => @PLACE(124, 49) => @ORIENT("MY");
+//   %pph    = $IO_PORT @ATTACH &phase_good     => @PLACE(124, 47) => @ORIENT("MY");
+//   %pqual  = $IO_PORT @ATTACH &qualified      => @PLACE(124, 18) => @ORIENT("MY");
+//   %prng   = $IO_PORT @ATTACH &range_error    => @PLACE(124, 16) => @ORIENT("MY");
+//   %prdy   = $IO_PORT @ATTACH &cfg_ready      => @PLACE(124, 14) => @ORIENT("MY");
+//   %pfrq   = $IO_PORT @ATTACH &frequency_good => @PLACE(124, 12) => @ORIENT("MY");
+//
+//   /* Analog Forward Loop: XREF -> XS (Sampler) -> XCP (Charge Pump) -> XLF (Loop Filter) -> XV (LC-VCO) */
+//   #XREF @PLACE(10, 42) => @ORIENT("R0");
+//   #CR   @PLACE(16, 36) => @ORIENT("R0");
+//   %gcr  = $GROUND @ATTACH &vss => @PLACE(16, 32);
+//
+//   #XS   @PLACE(26, 42) => @ORIENT("R0");
+//   #XCP  @PLACE(42, 42) => @ORIENT("R0");
+//   #XLF  @PLACE(54, 32) => @ORIENT("R0");
+//
+//   #XV   @PLACE(64, 42) => @ORIENT("R0");
+//   #VVCO @PLACE(64, 52) => @ORIENT("R180");
+//   %svco = $SUPPLY @ATTACH &vdd => @PLACE(64, 56);
+//
+//   /* AC-Coupled Mid-Rail Bias Network (Feeding Sampler VP/VN from VCO) */
+//   #XBM  @PLACE(10, 54) => @ORIENT("R0");
+//   #CCP  @PLACE(76, 44) => @ORIENT("R90");
+//   #CCN  @PLACE(76, 40) => @ORIENT("R90");
+//   #RBP  @PLACE(80, 52) => @ORIENT("R180");
+//   #RBN  @PLACE(86, 52) => @ORIENT("R180");
+//
+//   /* RF Buffer (XRX), Validity Monitor (XDET), Divider Bank (XD), Retimer (XR) */
+//   #XDET @PLACE(104, 48) => @ORIENT("R0");
+//   #XRX  @PLACE(90, 36)  => @ORIENT("R0");
+//   #VRX  @PLACE(90, 43)  => @ORIENT("R180");
+//   %srx  = $SUPPLY @ATTACH &vdd => @PLACE(90, 47);
+//
+//   #XD   @PLACE(90, 24)  => @ORIENT("R0");
+//   #XR   @PLACE(110, 34) => @ORIENT("R0");
+//   #VRT  @PLACE(110, 41) => @ORIENT("R180");
+//   %srt  = $SUPPLY @ATTACH &vdd => @PLACE(110, 45);
+//
+//   /* Digital Control Subsystem (XC) */
+//   #XC   @PLACE(44, 12)  => @ORIENT("R0");
+//
+//   /* --- 3. Primary Analog Loop, Single-Line Buses (K<5:0>, B<7:0>, S<5:0>) & Flying-Wire Control --- */
+//   &vdd     @WIRE { %svco:p #VVCO:n };
+//   &vco_vdd @WIRE { #VVCO:p #XV:vdd };
+//   &vdd     @WIRE { %srx:p  #VRX:n };
+//   &rx_vdd  @WIRE { #VRX:p  #XRX:vdd };
+//   &vdd     @WIRE { %srt:p  #VRT:n };
+//   &rt_vdd  @WIRE { #VRT:p  #XR:vdd };
+//   &vss     @WIRE { #CR:2   %gcr:p };
+//
+//   /* Single-Line Multi-Bit Buses */
+//   {&k0 &k1 &k2 &k3 &k4 &k5} @WIRE { %pk:p #XC:k0 } => @TEXT("K<5:0>") => @SET-STYLE $bus_label_style;
+//   {&b0 &b1 &b2 &b3 &b4 &b5 &b6 &b7} @WIRE { #XC:b0 (37, 27) (48, 27) (48, 40) #XV:b0 } => @TEXT("B<7:0>") => @SET-STYLE $bus_label_style;
+//   {&s0 &s1 &s2 &s3 &s4 &s5} @WIRE { #XC:s0 (41, 24.5) (80, 24.5) (80, 22) #XD:s0 } => @TEXT("S<5:0>") => @SET-STYLE $bus_label_style;
+//
+//   /* Primary Analog & RF Signal Loop */
+//   &ref   @WIRE { %pref:p #XREF:inp };
+//   &reset @WIRE { %prst:p #XC:reset };
+//   &apply @WIRE { %papply:p #XC:apply };
+//
+//   %jrefb = (16, 42); $JUNCTION @ATTACH %jrefb;
+//   &refb @WIRE { #XREF:out %jrefb #XS:ref } => @TEXT("refb") => @SET-STYLE $fly_label_style;
+//   &refb @WIRE { %jrefb #CR:1 };
+//
+//   &hp @WIRE { #XS:hp #XCP:hp } => @TEXT("hp") => @SET-STYLE $fly_label_style;
+//   &hn @WIRE { #XS:hn #XCP:hn } => @TEXT("hn") => @SET-STYLE $fly_label_style;
+//
+//   %jctrl = (54, 42); $JUNCTION @ATTACH %jctrl;
+//   &ctrl @WIRE { #XCP:out %jctrl (54, 44) #XV:ctrl };
+//   &ctrl @WIRE { %jctrl #XLF:ctrl };
+//
+//   %jvp1 = (72, 44);
+//   $JUNCTION @ATTACH %jvp1;
+//   &vp @WIRE { #XV:vp %jvp1 #CCP:1 };
+//   &sp @WIRE { #CCP:2 (80, 44) (80, 50) #RBP:1 } => @TEXT("sp") => @SET-STYLE $fly_label_style;
+//   &vp @WIRE { %jvp1 (72, 36) #XRX:rf };
+//   &vp @WIRE { %jvp1 (72, 50) #XDET:rf };
+//   &vn @WIRE { #XV:vn #CCN:1 };
+//   &sn @WIRE { #CCN:2 (86, 40) (86, 50) #RBN:1 } => @TEXT("sn") => @SET-STYLE $fly_label_style;
+//
+//   %jvm = (80, 54); $JUNCTION @ATTACH %jvm;
+//   &vmid @WIRE { #XBM:vmid %jvm #RBP:2 };
+//   &vmid @WIRE { %jvm (86, 54) #RBN:2 };
+//
+//   %jclk = (96, 36); $JUNCTION @ATTACH %jclk;
+//   &clk @WIRE { #XRX:clk %jclk (96, 33) #XR:clk };
+//   &clk @WIRE { %jclk (96, 30) (82, 30) (82, 26) #XD:clk };
+//   &data @WIRE { #XD:out (100, 26) (100, 35) #XR:data };
+//   &out  @WIRE { #XR:out %pout:p } => @TEXT("out") => @SET-STYLE $fly_label_style;
+//
+//   &amp_good   @WIRE { #XDET:amp_good   %pamp:p };
+//   &phase_good @WIRE { #XDET:phase_good %pph:p } => @TEXT("phase_good") => @SET-STYLE $fly_label_style;
+//   &qualified      @WIRE { #XC:qualified      %pqual:p };
+//   &range_error    @WIRE { #XC:range_error    %prng:p };
+//   &cfg_ready      @WIRE { #XC:config_ready   %prdy:p };
+//   &frequency_good @WIRE { #XC:frequency_good %pfrq:p };
+//
+//   /* Flying-Wire Terminal Labels for Secondary Control/Feedback Signals */
+//   #XS:vp       @TEXT("sp",            dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
+//   #XS:vn       @TEXT("sn",            dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
+//   #XDET:hp     @TEXT("hp",            dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
+//   #XDET:hn     @TEXT("hn",            dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
+//   #XCP:pulse   @TEXT("pulse",         dx=0,    dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XCP:enable  @TEXT("en",            dx=0,    dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XLF:enable  @TEXT("en",            dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
+//   #XLF:preset  @TEXT("preset",        dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
+//   #XD:reset    @TEXT("divider_reset", dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
+//   #XD:fllclk   @TEXT("acqclk",        dx=0.5,  dy=-0.3, halign="start")  => @SET-STYLE $fly_label_style;
+//   #XC:refclk   @TEXT("refb",          dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
+//   #XC:outclk   @TEXT("out",           dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
+//   #XC:acqclk   @TEXT("acqclk",        dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
+//   #XC:phase_good @TEXT("phase_good",  dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
+//   #XC:divider_reset @TEXT("divider_reset", dx=0, dy=0.5, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XC:enable   @TEXT("en",            dx=0,    dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//   #XC:pulse    @TEXT("pulse",         dx=0,    dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//   #XC:preset   @TEXT("preset",        dx=0,    dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//
+//   /* --- 4. Annotations & Defect Callout --- */
+//   #CR  @TEXT("60 fF",       key="value", dx=1.8,  dy=0, halign="start")  => @SET-STYLE $param_style;
+//   #CCP @TEXT("120 fF",      key="value", dy=1.8,  halign="middle")       => @SET-STYLE $param_style;
+//   #CCN @TEXT("120 fF",      key="value", dy=-2.2, halign="middle")       => @SET-STYLE $param_style;
+//   #RBP @TEXT("10 k\Omega", key="value", dx=-1.8, dy=0, halign="end")    => @SET-STYLE $param_style;
+//   #RBN @TEXT("10 k\Omega", key="value", dx=1.8,  dy=0, halign="start")  => @SET-STYLE $param_style;
+//
+//   (64, -5.0) @RECTANGLE(width=116, height=4.0) => @SET-STYLE $defect_box;
+//   (64, -4.2) @TEXT("DEFECT: Asymmetric VCO Tank Loading -- vp Drives XRX (RF Buffer) + XDET (Rectifier) + CCP, While vn Only Drives CCN", halign="middle") => @SET-STYLE $defect_style;
+//   (64, -5.8) @TEXT("Unbalanced single-ended load (~50 fF effective Cg/parasitic on vp only) skews differential LC tank symmetry; add dummy load on vn", halign="middle") => @SET-STYLE $param_style;
+//   (64, 62) @TEXT("pll_capture_rt4_r48_recenter109_v14_pdk110_0: 2.4-GHz Hybrid FLL-Assisted Sub-Sampling LC-PLL System", halign="middle") => @SET-STYLE $title_style;
+//   (64, 60.2) @TEXT("Combines Track-and-Hold Sub-Sampling Loop (XS, XCP, XLF, XV) with Single-Line Buses (K<5:0>, B<7:0>, S<5:0>) and 4x Retimed Divider Path (XD, XR)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends pll_capture_rt4_r48_recenter109_v14_pdk110_0

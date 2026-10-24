@@ -1,0 +1,59 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt div3_fast_v14_pdk110_30 (clk out vdd vss)
+XC (clk clkb vdd vss) pll_inv_pdk110_31
+XN (q0 q1 d0 vdd vss) nor_fast_v14_pdk110_32
+X0 (d0 clk clkb q0 vdd vss) ff_static_fast_v14_pdk110_33
+X1 (q0 clk clkb q1 vdd vss) ff_static_fast_v14_pdk110_33
+XB0 (q1 ob vdd vss) pll_inv_pdk110_29
+XB1 (ob out vdd vss) pll_inv_pdk110_27
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $DIV3_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %div3 = {#X0 #X1}(ring_ffs) #XN(feedback_nor) {#XC #XB0 #XB1}(clock_inverters) @AS(modulus=3) $MOD3_DIVIDER;
+//   {#X0 #X1} @AS $MATCHED;
+//   {#XN #X0 #X1 #XB0 #XB1} @AS(direction="left-to-right") $FLOW;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pclk = $IO_PORT @ATTACH &clk => @PLACE(2, 4)   => @ORIENT("R0");
+//   %pout = $IO_PORT @ATTACH &out => @PLACE(58, 14) => @ORIENT("MY");
+//
+//   #XC  @PLACE(10, 4)  => @ORIENT("R0");
+//   #XN  @PLACE(10, 14) => @ORIENT("R0");
+//   #X0  @PLACE(22, 12) => @ORIENT("R0");
+//   #X1  @PLACE(36, 12) => @ORIENT("R0");
+//   #XB0 @PLACE(45, 14) => @ORIENT("R0");
+//   #XB1 @PLACE(53, 14) => @ORIENT("R0");
+//
+//   /* --- 3. Primary Signal Flow Wiring & Flying-Wire Clock Labels --- */
+//   &d0 @WIRE { #XN:out #X0:d };
+//
+//   %jq0 = (28, 12);
+//   $JUNCTION @ATTACH %jq0;
+//   &q0 @WIRE { #X0:q %jq0 (28, 14) #X1:d };
+//   &q0 @WIRE { %jq0 (28, 19) (5, 19) (5, 15) #XN:a };
+//
+//   %jq1 = (41, 12);
+//   $JUNCTION @ATTACH %jq1;
+//   &q1 @WIRE { #X1:q %jq1 (41, 14) #XB0:a };
+//   &q1 @WIRE { %jq1 (41, 21) (3, 21) (3, 13) #XN:b };
+//
+//   &ob  @WIRE { #XB0:y #XB1:a };
+//   &out @WIRE { #XB1:y %pout:p };
+//
+//   &clk  @WIRE { %pclk:p #XC:a };
+//   &clkb @WIRE { #XC:y (16, 4) } => @TEXT("clkb") => @SET-STYLE $fly_label_style;
+//   #X0:clk  @TEXT("clk",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #X0:clkb @TEXT("clkb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #X1:clk  @TEXT("clk",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #X1:clkb @TEXT("clkb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   /* --- 4. Annotations --- */
+//   (30, 25) @TEXT("div3_fast_v14_pdk110_30: Synchronous Divide-by-3 State Machine", halign="middle") => @SET-STYLE $title_style;
+//   (30, 23.3) @TEXT("2-Bit Shift Register (X0, X1) with NOR2 Feedback (d0 = NOR(q0, q1)) Cycling Through 3 States (00 -> 10 -> 01)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends div3_fast_v14_pdk110_30

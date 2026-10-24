@@ -1,0 +1,46 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt pll_tg_pdk110_18 (a b on off vdd vss)
+MN (a on b vss) nch w=2e-05 l=1.8e-07 ad=9.599999999999999e-12 as=9.599999999999999e-12 pd=4.096e-05 ps=4.096e-05 nrd=0.0135 nrs=0.0135 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MP (a off b vdd) pch w=4e-05 l=1.8e-07 ad=1.92e-11 as=1.92e-11 pd=8.096e-05 ps=8.096e-05 nrd=0.00675 nrs=0.00675 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $TG_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %tg = #MP(pmos_pass) #MN(nmos_pass) @AS(role="loop_filter_preset_switch", ron_class="analog_preset (Wp=2u/Wn=1u)") $TRANSMISSION_GATE;
+//   {#MP #MN} @AS $MATCHED;
+//   {%pa #MP %pb} @AS(direction="left-to-right") $FLOW;
+//   /* Pass gate has no quiescent DC current; no static DC current annotated */
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pa   = $IO_PORT @ATTACH &a   => @PLACE(4, 12)  => @ORIENT("R0");
+//   %pb   = $IO_PORT @ATTACH &b   => @PLACE(24, 12) => @ORIENT("MY");
+//   %poff = $IO_PORT @ATTACH &off => @PLACE(11, 20) => @ORIENT("R0");
+//   %pon  = $IO_PORT @ATTACH &on  => @PLACE(11, 4)  => @ORIENT("R0");
+//   #MP @PLACE(14, 15) => @ORIENT("R270");
+//   #MN @PLACE(14, 9)  => @ORIENT("R90");
+//
+//   /* --- 3. Explicit Manhattan Wiring --- */
+//   %ja = (9, 12);
+//   %jb = (19, 12);
+//   $JUNCTION @ATTACH %ja;
+//   $JUNCTION @ATTACH %jb;
+//   &a @WIRE { %pa:p %ja };
+//   &a @WIRE { %ja (9, 15) #MP:d };
+//   &a @WIRE { %ja (9, 9)  #MN:d };
+//   &b @WIRE { #MP:s (19, 15) %jb };
+//   &b @WIRE { #MN:s (19, 9)  %jb };
+//   &b @WIRE { %jb %pb:p };
+//   &off @WIRE { %poff:p (14, 20) #MP:g };
+//   &on  @WIRE { %pon:p  (14, 4)  #MN:g };
+//
+//   /* --- 4. Annotations & Parameter Labels --- */
+//   #MP @TEXT("W=${w} L=${l}", key="wl", dx=2.5, dy=2.5, halign="start") => @SET-STYLE $param_style;
+//   #MN @TEXT("W=${w} L=${l}", key="wl", dx=2.5, dy=-2.5, halign="start") => @SET-STYLE $param_style;
+//   (14, 24.5) @TEXT("pll_tg_pdk110_18: Loop filter FLL coarse-preset bypass switch", halign="middle") => @SET-STYLE $title_style;
+//   (14, 22.8) @TEXT("Complementary Pass Gate | Sizing: analog_preset (Wp=2u/Wn=1u)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends pll_tg_pdk110_18

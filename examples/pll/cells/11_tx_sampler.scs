@@ -1,0 +1,75 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt tx_sampler_pdk110_11 (ref vp vn hp hn vdd vss)
+XI (ref refb vdd vss) pll_inv_pdk110_12
+XSP (vp hp refb ref vdd vss) pll_tg_pdk110_13
+XSN (vn hn refb ref vdd vss) pll_tg_pdk110_13
+CP (hp vss) capacitor c=4.000000000000001e-14
+CN (hn vss) capacitor c=4.000000000000001e-14
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $SAMPLER_SYM;
+//
+//   /* --- 1. Circuit Semantics & Design Defect Annotation --- */
+//   %sspd = #XSP(sampler_p) #XSN(sampler_n) #CP(hold_cap_p) #CN(hold_cap_n) {#XI}(clock_buffers) @AS(hold_cap="40fF", architecture="differential_track_and_hold") $SUB_SAMPLING_PD;
+//   {#XSP #XSN} @AS $MATCHED;
+//   {#CP #CN}   @AS $MATCHED;
+//   %defect_skew = {#XI #XSP #XSN}(culprit_devices) {&ref &refb &hp &hn}(affected_nets) @AS(
+//     severity="medium",
+//     category="sampling_clock_skew_charge_injection",
+//     mechanism="refb lags ref by one inverter delay (XI) without a dummy pass-gate delay equalizer on ref, causing NMOS and PMOS in XSP/XSN to turn off asynchronously and injecting common-mode/differential pedestal error onto CP/CN (40fF)",
+//     recommendation="Insert an always-on transmission gate in the ref path to equalize propagation delay with XI (refb)"
+//   ) $DESIGN_DEFECT;
+//   {%pvp #XSP %php} @AS(direction="left-to-right") $FLOW;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pvp  = $IO_PORT @ATTACH &vp  => @PLACE(2, 24)  => @ORIENT("R0");
+//   %pvn  = $IO_PORT @ATTACH &vn  => @PLACE(2, 10)  => @ORIENT("R0");
+//   %pref = $IO_PORT @ATTACH &ref => @PLACE(2, 17)  => @ORIENT("R0");
+//   %php  = $IO_PORT @ATTACH &hp  => @PLACE(32, 24) => @ORIENT("MY");
+//   %phn  = $IO_PORT @ATTACH &hn  => @PLACE(32, 10) => @ORIENT("MY");
+//   %gndp = $GROUND  @ATTACH &vss => @PLACE(25, 16);
+//   %gndn = $GROUND  @ATTACH &vss => @PLACE(25, 2);
+//
+//   #XI  @PLACE(9, 17)  => @ORIENT("R0");
+//   #XSP @PLACE(18, 24) => @ORIENT("R0");
+//   #XSN @PLACE(18, 10) => @ORIENT("R0");
+//   #CP  @PLACE(25, 20) => @ORIENT("R0");
+//   #CN  @PLACE(25, 6)  => @ORIENT("R0");
+//
+//   /* --- 3. Differential Track-and-Hold Wiring & Flying-Wire Clock Labels --- */
+//   &vp @WIRE { %pvp:p #XSP:a };
+//   &vn @WIRE { %pvn:p #XSN:a };
+//
+//   %jhp = (25, 24);
+//   $JUNCTION @ATTACH %jhp;
+//   &hp @WIRE { #XSP:b %jhp %php:p };
+//   &hp @WIRE { %jhp #CP:1 };
+//   &vss @WIRE { #CP:2 %gndp:p };
+//
+//   %jhn = (25, 10);
+//   $JUNCTION @ATTACH %jhn;
+//   &hn @WIRE { #XSN:b %jhn %phn:p };
+//   &hn @WIRE { %jhn #CN:1 };
+//   &vss @WIRE { #CN:2 %gndn:p };
+//
+//   &ref  @WIRE { %pref:p #XI:a };
+//   &refb @WIRE { #XI:y (14, 17) } => @TEXT("refb") => @SET-STYLE $fly_label_style;
+//
+//   #XSP:on  @TEXT("refb", dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XSP:off @TEXT("ref",  dx=0, dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//   #XSN:on  @TEXT("refb", dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XSN:off @TEXT("ref",  dx=0, dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//
+//   /* --- 4. Annotations & Defect Callout --- */
+//   #CP @TEXT("40 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #CN @TEXT("40 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   (17, -4.0) @RECTANGLE(width=32, height=3.6) => @SET-STYLE $defect_box;
+//   (17, -3.3) @TEXT("DEFECT: Uncompensated Inverter Delay (XI) Between ref and refb Sampling Phases", halign="middle") => @SET-STYLE $defect_style;
+//   (17, -4.7) @TEXT("Causes PMOS (ref) and NMOS (refb) in XSP/XSN to turn off asynchronously, inducing charge-injection offset on CP/CN", halign="middle") => @SET-STYLE $param_style;
+//   (17, 31) @TEXT("tx_sampler_pdk110_11: Differential Sub-Sampling Phase Detector (Track-and-Hold Sampler)", halign="middle") => @SET-STYLE $title_style;
+//   (17, 29.2) @TEXT("Samples AC-Coupled VCO Differential Sine Wave (vp, vn) onto 40 fF Hold Capacitors (CP, CN) on Rising Reference Edge", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends tx_sampler_pdk110_11

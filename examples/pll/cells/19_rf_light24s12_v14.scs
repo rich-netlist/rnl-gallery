@@ -1,0 +1,45 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt rf_light24s12_v14_pdk110_19 (rf clk vdd vss)
+C0 (rf g0) capacitor c=4e-12
+R0 (g0 clk) resistor r=20000
+X0 (g0 clk vdd vss) pll_inv_pdk110_20
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $RF_BUF_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %rfbuf = #C0(ac_cap) #R0(bias_resistor) {#X0}(inverter_chain) @AS(coupling="single_ended_AC") $SELF_BIASED_RF_BUFFER;
+//   {%prf #C0 #X0 %pclk} @AS(direction="left-to-right") $FLOW;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %prf  = $IO_PORT @ATTACH &rf  => @PLACE(2, 10)  => @ORIENT("R0");
+//   %pclk = $IO_PORT @ATTACH &clk => @PLACE(28, 10) => @ORIENT("MY");
+//
+//   #C0 @PLACE(8, 10)  => @ORIENT("R90");
+//   #X0 @PLACE(18, 10) => @ORIENT("R0");
+//   #R0 @PLACE(18, 16) => @ORIENT("R90");
+//
+//   /* --- 3. Explicit Manhattan Wiring --- */
+//   &rf @WIRE { %prf:p #C0:1 };
+//
+//   %jg0 = (13, 10);
+//   $JUNCTION @ATTACH %jg0;
+//   &g0 @WIRE { #C0:2 %jg0 #X0:a };
+//   &g0 @WIRE { %jg0 (13, 16) #R0:1 };
+//
+//   %jclk = (23, 10);
+//   $JUNCTION @ATTACH %jclk;
+//   &clk @WIRE { #X0:y %jclk %pclk:p };
+//   &clk @WIRE { %jclk (23, 16) #R0:2 };
+//
+//   /* --- 4. Annotations --- */
+//   #C0 @TEXT("4.0 pF",        key="value", dy=-2.2, halign="middle") => @SET-STYLE $param_style;
+//   #R0 @TEXT("20 k\Omega",   key="value", dy=1.8,  halign="middle") => @SET-STYLE $param_style;
+//   #X0 @TEXT("Wp=24u/Wn=12u", key="sz",    dy=-3.2, halign="middle") => @SET-STYLE $param_style;
+//   (15, 22) @TEXT("rf_light24s12_v14_pdk110_19: Self-Biased AC-Coupled RF-to-CMOS Clock Receiver Buffer", halign="middle") => @SET-STYLE $title_style;
+//   (15, 20.3) @TEXT("4 pF AC Coupling Cap (C0) + 20 kOhm Shunt-Feedback Resistor (R0) Self-Biasing Wide Inverter (X0) at Switching Threshold", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends rf_light24s12_v14_pdk110_19

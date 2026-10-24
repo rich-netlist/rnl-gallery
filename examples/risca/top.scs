@@ -1,0 +1,41 @@
+simulator lang=spectre
+// The entry file of the gallery: the files the exporter wrote, one subcircuit each, in one netlist.
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl");
+//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl")
+// }
+include "decap/V1_decap.scs"
+include "decap/V1_decap_notap.scs"
+include "L1_IO_ring.scs"
+include "L1_RISCA_core_V1.scs"
+include "L1_clk_buffer.scs"
+include "L2_Ib_mirror.scs"
+include "L2_frame_gen_V1.scs"
+include "L2_single_ch_V2.scs"
+include "L3_CDAC_V1.scs"
+include "L3_DAC_swi_V2.scs"
+include "L3_bridge_cap_V2.scs"
+include "L3_clk_mux_V1.scs"
+include "L3_comparator_V1.scs"
+include "L3_conf_V1.scs"
+include "L3_data_bus.scs"
+include "L3_gm_cell_V1.scs"
+include "L3_input_MUX_V1.scs"
+include "L3_logic_V2.scs"
+include "L3_res_rx_V2.scs"
+include "LB_DAC_cunit.scs"
+include "LB_RDAC.scs"
+include "LB_RES50.scs"
+include "LB_bs_gen_V2.scs"
+include "LB_bs_gen_V3.scs"
+include "LB_crossbar_cell.scs"
+include "LB_inv_trim.scs"
+include "LB_logicseg_X1.scs"
+include "LB_logicseg_X2.scs"
+include "LB_sandwitch_cap.scs"
+include "LB_trangate.scs"
+include "LB_vcmbooster.scs"
+include "LB_vcmbooster_LV.scs"
+include "L0_RISCA.scs"
