@@ -1,0 +1,34 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt tx_or_pdk110_67 (a b y vdd vss)
+XN (a b n vdd vss) pll_nor2_pdk110_68
+XI (n y vdd vss) pll_inv_pdk110_48
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $OR_2INPUT;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   #XN(source) {#XI}(chain) %py(load) @AS $CHAIN;
+//   {%pa #XN #XI %py} @AS(direction="left-to-right") $FLOW;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pa = $IO_PORT @ATTACH &a => @PLACE(2, 11)  => @ORIENT("R0");
+//   %pb = $IO_PORT @ATTACH &b => @PLACE(2, 9)   => @ORIENT("R0");
+//   %py = $IO_PORT @ATTACH &y => @PLACE(26, 10) => @ORIENT("MY");
+//
+//   #XN @PLACE(10, 10) => @ORIENT("R0");
+//   #XI @PLACE(20, 10) => @ORIENT("R0");
+//
+//   /* --- 3. Explicit Manhattan Wiring --- */
+//   &a @WIRE { %pa:p #XN:a };
+//   &b @WIRE { %pb:p #XN:b };
+//   &n @WIRE { #XN:y #XI:a };
+//   &y @WIRE { #XI:y %py:p };
+//
+//   /* --- 4. Annotations --- */
+//   (14, 16) @TEXT("tx_or_pdk110_67: 2-Input Static CMOS OR Gate (487 Instances in Synthesized Logic)", halign="middle") => @SET-STYLE $title_style;
+//   (14, 14.3) @TEXT("2-Input NOR Gate (XN: pll_nor2_pdk110_68) + Output Inverter (XI: pll_inv_pdk110_48)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends tx_or_pdk110_67

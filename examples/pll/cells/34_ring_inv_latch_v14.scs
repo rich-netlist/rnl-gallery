@@ -1,0 +1,54 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt ring_inv_latch_v14_pdk110_34 (d ck ckb qb vdd vss)
+XT (d x ck ckb vdd vss) pll_tg_pdk110_16
+XO (x qb vdd vss) pll_inv_pdk110_27
+XFI (qb fb vdd vss) pll_inv_pdk110_29
+XFB (fb x ckb ck vdd vss) pll_tg_pdk110_35
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $FF_2CLK_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %lat = #XT(input_pass) #XFB(feedback_pass) {#XO #XFI}(loop_inverters) @AS(transparent_level="high", reset_type="none") $STATIC_LATCH;
+//   #XO(forward_inv) #XFI(keeper_inv) @AS(keeper_length="180nm") $CROSS_COUPLED_KEEPER;
+//   {%pd #XT #XO %pqb} @AS(direction="left-to-right") $FLOW;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pd   = $IO_PORT @ATTACH &d   => @PLACE(2, 16)  => @ORIENT("R0");
+//   %pck  = $IO_PORT @ATTACH &ck  => @PLACE(2, 10)  => @ORIENT("R0");
+//   %pckb = $IO_PORT @ATTACH &ckb => @PLACE(2, 7)   => @ORIENT("R0");
+//   %pqb  = $IO_PORT @ATTACH &qb  => @PLACE(34, 16) => @ORIENT("MY");
+//
+//   #XT  @PLACE(10, 16) => @ORIENT("R0");
+//   #XO  @PLACE(22, 16) => @ORIENT("R0");
+//   #XFI @PLACE(24, 8)  => @ORIENT("MY");
+//   #XFB @PLACE(16, 8)  => @ORIENT("MY");
+//
+//   /* --- 3. Primary Loop Wiring & Flying-Wire Clock Labels --- */
+//   &d @WIRE { %pd:p #XT:a };
+//
+//   %jx = (13, 16);
+//   $JUNCTION @ATTACH %jx;
+//   &x @WIRE { #XT:b %jx #XO:a };
+//   &x @WIRE { %jx (13, 8) #XFB:b };
+//
+//   %jqb = (29, 16);
+//   $JUNCTION @ATTACH %jqb;
+//   &qb @WIRE { #XO:y %jqb %pqb:p };
+//   &qb @WIRE { %jqb (29, 8) #XFI:a };
+//
+//   &fb @WIRE { #XFI:y #XFB:a };
+//
+//   #XT:on   @TEXT("ck",  dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XT:off  @TEXT("ckb", dx=0, dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//   #XFB:on  @TEXT("ckb", dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XFB:off @TEXT("ck",  dx=0, dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//
+//   /* --- 4. Annotations --- */
+//   (18, 24) @TEXT("ring_inv_latch_v14_pdk110_34: High-Speed Inverting Transmission-Gate D-Latch", halign="middle") => @SET-STYLE $title_style;
+//   (18, 22.3) @TEXT("Input Pass Gate (XT) + Forward Driver (XO) + Clocked Feedback Keeper Loop (XFI, XFB)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends ring_inv_latch_v14_pdk110_34

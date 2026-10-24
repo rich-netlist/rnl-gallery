@@ -1,0 +1,55 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt tx_bias_mid_v5_pdk110_5 (vdd vss vmid)
+R0 (vdd vmid) resistor r=100000
+R1 (vmid vss) resistor r=100000
+C0 (vmid vss) capacitor c=9.999999999999999e-12
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $BIAS_MID_SYM;
+//
+//   /* --- 1. Circuit Semantics & Static DC Currents --- */
+//   %bnet = {#R0 #R1}(divider_resistors) {#C0}(bypass_caps) @AS(bias_level="0.500_VDD") $AC_COUPLED_BIAS_NETWORK;
+//   %rcf  = {#R0 #R1}(resistors) {#C0}(capacitors) @AS(cutoff_role="318kHz_midrail_decoupling") $RC_NOISE_FILTER;
+//   {#R0 #R1} @AS $MATCHED;
+//   {#R0 #R1} @AS $BRANCH;
+//   #R0:1 @AS $SUPPLY_HIGH;
+//   {#R1:2 #C0:2} @AS $SUPPLY_LOW;
+//   #R0:1 @CURRENT("in"); #R0:2 @CURRENT("out");
+//   #R1:1 @CURRENT("in"); #R1:2 @CURRENT("out");
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pvmid = $IO_PORT @ATTACH &vmid => @PLACE(24, 12) => @ORIENT("MY");
+//   %sup   = $SUPPLY  @ATTACH &vdd  => @PLACE(10, 22);
+//   %gnd   = $GROUND  @ATTACH &vss  => @PLACE(10, 0);
+//
+//   #R0 @PLACE(10, 16) => @ORIENT("R0");
+//   #R1 @PLACE(10, 6)  => @ORIENT("R0");
+//   #C0 @PLACE(18, 6)  => @ORIENT("R0");
+//
+//   /* --- 3. Explicit Manhattan Wiring --- */
+//   &vdd @WIRE { %sup:p #R0:1 };
+//
+//   %jvm1 = (10, 12);
+//   %jvm2 = (18, 12);
+//   $JUNCTION @ATTACH %jvm1;
+//   $JUNCTION @ATTACH %jvm2;
+//   &vmid @WIRE { #R0:2 %jvm1 #R1:1 };
+//   &vmid @WIRE { %jvm1 %jvm2 %pvmid:p };
+//   &vmid @WIRE { %jvm2 #C0:1 };
+//
+//   %jg = (10, 2);
+//   $JUNCTION @ATTACH %jg;
+//   &vss @WIRE { #R1:2 %jg %gnd:p };
+//   &vss @WIRE { #C0:2 (18, 2) %jg };
+//
+//   /* --- 4. Annotations --- */
+//   #R0 @TEXT("100 k\Omega", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #R1 @TEXT("100 k\Omega", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #C0 @TEXT("10 pF",        key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   (16, 29) @TEXT("tx_bias_mid_v5_pdk110_5: Mid-Rail (VDD/2) Common-Mode Bias Generator", halign="middle") => @SET-STYLE $title_style;
+//   (16, 27.2) @TEXT("Matched 100 kOhm / 100 kOhm Resistor Divider Decoupled by 10 pF Bypass Capacitor (C0)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends tx_bias_mid_v5_pdk110_5

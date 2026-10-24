@@ -1,0 +1,133 @@
+// RNL cell RISCA_JL/LB_trangate
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// }
+subckt LB_trangate A B GND N P VDD
+    M0 (A P B VDD) pch_mac l=30n w=5u multi=1 nf=10 sd=100n ad=2.5e-13 \
+        as=2.75e-13 pd=6u ps=7.1u nrd=0.046570 nrs=0.046570 sa=349.754n \
+        sb=349.754n sa1=161.047n sa2=316.499n sa3=575.493n sa4=331.707n \
+        sb1=161.047n sb2=316.499n sb3=575.493n spa=100n spa1=100n \
+        spa2=100n spa3=100n sap=150.407n sapb=165.494n spba=115.715n \
+        spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M1 (B N A GND) nch_mac l=30n w=5u multi=1 nf=10 sd=100n ad=2.5e-13 \
+        as=2.75e-13 pd=6u ps=7.1u nrd=0.110293 nrs=0.110293 sa=349.754n \
+        sb=349.754n sa1=161.047n sa2=316.499n sa3=575.493n sa4=331.707n \
+        sb1=161.047n sb2=316.499n sb3=575.493n spa=100n spa1=100n \
+        spa2=100n spa3=100n sap=150.407n sapb=165.494n spba=115.715n \
+        spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+// @RNL(author="rnl-virtuoso") {
+//   %block_symbol = @DEFINE-SYMBOL(box=[0, -2, 6, 2]) {
+//     @LINE {(0, -2) (3, -2)};
+//     @LINE {(3, 2) (3, 1)};
+//     @LINE {(0, 2) (3, 2)};
+//     @LINE {(3, -2) (3, -1)};
+//     @LINE {(6, 0) (4, 0)};
+//     (3, -0.8) @CIRCLE(radius=0.2);
+//     @LINE {(0, 0) (2, 0)};
+//     @LINE {(2, 0) (4, 1)};
+//     ? @TEXT("${name}", size=0.3, halign="start", valign="middle", key="name") => @PLACE(3, 3);
+//     (0, -2) @PIN(terminal="P");
+//     (0, 2) @PIN(terminal="N");
+//     (6, 2) @PIN(terminal="VDD");
+//     (5.4, 2) @TEXT("VDD", size=0.3, halign="end", valign="middle");
+//     (6, -2) @PIN(terminal="GND");
+//     (5.4, -2) @TEXT("GND", size=0.3, halign="end", valign="middle");
+//     (6, 0) @PIN(terminal="B");
+//     (0, 0) @PIN(terminal="A")
+//   };
+//   # @SET-SYMBOL %block_symbol;
+//   %symbol_0 = @DEFINE-SYMBOL(box=[-0.1, -2.8, 3.8, 2.8]) {
+//     @LINE {(2, 1.5) (4, 1.5) (4, 3)};
+//     @LINE {(2, -1.5) (2, 1.5)};
+//     @LINE {(3, -1) (4, -1.5) (3, -2)};
+//     @LINE {(0, 0) (1.5, 0)};
+//     @LINE {(1.5, 1.5) (1.5, -1.5)};
+//     @LINE {(2, -1.5) (4, -1.5) (4, -3)};
+//     ? @TEXT("${name}", size=0.8, halign="start", valign="baseline", key="name") => @PLACE(5, 3.5);
+//     ? @TEXT("${model}", size=0.8, halign="end", valign="baseline", key="model") => @PLACE(3.2, 3.2);
+//     (4, -1) @PIN(terminal=4);
+//     (4, -3) @PIN(terminal=3);
+//     (4, 3) @PIN(terminal=1);
+//     (0, 0) @PIN(terminal=2)
+//   };
+//   #"M1" @SET-SYMBOL %symbol_0;
+//   #"M1" @PLACE(-4, 11) => @ORIENT("R270");
+//   %symbol_1 = @DEFINE-SYMBOL(box=[-0.1, -2.8, 3.8, 2.8]) {
+//     @LINE {(0, 0) (0.7, 0)};
+//     @LINE {(1.5, 1.5) (1.5, -1.5)};
+//     @LINE {(2, -1.5) (4, -1.5) (4, -3)};
+//     @LINE {(2, 1.5) (4, 1.5) (4, 3)};
+//     (1.1, 0) @CIRCLE(radius=0.4);
+//     @LINE {(3.7, 2) (2.7, 1.5) (3.7, 1)};
+//     @LINE {(2, -1.5) (2, 1.5)};
+//     ? @TEXT("${name}", size=0.8, halign="start", valign="baseline", key="name") => @PLACE(4.9, 3.4);
+//     ? @TEXT("${model}", size=0.8, halign="end", valign="baseline", key="model") => @PLACE(3.3, 3.2);
+//     (4, 3) @PIN(terminal=3);
+//     (4, 1) @PIN(terminal=4);
+//     (0, 0) @PIN(terminal=2);
+//     (4, -3) @PIN(terminal=1)
+//   };
+//   #"M0" @SET-SYMBOL %symbol_1;
+//   #"M0" @PLACE(-4, -3) => @ORIENT("MXR90");
+//   %port_0 = $IO_PORT @ATTACH &"VDD" => @PLACE(-23, 15) => @ORIENT("R0");
+//   %port_1 = $IO_PORT @ATTACH &"GND" => @PLACE(-23, 12) => @ORIENT("R0");
+//   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
+//       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
+//       (0, 0) @PIN(terminal=1, direction="right");
+//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//     };
+//   %port_2 = $IO_PORT @ATTACH &"P" => @PLACE(-6, -7) => @ORIENT("R0");
+//   %port_2 @SET-SYMBOL %input_port_symbol;
+//   %port_2 @TEXT("P", key="name");
+//   %port_3 = $IO_PORT @ATTACH &"N" => @PLACE(-6, 14) => @ORIENT("R0");
+//   %port_3 @SET-SYMBOL %input_port_symbol;
+//   %port_3 @TEXT("N", key="name");
+//   %port_4 = $IO_PORT @ATTACH &"A" => @PLACE(-11, 4) => @ORIENT("R0");
+//   %port_5 = $IO_PORT @ATTACH &"B" => @PLACE(5, 4) => @ORIENT("R0");
+//   %p0 = (-1, 4);
+//   %p1 = (3, 4);
+//   %wire_0 = &"B" @WIRE(mode="straight") {%p0 %p1};
+//   %wire_1 = &"B" @WIRE(mode="straight") {#"M0":3 %p0};
+//   %wire_2 = &"B" @WIRE(mode="straight") {%p0 #"M1":1};
+//   %p2 = (-7, 4);
+//   %wire_3 = &"A" @WIRE(mode="straight") {%port_4:p %p2};
+//   %wire_4 = &"A" @WIRE(mode="straight") {%p2 #"M1":3};
+//   %wire_5 = &"A" @WIRE(mode="straight") {#"M0":1 %p2};
+//   %p3 = (-7, 14);
+//   %p4 = (-4, 14);
+//   %wire_6 = &"N" @WIRE(mode="straight") {%p3 %port_3:p %p4};
+//   %wire_7 = &"N" @WIRE(mode="straight") {#"M1":2 %p4};
+//   %p5 = (-7, -7);
+//   %p6 = (-4, -7);
+//   %wire_8 = &"P" @WIRE(mode="straight") {%p5 %port_2:p %p6};
+//   %wire_9 = &"P" @WIRE(mode="straight") {%p6 #"M0":2};
+//   %p7 = (-5, 3);
+//   %wire_10 = &"GND" @WIRE(mode="straight") {%p7 #"M1":4};
+//   %wire_10 @TEXT("GND", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-5.7, 5);
+//   %p8 = (-3, 5);
+//   %wire_11 = &"VDD" @WIRE(mode="straight") {#"M0":4 %p8};
+//   %wire_11 @TEXT("VDD", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-3.7, 3);
+//   $JUNCTION @ATTACH %p0;
+//   $JUNCTION @ATTACH %p2
+// }
+// @RNL(author="gemini-4-argon") {
+//   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
+//   /* LB_trangate: Complementary CMOS Analog Transmission Gate (w=5u, l=30n, nf=10) */
+//   #"M0"(pmos_pass) #"M1"(nmos_pass) @AS(role="bidirectional_analog_switch", width="5um_nf10") $CMOS_TRANGATE;
+//   {#"M0" #"M1"}(members) @AS $MATCHED;
+//   {%port_4 #"M0" %port_5}(path) @AS(direction="left-to-right") $FLOW;
+//   {%port_4 #"M1" %port_5}(path) @AS(direction="left-to-right") $FLOW;
+//   #"M0":4(pin) @AS $SUPPLY_HIGH;
+//   #"M1":4(pin) @AS $SUPPLY_LOW;
+//   {#"M1" #"M0"}(members) @AS $BRANCH;
+//   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
+//   (-33, 40.96) @TEXT("Comment by Gemini-4-Argon", size=1.5) => @SET-STYLE $risca_author_style;
+//   @RECTANGLE {(-33, 31.01) (66.17, 39.51)} => @SET-STYLE $risca_note_box;
+//   (-31, 35.8) @TEXT("LB_trangate: Complementary CMOS Transmission Gate (PMOS M0 + NMOS M1, w=5u, l=30n, nf=10)", size=1.65) => @SET-STYLE $risca_title_style;
+//   (-31, 33.2) @TEXT("Note: Bidirectional analog switch (ON when N=1, P=0); used in bridge cap network, Gm output router, and TIA receiver.", size=1.35) => @SET-STYLE $risca_swcap_style
+// }
+ends LB_trangate

@@ -1,0 +1,122 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt tx_fll_snapshot_pdk110_74 (gate d0 d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 q0 q1 q2 q3 q4 q5 q6 q7 q8 q9 q10 q11 q12 q13 vdd vss)
+XI (gate openb vdd vss) pll_inv_pdk110_12
+XB (openb hold vdd vss) pll_inv_pdk110_12
+XL0 (d0 openb hold q0 vdd vss) pll_latch_pdk110_72
+XL1 (d1 openb hold q1 vdd vss) pll_latch_pdk110_72
+XL2 (d2 openb hold q2 vdd vss) pll_latch_pdk110_72
+XL3 (d3 openb hold q3 vdd vss) pll_latch_pdk110_72
+XL4 (d4 openb hold q4 vdd vss) pll_latch_pdk110_72
+XL5 (d5 openb hold q5 vdd vss) pll_latch_pdk110_72
+XL6 (d6 openb hold q6 vdd vss) pll_latch_pdk110_72
+XL7 (d7 openb hold q7 vdd vss) pll_latch_pdk110_72
+XL8 (d8 openb hold q8 vdd vss) pll_latch_pdk110_72
+XL9 (d9 openb hold q9 vdd vss) pll_latch_pdk110_72
+XL10 (d10 openb hold q10 vdd vss) pll_latch_pdk110_72
+XL11 (d11 openb hold q11 vdd vss) pll_latch_pdk110_72
+XL12 (d12 openb hold q12 vdd vss) pll_latch_pdk110_72
+XL13 (d13 openb hold q13 vdd vss) pll_latch_pdk110_72
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $FLL_SNAP_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %snap = {#XI #XB}(clock_buffers) {#XL0 #XL1 #XL2 #XL3 #XL4 #XL5 #XL6 #XL7 #XL8 #XL9 #XL10 #XL11 #XL12 #XL13}(bit_latches) @AS(bits=14) $SNAPSHOT_REGISTER;
+//   {#XL0 #XL1 #XL2 #XL3 #XL4 #XL5 #XL6 #XL7 #XL8 #XL9 #XL10 #XL11 #XL12 #XL13} @AS $MATCHED;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   {&d1 &d2 &d3 &d4 &d5 &d6 &d7 &d8 &d9 &d10 &d11 &d12 &d13 &q1 &q2 &q3 &q4 &q5 &q6 &q7 &q8 &q9 &q10 &q11 &q12 &q13} @REMOVE-FROM $PORT_FILL_SET;
+//   %pgate = $IO_PORT @ATTACH &gate => @PLACE(2, 14)   => @ORIENT("R0");
+//   %pd    = $IO_PORT @ATTACH &d0   => @PLACE(12, 22)  => @ORIENT("R0");
+//   %pd @TEXT("d<13:0>", key="name");
+//   %pq    = $IO_PORT @ATTACH &q0   => @PLACE(196, 6)  => @ORIENT("MY");
+//   %pq @TEXT("q<13:0>", key="name");
+//
+//   #XI    @PLACE(8, 14)  => @ORIENT("R0");
+//   #XB    @PLACE(16, 14) => @ORIENT("R0");
+//   #XL0 @PLACE(28, 14) => @ORIENT("R0");
+//   #XL1 @PLACE(40, 14) => @ORIENT("R0");
+//   #XL2 @PLACE(52, 14) => @ORIENT("R0");
+//   #XL3 @PLACE(64, 14) => @ORIENT("R0");
+//   #XL4 @PLACE(76, 14) => @ORIENT("R0");
+//   #XL5 @PLACE(88, 14) => @ORIENT("R0");
+//   #XL6 @PLACE(100, 14) => @ORIENT("R0");
+//   #XL7 @PLACE(112, 14) => @ORIENT("R0");
+//   #XL8 @PLACE(124, 14) => @ORIENT("R0");
+//   #XL9 @PLACE(136, 14) => @ORIENT("R0");
+//   #XL10 @PLACE(148, 14) => @ORIENT("R0");
+//   #XL11 @PLACE(160, 14) => @ORIENT("R0");
+//   #XL12 @PLACE(172, 14) => @ORIENT("R0");
+//   #XL13 @PLACE(184, 14) => @ORIENT("R0");
+//
+//   /* --- 3. Single-Line Buses D<13:0>, Q<13:0> & Flying-Wire Strobe Labels --- */
+//   {&d0 &d1 &d2 &d3 &d4 &d5 &d6 &d7 &d8 &d9 &d10 &d11 &d12 &d13} @WIRE { %pd:p (180, 22) } => @TEXT("D<13:0>") => @SET-STYLE $bus_label_style;
+//   {&q0 &q1 &q2 &q3 &q4 &q5 &q6 &q7 &q8 &q9 &q10 &q11 &q12 &q13} @WIRE { (32, 6) %pq:p }   => @TEXT("Q<13:0>") => @SET-STYLE $bus_label_style;
+//   &gate  @WIRE { %pgate:p #XI:a };
+//   &openb @WIRE { #XI:y #XB:a } => @TEXT("openb") => @SET-STYLE $fly_label_style;
+//   &hold  @WIRE { #XB:y (21, 14) } => @TEXT("hold") => @SET-STYLE $fly_label_style;
+//   &d0 @WIRE { (24, 22) (24, 16) #XL0:d } => @TEXT("d0") => @SET-STYLE $fly_label_style;
+//   &q0 @WIRE { #XL0:q (32, 6) } => @TEXT("q0") => @SET-STYLE $fly_label_style;
+//   #XL0:gate  @TEXT("openb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XL0:gateb @TEXT("hold",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &d1 @WIRE { (36, 22) (36, 16) #XL1:d } => @TEXT("d1") => @SET-STYLE $fly_label_style;
+//   &q1 @WIRE { #XL1:q (44, 6) } => @TEXT("q1") => @SET-STYLE $fly_label_style;
+//   #XL1:gate  @TEXT("openb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XL1:gateb @TEXT("hold",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &d2 @WIRE { (48, 22) (48, 16) #XL2:d } => @TEXT("d2") => @SET-STYLE $fly_label_style;
+//   &q2 @WIRE { #XL2:q (56, 6) } => @TEXT("q2") => @SET-STYLE $fly_label_style;
+//   #XL2:gate  @TEXT("openb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XL2:gateb @TEXT("hold",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &d3 @WIRE { (60, 22) (60, 16) #XL3:d } => @TEXT("d3") => @SET-STYLE $fly_label_style;
+//   &q3 @WIRE { #XL3:q (68, 6) } => @TEXT("q3") => @SET-STYLE $fly_label_style;
+//   #XL3:gate  @TEXT("openb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XL3:gateb @TEXT("hold",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &d4 @WIRE { (72, 22) (72, 16) #XL4:d } => @TEXT("d4") => @SET-STYLE $fly_label_style;
+//   &q4 @WIRE { #XL4:q (80, 6) } => @TEXT("q4") => @SET-STYLE $fly_label_style;
+//   #XL4:gate  @TEXT("openb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XL4:gateb @TEXT("hold",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &d5 @WIRE { (84, 22) (84, 16) #XL5:d } => @TEXT("d5") => @SET-STYLE $fly_label_style;
+//   &q5 @WIRE { #XL5:q (92, 6) } => @TEXT("q5") => @SET-STYLE $fly_label_style;
+//   #XL5:gate  @TEXT("openb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XL5:gateb @TEXT("hold",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &d6 @WIRE { (96, 22) (96, 16) #XL6:d } => @TEXT("d6") => @SET-STYLE $fly_label_style;
+//   &q6 @WIRE { #XL6:q (104, 6) } => @TEXT("q6") => @SET-STYLE $fly_label_style;
+//   #XL6:gate  @TEXT("openb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XL6:gateb @TEXT("hold",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &d7 @WIRE { (108, 22) (108, 16) #XL7:d } => @TEXT("d7") => @SET-STYLE $fly_label_style;
+//   &q7 @WIRE { #XL7:q (116, 6) } => @TEXT("q7") => @SET-STYLE $fly_label_style;
+//   #XL7:gate  @TEXT("openb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XL7:gateb @TEXT("hold",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &d8 @WIRE { (120, 22) (120, 16) #XL8:d } => @TEXT("d8") => @SET-STYLE $fly_label_style;
+//   &q8 @WIRE { #XL8:q (128, 6) } => @TEXT("q8") => @SET-STYLE $fly_label_style;
+//   #XL8:gate  @TEXT("openb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XL8:gateb @TEXT("hold",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &d9 @WIRE { (132, 22) (132, 16) #XL9:d } => @TEXT("d9") => @SET-STYLE $fly_label_style;
+//   &q9 @WIRE { #XL9:q (140, 6) } => @TEXT("q9") => @SET-STYLE $fly_label_style;
+//   #XL9:gate  @TEXT("openb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XL9:gateb @TEXT("hold",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &d10 @WIRE { (144, 22) (144, 16) #XL10:d } => @TEXT("d10") => @SET-STYLE $fly_label_style;
+//   &q10 @WIRE { #XL10:q (152, 6) } => @TEXT("q10") => @SET-STYLE $fly_label_style;
+//   #XL10:gate  @TEXT("openb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XL10:gateb @TEXT("hold",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &d11 @WIRE { (156, 22) (156, 16) #XL11:d } => @TEXT("d11") => @SET-STYLE $fly_label_style;
+//   &q11 @WIRE { #XL11:q (164, 6) } => @TEXT("q11") => @SET-STYLE $fly_label_style;
+//   #XL11:gate  @TEXT("openb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XL11:gateb @TEXT("hold",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &d12 @WIRE { (168, 22) (168, 16) #XL12:d } => @TEXT("d12") => @SET-STYLE $fly_label_style;
+//   &q12 @WIRE { #XL12:q (176, 6) } => @TEXT("q12") => @SET-STYLE $fly_label_style;
+//   #XL12:gate  @TEXT("openb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XL12:gateb @TEXT("hold",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &d13 @WIRE { (180, 22) (180, 16) #XL13:d } => @TEXT("d13") => @SET-STYLE $fly_label_style;
+//   &q13 @WIRE { #XL13:q (188, 6) } => @TEXT("q13") => @SET-STYLE $fly_label_style;
+//   #XL13:gate  @TEXT("openb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XL13:gateb @TEXT("hold",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   /* --- 4. Annotations --- */
+//   (100, 28) @TEXT("tx_fll_snapshot_pdk110_74: 14-Bit Transparent-High / Latch-Low Count Snapshot Register", halign="middle") => @SET-STYLE $title_style;
+//   (100, 26.2) @TEXT("Captures & Holds 14-Bit Ripple Counter Bus D<13:0> onto Output Bus Q<13:0> on Falling Edge of Measurement Gate", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends tx_fll_snapshot_pdk110_74

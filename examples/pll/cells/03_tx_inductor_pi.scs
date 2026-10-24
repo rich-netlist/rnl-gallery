@@ -1,0 +1,93 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt tx_inductor_pi_pdk110_3 (p n sub)
+RW (p x) resistor r=6.822430344006023
+LW (x n) inductor l=2e-09
+CW (p n) capacitor c=2e-14
+COXP (p sp) capacitor c=8.000000000000001e-14
+COXN (n sn) capacitor c=8.000000000000001e-14
+RSP (sp sub) resistor r=300
+RSN (sn sub) resistor r=300
+CSP (sp sub) capacitor c=5e-14
+CSN (sn sub) capacitor c=5e-14
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $IND_PI_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %pi = {#RW #LW}(series_branch) {#COXP #COXN}(oxide_caps) {#RSP #CSP #RSN #CSN}(substrate_network) {#CW}(port_caps) @AS(inductance="2.0nH", series_r="6.82Ohm") $INDUCTOR_PI_MODEL;
+//   {#COXP #COXN} @AS $MATCHED;
+//   {#RSP #RSN}   @AS $MATCHED;
+//   {#CSP #CSN}   @AS $MATCHED;
+//   %ax = (22, _);
+//   #COXP(a) #COXN(b) %ax(axis) @AS $MIRRORED;
+//   #RSP(a)  #RSN(b)  %ax(axis) @AS $MIRRORED;
+//   #CSP(a)  #CSN(b)  %ax(axis) @AS $MIRRORED;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pp   = $IO_PORT @ATTACH &p   => @PLACE(4, 18)  => @ORIENT("R0");
+//   %pn   = $IO_PORT @ATTACH &n   => @PLACE(40, 18) => @ORIENT("MY");
+//   %gsub = $GROUND  @ATTACH &sub => @PLACE(22, 0);
+//
+//   #CW   @PLACE(22, 24) => @ORIENT("R90");
+//   #RW   @PLACE(17, 18) => @ORIENT("R90");
+//   #LW   @PLACE(27, 18) => @ORIENT("R90");
+//   #COXP @PLACE(11, 13) => @ORIENT("R0");
+//   #COXN @PLACE(33, 13) => @ORIENT("R0");
+//   #RSP  @PLACE(6, 5)   => @ORIENT("R0");
+//   #CSP  @PLACE(15, 5)  => @ORIENT("R0");
+//   #CSN  @PLACE(29, 5)  => @ORIENT("R0");
+//   #RSN  @PLACE(38, 5)  => @ORIENT("R0");
+//
+//   /* --- 3. Explicit Manhattan Wiring --- */
+//   %jp = (11, 18);
+//   $JUNCTION @ATTACH %jp;
+//   &p @WIRE { %pp:p %jp #RW:1 };
+//   &p @WIRE { %jp #COXP:1 };
+//   &p @WIRE { %jp (11, 24) #CW:1 };
+//
+//   &x @WIRE { #RW:2 #LW:1 };
+//
+//   %jn = (33, 18);
+//   $JUNCTION @ATTACH %jn;
+//   &n @WIRE { #LW:2 %jn %pn:p };
+//   &n @WIRE { %jn #COXN:1 };
+//   &n @WIRE { %jn (33, 24) #CW:2 };
+//
+//   %jsp = (11, 9);
+//   $JUNCTION @ATTACH %jsp;
+//   &sp @WIRE { #COXP:2 %jsp (6, 9)  #RSP:1 };
+//   &sp @WIRE { %jsp (15, 9) #CSP:1 };
+//
+//   %jsn = (33, 9);
+//   $JUNCTION @ATTACH %jsn;
+//   &sn @WIRE { #COXN:2 %jsn (29, 9) #CSN:1 };
+//   &sn @WIRE { %jsn (38, 9) #RSN:1 };
+//
+//   %jg1 = (15, 2);
+//   %jg2 = (22, 2);
+//   %jg3 = (29, 2);
+//   $JUNCTION @ATTACH %jg1;
+//   $JUNCTION @ATTACH %jg2;
+//   $JUNCTION @ATTACH %jg3;
+//   &sub @WIRE { #RSP:2 (6, 2) %jg1 %jg2 %jg3 (38, 2) #RSN:2 };
+//   &sub @WIRE { %jg1 #CSP:2 };
+//   &sub @WIRE { %jg2 %gsub:p };
+//   &sub @WIRE { %jg3 #CSN:2 };
+//
+//   /* --- 4. Annotations --- */
+//   #RW   @TEXT("6.82 \Omega", key="value", dy=1.8, halign="middle") => @SET-STYLE $param_style;
+//   #LW   @TEXT("2.0 nH",       key="value", dy=1.8, halign="middle") => @SET-STYLE $param_style;
+//   #CW   @TEXT("20 fF",        key="value", dy=1.8, halign="middle") => @SET-STYLE $param_style;
+//   #COXP @TEXT("80 fF",        key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #COXN @TEXT("80 fF",        key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #RSP  @TEXT("300 \Omega",  key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #RSN  @TEXT("300 \Omega",  key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #CSP  @TEXT("50 fF",        key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #CSN  @TEXT("50 fF",        key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   (22, 30) @TEXT("tx_inductor_pi_pdk110_3: Broadband Lumped Pi-Model of On-Chip Spiral Inductor (L=2.0 nH, R=6.82 Ohm)", halign="middle") => @SET-STYLE $title_style;
+//   (22, 28.2) @TEXT("Includes Inter-Turn Bridge Cap (CW=20fF), Oxide Capacitance (COX=80fF/side), and Si Substrate Loss Network (300 Ohm || 50fF)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends tx_inductor_pi_pdk110_3

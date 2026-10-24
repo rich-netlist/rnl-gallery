@@ -1,0 +1,41 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt rt_noise_scale4_v14_pdk110_49 (data clk out vdd vss)
+XFF (data clk qb vdd vss) rtcomb_ff_v13_pdk110_50
+X0 (qb ob vdd vss) pll_inv_pdk110_51
+X1 (ob out vdd vss) pll_inv_pdk110_52
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $RETIMER_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %ret = {#XFF}(retimer_ffs) {#X0 #X1}(skewed_buffers) @AS(stages=1, scale="4x_low_noise") $RETIMER_STAGE;
+//   %pdata(source) {#XFF #X0 #X1}(chain) %pout(load) @AS $CHAIN;
+//   {%pdata #XFF #X0 #X1 %pout} @AS(direction="left-to-right") $FLOW;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pdata = $IO_PORT @ATTACH &data => @PLACE(2, 11)  => @ORIENT("R0");
+//   %pclk  = $IO_PORT @ATTACH &clk  => @PLACE(2, 9)   => @ORIENT("R0");
+//   %pout  = $IO_PORT @ATTACH &out  => @PLACE(38, 10) => @ORIENT("MY");
+//
+//   #XFF @PLACE(12, 10) => @ORIENT("R0");
+//   #X0  @PLACE(23, 10) => @ORIENT("R0");
+//   #X1  @PLACE(32, 10) => @ORIENT("R0");
+//
+//   /* --- 3. Explicit Manhattan Wiring --- */
+//   &data @WIRE { %pdata:p #XFF:d };
+//   &clk  @WIRE { %pclk:p  #XFF:ck };
+//   &qb   @WIRE { #XFF:qb  #X0:a };
+//   &ob   @WIRE { #X0:y    #X1:a };
+//   &out  @WIRE { #X1:y    %pout:p };
+//
+//   /* --- 4. Annotations --- */
+//   #XFF @TEXT("4.8x Low-Noise TSPC", key="role", dy=-3, halign="middle") => @SET-STYLE $param_style;
+//   #X0  @TEXT("NMOS-Skew (2u/12u)",  key="role", dy=-3, halign="middle") => @SET-STYLE $param_style;
+//   #X1  @TEXT("PMOS-Skew (12u/3.2u)",key="role", dy=-3, halign="middle") => @SET-STYLE $param_style;
+//   (20, 16) @TEXT("rt_noise_scale4_v14_pdk110_49: Low-Phase-Noise Divider Retimer & Edge Restorer", halign="middle") => @SET-STYLE $title_style;
+//   (20, 14.3) @TEXT("Re-Samples Divided Clock with VCO Clock (XFF) + Complementary Skewed Buffers (X0, X1) for Fast Rising Edge", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends rt_noise_scale4_v14_pdk110_49

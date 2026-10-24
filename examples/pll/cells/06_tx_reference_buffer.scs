@@ -1,0 +1,42 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt tx_reference_buffer_pdk110_6 (inp out vdd vss)
+X0 (inp a vdd vss) pll_inv_pdk110_7
+X1 (a b vdd vss) pll_inv_pdk110_8
+X2 (b c vdd vss) pll_inv_pdk110_9
+X3 (c out vdd vss) pll_inv_pdk110_10
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $BUFFER;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %buf = {#X0 #X1 #X2 #X3}(stages) @AS(purpose="4_stage_2x_tapered_refclk_buffer") $TAPERED_BUFFER_CHAIN;
+//   %p_in(source) {#X0 #X1 #X2 #X3}(chain) %p_out(load) @AS $CHAIN;
+//   {%p_in #X0 #X1 #X2 #X3 %p_out} @AS(direction="left-to-right") $FLOW;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %p_in  = $IO_PORT @ATTACH &inp => @PLACE(2, 10)  => @ORIENT("R0");
+//   %p_out = $IO_PORT @ATTACH &out => @PLACE(42, 10) => @ORIENT("MY");
+//   #X0 @PLACE(9, 10)  => @ORIENT("R0");
+//   #X1 @PLACE(18, 10) => @ORIENT("R0");
+//   #X2 @PLACE(27, 10) => @ORIENT("R0");
+//   #X3 @PLACE(36, 10) => @ORIENT("R0");
+//
+//   /* --- 3. Explicit Manhattan Wiring --- */
+//   &inp @WIRE { %p_in:p #X0:a };
+//   &a   @WIRE { #X0:y #X1:a };
+//   &b   @WIRE { #X1:y #X2:a };
+//   &c   @WIRE { #X2:y #X3:a };
+//   &out @WIRE { #X3:y %p_out:p };
+//
+//   /* --- 4. Annotations --- */
+//   #X0 @TEXT("1x (2.5u/1u)", key="sz", dy=-2.5, halign="middle") => @SET-STYLE $param_style;
+//   #X1 @TEXT("2x (5u/2u)",   key="sz", dy=-2.5, halign="middle") => @SET-STYLE $param_style;
+//   #X2 @TEXT("4x (10u/4u)",  key="sz", dy=-2.5, halign="middle") => @SET-STYLE $param_style;
+//   #X3 @TEXT("8x (20u/8u)",  key="sz", dy=-2.5, halign="middle") => @SET-STYLE $param_style;
+//   (22, 16) @TEXT("tx_reference_buffer_pdk110_6: 4-Stage Tapered Reference Clock Buffer (1x -> 2x -> 4x -> 8x)", halign="middle") => @SET-STYLE $title_style;
+//   (22, 14.3) @TEXT("Sharpens Reference Clock Edges for Sub-Sampling Phase Detector & Digital Controllers", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends tx_reference_buffer_pdk110_6

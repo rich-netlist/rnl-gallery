@@ -1,0 +1,53 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt pll_latch_pdk110_72 (d gate gateb q vdd vss)
+XT (d x gate gateb vdd vss) pll_tg_pdk110_61
+XI (x qb vdd vss) pll_inv_pdk110_48
+XO (qb q vdd vss) pll_inv_pdk110_62
+XF (q x gateb gate vdd vss) pll_tg_pdk110_63
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $LATCH_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %lat = #XT(input_pass) #XF(feedback_pass) {#XI #XO}(loop_inverters) @AS(transparent_level="high", reset_type="none") $STATIC_LATCH;
+//   {%pd #XT #XI #XO %pq} @AS(direction="left-to-right") $FLOW;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pd  = $IO_PORT @ATTACH &d     => @PLACE(2, 16)  => @ORIENT("R0");
+//   %pg  = $IO_PORT @ATTACH &gate  => @PLACE(2, 10)  => @ORIENT("R0");
+//   %pgb = $IO_PORT @ATTACH &gateb => @PLACE(2, 7)   => @ORIENT("R0");
+//   %pq  = $IO_PORT @ATTACH &q     => @PLACE(36, 16) => @ORIENT("MY");
+//
+//   #XT @PLACE(9, 16)  => @ORIENT("R0");
+//   #XI @PLACE(19, 16) => @ORIENT("R0");
+//   #XO @PLACE(28, 16) => @ORIENT("R0");
+//   #XF @PLACE(19, 8)  => @ORIENT("MY");
+//
+//   /* --- 3. Primary Latch Loop Wiring & Flying-Wire Gate Labels --- */
+//   &d @WIRE { %pd:p #XT:a };
+//
+//   %jx = (13, 16);
+//   $JUNCTION @ATTACH %jx;
+//   &x @WIRE { #XT:b %jx #XI:a };
+//   &x @WIRE { %jx (13, 8) #XF:b };
+//
+//   &qb @WIRE { #XI:y #XO:a };
+//
+//   %jq = (32, 16);
+//   $JUNCTION @ATTACH %jq;
+//   &q @WIRE { #XO:y %jq %pq:p };
+//   &q @WIRE { %jq (32, 8) #XF:a };
+//
+//   #XT:on  @TEXT("gate",  dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XT:off @TEXT("gateb", dx=0, dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//   #XF:on  @TEXT("gateb", dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XF:off @TEXT("gate",  dx=0, dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//
+//   /* --- 4. Annotations --- */
+//   (19, 24) @TEXT("pll_latch_pdk110_72: Non-Inverting Static Transparent D-Latch (Used in 14-Bit FLL Snapshot Register)", halign="middle") => @SET-STYLE $title_style;
+//   (19, 22.3) @TEXT("Input Pass Gate (XT) + Two-Inverter Forward Path (XI, XO) + Feedback Keeper Pass Gate (XF)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends pll_latch_pdk110_72

@@ -1,0 +1,207 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt pll_control_recenter109_v14_pdk110_56 (refclk reset apply k0 k1 k2 k3 k4 k5 outclk acqclk phase_good frequency_good b0 b1 b2 b3 b4 b5 b6 b7 s0 s1 s2 s3 s4 s5 divider_reset enable pulse preset qualified range_error config_ready config_invalid restart count_gate count_reset vdd vss)
+XC (refclk reset apply k0 k1 k2 k3 k4 k5 ak0 ak1 ak2 ak3 ak4 ak5 s0 s1 s2 s3 s4 s5 config_ready config_invalid cfg_reset vdd vss) tx_pll_config_pdk110_57
+XR (cfg_reset restart fll_reset vdd vss) tx_or_pdk110_67
+XDRESET (cfg_reset restart divider_reset vdd vss) tx_or_pdk110_67
+XF (refclk fll_reset ak0 ak1 ak2 ak3 ak4 ak5 m0 m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 m12 m13 b0 b1 b2 b3 b4 b5 b6 b7 d0 d1 d2 d3 d4 d5 fll_gate fll_count_reset acquired range_error state0 state1 state2 vdd vss) tx_fll_recenter109_v14_pdk110_69
+XACQI (acquired acquired_b vdd vss) pll_inv_pdk110_7
+XACQ0 (acqclk clock_mux acquired_b acquired vdd vss) pll_tg_pdk110_16
+XACQ1 (outclk clock_mux acquired acquired_b vdd vss) pll_tg_pdk110_16
+XACB0 (clock_mux clock_b vdd vss) pll_inv_pdk110_36
+XACB1 (clock_b count_clock vdd vss) pll_inv_pdk110_27
+XCOUNT (count_clock count_gate count_reset q0 q1 q2 q3 q4 q5 q6 q7 q8 q9 q10 q11 q12 q13 vdd vss) tx_fll_counter_pdk110_71
+XSN (count_gate q0 q1 q2 q3 q4 q5 q6 q7 q8 q9 q10 q11 q12 q13 m0 m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 m12 m13 vdd vss) tx_fll_snapshot_pdk110_74
+XDAC (d0 d1 d2 d3 d4 d5 acquired preset vdd vss) tx_fll_dac_pdk110_75
+XPHCLK (refclk ref_fall vdd vss) pll_inv_pdk110_7
+XPH (phase_good ref_fall reset phase_held vdd vss) tx_dff_r0_pdk110_58
+XS (refclk reset config_ready acquired range_error phase_held frequency_good enable qualified restart fault vdd vss) tx_pll_supervisor_capture_v14_pdk110_77
+XP (refclk enable fll_reset pulse vdd vss) tx_cp_timing_pdk110_78
+XWG (fll_gate watch_gate acquired count_gate vdd vss) tx_mux_pdk110_64
+XWR (fll_count_reset watch_reset acquired count_reset vdd vss) tx_mux_pdk110_64
+XW (refclk fll_reset acquired ak0 ak1 ak2 ak3 ak4 ak5 m0 m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 m12 m13 watch_gate watch_reset frequency_good watchdog_valid vdd vss) tx_frequency_watchdog_pdk110_80
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $PLL_CTRL_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %ctrl = #XC(config_ctrl) #XF(fll_ctrl) #XCOUNT(fll_counter) #XSN(fll_snapshot) #XDAC(fll_dac) #XS(supervisor) #XP(cp_timing) #XW(watchdog) {#XR #XDRESET #XACQI #XACQ0 #XACQ1 #XACB0 #XACB1 #XPHCLK #XPH #XWG #XWR}(glue_logic) @AS(architecture="hybrid_FLL_assisted_SSPLL_controller") $PLL_CONTROL_SUBSYSTEM;
+//   $NO_CONNECT @ATTACH #XF:state_out0;
+//   $NO_CONNECT @ATTACH #XF:state_out1;
+//   $NO_CONNECT @ATTACH #XF:state_out2;
+//   $NO_CONNECT @ATTACH #XS:fault;
+//   $NO_CONNECT @ATTACH #XW:valid;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   {&k1 &k2 &k3 &k4 &k5 &b1 &b2 &b3 &b4 &b5 &b6 &b7 &s1 &s2 &s3 &s4 &s5} @REMOVE-FROM $PORT_FILL_SET;
+//   %pref   = $IO_PORT @ATTACH &refclk         => @PLACE(2, 54) => @ORIENT("R0");
+//   %prst   = $IO_PORT @ATTACH &reset          => @PLACE(2, 50) => @ORIENT("R0");
+//   %papply = $IO_PORT @ATTACH &apply          => @PLACE(2, 44) => @ORIENT("R0");
+//   %pk     = $IO_PORT @ATTACH &k0             => @PLACE(2, 41) => @ORIENT("R0");
+//   %pk @TEXT("k<5:0>", key="name");
+//   %pacq   = $IO_PORT @ATTACH &acqclk         => @PLACE(2, 22) => @ORIENT("R0");
+//   %poutc  = $IO_PORT @ATTACH &outclk         => @PLACE(2, 16) => @ORIENT("R0");
+//   %pphok  = $IO_PORT @ATTACH &phase_good     => @PLACE(2, 7)  => @ORIENT("R0");
+//
+//   %pb     = $IO_PORT @ATTACH &b0             => @PLACE(128, 49) => @ORIENT("MY");
+//   %pb @TEXT("b<7:0>", key="name");
+//   %ps     = $IO_PORT @ATTACH &s0             => @PLACE(128, 36) => @ORIENT("MY");
+//   %ps @TEXT("s<5:0>", key="name");
+//   %pdrst  = $IO_PORT @ATTACH &divider_reset  => @PLACE(128, 32) => @ORIENT("MY");
+//   %ppre   = $IO_PORT @ATTACH &preset         => @PLACE(128, 44) => @ORIENT("MY");
+//   %pen    = $IO_PORT @ATTACH &enable         => @PLACE(128, 21) => @ORIENT("MY");
+//   %ppulse = $IO_PORT @ATTACH &pulse          => @PLACE(128, 0)  => @ORIENT("MY");
+//   %pqual  = $IO_PORT @ATTACH &qualified      => @PLACE(128, 19) => @ORIENT("MY");
+//   %prng   = $IO_PORT @ATTACH &range_error    => @PLACE(128, 28) => @ORIENT("MY");
+//   %prdy   = $IO_PORT @ATTACH &config_ready   => @PLACE(128, 25) => @ORIENT("MY");
+//   %pfrq   = $IO_PORT @ATTACH &frequency_good => @PLACE(128, -5) => @ORIENT("MY");
+//   %pinv   = $IO_PORT @ATTACH &config_invalid => @PLACE(128, 13) => @ORIENT("MY");
+//   %prestart = $IO_PORT @ATTACH &restart      => @PLACE(128, 17) => @ORIENT("MY");
+//   %pcgate = $IO_PORT @ATTACH &count_gate     => @PLACE(128, 6)  => @ORIENT("MY");
+//   %pcrst  = $IO_PORT @ATTACH &count_reset    => @PLACE(128, -8) => @ORIENT("MY");
+//
+//   /* Column 1: Config Decoder (XC), Reset ORs (XR, XDRESET), Clock Mux (XACQ*), Phase DFF (XPH) */
+//   #XC      @PLACE(22, 44) => @ORIENT("R0");
+//   #XR      @PLACE(42, 42) => @ORIENT("R0");
+//   #XDRESET @PLACE(42, 32) => @ORIENT("R0");
+//   #XACQI   @PLACE(12, 26) => @ORIENT("R0");
+//   #XACQ0   @PLACE(22, 22) => @ORIENT("R0");
+//   #XACQ1   @PLACE(22, 16) => @ORIENT("R0");
+//   #XACB0   @PLACE(30, 19) => @ORIENT("R0");
+//   #XACB1   @PLACE(38, 19) => @ORIENT("R0");
+//   #XPHCLK  @PLACE(14, 4)  => @ORIENT("R0");
+//   #XPH     @PLACE(26, 6)  => @ORIENT("R0");
+//
+//   /* Column 2: 14-Bit Counter (XCOUNT), Snapshot Register (XSN), Gate/Reset Muxes (XWG, XWR) */
+//   #XCOUNT  @PLACE(54, 19) => @ORIENT("R0");
+//   #XSN     @PLACE(74, 19) => @ORIENT("R0");
+//   #XWG     @PLACE(54, 6)  => @ORIENT("R0");
+//   #XWR     @PLACE(54, -4) => @ORIENT("R0");
+//
+//   /* Column 3: FLL Recenter Core (XF) & Frequency Watchdog (XW) */
+//   #XF      @PLACE(74, 42) => @ORIENT("R0");
+//   #XW      @PLACE(74, -4) => @ORIENT("R0");
+//
+//   /* Column 4: 6-Bit Preset DAC (XDAC), Supervisor FSM (XS), CP Pulse Generator (XP) */
+//   #XDAC    @PLACE(104, 44) => @ORIENT("R0");
+//   #XS      @PLACE(104, 18) => @ORIENT("R0");
+//   #XP      @PLACE(104, 0)  => @ORIENT("R0");
+//
+//   /* --- 3. Single-Line Multi-Bit Buses & Clean Local / Flying-Wire Connections --- */
+//   /* 3.1 Multi-Bit Buses: K<5:0>, AK<5:0>, S<5:0>, B<7:0>, D<5:0>, Q<13:0>, M<13:0> */
+//   {&k0 &k1 &k2 &k3 &k4 &k5} @WIRE { %pk:p #XC:cfg_k0 } => @TEXT("K<5:0>") => @SET-STYLE $bus_label_style;
+//
+//   %jak = (34, 48); $JUNCTION @ATTACH %jak;
+//   {&ak0 &ak1 &ak2 &ak3 &ak4 &ak5} @WIRE { #XC:active_k0 %jak (34, 42) #XF:target_k0 } => @TEXT("AK<5:0>") => @SET-STYLE $bus_label_style;
+//   {&ak0 &ak1 &ak2 &ak3 &ak4 &ak5} @WIRE { %jak (34, -6) #XW:target_k0 } => @TEXT("AK<5:0>") => @SET-STYLE $bus_label_style;
+//
+//   {&s0 &s1 &s2 &s3 &s4 &s5} @WIRE { #XC:select_m0 (31, 46) (31, 56) (120, 56) (120, 36) %ps:p } => @TEXT("S<5:0>") => @SET-STYLE $bus_label_style;
+//   {&b0 &b1 &b2 &b3 &b4 &b5 &b6 &b7} @WIRE { #XF:coarse0 %pb:p } => @TEXT("B<7:0>") => @SET-STYLE $bus_label_style;
+//   {&d0 &d1 &d2 &d3 &d4 &d5} @WIRE { #XF:dac0 (90, 47) (90, 45) #XDAC:d0 } => @TEXT("D<5:0>") => @SET-STYLE $bus_label_style;
+//   {&q0 &q1 &q2 &q3 &q4 &q5 &q6 &q7 &q8 &q9 &q10 &q11 &q12 &q13} @WIRE { #XCOUNT:q0 (64, 19) (64, 18) #XSN:d0 } => @TEXT("Q<13:0>") => @SET-STYLE $bus_label_style;
+//
+//   %jm = (84, 19); $JUNCTION @ATTACH %jm;
+//   {&m0 &m1 &m2 &m3 &m4 &m5 &m6 &m7 &m8 &m9 &m10 &m11 &m12 &m13} @WIRE { #XSN:q0 %jm (84, 32) (62, 32) (62, 38) #XF:measured0 } => @TEXT("M<13:0>") => @SET-STYLE $bus_label_style;
+//   {&m0 &m1 &m2 &m3 &m4 &m5 &m6 &m7 &m8 &m9 &m10 &m11 &m12 &m13} @WIRE { %jm (84, -12) (62, -12) (62, -8) #XW:measured0 } => @TEXT("M<13:0>") => @SET-STYLE $bus_label_style;
+//
+//   /* 3.2 Local Direct Datapath Chains */
+//   &refclk @WIRE { %pref:p (9, 54) } => @TEXT("refclk") => @SET-STYLE $fly_label_style;
+//   &reset  @WIRE { %prst:p (9, 50) } => @TEXT("reset")  => @SET-STYLE $fly_label_style;
+//   &apply  @WIRE { %papply:p #XC:apply };
+//   &preset @WIRE { #XDAC:out %ppre:p };
+//   &pulse  @WIRE { #XP:pulse %ppulse:p };
+//   &enable    @WIRE { #XS:pll_enable %pen:p }      => @TEXT("enable") => @SET-STYLE $fly_label_style;
+//   &qualified @WIRE { #XS:qualified  %pqual:p };
+//   &restart   @WIRE { #XS:restart    %prestart:p } => @TEXT("restart") => @SET-STYLE $fly_label_style;
+//   &frequency_good @WIRE { #XW:frequency_good %pfrq:p } => @TEXT("frequency_good") => @SET-STYLE $fly_label_style;
+//   &divider_reset  @WIRE { (120, 32) %pdrst:p }  => @TEXT("divider_reset")  => @SET-STYLE $fly_label_style;
+//   &range_error    @WIRE { (120, 28) %prng:p }   => @TEXT("range_error")    => @SET-STYLE $fly_label_style;
+//   &config_ready   @WIRE { (120, 25) %prdy:p }   => @TEXT("config_ready")   => @SET-STYLE $fly_label_style;
+//   &config_invalid @WIRE { (120, 13) %pinv:p }   => @TEXT("config_invalid") => @SET-STYLE $fly_label_style;
+//   &count_gate     @WIRE { (120, 6)  %pcgate:p } => @TEXT("count_gate")     => @SET-STYLE $fly_label_style;
+//   &count_reset    @WIRE { (120, -8) %pcrst:p }  => @TEXT("count_reset")    => @SET-STYLE $fly_label_style;
+//
+//   &acqclk @WIRE { %pacq:p  #XACQ0:a };
+//   &outclk @WIRE { %poutc:p #XACQ1:a };
+//   %jacq_m = (26, 19); $JUNCTION @ATTACH %jacq_m;
+//   &clock_mux   @WIRE { #XACQ0:b (26, 22) %jacq_m #XACB0:a };
+//   &clock_mux   @WIRE { #XACQ1:b (26, 16) %jacq_m };
+//   &clock_b     @WIRE { #XACB0:y #XACB1:a };
+//   &count_clock @WIRE { #XACB1:y (45, 19) (45, 21) #XCOUNT:clk } => @TEXT("count_clock") => @SET-STYLE $fly_label_style;
+//
+//   &phase_good @WIRE { %pphok:p #XPH:d };
+//   &ref_fall   @WIRE { #XPHCLK:y (20, 4) (20, 5) #XPH:clk };
+//   &phase_held @WIRE { #XPH:q (33, 6) } => @TEXT("phase_held") => @SET-STYLE $fly_label_style;
+//
+//   &cfg_reset @WIRE { #XC:divider_reset (33, 40) } => @TEXT("cfg_reset") => @SET-STYLE $fly_label_style;
+//   &fll_reset @WIRE { #XR:y (48, 42) } => @TEXT("fll_reset") => @SET-STYLE $fly_label_style;
+//   &divider_reset @WIRE { #XDRESET:y (50, 32) } => @TEXT("divider_reset") => @SET-STYLE $fly_label_style;
+//   &count_gate @WIRE { #XWG:y (60, 6) } => @TEXT("count_gate") => @SET-STYLE $fly_label_style;
+//   &count_reset @WIRE { #XWR:y (60, -4) } => @TEXT("count_reset") => @SET-STYLE $fly_label_style;
+//   &acquired_b @WIRE { #XACQI:y (18, 26) } => @TEXT("acquired_b") => @SET-STYLE $fly_label_style;
+//
+//   /* 3.3 Flying-Wire Terminal Labels for Control/Clock/Reset Signals */
+//   #XC:refclk @TEXT("refclk", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XC:reset  @TEXT("reset",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XC:ready   @TEXT("config_ready",   dx=0.5, dy=-0.3, halign="start") => @SET-STYLE $fly_label_style;
+//   #XC:invalid @TEXT("config_invalid", dx=0.5, dy=-0.3, halign="start") => @SET-STYLE $fly_label_style;
+//
+//   #XR:a @TEXT("cfg_reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XR:b @TEXT("restart",   dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XDRESET:a @TEXT("cfg_reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XDRESET:b @TEXT("restart",   dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   #XACQI:a   @TEXT("acquired",   dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
+//   #XACQ0:on  @TEXT("acquired_b", dx=0,    dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XACQ0:off @TEXT("acquired",   dx=0,    dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//   #XACQ1:on  @TEXT("acquired",   dx=0,    dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XACQ1:off @TEXT("acquired_b", dx=0,    dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//
+//   #XPHCLK:a  @TEXT("refclk", dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
+//   #XPH:reset @TEXT("reset",  dx=0,    dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//
+//   #XCOUNT:gate  @TEXT("count_gate",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XCOUNT:reset @TEXT("count_reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XSN:gate     @TEXT("count_gate",  dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   #XWG:a @TEXT("fll_gate",   dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XWG:b @TEXT("watch_gate", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XWG:s @TEXT("acquired",   dx=0,    dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XWR:a @TEXT("fll_count_reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XWR:b @TEXT("watch_reset",     dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XWR:s @TEXT("acquired",        dx=0,    dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//
+//   #XF:refclk      @TEXT("refclk",          dx=-0.5, dy=-0.3, halign="end")   => @SET-STYLE $fly_label_style;
+//   #XF:reset       @TEXT("fll_reset",       dx=-0.5, dy=-0.3, halign="end")   => @SET-STYLE $fly_label_style;
+//   #XF:count_gate  @TEXT("fll_gate",        dx=0.5,  dy=-0.3, halign="start") => @SET-STYLE $fly_label_style;
+//   #XF:count_reset @TEXT("fll_count_reset", dx=0.5,  dy=-0.3, halign="start") => @SET-STYLE $fly_label_style;
+//   #XF:enable      @TEXT("acquired",        dx=0.5,  dy=-0.3, halign="start") => @SET-STYLE $fly_label_style;
+//   #XF:range_error @TEXT("range_error",     dx=0.5,  dy=-0.3, halign="start") => @SET-STYLE $fly_label_style;
+//
+//   #XW:refclk      @TEXT("refclk",      dx=-0.5, dy=-0.3, halign="end")   => @SET-STYLE $fly_label_style;
+//   #XW:reset       @TEXT("fll_reset",   dx=-0.5, dy=-0.3, halign="end")   => @SET-STYLE $fly_label_style;
+//   #XW:active      @TEXT("acquired",    dx=-0.5, dy=-0.3, halign="end")   => @SET-STYLE $fly_label_style;
+//   #XW:count_gate  @TEXT("watch_gate",  dx=0.5,  dy=-0.3, halign="start") => @SET-STYLE $fly_label_style;
+//   #XW:count_reset @TEXT("watch_reset", dx=0.5,  dy=-0.3, halign="start") => @SET-STYLE $fly_label_style;
+//
+//   #XDAC:enable @TEXT("acquired", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   #XS:refclk         @TEXT("refclk",         dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XS:reset          @TEXT("reset",          dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XS:cfg_ready      @TEXT("config_ready",   dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XS:fll_enable     @TEXT("acquired",       dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XS:range_error    @TEXT("range_error",    dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XS:phase_good     @TEXT("phase_held",     dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XS:frequency_good @TEXT("frequency_good", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   #XP:ref    @TEXT("refclk",    dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XP:enable @TEXT("enable",    dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XP:reset  @TEXT("fll_reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   /* --- 4. Annotations --- */
+//   (66, 62) @TEXT("pll_control_recenter109_v14_pdk110_56: Complete Digital FLL Acquisition, Recenter, Watchdog & Supervisor Subsystem", halign="middle") => @SET-STYLE $title_style;
+//   (66, 60.2) @TEXT("Single-Line Buses (K<5:0>, AK<5:0>, S<5:0>, B<7:0>, D<5:0>, Q<13:0>, M<13:0>) + Flying-Wire Control Signals for Zero-Crossing Readability", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends pll_control_recenter109_v14_pdk110_56

@@ -1,0 +1,168 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt validity_physical_v14_pdk110_53 (rf hp hn amp_good phase_good vdd vss)
+MD (rf rf env vss) nch w=5e-07 l=1.8e-07 ad=2.4e-13 as=2.4e-13 pd=1.96e-06 ps=1.96e-06 nrd=0.54 nrs=0.54 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+RE (env vss) resistor r=1000000
+CE (env vss) capacitor c=5e-14
+MR (vdd vdd envref vss) nch w=5e-07 l=1.8e-07 ad=2.4e-13 as=2.4e-13 pd=1.96e-06 ps=1.96e-06 nrd=0.54 nrs=0.54 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+RR (envref vss) resistor r=1000000
+RT0 (envref threshold) resistor r=10000000
+RT1 (threshold vdd) resistor r=90000000
+XA (env threshold amp_good vdd vss) cmp_physical_v14_pdk110_54
+RH0 (hn wh) resistor r=1000000
+RH1 (wh vdd) resistor r=9000000
+RL0 (hn wl) resistor r=1000000
+RL1 (wl vss) resistor r=9000000
+XH (wh hp upper_ok vdd vss) cmp_physical_v14_pdk110_54
+XL (hp wl lower_ok vdd vss) cmp_physical_v14_pdk110_54
+XW (upper_ok lower_ok window_ok vdd vss) tx_and_pdk110_47
+XG (window_ok amp_good phase_good vdd vss) tx_and_pdk110_47
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $VALIDITY_SYM;
+//
+//   /* --- 1. Circuit Semantics, Static DC Currents & Defect Annotation --- */
+//   %env = #MD(rectifier) #MR(reference_device) {#RE #CE #RR}(leak_rc) {#RT0 #RT1}(threshold_divider) #XA(comparator) @AS(target="RF_amplitude_monitor") $ENVELOPE_DETECTOR;
+//   %win = {#RH0 #RH1 #RL0 #RL1}(reference_ladder) #XH(upper_cmp) #XL(lower_cmp) {#XW #XG}(window_logic) @AS(window="hn_plus_minus_0.1_rail") $WINDOW_COMPARATOR;
+//   {#MD #MR}   @AS $MATCHED;
+//   {#RE #RR}   @AS $MATCHED;
+//   {#RH0 #RL0} @AS $MATCHED;
+//   {#RH1 #RL1} @AS $MATCHED;
+//   {#XH #XL}   @AS $MATCHED;
+//
+//   %defect_thr = {#MR #RT0 #RT1}(culprit_devices) {&envref &threshold &amp_good}(affected_nets) @AS(
+//     severity="medium",
+//     category="envelope_threshold_pullup_sensitivity",
+//     mechanism="MR generates envref = VDD - Vth, and RT0 (10M) / RT1 (90M to VDD) pulls threshold UP toward VDD (threshold = VDD - 0.9*Vth), so amp_good only trips when RF node vp swings above VDD (which occurs only because LC tank vp is DC-biased at VDD) with a tiny ~45 mV threshold margin",
+//     recommendation="Scale RT0/RT1 divider ratio to set a robust RF oscillation amplitude threshold (e.g. >250 mVpk)"
+//   ) $DESIGN_DEFECT;
+//
+//   /* Static DC Bias Currents */
+//   #MR:d  @CURRENT("in"); #MR:s  @CURRENT("out");
+//   #RR:1  @CURRENT("in"); #RR:2  @CURRENT("out");
+//   #RT1:2 @CURRENT("in"); #RT1:1 @CURRENT("out");
+//   #RT0:2 @CURRENT("in"); #RT0:1 @CURRENT("out");
+//   #MD:d  @CURRENT("in"); #MD:s  @CURRENT("out");
+//   #RE:1  @CURRENT("in"); #RE:2  @CURRENT("out");
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %prf   = $IO_PORT @ATTACH &rf         => @PLACE(2, 46)  => @ORIENT("R0");
+//   %php   = $IO_PORT @ATTACH &hp         => @PLACE(2, 9)   => @ORIENT("R0");
+//   %phn   = $IO_PORT @ATTACH &hn         => @PLACE(2, 2)   => @ORIENT("R0");
+//   %pamp  = $IO_PORT @ATTACH &amp_good   => @PLACE(58, 36) => @ORIENT("MY");
+//   %pph   = $IO_PORT @ATTACH &phase_good => @PLACE(58, 7)  => @ORIENT("MY");
+//
+//   %sup_mr  = $SUPPLY @ATTACH &vdd => @PLACE(10, 32);
+//   %sup_rt1 = $SUPPLY @ATTACH &vdd => @PLACE(24, 32);
+//   %sup_rh1 = $SUPPLY @ATTACH &vdd => @PLACE(20, 18);
+//   %gnd_re  = $GROUND @ATTACH &vss => @PLACE(14, 34);
+//   %gnd_rr  = $GROUND @ATTACH &vss => @PLACE(10, 14);
+//   %gnd_rl1 = $GROUND @ATTACH &vss => @PLACE(20, -6);
+//
+//   /* Top Section: RF Envelope Detector & Threshold Generator */
+//   #MD  @PLACE(10, 46) => @ORIENT("MY");
+//   #RE  @PLACE(10, 40) => @ORIENT("R0");
+//   #CE  @PLACE(18, 40) => @ORIENT("R0");
+//   #MR  @PLACE(10, 26) => @ORIENT("MY");
+//   #RR  @PLACE(10, 19) => @ORIENT("R0");
+//   #RT0 @PLACE(17, 23) => @ORIENT("R90");
+//   #RT1 @PLACE(24, 27) => @ORIENT("R0");
+//   #XA  @PLACE(36, 36) => @ORIENT("R0");
+//
+//   /* Bottom Section: Sampled Phase-Error Window Comparator */
+//   #RH0 @PLACE(14, 12) => @ORIENT("R90");
+//   #RH1 @PLACE(20, 15) => @ORIENT("R0");
+//   #RL0 @PLACE(14, 1)  => @ORIENT("R90");
+//   #RL1 @PLACE(20, -2) => @ORIENT("R0");
+//   #XH  @PLACE(36, 11) => @ORIENT("R0");
+//   #XL  @PLACE(36, 2)  => @ORIENT("R0");
+//   #XW  @PLACE(45, 7)  => @ORIENT("R0");
+//   #XG  @PLACE(53, 7)  => @ORIENT("R0");
+//
+//   /* --- 3. Explicit Manhattan Wiring & Flying-Wire Cross-Section Labels --- */
+//   %jrf = (10, 49);
+//   $JUNCTION @ATTACH %jrf;
+//   &rf @WIRE { %prf:p (6, 46) (6, 49) %jrf #MD:d };
+//   &rf @WIRE { %jrf (13, 49) (13, 46) #MD:g };
+//
+//   %jenv1 = (10, 43);
+//   %jenv2 = (18, 43);
+//   $JUNCTION @ATTACH %jenv1;
+//   $JUNCTION @ATTACH %jenv2;
+//   &env @WIRE { #MD:s %jenv1 #RE:1 };
+//   &env @WIRE { %jenv1 %jenv2 (28, 43) (28, 37) #XA:vp };
+//   &env @WIRE { %jenv2 #CE:1 };
+//
+//   %jg_env = (14, 36);
+//   $JUNCTION @ATTACH %jg_env;
+//   &vss @WIRE { #RE:2 (10, 36) %jg_env (18, 36) #CE:2 };
+//   &vss @WIRE { %jg_env %gnd_re:p };
+//
+//   %jv_mr = (10, 29);
+//   $JUNCTION @ATTACH %jv_mr;
+//   &vdd @WIRE { %sup_mr:p %jv_mr #MR:d };
+//   &vdd @WIRE { %jv_mr (13, 29) (13, 26) #MR:g };
+//
+//   %jer = (10, 23);
+//   $JUNCTION @ATTACH %jer;
+//   &envref @WIRE { #MR:s %jer #RR:1 };
+//   &envref @WIRE { %jer #RT0:1 };
+//   &vss    @WIRE { #RR:2 %gnd_rr:p };
+//
+//   %jthr = (24, 23);
+//   $JUNCTION @ATTACH %jthr;
+//   &threshold @WIRE { #RT0:2 %jthr #RT1:1 };
+//   &threshold @WIRE { %jthr (28, 23) (28, 35) #XA:vn };
+//   &vdd       @WIRE { %sup_rt1:p #RT1:2 };
+//
+//   &amp_good @WIRE { #XA:out %pamp:p };
+//   #XG:b @TEXT("amp_good", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   /* Window Comparator Wiring */
+//   %jhn = (6, 2);
+//   $JUNCTION @ATTACH %jhn;
+//   &hn @WIRE { %phn:p %jhn (6, 12) #RH0:1 };
+//   &hn @WIRE { %jhn (6, 1)  #RL0:1 };
+//
+//   %jwh = (20, 12);
+//   $JUNCTION @ATTACH %jwh;
+//   &wh  @WIRE { #RH0:2 %jwh #RH1:1 };
+//   &wh  @WIRE { %jwh #XH:vp };
+//   &vdd @WIRE { %sup_rh1:p #RH1:2 };
+//
+//   %jwl = (20, 1);
+//   $JUNCTION @ATTACH %jwl;
+//   &wl  @WIRE { #RL0:2 %jwl #RL1:1 };
+//   &wl  @WIRE { %jwl #XL:vn };
+//   &vss @WIRE { #RL1:2 %gnd_rl1:p };
+//
+//   %jhp = (26, 9);
+//   $JUNCTION @ATTACH %jhp;
+//   &hp @WIRE { %php:p %jhp (26, 10) #XH:vn };
+//   &hp @WIRE { %jhp (26, 3)  #XL:vp };
+//
+//   &upper_ok   @WIRE { #XH:out (40, 11) (40, 8) #XW:a };
+//   &lower_ok   @WIRE { #XL:out (40, 2)  (40, 6) #XW:b };
+//   &window_ok  @WIRE { #XW:y   (48, 7)  (48, 8) #XG:a };
+//   &phase_good @WIRE { #XG:y %pph:p };
+//
+//   /* --- 4. Annotations & Defect Callout --- */
+//   #RE  @TEXT("1 M\Omega",  key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #CE  @TEXT("50 fF",       key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #RR  @TEXT("1 M\Omega",  key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #RT0 @TEXT("10 M\Omega", key="value", dy=1.8,  halign="middle")    => @SET-STYLE $param_style;
+//   #RT1 @TEXT("90 M\Omega", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #RH0 @TEXT("1 M\Omega",  key="value", dy=1.8,  halign="middle")    => @SET-STYLE $param_style;
+//   #RH1 @TEXT("9 M\Omega",  key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #RL0 @TEXT("1 M\Omega",  key="value", dy=-2.2, halign="middle")    => @SET-STYLE $param_style;
+//   #RL1 @TEXT("9 M\Omega",  key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//
+//   (30, -12.0) @RECTANGLE(width=48, height=3.8) => @SET-STYLE $defect_box;
+//   (30, -11.3) @TEXT("DEFECT: RT0(10M)/RT1(90M to VDD) Sets Threshold = VDD - 0.9*Vth", halign="middle") => @SET-STYLE $defect_style;
+//   (30, -12.7) @TEXT("Requires only ~45 mVpk RF swing above DC VDD on vp to assert amp_good", halign="middle") => @SET-STYLE $param_style;
+//   (30, 54) @TEXT("validity_physical_v14_pdk110_53: RF Amplitude Envelope Monitor & Phase-Lock Window Detector", halign="middle") => @SET-STYLE $title_style;
+//   (30, 52.2) @TEXT("Rectifies RF Peak (MD, RE, CE) for amp_good (XA) + Checks |hp - hn| < 0.1*VDD Window (XH, XL, XW) for phase_good (XG)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends validity_physical_v14_pdk110_53

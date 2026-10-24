@@ -1,0 +1,1284 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt tx_pll_config_pdk110_57 (refclk reset apply cfg_k0 cfg_k1 cfg_k2 cfg_k3 cfg_k4 cfg_k5 active_k0 active_k1 active_k2 active_k3 active_k4 active_k5 select_m0 select_m1 select_m2 select_m3 select_m4 select_m5 ready invalid divider_reset vdd vss)
+X0 (n26 refclk reset invalid vdd vss) tx_dff_r0_pdk110_58
+X1 (n27 refclk reset ready vdd vss) tx_dff_r0_pdk110_58
+X2 (n28 refclk reset n29 vdd vss) tx_dff_r0_pdk110_58
+X3 (n30 refclk reset n31 vdd vss) tx_dff_r0_pdk110_58
+X4 (n32 refclk reset n33 vdd vss) tx_dff_r0_pdk110_58
+X5 (n34 refclk reset n35 vdd vss) tx_dff_r0_pdk110_58
+X6 (n36 refclk reset n37 vdd vss) tx_dff_r0_pdk110_58
+X7 (n38 refclk reset n39 vdd vss) tx_dff_r0_pdk110_58
+X8 (n40 refclk reset active_k0 vdd vss) tx_dff_r0_pdk110_58
+X9 (n41 refclk reset active_k1 vdd vss) tx_dff_r0_pdk110_58
+X10 (n42 refclk reset active_k2 vdd vss) tx_dff_r0_pdk110_58
+X11 (n43 refclk reset active_k3 vdd vss) tx_dff_r0_pdk110_58
+X12 (n44 refclk reset active_k4 vdd vss) tx_dff_r0_pdk110_58
+X13 (n45 refclk reset active_k5 vdd vss) tx_dff_r0_pdk110_58
+X14 (n46 refclk reset n47 vdd vss) tx_dff_r0_pdk110_58
+X15 (n48 refclk reset n49 vdd vss) tx_dff_r0_pdk110_58
+X16 (n50 refclk reset n51 vdd vss) tx_dff_r0_pdk110_58
+X17 (n52 refclk reset n53 vdd vss) tx_dff_r0_pdk110_58
+X18 (apply refclk reset n54 vdd vss) tx_dff_r0_pdk110_58
+X19 (n54 refclk reset n55 vdd vss) tx_dff_r0_pdk110_58
+X20 (n55 refclk reset n56 vdd vss) tx_dff_r0_pdk110_58
+X21 (n57 refclk reset n58 vdd vss) tx_dff_r0_pdk110_58
+X22 (n51 n59 n60 n50 vdd vss) tx_mux_pdk110_64
+X23 (n49 n61 n60 n48 vdd vss) tx_mux_pdk110_64
+X24 (n47 n62 n60 n46 vdd vss) tx_mux_pdk110_64
+X25 (active_k4 n37 n63 n44 vdd vss) tx_mux_pdk110_64
+X26 (active_k3 n35 n63 n43 vdd vss) tx_mux_pdk110_64
+X27 (active_k2 n33 n63 n42 vdd vss) tx_mux_pdk110_64
+X28 (active_k1 n31 n63 n41 vdd vss) tx_mux_pdk110_64
+X29 (active_k0 n29 n63 n40 vdd vss) tx_mux_pdk110_64
+X30 (n37 cfg_k4 n64 n36 vdd vss) tx_mux_pdk110_64
+X31 (n35 cfg_k3 n64 n34 vdd vss) tx_mux_pdk110_64
+X32 (n33 cfg_k2 n64 n32 vdd vss) tx_mux_pdk110_64
+X33 (n31 cfg_k1 n64 n30 vdd vss) tx_mux_pdk110_64
+X34 (n29 cfg_k0 n64 n28 vdd vss) tx_mux_pdk110_64
+X35 (invalid n65 n66 n26 vdd vss) tx_mux_pdk110_64
+X36 (ready n67 n66 n27 vdd vss) tx_mux_pdk110_64
+X37 (n39 cfg_k5 n64 n38 vdd vss) tx_mux_pdk110_64
+X38 (active_k5 n39 n63 n45 vdd vss) tx_mux_pdk110_64
+X39 (n53 n68 n60 n52 vdd vss) tx_mux_pdk110_64
+X40 (n47 n69 vdd vss) pll_inv_pdk110_7
+X41 (n31 n70 vdd vss) pll_inv_pdk110_7
+X42 (n33 n71 vdd vss) pll_inv_pdk110_7
+X43 (n39 n72 vdd vss) pll_inv_pdk110_7
+X44 (n37 n73 vdd vss) pll_inv_pdk110_7
+X45 (active_k1 n74 vdd vss) pll_inv_pdk110_7
+X46 (active_k0 n75 vdd vss) pll_inv_pdk110_7
+X47 (active_k5 n76 vdd vss) pll_inv_pdk110_7
+X48 (active_k3 n77 vdd vss) pll_inv_pdk110_7
+X49 (active_k2 n78 vdd vss) pll_inv_pdk110_7
+X50 (active_k4 n79 vdd vss) pll_inv_pdk110_7
+X51 (n51 n80 vdd vss) pll_inv_pdk110_7
+X52 (n81 n82 vdd vss) pll_inv_pdk110_7
+X53 (n83 n84 vdd vss) pll_inv_pdk110_7
+X54 (n85 n86 vdd vss) pll_inv_pdk110_7
+X55 (n87 n88 vdd vss) pll_inv_pdk110_7
+X56 (n89 n90 vdd vss) pll_inv_pdk110_7
+X57 (n91 n92 vdd vss) pll_inv_pdk110_7
+X58 (n93 n94 vdd vss) pll_inv_pdk110_7
+X59 (n95 n96 vdd vss) pll_inv_pdk110_7
+X60 (n97 n98 vdd vss) pll_inv_pdk110_7
+X61 (n99 n100 vdd vss) pll_inv_pdk110_7
+X62 (n101 n102 vdd vss) pll_inv_pdk110_7
+X63 (n103 n104 vdd vss) pll_inv_pdk110_7
+X64 (n105 n106 vdd vss) pll_inv_pdk110_7
+X65 (n49 n47 n107 vdd vss) tx_xor_pdk110_66
+X66 (n51 n108 n109 vdd vss) tx_xor_pdk110_66
+X67 (n53 n110 n111 vdd vss) tx_xor_pdk110_66
+X68 (n112 n113 n105 vdd vss) tx_or_pdk110_67
+X69 (n114 n115 n113 vdd vss) tx_and_pdk110_47
+X70 (active_k5 n116 n112 vdd vss) tx_or_pdk110_67
+X71 (active_k3 active_k2 n117 vdd vss) tx_and_pdk110_47
+X72 (n118 n119 n103 vdd vss) tx_or_pdk110_67
+X73 (n120 n115 n119 vdd vss) tx_and_pdk110_47
+X74 (n117 n121 n115 vdd vss) tx_or_pdk110_67
+X75 (n122 n123 n121 vdd vss) tx_and_pdk110_47
+X76 (active_k5 n79 n120 vdd vss) tx_and_pdk110_47
+X77 (active_k5 active_k4 n118 vdd vss) tx_and_pdk110_47
+X78 (active_k5 n124 n101 vdd vss) tx_or_pdk110_67
+X79 (n116 n117 n124 vdd vss) tx_and_pdk110_47
+X80 (n116 n125 n126 vdd vss) tx_and_pdk110_47
+X81 (active_k5 n126 n99 vdd vss) tx_or_pdk110_67
+X82 (n127 n128 n125 vdd vss) tx_or_pdk110_67
+X83 (n129 n130 n128 vdd vss) tx_and_pdk110_47
+X84 (n76 active_k4 n116 vdd vss) tx_and_pdk110_47
+X85 (n77 n78 n129 vdd vss) tx_and_pdk110_47
+X86 (active_k3 n131 n127 vdd vss) tx_or_pdk110_67
+X87 (active_k5 n132 n97 vdd vss) tx_or_pdk110_67
+X88 (n116 n133 n132 vdd vss) tx_and_pdk110_47
+X89 (n106 n134 n135 vdd vss) tx_or_pdk110_67
+X90 (n117 n136 n133 vdd vss) tx_or_pdk110_67
+X91 (n114 n137 n138 vdd vss) tx_and_pdk110_47
+X92 (n112 n138 n95 vdd vss) tx_or_pdk110_67
+X93 (n117 active_k1 n137 vdd vss) tx_and_pdk110_47
+X94 (n76 n79 n114 vdd vss) tx_and_pdk110_47
+X95 (active_k5 n139 n93 vdd vss) tx_or_pdk110_67
+X96 (n116 n140 n139 vdd vss) tx_and_pdk110_47
+X97 (n127 n141 n140 vdd vss) tx_or_pdk110_67
+X98 (n129 active_k1 n141 vdd vss) tx_and_pdk110_47
+X99 (n77 active_k2 n131 vdd vss) tx_and_pdk110_47
+X100 (n102 n142 n143 vdd vss) tx_or_pdk110_67
+X101 (n114 n117 n144 vdd vss) tx_and_pdk110_47
+X102 (n112 n144 n91 vdd vss) tx_or_pdk110_67
+X103 (n112 n145 n89 vdd vss) tx_or_pdk110_67
+X104 (n114 n146 n145 vdd vss) tx_and_pdk110_47
+X105 (n117 n123 n146 vdd vss) tx_and_pdk110_47
+X106 (n100 n147 n148 vdd vss) tx_or_pdk110_67
+X107 (active_k1 n149 n123 vdd vss) tx_or_pdk110_67
+X108 (n74 active_k0 n149 vdd vss) tx_and_pdk110_47
+X109 (n112 n150 n87 vdd vss) tx_or_pdk110_67
+X110 (n114 n151 n150 vdd vss) tx_and_pdk110_47
+X111 (n117 n152 n151 vdd vss) tx_or_pdk110_67
+X112 (n122 active_k1 n152 vdd vss) tx_and_pdk110_47
+X113 (active_k3 n78 n122 vdd vss) tx_and_pdk110_47
+X114 (n112 n153 n85 vdd vss) tx_or_pdk110_67
+X115 (n114 n133 n153 vdd vss) tx_and_pdk110_47
+X116 (active_k1 active_k0 n130 vdd vss) tx_and_pdk110_47
+X117 (n96 n154 n155 vdd vss) tx_or_pdk110_67
+X118 (n156 n157 n83 vdd vss) tx_or_pdk110_67
+X119 (n158 n159 n157 vdd vss) tx_and_pdk110_47
+X120 (n160 n161 n159 vdd vss) tx_or_pdk110_67
+X121 (n39 n162 n156 vdd vss) tx_or_pdk110_67
+X122 (n72 n37 n162 vdd vss) tx_and_pdk110_47
+X123 (n31 n163 n164 vdd vss) tx_or_pdk110_67
+X124 (n165 n159 n166 vdd vss) tx_and_pdk110_47
+X125 (n167 n166 n81 vdd vss) tx_or_pdk110_67
+X126 (n168 n164 n161 vdd vss) tx_and_pdk110_47
+X127 (n39 n37 n167 vdd vss) tx_and_pdk110_47
+X128 (n35 n33 n160 vdd vss) tx_and_pdk110_47
+X129 (n70 n29 n163 vdd vss) tx_and_pdk110_47
+X130 (n51 n108 n110 vdd vss) tx_and_pdk110_47
+X131 (n49 n47 n108 vdd vss) tx_and_pdk110_47
+X132 (n92 n169 n170 vdd vss) tx_or_pdk110_67
+X133 (n88 n171 n172 vdd vss) tx_or_pdk110_67
+X134 (n84 n173 n174 vdd vss) tx_or_pdk110_67
+X135 (n175 n176 n66 vdd vss) tx_and_pdk110_47
+X136 (n64 n177 n175 vdd vss) tx_or_pdk110_67
+X137 (n58 n64 n176 vdd vss) tx_or_pdk110_67
+X138 (n178 n58 n179 vdd vss) tx_and_pdk110_47
+X139 (n179 n180 n63 vdd vss) tx_and_pdk110_47
+X140 (n181 n176 n60 vdd vss) tx_and_pdk110_47
+X141 (n64 n182 n181 vdd vss) tx_or_pdk110_67
+X142 (n75 active_k1 n183 vdd vss) tx_or_pdk110_67
+X143 (active_k2 n77 n184 vdd vss) tx_or_pdk110_67
+X144 (active_k4 active_k5 n185 vdd vss) tx_or_pdk110_67
+X145 (n183 n184 n186 vdd vss) tx_or_pdk110_67
+X146 (n186 n185 n187 vdd vss) tx_or_pdk110_67
+X147 (n69 n49 n188 vdd vss) tx_or_pdk110_67
+X148 (n51 n53 n189 vdd vss) tx_or_pdk110_67
+X149 (n188 n189 n190 vdd vss) tx_or_pdk110_67
+X150 (n69 n191 n192 vdd vss) tx_or_pdk110_67
+X151 (n80 n53 n193 vdd vss) tx_or_pdk110_67
+X152 (n192 n193 n182 vdd vss) tx_or_pdk110_67
+X153 (n194 n114 n134 vdd vss) tx_and_pdk110_47
+X154 (n195 n134 n196 vdd vss) tx_or_pdk110_67
+X155 (n149 n122 n194 vdd vss) tx_and_pdk110_47
+X156 (n194 n120 n197 vdd vss) tx_and_pdk110_47
+X157 (n104 n197 n198 vdd vss) tx_or_pdk110_67
+X158 (n75 n74 n199 vdd vss) tx_and_pdk110_47
+X159 (n199 n117 n200 vdd vss) tx_and_pdk110_47
+X160 (n200 n116 n142 vdd vss) tx_and_pdk110_47
+X161 (n201 n142 n202 vdd vss) tx_or_pdk110_67
+X162 (n128 n116 n147 vdd vss) tx_and_pdk110_47
+X163 (n203 n147 n204 vdd vss) tx_or_pdk110_67
+X164 (n130 n122 n136 vdd vss) tx_and_pdk110_47
+X165 (n136 n116 n205 vdd vss) tx_and_pdk110_47
+X166 (n98 n205 n206 vdd vss) tx_or_pdk110_67
+X167 (n207 n117 n208 vdd vss) tx_and_pdk110_47
+X168 (n208 n114 n154 vdd vss) tx_and_pdk110_47
+X169 (n209 n154 n210 vdd vss) tx_or_pdk110_67
+X170 (n75 active_k1 n207 vdd vss) tx_and_pdk110_47
+X171 (n207 n129 n211 vdd vss) tx_and_pdk110_47
+X172 (n211 n116 n212 vdd vss) tx_and_pdk110_47
+X173 (n94 n212 n213 vdd vss) tx_or_pdk110_67
+X174 (n200 n114 n169 vdd vss) tx_and_pdk110_47
+X175 (n214 n169 n215 vdd vss) tx_or_pdk110_67
+X176 (n149 n117 n216 vdd vss) tx_and_pdk110_47
+X177 (n216 n114 n217 vdd vss) tx_and_pdk110_47
+X178 (n90 n217 n218 vdd vss) tx_or_pdk110_67
+X179 (n207 n122 n219 vdd vss) tx_and_pdk110_47
+X180 (n219 n114 n171 vdd vss) tx_and_pdk110_47
+X181 (n220 n171 n221 vdd vss) tx_or_pdk110_67
+X182 (n136 n114 n222 vdd vss) tx_and_pdk110_47
+X183 (n86 n222 n223 vdd vss) tx_or_pdk110_67
+X184 (n71 n35 n168 vdd vss) tx_and_pdk110_47
+X185 (n73 n72 n158 vdd vss) tx_and_pdk110_47
+X186 (n163 n168 n224 vdd vss) tx_and_pdk110_47
+X187 (n224 n158 n173 vdd vss) tx_and_pdk110_47
+X188 (n225 n173 n226 vdd vss) tx_or_pdk110_67
+X189 (n73 n39 n165 vdd vss) tx_and_pdk110_47
+X190 (n224 n165 n227 vdd vss) tx_and_pdk110_47
+X191 (n82 n227 n228 vdd vss) tx_or_pdk110_67
+X192 (n187 n229 vdd vss) pll_inv_pdk110_7
+X193 (ready n230 vdd vss) pll_inv_pdk110_7
+X194 (n56 n231 vdd vss) pll_inv_pdk110_7
+X195 (n190 n180 vdd vss) pll_inv_pdk110_7
+X196 (n182 n177 vdd vss) pll_inv_pdk110_7
+X197 (n232 n233 vdd vss) pll_inv_pdk110_7
+X198 (n196 n198 n234 vdd vss) tx_and_pdk110_47
+X199 (n234 n202 select_m0 vdd vss) tx_and_pdk110_47
+X200 (n234 n204 n235 vdd vss) tx_and_pdk110_47
+X201 (n235 n206 select_m1 vdd vss) tx_and_pdk110_47
+X202 (n234 n210 n236 vdd vss) tx_and_pdk110_47
+X203 (n236 n213 select_m2 vdd vss) tx_and_pdk110_47
+X204 (n234 n215 n237 vdd vss) tx_and_pdk110_47
+X205 (n237 n218 select_m3 vdd vss) tx_and_pdk110_47
+X206 (n234 n221 n238 vdd vss) tx_and_pdk110_47
+X207 (n238 n223 select_m4 vdd vss) tx_and_pdk110_47
+X208 (n234 n229 select_m5 vdd vss) tx_and_pdk110_47
+X209 (reset n230 divider_reset vdd vss) tx_or_pdk110_67
+X210 (n55 n231 n64 vdd vss) tx_and_pdk110_47
+X211 (n226 n228 n232 vdd vss) tx_and_pdk110_47
+X212 (vss n182 n58 n239 vdd vss) tx_mux_pdk110_64
+X213 (n239 vdd n64 n57 vdd vss) tx_mux_pdk110_64
+X214 (nx n69 n182 n240 vdd vss) tx_mux_pdk110_64
+X215 (nx n107 n182 n241 vdd vss) tx_mux_pdk110_64
+X216 (nx n109 n182 n242 vdd vss) tx_mux_pdk110_64
+X217 (nx n111 n182 n243 vdd vss) tx_mux_pdk110_64
+X218 (nx n240 n58 n244 vdd vss) tx_mux_pdk110_64
+X219 (nx n241 n58 n245 vdd vss) tx_mux_pdk110_64
+X220 (nx n242 n58 n246 vdd vss) tx_mux_pdk110_64
+X221 (nx n243 n58 n247 vdd vss) tx_mux_pdk110_64
+X222 (n244 vss n64 n62 vdd vss) tx_mux_pdk110_64
+X223 (n245 vss n64 n61 vdd vss) tx_mux_pdk110_64
+X224 (n246 vss n64 n59 vdd vss) tx_mux_pdk110_64
+X225 (n247 vss n64 n68 vdd vss) tx_mux_pdk110_64
+X226 (n233 nx n182 n248 vdd vss) tx_mux_pdk110_64
+X227 (nx n248 n58 n249 vdd vss) tx_mux_pdk110_64
+X228 (n249 vss n64 n65 vdd vss) tx_mux_pdk110_64
+X229 (n232 nx n182 n250 vdd vss) tx_mux_pdk110_64
+X230 (nx n250 n58 n251 vdd vss) tx_mux_pdk110_64
+X231 (n251 vss n64 n67 vdd vss) tx_mux_pdk110_64
+X232 (n49 n191 vdd vss) pll_inv_pdk110_7
+X233 (n64 n178 vdd vss) pll_inv_pdk110_7
+X234 (n135 n195 vdd vss) pll_inv_pdk110_7
+X235 (n143 n201 vdd vss) pll_inv_pdk110_7
+X236 (n148 n203 vdd vss) pll_inv_pdk110_7
+X237 (n155 n209 vdd vss) pll_inv_pdk110_7
+X238 (n170 n214 vdd vss) pll_inv_pdk110_7
+X239 (n172 n220 vdd vss) pll_inv_pdk110_7
+X240 (n174 n225 vdd vss) pll_inv_pdk110_7
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $PLL_CFG_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %fsm = {#X0 #X1 #X2 #X3 #X4 #X5 #X6 #X7 #X8 #X9 #X10 #X11 #X12 #X13 #X14 #X15 #X16 #X17 #X18 #X19 #X20 #X21}(state_ffs) {#X22 #X23 #X24 #X25 #X26 #X27 #X28 #X29 #X30 #X31 #X32 #X33 #X34 #X35 #X36 #X37 #X38 #X39 #X212 #X213 #X214 #X215 #X216 #X217 #X218 #X219 #X220 #X221 #X222 #X223 #X224 #X225 #X226 #X227 #X228 #X229 #X230 #X231}(datapath_muxes) {#X40 #X41 #X42 #X43 #X44 #X45 #X46 #X47 #X48 #X49 #X50 #X51 #X52 #X53 #X54 #X55 #X56 #X57 #X58 #X59 #X60 #X61 #X62 #X63 #X64 #X65 #X66 #X67 #X68 #X69 #X70 #X71 #X72 #X73 #X74 #X75 #X76 #X77 #X78 #X79 #X80 #X81 #X82 #X83 #X84 #X85 #X86 #X87 #X88 #X89 #X90 #X91 #X92 #X93 #X94 #X95 #X96 #X97 #X98 #X99 #X100 #X101 #X102 #X103 #X104 #X105 #X106 #X107 #X108 #X109 #X110 #X111 #X112 #X113 #X114 #X115 #X116 #X117 #X118 #X119 #X120 #X121 #X122 #X123 #X124 #X125 #X126 #X127 #X128 #X129 #X130 #X131 #X132 #X133 #X134 #X135 #X136 #X137 #X138 #X139 #X140 #X141 #X142 #X143 #X144 #X145 #X146 #X147 #X148 #X149 #X150 #X151 #X152 #X153 #X154 #X155 #X156 #X157 #X158 #X159 #X160 #X161 #X162 #X163 #X164 #X165 #X166 #X167 #X168 #X169 #X170 #X171 #X172 #X173 #X174 #X175 #X176 #X177 #X178 #X179 #X180 #X181 #X182 #X183 #X184 #X185 #X186 #X187 #X188 #X189 #X190 #X191 #X192 #X193 #X194 #X195 #X196 #X197 #X198 #X199 #X200 #X201 #X202 #X203 #X204 #X205 #X206 #X207 #X208 #X209 #X210 #X211 #X232 #X233 #X234 #X235 #X236 #X237 #X238 #X239 #X240}(comb_logic) @AS(controller_name="57_tx_pll_config", clock_domain="refclk") $SYNTHESIZED_FSM_CONTROLLER;
+//   {%p_refclk #X0 #X22 #X40 %p_active_k0} @AS(direction="left-to-right") $FLOW;
+//   %defect_nx = {#X214 #X215 #X216 #X217 #X218 #X219 #X220 #X221 #X226 #X227 #X229 #X230}(culprit_devices) {&nx}(affected_nets) @AS(
+//     severity="critical",
+//     category="undriven_floating_net_nx_from_synthesis_tie_cell_omission",
+//     mechanism="Net 'nx' has zero drivers in tx_pll_config_pdk110_57; when s=0 on those 12 muxes, floating CMOS gates cause unknown logic state and crowbar current (tie nx to vss)",
+//     recommendation="Tie net nx to vss (or appropriate constant tie cell) in the synthesized netlist"
+//   ) $DESIGN_DEFECT;
+//
+//   /* --- 2. Structured Column Placement & Orientation --- */
+//   {&cfg_k1 &cfg_k2 &cfg_k3 &cfg_k4 &cfg_k5 &active_k1 &active_k2 &active_k3 &active_k4 &active_k5 &select_m1 &select_m2 &select_m3 &select_m4 &select_m5} @REMOVE-FROM $PORT_FILL_SET;
+//   %p_refclk = $IO_PORT @ATTACH &refclk => @PLACE(2, 122) => @ORIENT("R0");
+//   %p_reset = $IO_PORT @ATTACH &reset => @PLACE(2, 92) => @ORIENT("R0");
+//   %p_apply = $IO_PORT @ATTACH &apply => @PLACE(2, 62) => @ORIENT("R0");
+//   %p_cfg_k0 = $IO_PORT @ATTACH &cfg_k0 => @PLACE(2, 32) => @ORIENT("R0");
+//   %p_cfg_k0 @TEXT("cfg_k<5:0>", key="name");
+//   %p_active_k0 = $IO_PORT @ATTACH &active_k0 => @PLACE(300, 127) => @ORIENT("MY");
+//   %p_active_k0 @TEXT("active_k<5:0>", key="name");
+//   %p_select_m0 = $IO_PORT @ATTACH &select_m0 => @PLACE(300, 102) => @ORIENT("MY");
+//   %p_select_m0 @TEXT("select_m<5:0>", key="name");
+//   %p_ready = $IO_PORT @ATTACH &ready => @PLACE(300, 77) => @ORIENT("MY");
+//   %p_invalid = $IO_PORT @ATTACH &invalid => @PLACE(300, 52) => @ORIENT("MY");
+//   %p_divider_reset = $IO_PORT @ATTACH &divider_reset => @PLACE(300, 27) => @ORIENT("MY");
+//   #X0 @PLACE(24, 144) => @ORIENT("R0");
+//   #X1 @PLACE(24, 136) => @ORIENT("R0");
+//   #X2 @PLACE(24, 128) => @ORIENT("R0");
+//   #X3 @PLACE(24, 120) => @ORIENT("R0");
+//   #X4 @PLACE(24, 112) => @ORIENT("R0");
+//   #X5 @PLACE(24, 104) => @ORIENT("R0");
+//   #X6 @PLACE(24, 96) => @ORIENT("R0");
+//   #X7 @PLACE(24, 88) => @ORIENT("R0");
+//   #X8 @PLACE(24, 80) => @ORIENT("R0");
+//   #X9 @PLACE(24, 72) => @ORIENT("R0");
+//   #X10 @PLACE(24, 64) => @ORIENT("R0");
+//   #X11 @PLACE(24, 56) => @ORIENT("R0");
+//   #X12 @PLACE(24, 48) => @ORIENT("R0");
+//   #X13 @PLACE(24, 40) => @ORIENT("R0");
+//   #X14 @PLACE(24, 32) => @ORIENT("R0");
+//   #X15 @PLACE(24, 24) => @ORIENT("R0");
+//   #X16 @PLACE(24, 16) => @ORIENT("R0");
+//   #X17 @PLACE(24, 8) => @ORIENT("R0");
+//   #X18 @PLACE(40, 144) => @ORIENT("R0");
+//   #X19 @PLACE(40, 136) => @ORIENT("R0");
+//   #X20 @PLACE(40, 128) => @ORIENT("R0");
+//   #X21 @PLACE(40, 120) => @ORIENT("R0");
+//   #X22 @PLACE(64, 144) => @ORIENT("R0");
+//   #X23 @PLACE(64, 136) => @ORIENT("R0");
+//   #X24 @PLACE(64, 128) => @ORIENT("R0");
+//   #X25 @PLACE(64, 120) => @ORIENT("R0");
+//   #X26 @PLACE(64, 112) => @ORIENT("R0");
+//   #X27 @PLACE(64, 104) => @ORIENT("R0");
+//   #X28 @PLACE(64, 96) => @ORIENT("R0");
+//   #X29 @PLACE(64, 88) => @ORIENT("R0");
+//   #X30 @PLACE(64, 80) => @ORIENT("R0");
+//   #X31 @PLACE(64, 72) => @ORIENT("R0");
+//   #X32 @PLACE(64, 64) => @ORIENT("R0");
+//   #X33 @PLACE(64, 56) => @ORIENT("R0");
+//   #X34 @PLACE(64, 48) => @ORIENT("R0");
+//   #X35 @PLACE(64, 40) => @ORIENT("R0");
+//   #X36 @PLACE(64, 32) => @ORIENT("R0");
+//   #X37 @PLACE(64, 24) => @ORIENT("R0");
+//   #X38 @PLACE(64, 16) => @ORIENT("R0");
+//   #X39 @PLACE(64, 8) => @ORIENT("R0");
+//   #X212 @PLACE(80, 144) => @ORIENT("R0");
+//   #X213 @PLACE(80, 136) => @ORIENT("R0");
+//   #X214 @PLACE(80, 128) => @ORIENT("R0");
+//   #X215 @PLACE(80, 120) => @ORIENT("R0");
+//   #X216 @PLACE(80, 112) => @ORIENT("R0");
+//   #X217 @PLACE(80, 104) => @ORIENT("R0");
+//   #X218 @PLACE(80, 96) => @ORIENT("R0");
+//   #X219 @PLACE(80, 88) => @ORIENT("R0");
+//   #X220 @PLACE(80, 80) => @ORIENT("R0");
+//   #X221 @PLACE(80, 72) => @ORIENT("R0");
+//   #X222 @PLACE(80, 64) => @ORIENT("R0");
+//   #X223 @PLACE(80, 56) => @ORIENT("R0");
+//   #X224 @PLACE(80, 48) => @ORIENT("R0");
+//   #X225 @PLACE(80, 40) => @ORIENT("R0");
+//   #X226 @PLACE(80, 32) => @ORIENT("R0");
+//   #X227 @PLACE(80, 24) => @ORIENT("R0");
+//   #X228 @PLACE(80, 16) => @ORIENT("R0");
+//   #X229 @PLACE(80, 8) => @ORIENT("R0");
+//   #X230 @PLACE(96, 144) => @ORIENT("R0");
+//   #X231 @PLACE(96, 136) => @ORIENT("R0");
+//   #X40 @PLACE(120, 144) => @ORIENT("R0");
+//   #X41 @PLACE(120, 136) => @ORIENT("R0");
+//   #X42 @PLACE(120, 128) => @ORIENT("R0");
+//   #X43 @PLACE(120, 120) => @ORIENT("R0");
+//   #X44 @PLACE(120, 112) => @ORIENT("R0");
+//   #X45 @PLACE(120, 104) => @ORIENT("R0");
+//   #X46 @PLACE(120, 96) => @ORIENT("R0");
+//   #X47 @PLACE(120, 88) => @ORIENT("R0");
+//   #X48 @PLACE(120, 80) => @ORIENT("R0");
+//   #X49 @PLACE(120, 72) => @ORIENT("R0");
+//   #X50 @PLACE(120, 64) => @ORIENT("R0");
+//   #X51 @PLACE(120, 56) => @ORIENT("R0");
+//   #X52 @PLACE(120, 48) => @ORIENT("R0");
+//   #X53 @PLACE(120, 40) => @ORIENT("R0");
+//   #X54 @PLACE(120, 32) => @ORIENT("R0");
+//   #X55 @PLACE(120, 24) => @ORIENT("R0");
+//   #X56 @PLACE(120, 16) => @ORIENT("R0");
+//   #X57 @PLACE(120, 8) => @ORIENT("R0");
+//   #X58 @PLACE(136, 144) => @ORIENT("R0");
+//   #X59 @PLACE(136, 136) => @ORIENT("R0");
+//   #X60 @PLACE(136, 128) => @ORIENT("R0");
+//   #X61 @PLACE(136, 120) => @ORIENT("R0");
+//   #X62 @PLACE(136, 112) => @ORIENT("R0");
+//   #X63 @PLACE(136, 104) => @ORIENT("R0");
+//   #X64 @PLACE(136, 96) => @ORIENT("R0");
+//   #X65 @PLACE(136, 88) => @ORIENT("R0");
+//   #X66 @PLACE(136, 80) => @ORIENT("R0");
+//   #X67 @PLACE(136, 72) => @ORIENT("R0");
+//   #X68 @PLACE(136, 64) => @ORIENT("R0");
+//   #X69 @PLACE(136, 56) => @ORIENT("R0");
+//   #X70 @PLACE(136, 48) => @ORIENT("R0");
+//   #X71 @PLACE(136, 40) => @ORIENT("R0");
+//   #X72 @PLACE(136, 32) => @ORIENT("R0");
+//   #X73 @PLACE(136, 24) => @ORIENT("R0");
+//   #X74 @PLACE(136, 16) => @ORIENT("R0");
+//   #X75 @PLACE(136, 8) => @ORIENT("R0");
+//   #X76 @PLACE(152, 144) => @ORIENT("R0");
+//   #X77 @PLACE(152, 136) => @ORIENT("R0");
+//   #X78 @PLACE(152, 128) => @ORIENT("R0");
+//   #X79 @PLACE(152, 120) => @ORIENT("R0");
+//   #X80 @PLACE(152, 112) => @ORIENT("R0");
+//   #X81 @PLACE(152, 104) => @ORIENT("R0");
+//   #X82 @PLACE(152, 96) => @ORIENT("R0");
+//   #X83 @PLACE(152, 88) => @ORIENT("R0");
+//   #X84 @PLACE(152, 80) => @ORIENT("R0");
+//   #X85 @PLACE(152, 72) => @ORIENT("R0");
+//   #X86 @PLACE(152, 64) => @ORIENT("R0");
+//   #X87 @PLACE(152, 56) => @ORIENT("R0");
+//   #X88 @PLACE(152, 48) => @ORIENT("R0");
+//   #X89 @PLACE(152, 40) => @ORIENT("R0");
+//   #X90 @PLACE(152, 32) => @ORIENT("R0");
+//   #X91 @PLACE(152, 24) => @ORIENT("R0");
+//   #X92 @PLACE(152, 16) => @ORIENT("R0");
+//   #X93 @PLACE(152, 8) => @ORIENT("R0");
+//   #X94 @PLACE(168, 144) => @ORIENT("R0");
+//   #X95 @PLACE(168, 136) => @ORIENT("R0");
+//   #X96 @PLACE(168, 128) => @ORIENT("R0");
+//   #X97 @PLACE(168, 120) => @ORIENT("R0");
+//   #X98 @PLACE(168, 112) => @ORIENT("R0");
+//   #X99 @PLACE(168, 104) => @ORIENT("R0");
+//   #X100 @PLACE(168, 96) => @ORIENT("R0");
+//   #X101 @PLACE(168, 88) => @ORIENT("R0");
+//   #X102 @PLACE(168, 80) => @ORIENT("R0");
+//   #X103 @PLACE(168, 72) => @ORIENT("R0");
+//   #X104 @PLACE(168, 64) => @ORIENT("R0");
+//   #X105 @PLACE(168, 56) => @ORIENT("R0");
+//   #X106 @PLACE(168, 48) => @ORIENT("R0");
+//   #X107 @PLACE(168, 40) => @ORIENT("R0");
+//   #X108 @PLACE(168, 32) => @ORIENT("R0");
+//   #X109 @PLACE(168, 24) => @ORIENT("R0");
+//   #X110 @PLACE(168, 16) => @ORIENT("R0");
+//   #X111 @PLACE(168, 8) => @ORIENT("R0");
+//   #X112 @PLACE(184, 144) => @ORIENT("R0");
+//   #X113 @PLACE(184, 136) => @ORIENT("R0");
+//   #X114 @PLACE(184, 128) => @ORIENT("R0");
+//   #X115 @PLACE(184, 120) => @ORIENT("R0");
+//   #X116 @PLACE(184, 112) => @ORIENT("R0");
+//   #X117 @PLACE(184, 104) => @ORIENT("R0");
+//   #X118 @PLACE(184, 96) => @ORIENT("R0");
+//   #X119 @PLACE(184, 88) => @ORIENT("R0");
+//   #X120 @PLACE(184, 80) => @ORIENT("R0");
+//   #X121 @PLACE(184, 72) => @ORIENT("R0");
+//   #X122 @PLACE(184, 64) => @ORIENT("R0");
+//   #X123 @PLACE(184, 56) => @ORIENT("R0");
+//   #X124 @PLACE(184, 48) => @ORIENT("R0");
+//   #X125 @PLACE(184, 40) => @ORIENT("R0");
+//   #X126 @PLACE(184, 32) => @ORIENT("R0");
+//   #X127 @PLACE(184, 24) => @ORIENT("R0");
+//   #X128 @PLACE(184, 16) => @ORIENT("R0");
+//   #X129 @PLACE(184, 8) => @ORIENT("R0");
+//   #X130 @PLACE(200, 144) => @ORIENT("R0");
+//   #X131 @PLACE(200, 136) => @ORIENT("R0");
+//   #X132 @PLACE(200, 128) => @ORIENT("R0");
+//   #X133 @PLACE(200, 120) => @ORIENT("R0");
+//   #X134 @PLACE(200, 112) => @ORIENT("R0");
+//   #X135 @PLACE(200, 104) => @ORIENT("R0");
+//   #X136 @PLACE(200, 96) => @ORIENT("R0");
+//   #X137 @PLACE(200, 88) => @ORIENT("R0");
+//   #X138 @PLACE(200, 80) => @ORIENT("R0");
+//   #X139 @PLACE(200, 72) => @ORIENT("R0");
+//   #X140 @PLACE(200, 64) => @ORIENT("R0");
+//   #X141 @PLACE(200, 56) => @ORIENT("R0");
+//   #X142 @PLACE(200, 48) => @ORIENT("R0");
+//   #X143 @PLACE(200, 40) => @ORIENT("R0");
+//   #X144 @PLACE(200, 32) => @ORIENT("R0");
+//   #X145 @PLACE(200, 24) => @ORIENT("R0");
+//   #X146 @PLACE(200, 16) => @ORIENT("R0");
+//   #X147 @PLACE(200, 8) => @ORIENT("R0");
+//   #X148 @PLACE(216, 144) => @ORIENT("R0");
+//   #X149 @PLACE(216, 136) => @ORIENT("R0");
+//   #X150 @PLACE(216, 128) => @ORIENT("R0");
+//   #X151 @PLACE(216, 120) => @ORIENT("R0");
+//   #X152 @PLACE(216, 112) => @ORIENT("R0");
+//   #X153 @PLACE(216, 104) => @ORIENT("R0");
+//   #X154 @PLACE(216, 96) => @ORIENT("R0");
+//   #X155 @PLACE(216, 88) => @ORIENT("R0");
+//   #X156 @PLACE(216, 80) => @ORIENT("R0");
+//   #X157 @PLACE(216, 72) => @ORIENT("R0");
+//   #X158 @PLACE(216, 64) => @ORIENT("R0");
+//   #X159 @PLACE(216, 56) => @ORIENT("R0");
+//   #X160 @PLACE(216, 48) => @ORIENT("R0");
+//   #X161 @PLACE(216, 40) => @ORIENT("R0");
+//   #X162 @PLACE(216, 32) => @ORIENT("R0");
+//   #X163 @PLACE(216, 24) => @ORIENT("R0");
+//   #X164 @PLACE(216, 16) => @ORIENT("R0");
+//   #X165 @PLACE(216, 8) => @ORIENT("R0");
+//   #X166 @PLACE(232, 144) => @ORIENT("R0");
+//   #X167 @PLACE(232, 136) => @ORIENT("R0");
+//   #X168 @PLACE(232, 128) => @ORIENT("R0");
+//   #X169 @PLACE(232, 120) => @ORIENT("R0");
+//   #X170 @PLACE(232, 112) => @ORIENT("R0");
+//   #X171 @PLACE(232, 104) => @ORIENT("R0");
+//   #X172 @PLACE(232, 96) => @ORIENT("R0");
+//   #X173 @PLACE(232, 88) => @ORIENT("R0");
+//   #X174 @PLACE(232, 80) => @ORIENT("R0");
+//   #X175 @PLACE(232, 72) => @ORIENT("R0");
+//   #X176 @PLACE(232, 64) => @ORIENT("R0");
+//   #X177 @PLACE(232, 56) => @ORIENT("R0");
+//   #X178 @PLACE(232, 48) => @ORIENT("R0");
+//   #X179 @PLACE(232, 40) => @ORIENT("R0");
+//   #X180 @PLACE(232, 32) => @ORIENT("R0");
+//   #X181 @PLACE(232, 24) => @ORIENT("R0");
+//   #X182 @PLACE(232, 16) => @ORIENT("R0");
+//   #X183 @PLACE(232, 8) => @ORIENT("R0");
+//   #X184 @PLACE(248, 144) => @ORIENT("R0");
+//   #X185 @PLACE(248, 136) => @ORIENT("R0");
+//   #X186 @PLACE(248, 128) => @ORIENT("R0");
+//   #X187 @PLACE(248, 120) => @ORIENT("R0");
+//   #X188 @PLACE(248, 112) => @ORIENT("R0");
+//   #X189 @PLACE(248, 104) => @ORIENT("R0");
+//   #X190 @PLACE(248, 96) => @ORIENT("R0");
+//   #X191 @PLACE(248, 88) => @ORIENT("R0");
+//   #X192 @PLACE(248, 80) => @ORIENT("R0");
+//   #X193 @PLACE(248, 72) => @ORIENT("R0");
+//   #X194 @PLACE(248, 64) => @ORIENT("R0");
+//   #X195 @PLACE(248, 56) => @ORIENT("R0");
+//   #X196 @PLACE(248, 48) => @ORIENT("R0");
+//   #X197 @PLACE(248, 40) => @ORIENT("R0");
+//   #X198 @PLACE(248, 32) => @ORIENT("R0");
+//   #X199 @PLACE(248, 24) => @ORIENT("R0");
+//   #X200 @PLACE(248, 16) => @ORIENT("R0");
+//   #X201 @PLACE(248, 8) => @ORIENT("R0");
+//   #X202 @PLACE(264, 144) => @ORIENT("R0");
+//   #X203 @PLACE(264, 136) => @ORIENT("R0");
+//   #X204 @PLACE(264, 128) => @ORIENT("R0");
+//   #X205 @PLACE(264, 120) => @ORIENT("R0");
+//   #X206 @PLACE(264, 112) => @ORIENT("R0");
+//   #X207 @PLACE(264, 104) => @ORIENT("R0");
+//   #X208 @PLACE(264, 96) => @ORIENT("R0");
+//   #X209 @PLACE(264, 88) => @ORIENT("R0");
+//   #X210 @PLACE(264, 80) => @ORIENT("R0");
+//   #X211 @PLACE(264, 72) => @ORIENT("R0");
+//   #X232 @PLACE(264, 64) => @ORIENT("R0");
+//   #X233 @PLACE(264, 56) => @ORIENT("R0");
+//   #X234 @PLACE(264, 48) => @ORIENT("R0");
+//   #X235 @PLACE(264, 40) => @ORIENT("R0");
+//   #X236 @PLACE(264, 32) => @ORIENT("R0");
+//   #X237 @PLACE(264, 24) => @ORIENT("R0");
+//   #X238 @PLACE(264, 16) => @ORIENT("R0");
+//   #X239 @PLACE(264, 8) => @ORIENT("R0");
+//   #X240 @PLACE(280, 144) => @ORIENT("R0");
+//   $GROUND @ATTACH #X212:a;
+//   $SUPPLY @ATTACH #X213:b;
+//   $GROUND @ATTACH #X222:b;
+//   $GROUND @ATTACH #X223:b;
+//   $GROUND @ATTACH #X224:b;
+//   $GROUND @ATTACH #X225:b;
+//   $GROUND @ATTACH #X228:b;
+//   $GROUND @ATTACH #X231:b;
+//
+//   /* --- 3. Single-Line Port Buses & Flying-Wire Terminal Labels --- */
+//   &refclk @WIRE { %p_refclk:p (12, 122) } => @TEXT("refclk") => @SET-STYLE $fly_label_style;
+//   &reset @WIRE { %p_reset:p (12, 92) } => @TEXT("reset") => @SET-STYLE $fly_label_style;
+//   &apply @WIRE { %p_apply:p (12, 62) } => @TEXT("apply") => @SET-STYLE $fly_label_style;
+//   {&cfg_k0 &cfg_k1 &cfg_k2 &cfg_k3 &cfg_k4 &cfg_k5} @WIRE { %p_cfg_k0:p (14, 32) } => @TEXT("CFG_K<5:0>") => @SET-STYLE $bus_label_style;
+//   {&active_k0 &active_k1 &active_k2 &active_k3 &active_k4 &active_k5} @WIRE { (288, 127) %p_active_k0:p } => @TEXT("ACTIVE_K<5:0>") => @SET-STYLE $bus_label_style;
+//   {&select_m0 &select_m1 &select_m2 &select_m3 &select_m4 &select_m5} @WIRE { (288, 102) %p_select_m0:p } => @TEXT("SELECT_M<5:0>") => @SET-STYLE $bus_label_style;
+//   &ready @WIRE { (290, 77) %p_ready:p } => @TEXT("ready") => @SET-STYLE $fly_label_style;
+//   &invalid @WIRE { (290, 52) %p_invalid:p } => @TEXT("invalid") => @SET-STYLE $fly_label_style;
+//   &divider_reset @WIRE { (290, 27) %p_divider_reset:p } => @TEXT("divider_reset") => @SET-STYLE $fly_label_style;
+//   #X0:d @TEXT("n26", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X0:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X0:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X0:q @TEXT("invalid", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X1:d @TEXT("n27", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X1:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X1:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X1:q @TEXT("ready", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X2:d @TEXT("n28", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X2:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X2:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X2:q @TEXT("n29", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X3:d @TEXT("n30", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X3:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X3:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X3:q @TEXT("n31", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X4:d @TEXT("n32", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X4:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X4:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X4:q @TEXT("n33", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X5:d @TEXT("n34", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X5:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X5:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X5:q @TEXT("n35", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X6:d @TEXT("n36", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X6:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X6:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X6:q @TEXT("n37", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X7:d @TEXT("n38", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X7:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X7:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X7:q @TEXT("n39", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X8:d @TEXT("n40", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X8:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X8:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X8:q @TEXT("active_k0", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X9:d @TEXT("n41", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X9:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X9:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X9:q @TEXT("active_k1", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X10:d @TEXT("n42", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X10:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X10:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X10:q @TEXT("active_k2", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X11:d @TEXT("n43", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X11:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X11:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X11:q @TEXT("active_k3", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X12:d @TEXT("n44", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X12:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X12:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X12:q @TEXT("active_k4", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X13:d @TEXT("n45", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X13:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X13:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X13:q @TEXT("active_k5", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X14:d @TEXT("n46", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X14:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X14:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X14:q @TEXT("n47", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X15:d @TEXT("n48", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X15:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X15:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X15:q @TEXT("n49", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X16:d @TEXT("n50", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X16:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X16:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X16:q @TEXT("n51", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X17:d @TEXT("n52", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X17:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X17:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X17:q @TEXT("n53", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X18:d @TEXT("apply", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X18:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X18:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X18:q @TEXT("n54", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X19:d @TEXT("n54", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X19:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X19:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X19:q @TEXT("n55", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X20:d @TEXT("n55", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X20:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X20:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X20:q @TEXT("n56", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X21:d @TEXT("n57", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X21:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X21:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X21:q @TEXT("n58", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X22:a @TEXT("n51", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X22:b @TEXT("n59", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X22:s @TEXT("n60", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X22:y @TEXT("n50", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X23:a @TEXT("n49", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X23:b @TEXT("n61", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X23:s @TEXT("n60", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X23:y @TEXT("n48", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X24:a @TEXT("n47", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X24:b @TEXT("n62", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X24:s @TEXT("n60", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X24:y @TEXT("n46", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X25:a @TEXT("active_k4", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X25:b @TEXT("n37", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X25:s @TEXT("n63", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X25:y @TEXT("n44", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X26:a @TEXT("active_k3", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X26:b @TEXT("n35", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X26:s @TEXT("n63", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X26:y @TEXT("n43", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X27:a @TEXT("active_k2", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X27:b @TEXT("n33", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X27:s @TEXT("n63", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X27:y @TEXT("n42", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X28:a @TEXT("active_k1", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X28:b @TEXT("n31", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X28:s @TEXT("n63", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X28:y @TEXT("n41", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X29:a @TEXT("active_k0", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X29:b @TEXT("n29", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X29:s @TEXT("n63", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X29:y @TEXT("n40", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X30:a @TEXT("n37", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X30:b @TEXT("cfg_k4", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X30:s @TEXT("n64", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X30:y @TEXT("n36", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X31:a @TEXT("n35", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X31:b @TEXT("cfg_k3", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X31:s @TEXT("n64", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X31:y @TEXT("n34", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X32:a @TEXT("n33", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X32:b @TEXT("cfg_k2", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X32:s @TEXT("n64", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X32:y @TEXT("n32", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X33:a @TEXT("n31", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X33:b @TEXT("cfg_k1", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X33:s @TEXT("n64", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X33:y @TEXT("n30", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X34:a @TEXT("n29", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X34:b @TEXT("cfg_k0", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X34:s @TEXT("n64", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X34:y @TEXT("n28", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X35:a @TEXT("invalid", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X35:b @TEXT("n65", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X35:s @TEXT("n66", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X35:y @TEXT("n26", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X36:a @TEXT("ready", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X36:b @TEXT("n67", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X36:s @TEXT("n66", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X36:y @TEXT("n27", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X37:a @TEXT("n39", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X37:b @TEXT("cfg_k5", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X37:s @TEXT("n64", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X37:y @TEXT("n38", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X38:a @TEXT("active_k5", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X38:b @TEXT("n39", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X38:s @TEXT("n63", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X38:y @TEXT("n45", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X39:a @TEXT("n53", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X39:b @TEXT("n68", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X39:s @TEXT("n60", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X39:y @TEXT("n52", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X40:a @TEXT("n47", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X40:y @TEXT("n69", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X41:a @TEXT("n31", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X41:y @TEXT("n70", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X42:a @TEXT("n33", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X42:y @TEXT("n71", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X43:a @TEXT("n39", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X43:y @TEXT("n72", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X44:a @TEXT("n37", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X44:y @TEXT("n73", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X45:a @TEXT("active_k1", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X45:y @TEXT("n74", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X46:a @TEXT("active_k0", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X46:y @TEXT("n75", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X47:a @TEXT("active_k5", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X47:y @TEXT("n76", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X48:a @TEXT("active_k3", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X48:y @TEXT("n77", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X49:a @TEXT("active_k2", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X49:y @TEXT("n78", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X50:a @TEXT("active_k4", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X50:y @TEXT("n79", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X51:a @TEXT("n51", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X51:y @TEXT("n80", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X52:a @TEXT("n81", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X52:y @TEXT("n82", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X53:a @TEXT("n83", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X53:y @TEXT("n84", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X54:a @TEXT("n85", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X54:y @TEXT("n86", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X55:a @TEXT("n87", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X55:y @TEXT("n88", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X56:a @TEXT("n89", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X56:y @TEXT("n90", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X57:a @TEXT("n91", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X57:y @TEXT("n92", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X58:a @TEXT("n93", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X58:y @TEXT("n94", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X59:a @TEXT("n95", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X59:y @TEXT("n96", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X60:a @TEXT("n97", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X60:y @TEXT("n98", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X61:a @TEXT("n99", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X61:y @TEXT("n100", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X62:a @TEXT("n101", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X62:y @TEXT("n102", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X63:a @TEXT("n103", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X63:y @TEXT("n104", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X64:a @TEXT("n105", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X64:y @TEXT("n106", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X65:a @TEXT("n49", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X65:b @TEXT("n47", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X65:y @TEXT("n107", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X66:a @TEXT("n51", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X66:b @TEXT("n108", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X66:y @TEXT("n109", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X67:a @TEXT("n53", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X67:b @TEXT("n110", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X67:y @TEXT("n111", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X68:a @TEXT("n112", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X68:b @TEXT("n113", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X68:y @TEXT("n105", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X69:a @TEXT("n114", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X69:b @TEXT("n115", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X69:y @TEXT("n113", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X70:a @TEXT("active_k5", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X70:b @TEXT("n116", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X70:y @TEXT("n112", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X71:a @TEXT("active_k3", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X71:b @TEXT("active_k2", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X71:y @TEXT("n117", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X72:a @TEXT("n118", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X72:b @TEXT("n119", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X72:y @TEXT("n103", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X73:a @TEXT("n120", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X73:b @TEXT("n115", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X73:y @TEXT("n119", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X74:a @TEXT("n117", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X74:b @TEXT("n121", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X74:y @TEXT("n115", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X75:a @TEXT("n122", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X75:b @TEXT("n123", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X75:y @TEXT("n121", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X76:a @TEXT("active_k5", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X76:b @TEXT("n79", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X76:y @TEXT("n120", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X77:a @TEXT("active_k5", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X77:b @TEXT("active_k4", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X77:y @TEXT("n118", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X78:a @TEXT("active_k5", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X78:b @TEXT("n124", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X78:y @TEXT("n101", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X79:a @TEXT("n116", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X79:b @TEXT("n117", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X79:y @TEXT("n124", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X80:a @TEXT("n116", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X80:b @TEXT("n125", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X80:y @TEXT("n126", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X81:a @TEXT("active_k5", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X81:b @TEXT("n126", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X81:y @TEXT("n99", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X82:a @TEXT("n127", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X82:b @TEXT("n128", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X82:y @TEXT("n125", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X83:a @TEXT("n129", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X83:b @TEXT("n130", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X83:y @TEXT("n128", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X84:a @TEXT("n76", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X84:b @TEXT("active_k4", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X84:y @TEXT("n116", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X85:a @TEXT("n77", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X85:b @TEXT("n78", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X85:y @TEXT("n129", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X86:a @TEXT("active_k3", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X86:b @TEXT("n131", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X86:y @TEXT("n127", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X87:a @TEXT("active_k5", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X87:b @TEXT("n132", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X87:y @TEXT("n97", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X88:a @TEXT("n116", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X88:b @TEXT("n133", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X88:y @TEXT("n132", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X89:a @TEXT("n106", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X89:b @TEXT("n134", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X89:y @TEXT("n135", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X90:a @TEXT("n117", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X90:b @TEXT("n136", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X90:y @TEXT("n133", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X91:a @TEXT("n114", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X91:b @TEXT("n137", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X91:y @TEXT("n138", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X92:a @TEXT("n112", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X92:b @TEXT("n138", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X92:y @TEXT("n95", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X93:a @TEXT("n117", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X93:b @TEXT("active_k1", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X93:y @TEXT("n137", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X94:a @TEXT("n76", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X94:b @TEXT("n79", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X94:y @TEXT("n114", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X95:a @TEXT("active_k5", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X95:b @TEXT("n139", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X95:y @TEXT("n93", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X96:a @TEXT("n116", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X96:b @TEXT("n140", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X96:y @TEXT("n139", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X97:a @TEXT("n127", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X97:b @TEXT("n141", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X97:y @TEXT("n140", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X98:a @TEXT("n129", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X98:b @TEXT("active_k1", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X98:y @TEXT("n141", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X99:a @TEXT("n77", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X99:b @TEXT("active_k2", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X99:y @TEXT("n131", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X100:a @TEXT("n102", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X100:b @TEXT("n142", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X100:y @TEXT("n143", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X101:a @TEXT("n114", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X101:b @TEXT("n117", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X101:y @TEXT("n144", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X102:a @TEXT("n112", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X102:b @TEXT("n144", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X102:y @TEXT("n91", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X103:a @TEXT("n112", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X103:b @TEXT("n145", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X103:y @TEXT("n89", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X104:a @TEXT("n114", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X104:b @TEXT("n146", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X104:y @TEXT("n145", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X105:a @TEXT("n117", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X105:b @TEXT("n123", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X105:y @TEXT("n146", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X106:a @TEXT("n100", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X106:b @TEXT("n147", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X106:y @TEXT("n148", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X107:a @TEXT("active_k1", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X107:b @TEXT("n149", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X107:y @TEXT("n123", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X108:a @TEXT("n74", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X108:b @TEXT("active_k0", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X108:y @TEXT("n149", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X109:a @TEXT("n112", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X109:b @TEXT("n150", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X109:y @TEXT("n87", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X110:a @TEXT("n114", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X110:b @TEXT("n151", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X110:y @TEXT("n150", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X111:a @TEXT("n117", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X111:b @TEXT("n152", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X111:y @TEXT("n151", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X112:a @TEXT("n122", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X112:b @TEXT("active_k1", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X112:y @TEXT("n152", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X113:a @TEXT("active_k3", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X113:b @TEXT("n78", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X113:y @TEXT("n122", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X114:a @TEXT("n112", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X114:b @TEXT("n153", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X114:y @TEXT("n85", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X115:a @TEXT("n114", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X115:b @TEXT("n133", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X115:y @TEXT("n153", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X116:a @TEXT("active_k1", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X116:b @TEXT("active_k0", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X116:y @TEXT("n130", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X117:a @TEXT("n96", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X117:b @TEXT("n154", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X117:y @TEXT("n155", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X118:a @TEXT("n156", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X118:b @TEXT("n157", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X118:y @TEXT("n83", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X119:a @TEXT("n158", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X119:b @TEXT("n159", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X119:y @TEXT("n157", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X120:a @TEXT("n160", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X120:b @TEXT("n161", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X120:y @TEXT("n159", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X121:a @TEXT("n39", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X121:b @TEXT("n162", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X121:y @TEXT("n156", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X122:a @TEXT("n72", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X122:b @TEXT("n37", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X122:y @TEXT("n162", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X123:a @TEXT("n31", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X123:b @TEXT("n163", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X123:y @TEXT("n164", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X124:a @TEXT("n165", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X124:b @TEXT("n159", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X124:y @TEXT("n166", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X125:a @TEXT("n167", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X125:b @TEXT("n166", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X125:y @TEXT("n81", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X126:a @TEXT("n168", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X126:b @TEXT("n164", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X126:y @TEXT("n161", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X127:a @TEXT("n39", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X127:b @TEXT("n37", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X127:y @TEXT("n167", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X128:a @TEXT("n35", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X128:b @TEXT("n33", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X128:y @TEXT("n160", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X129:a @TEXT("n70", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X129:b @TEXT("n29", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X129:y @TEXT("n163", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X130:a @TEXT("n51", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X130:b @TEXT("n108", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X130:y @TEXT("n110", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X131:a @TEXT("n49", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X131:b @TEXT("n47", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X131:y @TEXT("n108", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X132:a @TEXT("n92", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X132:b @TEXT("n169", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X132:y @TEXT("n170", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X133:a @TEXT("n88", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X133:b @TEXT("n171", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X133:y @TEXT("n172", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X134:a @TEXT("n84", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X134:b @TEXT("n173", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X134:y @TEXT("n174", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X135:a @TEXT("n175", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X135:b @TEXT("n176", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X135:y @TEXT("n66", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X136:a @TEXT("n64", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X136:b @TEXT("n177", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X136:y @TEXT("n175", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X137:a @TEXT("n58", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X137:b @TEXT("n64", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X137:y @TEXT("n176", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X138:a @TEXT("n178", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X138:b @TEXT("n58", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X138:y @TEXT("n179", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X139:a @TEXT("n179", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X139:b @TEXT("n180", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X139:y @TEXT("n63", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X140:a @TEXT("n181", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X140:b @TEXT("n176", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X140:y @TEXT("n60", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X141:a @TEXT("n64", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X141:b @TEXT("n182", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X141:y @TEXT("n181", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X142:a @TEXT("n75", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X142:b @TEXT("active_k1", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X142:y @TEXT("n183", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X143:a @TEXT("active_k2", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X143:b @TEXT("n77", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X143:y @TEXT("n184", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X144:a @TEXT("active_k4", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X144:b @TEXT("active_k5", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X144:y @TEXT("n185", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X145:a @TEXT("n183", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X145:b @TEXT("n184", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X145:y @TEXT("n186", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X146:a @TEXT("n186", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X146:b @TEXT("n185", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X146:y @TEXT("n187", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X147:a @TEXT("n69", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X147:b @TEXT("n49", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X147:y @TEXT("n188", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X148:a @TEXT("n51", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X148:b @TEXT("n53", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X148:y @TEXT("n189", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X149:a @TEXT("n188", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X149:b @TEXT("n189", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X149:y @TEXT("n190", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X150:a @TEXT("n69", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X150:b @TEXT("n191", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X150:y @TEXT("n192", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X151:a @TEXT("n80", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X151:b @TEXT("n53", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X151:y @TEXT("n193", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X152:a @TEXT("n192", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X152:b @TEXT("n193", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X152:y @TEXT("n182", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X153:a @TEXT("n194", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X153:b @TEXT("n114", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X153:y @TEXT("n134", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X154:a @TEXT("n195", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X154:b @TEXT("n134", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X154:y @TEXT("n196", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X155:a @TEXT("n149", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X155:b @TEXT("n122", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X155:y @TEXT("n194", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X156:a @TEXT("n194", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X156:b @TEXT("n120", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X156:y @TEXT("n197", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X157:a @TEXT("n104", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X157:b @TEXT("n197", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X157:y @TEXT("n198", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X158:a @TEXT("n75", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X158:b @TEXT("n74", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X158:y @TEXT("n199", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X159:a @TEXT("n199", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X159:b @TEXT("n117", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X159:y @TEXT("n200", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X160:a @TEXT("n200", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X160:b @TEXT("n116", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X160:y @TEXT("n142", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X161:a @TEXT("n201", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X161:b @TEXT("n142", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X161:y @TEXT("n202", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X162:a @TEXT("n128", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X162:b @TEXT("n116", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X162:y @TEXT("n147", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X163:a @TEXT("n203", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X163:b @TEXT("n147", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X163:y @TEXT("n204", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X164:a @TEXT("n130", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X164:b @TEXT("n122", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X164:y @TEXT("n136", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X165:a @TEXT("n136", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X165:b @TEXT("n116", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X165:y @TEXT("n205", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X166:a @TEXT("n98", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X166:b @TEXT("n205", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X166:y @TEXT("n206", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X167:a @TEXT("n207", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X167:b @TEXT("n117", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X167:y @TEXT("n208", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X168:a @TEXT("n208", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X168:b @TEXT("n114", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X168:y @TEXT("n154", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X169:a @TEXT("n209", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X169:b @TEXT("n154", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X169:y @TEXT("n210", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X170:a @TEXT("n75", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X170:b @TEXT("active_k1", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X170:y @TEXT("n207", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X171:a @TEXT("n207", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X171:b @TEXT("n129", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X171:y @TEXT("n211", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X172:a @TEXT("n211", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X172:b @TEXT("n116", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X172:y @TEXT("n212", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X173:a @TEXT("n94", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X173:b @TEXT("n212", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X173:y @TEXT("n213", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X174:a @TEXT("n200", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X174:b @TEXT("n114", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X174:y @TEXT("n169", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X175:a @TEXT("n214", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X175:b @TEXT("n169", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X175:y @TEXT("n215", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X176:a @TEXT("n149", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X176:b @TEXT("n117", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X176:y @TEXT("n216", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X177:a @TEXT("n216", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X177:b @TEXT("n114", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X177:y @TEXT("n217", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X178:a @TEXT("n90", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X178:b @TEXT("n217", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X178:y @TEXT("n218", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X179:a @TEXT("n207", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X179:b @TEXT("n122", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X179:y @TEXT("n219", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X180:a @TEXT("n219", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X180:b @TEXT("n114", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X180:y @TEXT("n171", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X181:a @TEXT("n220", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X181:b @TEXT("n171", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X181:y @TEXT("n221", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X182:a @TEXT("n136", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X182:b @TEXT("n114", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X182:y @TEXT("n222", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X183:a @TEXT("n86", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X183:b @TEXT("n222", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X183:y @TEXT("n223", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X184:a @TEXT("n71", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X184:b @TEXT("n35", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X184:y @TEXT("n168", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X185:a @TEXT("n73", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X185:b @TEXT("n72", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X185:y @TEXT("n158", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X186:a @TEXT("n163", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X186:b @TEXT("n168", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X186:y @TEXT("n224", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X187:a @TEXT("n224", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X187:b @TEXT("n158", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X187:y @TEXT("n173", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X188:a @TEXT("n225", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X188:b @TEXT("n173", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X188:y @TEXT("n226", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X189:a @TEXT("n73", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X189:b @TEXT("n39", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X189:y @TEXT("n165", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X190:a @TEXT("n224", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X190:b @TEXT("n165", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X190:y @TEXT("n227", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X191:a @TEXT("n82", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X191:b @TEXT("n227", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X191:y @TEXT("n228", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X192:a @TEXT("n187", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X192:y @TEXT("n229", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X193:a @TEXT("ready", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X193:y @TEXT("n230", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X194:a @TEXT("n56", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X194:y @TEXT("n231", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X195:a @TEXT("n190", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X195:y @TEXT("n180", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X196:a @TEXT("n182", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X196:y @TEXT("n177", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X197:a @TEXT("n232", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X197:y @TEXT("n233", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X198:a @TEXT("n196", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X198:b @TEXT("n198", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X198:y @TEXT("n234", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X199:a @TEXT("n234", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X199:b @TEXT("n202", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X199:y @TEXT("select_m0", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X200:a @TEXT("n234", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X200:b @TEXT("n204", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X200:y @TEXT("n235", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X201:a @TEXT("n235", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X201:b @TEXT("n206", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X201:y @TEXT("select_m1", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X202:a @TEXT("n234", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X202:b @TEXT("n210", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X202:y @TEXT("n236", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X203:a @TEXT("n236", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X203:b @TEXT("n213", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X203:y @TEXT("select_m2", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X204:a @TEXT("n234", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X204:b @TEXT("n215", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X204:y @TEXT("n237", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X205:a @TEXT("n237", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X205:b @TEXT("n218", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X205:y @TEXT("select_m3", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X206:a @TEXT("n234", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X206:b @TEXT("n221", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X206:y @TEXT("n238", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X207:a @TEXT("n238", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X207:b @TEXT("n223", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X207:y @TEXT("select_m4", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X208:a @TEXT("n234", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X208:b @TEXT("n229", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X208:y @TEXT("select_m5", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X209:a @TEXT("reset", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X209:b @TEXT("n230", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X209:y @TEXT("divider_reset", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X210:a @TEXT("n55", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X210:b @TEXT("n231", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X210:y @TEXT("n64", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X211:a @TEXT("n226", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X211:b @TEXT("n228", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X211:y @TEXT("n232", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X212:b @TEXT("n182", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X212:s @TEXT("n58", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X212:y @TEXT("n239", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X213:a @TEXT("n239", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X213:s @TEXT("n64", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X213:y @TEXT("n57", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X214:a @TEXT("nx", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X214:b @TEXT("n69", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X214:s @TEXT("n182", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X214:y @TEXT("n240", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X215:a @TEXT("nx", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X215:b @TEXT("n107", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X215:s @TEXT("n182", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X215:y @TEXT("n241", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X216:a @TEXT("nx", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X216:b @TEXT("n109", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X216:s @TEXT("n182", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X216:y @TEXT("n242", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X217:a @TEXT("nx", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X217:b @TEXT("n111", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X217:s @TEXT("n182", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X217:y @TEXT("n243", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X218:a @TEXT("nx", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X218:b @TEXT("n240", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X218:s @TEXT("n58", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X218:y @TEXT("n244", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X219:a @TEXT("nx", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X219:b @TEXT("n241", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X219:s @TEXT("n58", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X219:y @TEXT("n245", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X220:a @TEXT("nx", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X220:b @TEXT("n242", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X220:s @TEXT("n58", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X220:y @TEXT("n246", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X221:a @TEXT("nx", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X221:b @TEXT("n243", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X221:s @TEXT("n58", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X221:y @TEXT("n247", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X222:a @TEXT("n244", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X222:s @TEXT("n64", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X222:y @TEXT("n62", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X223:a @TEXT("n245", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X223:s @TEXT("n64", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X223:y @TEXT("n61", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X224:a @TEXT("n246", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X224:s @TEXT("n64", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X224:y @TEXT("n59", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X225:a @TEXT("n247", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X225:s @TEXT("n64", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X225:y @TEXT("n68", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X226:a @TEXT("n233", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X226:b @TEXT("nx", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X226:s @TEXT("n182", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X226:y @TEXT("n248", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X227:a @TEXT("nx", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X227:b @TEXT("n248", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X227:s @TEXT("n58", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X227:y @TEXT("n249", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X228:a @TEXT("n249", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X228:s @TEXT("n64", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X228:y @TEXT("n65", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X229:a @TEXT("n232", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X229:b @TEXT("nx", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X229:s @TEXT("n182", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X229:y @TEXT("n250", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X230:a @TEXT("nx", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X230:b @TEXT("n250", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X230:s @TEXT("n58", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X230:y @TEXT("n251", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X231:a @TEXT("n251", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X231:s @TEXT("n64", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;
+//   #X231:y @TEXT("n67", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X232:a @TEXT("n49", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X232:y @TEXT("n191", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X233:a @TEXT("n64", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X233:y @TEXT("n178", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X234:a @TEXT("n135", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X234:y @TEXT("n195", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X235:a @TEXT("n143", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X235:y @TEXT("n201", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X236:a @TEXT("n148", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X236:y @TEXT("n203", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X237:a @TEXT("n155", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X237:y @TEXT("n209", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X238:a @TEXT("n170", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X238:y @TEXT("n214", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X239:a @TEXT("n172", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X239:y @TEXT("n220", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//   #X240:a @TEXT("n174", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
+//   #X240:y @TEXT("n225", dx=0.4, dy=-0.25, halign="start") => @SET-STYLE $fly_label_style;
+//
+//   /* --- 4. Architectural Section Frames & Annotations --- */
+//   (32, 80) @RECTANGLE(width=28, height=156) => @SET-STYLE $section_box;
+//   (32, 159.5) @TEXT("State Registers (22 DFFs)", halign="middle") => @SET-STYLE $section_label;
+//   (80, 80) @RECTANGLE(width=44, height=156) => @SET-STYLE $section_box;
+//   (80, 159.5) @TEXT("Datapath Multiplexers (38 MUX2)", halign="middle") => @SET-STYLE $section_label;
+//   (200, 80) @RECTANGLE(width=172, height=156) => @SET-STYLE $section_box;
+//   (200, 159.5) @TEXT("Combinational Logic Cloud (181 Gates)", halign="middle") => @SET-STYLE $section_label;
+//   (150, 166) @TEXT("tx_pll_config_pdk110_57: Synthesized PLL Configuration & Modulus Decoder Controller (241 Gates)", halign="middle") => @SET-STYLE $title_style;
+//   (150, 163.5) @TEXT("Single-Line Buses (CFG_K<5:0>, ACTIVE_K<5:0>, SELECT_M<5:0>) + Flying-Wire Terminal Labels Across State DFFs, MUXes & Logic Cloud", halign="middle") => @SET-STYLE $subtitle_style;
+//   (150, -5) @RECTANGLE(width=292, height=5.0) => @SET-STYLE $defect_box;
+//   (150, -3.8) @TEXT("DEFECT: Undriven Floating Net 'nx' Feeds Input a of 12 Multiplexers (X214..X221, X226..X227, X229..X230)", halign="middle") => @SET-STYLE $defect_style;
+//   (150, -6.0) @TEXT("Net 'nx' has zero drivers in tx_pll_config_pdk110_57; when s=0 on those 12 muxes, floating CMOS gates cause unknown logic state and crowbar current (tie nx to vss)", halign="middle") => @SET-STYLE $param_style
+// }
+ends tx_pll_config_pdk110_57

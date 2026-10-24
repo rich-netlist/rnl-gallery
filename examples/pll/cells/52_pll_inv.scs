@@ -1,0 +1,49 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt pll_inv_pdk110_52 (a y vdd vss)
+MN (y a vss vss) nch w=3.2e-06 l=1.8e-07 nf=1 ad=1.536e-12 as=1.536e-12 pd=7.36e-06 ps=7.36e-06 nrd=0.08437500000000001 nrs=0.08437500000000001 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MP (y a vdd vdd) pch w=1.2e-05 l=1.8e-07 nf=1 ad=5.76e-12 as=5.76e-12 pd=2.496e-05 ps=2.496e-05 nrd=0.0225 nrs=0.0225 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $INVERTER;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %inv = #MP(pull_up) #MN(pull_down) @AS(role="retimer_p_skew", skew="PMOS_heavy_3.75_to_1", drive_strength="4x_pull_up (Wp=12u/Wn=3.2u)", channel_length="180nm") $CMOS_INVERTER;
+//   {#MP #MN} @AS $BRANCH;
+//   #MP:s @AS $SUPPLY_HIGH;
+//   #MN:s @AS $SUPPLY_LOW;
+//   {%pa #MP %py} @AS(direction="left-to-right") $FLOW;
+//   /* Static CMOS inverter has zero quiescent DC current; no static DC current annotated */
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pa  = $IO_PORT @ATTACH &a => @PLACE(4, 12) => @ORIENT("R0");
+//   %py  = $IO_PORT @ATTACH &y => @PLACE(20, 12) => @ORIENT("MY");
+//   %sup = $SUPPLY  @ATTACH &vdd => @PLACE(12, 20);
+//   %gnd = $GROUND  @ATTACH &vss => @PLACE(12, 4);
+//   #MP @PLACE(12, 16) => @ORIENT("R0");
+//   #MN @PLACE(12, 8)  => @ORIENT("R0");
+//
+//   /* --- 3. Explicit Manhattan Wiring --- */
+//   %jg = (7, 12);
+//   $JUNCTION @ATTACH %jg;
+//   &a @WIRE { %pa:p %jg };
+//   &a @WIRE { %jg (7, 16) #MP:g };
+//   &a @WIRE { %jg (7, 8)  #MN:g };
+//
+//   %jy = (12, 12);
+//   $JUNCTION @ATTACH %jy;
+//   &y @WIRE { #MP:d %jy #MN:d };
+//   &y @WIRE { %jy %py:p };
+//
+//   &vdd @WIRE { %sup:p #MP:s };
+//   &vss @WIRE { #MN:s %gnd:p };
+//
+//   /* --- 4. Annotations & Parameter Labels --- */
+//   #MP @TEXT("W=${w} L=${l}", key="wl", dx=3.5, dy=0, halign="start") => @SET-STYLE $param_style;
+//   #MN @TEXT("W=${w} L=${l}", key="wl", dx=3.5, dy=0, halign="start") => @SET-STYLE $param_style;
+//   (12, 25.5) @TEXT("pll_inv_pdk110_52: Retimer sharp rising-edge PMOS-skewed output driver (Wp=12u, Wn=3.2u)", halign="middle") => @SET-STYLE $title_style;
+//   (12, 23.8) @TEXT("Drive: 4x_pull_up (Wp=12u/Wn=3.2u) | Skew: PMOS_heavy_3.75_to_1 | L=180nm", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends pll_inv_pdk110_52

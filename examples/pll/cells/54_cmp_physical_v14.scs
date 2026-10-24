@@ -1,0 +1,110 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt cmp_physical_v14_pdk110_54 (vp vn out vdd vss)
+RB (vdd nb) resistor r=100000
+MB (nb nb vss vss) nch w=1e-06 l=1e-06 ad=4.8e-13 as=4.8e-13 pd=2.96e-06 ps=2.96e-06 nrd=0.27 nrs=0.27 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MT (tail nb vss vss) nch w=2e-06 l=1e-06 ad=9.599999999999999e-13 as=9.599999999999999e-13 pd=4.96e-06 ps=4.96e-06 nrd=0.135 nrs=0.135 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MP (left vp tail vss) nch w=1e-06 l=5.000000000000001e-07 ad=4.8e-13 as=4.8e-13 pd=2.96e-06 ps=2.96e-06 nrd=0.27 nrs=0.27 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MN (sense vn tail vss) nch w=1e-06 l=5.000000000000001e-07 ad=4.8e-13 as=4.8e-13 pd=2.96e-06 ps=2.96e-06 nrd=0.27 nrs=0.27 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+PL (left left vdd vdd) pch w=2e-06 l=1e-06 ad=9.599999999999999e-13 as=9.599999999999999e-13 pd=4.96e-06 ps=4.96e-06 nrd=0.135 nrs=0.135 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+PR (sense left vdd vdd) pch w=2e-06 l=1e-06 ad=9.599999999999999e-13 as=9.599999999999999e-13 pd=4.96e-06 ps=4.96e-06 nrd=0.135 nrs=0.135 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+XI0 (sense inv vdd vss) pll_inv_pdk110_55
+XI1 (inv out vdd vss) pll_inv_pdk110_7
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $COMPARATOR;
+//
+//   /* --- 1. Circuit Semantics & Static DC Currents --- */
+//   %ota = #MP(in_p) #MN(in_n) #PL(load_ref) #PR(load_out) #MT(tail) {#XI0 #XI1}(output_stage) @AS(topology="5T_OTA_plus_push_pull_inverter") $OTA_COMPARATOR;
+//   %dp  = #MP(in_p) #MN(in_n) {#MT}(tail) @AS $DIFFERENTIAL_PAIR;
+//   %cm1 = {#PL}(ref) {#PR}(out) @AS $CURRENT_MIRROR;
+//   %cm2 = {#MB}(ref) {#MT}(out) @AS $CURRENT_MIRROR;
+//   {#MP #MN} @AS $MATCHED;
+//   {#PL #PR} @AS $MATCHED;
+//   {#MB #MT} @AS $MATCHED;
+//   %ax = (22, _);
+//   #MP(a) #MN(b) %ax(axis) @AS $MIRRORED;
+//   #PL(a) #PR(b) %ax(axis) @AS $MIRRORED;
+//   {%pvp #MP #PR #XI0 #XI1 %pout} @AS(direction="left-to-right") $FLOW;
+//
+//   /* Continuous Static DC Bias Currents */
+//   #RB:1 @CURRENT("in"); #RB:2 @CURRENT("out");
+//   #MB:d @CURRENT("in"); #MB:s @CURRENT("out");
+//   #PL:s @CURRENT("in"); #PL:d @CURRENT("out");
+//   #PR:s @CURRENT("in"); #PR:d @CURRENT("out");
+//   #MP:d @CURRENT("in"); #MP:s @CURRENT("out");
+//   #MN:d @CURRENT("in"); #MN:s @CURRENT("out");
+//   #MT:d @CURRENT("in"); #MT:s @CURRENT("out");
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pvp  = $IO_PORT @ATTACH &vp  => @PLACE(10, 14) => @ORIENT("R0");
+//   %pvn  = $IO_PORT @ATTACH &vn  => @PLACE(34, 14) => @ORIENT("MY");
+//   %pout = $IO_PORT @ATTACH &out => @PLACE(48, 18) => @ORIENT("MY");
+//
+//   %sup1 = $SUPPLY @ATTACH &vdd => @PLACE(6, 22);
+//   %sup2 = $SUPPLY @ATTACH &vdd => @PLACE(22, 28);
+//   %gnd  = $GROUND @ATTACH &vss => @PLACE(22, 0);
+//
+//   #RB  @PLACE(6, 16)  => @ORIENT("R0");
+//   #MB  @PLACE(6, 6)   => @ORIENT("MY");
+//   #PL  @PLACE(16, 22) => @ORIENT("MY");
+//   #PR  @PLACE(28, 22) => @ORIENT("R0");
+//   #MP  @PLACE(16, 14) => @ORIENT("R0");
+//   #MN  @PLACE(28, 14) => @ORIENT("MY");
+//   #MT  @PLACE(22, 6)  => @ORIENT("R0");
+//   #XI0 @PLACE(36, 18) => @ORIENT("R0");
+//   #XI1 @PLACE(44, 18) => @ORIENT("R0");
+//
+//   /* --- 3. Explicit Manhattan Wiring --- */
+//   &vdd @WIRE { %sup1:p #RB:1 };
+//   %jvdd = (22, 26);
+//   $JUNCTION @ATTACH %jvdd;
+//   &vdd @WIRE { %sup2:p %jvdd };
+//   &vdd @WIRE { %jvdd (16, 26) #PL:s };
+//   &vdd @WIRE { %jvdd (28, 26) #PR:s };
+//
+//   %jnb1 = (6, 10);
+//   %jnb2 = (9, 6);
+//   $JUNCTION @ATTACH %jnb1;
+//   $JUNCTION @ATTACH %jnb2;
+//   &nb @WIRE { #RB:2 %jnb1 #MB:d };
+//   &nb @WIRE { %jnb1 (9, 10) %jnb2 #MB:g };
+//   &nb @WIRE { %jnb2 #MT:g };
+//
+//   &vp @WIRE { %pvp:p #MP:g };
+//   &vn @WIRE { %pvn:p #MN:g };
+//
+//   %jtail = (22, 10);
+//   $JUNCTION @ATTACH %jtail;
+//   &tail @WIRE { #MP:s (16, 10) %jtail (28, 10) #MN:s };
+//   &tail @WIRE { %jtail #MT:d };
+//
+//   %jleft1 = (16, 18);
+//   %jleft2 = (19, 18);
+//   $JUNCTION @ATTACH %jleft1;
+//   $JUNCTION @ATTACH %jleft2;
+//   &left @WIRE { #PL:d %jleft1 #MP:d };
+//   &left @WIRE { %jleft1 %jleft2 (19, 22) #PL:g };
+//   &left @WIRE { %jleft2 (24, 18) (24, 22) #PR:g };
+//
+//   %jsense = (28, 18);
+//   $JUNCTION @ATTACH %jsense;
+//   &sense @WIRE { #PR:d %jsense #MN:d };
+//   &sense @WIRE { %jsense #XI0:a };
+//
+//   &inv @WIRE { #XI0:y #XI1:a };
+//   &out @WIRE { #XI1:y %pout:p };
+//
+//   %jg = (22, 2);
+//   $JUNCTION @ATTACH %jg;
+//   &vss @WIRE { #MB:s (6, 2) %jg #MT:s };
+//   &vss @WIRE { %jg %gnd:p };
+//
+//   /* --- 4. Annotations --- */
+//   #RB @TEXT("100 k\Omega", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   (26, 34) @TEXT("cmp_physical_v14_pdk110_54: 5-Transistor Differential OTA Comparator with Rail-to-Rail Output Buffer", halign="middle") => @SET-STYLE $title_style;
+//   (26, 32.2) @TEXT("10 uA Reference Bias (RB=100k, MB) + NMOS Input Pair (MP, MN) + PMOS Mirror Load (PL, PR) + Two-Stage CMOS Slicer (XI0, XI1)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends cmp_physical_v14_pdk110_54

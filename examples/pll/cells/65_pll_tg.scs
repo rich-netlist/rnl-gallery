@@ -1,0 +1,46 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt pll_tg_pdk110_65 (a b on off vdd vss)
+MN (a on b vss) nch w=5.000000000000001e-07 l=1.8e-07 ad=2.4e-13 as=2.4e-13 pd=1.96e-06 ps=1.96e-06 nrd=0.54 nrs=0.54 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MP (a off b vdd) pch w=1e-06 l=1.8e-07 ad=4.8e-13 as=4.8e-13 pd=2.96e-06 ps=2.96e-06 nrd=0.27 nrs=0.27 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $TG_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %tg = #MP(pmos_pass) #MN(nmos_pass) @AS(role="mux2_pass_gate", ron_class="standard (Wp=1.5u/Wn=0.75u)") $TRANSMISSION_GATE;
+//   {#MP #MN} @AS $MATCHED;
+//   {%pa #MP %pb} @AS(direction="left-to-right") $FLOW;
+//   /* Pass gate has no quiescent DC current; no static DC current annotated */
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pa   = $IO_PORT @ATTACH &a   => @PLACE(4, 12)  => @ORIENT("R0");
+//   %pb   = $IO_PORT @ATTACH &b   => @PLACE(24, 12) => @ORIENT("MY");
+//   %poff = $IO_PORT @ATTACH &off => @PLACE(11, 20) => @ORIENT("R0");
+//   %pon  = $IO_PORT @ATTACH &on  => @PLACE(11, 4)  => @ORIENT("R0");
+//   #MP @PLACE(14, 15) => @ORIENT("R270");
+//   #MN @PLACE(14, 9)  => @ORIENT("R90");
+//
+//   /* --- 3. Explicit Manhattan Wiring --- */
+//   %ja = (9, 12);
+//   %jb = (19, 12);
+//   $JUNCTION @ATTACH %ja;
+//   $JUNCTION @ATTACH %jb;
+//   &a @WIRE { %pa:p %ja };
+//   &a @WIRE { %ja (9, 15) #MP:d };
+//   &a @WIRE { %ja (9, 9)  #MN:d };
+//   &b @WIRE { #MP:s (19, 15) %jb };
+//   &b @WIRE { #MN:s (19, 9)  %jb };
+//   &b @WIRE { %jb %pb:p };
+//   &off @WIRE { %poff:p (14, 20) #MP:g };
+//   &on  @WIRE { %pon:p  (14, 4)  #MN:g };
+//
+//   /* --- 4. Annotations & Parameter Labels --- */
+//   #MP @TEXT("W=${w} L=${l}", key="wl", dx=2.5, dy=2.5, halign="start") => @SET-STYLE $param_style;
+//   #MN @TEXT("W=${w} L=${l}", key="wl", dx=2.5, dy=-2.5, halign="start") => @SET-STYLE $param_style;
+//   (14, 24.5) @TEXT("pll_tg_pdk110_65: 2-to-1 digital multiplexer pass-gate switch", halign="middle") => @SET-STYLE $title_style;
+//   (14, 22.8) @TEXT("Complementary Pass Gate | Sizing: standard (Wp=1.5u/Wn=0.75u)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends pll_tg_pdk110_65

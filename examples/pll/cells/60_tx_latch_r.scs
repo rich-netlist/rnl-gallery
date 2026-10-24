@@ -1,0 +1,55 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt tx_latch_r_pdk110_60 (d gate gateb resetb q vdd vss)
+XT (d x gate gateb vdd vss) pll_tg_pdk110_61
+XN (x resetb qb vdd vss) pll_nand2_pdk110_15
+XO (qb q vdd vss) pll_inv_pdk110_62
+XF (q x gateb gate vdd vss) pll_tg_pdk110_63
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $LATCH_R_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %lat = #XT(input_pass) #XF(feedback_pass) {#XO}(loop_inverters) {#XN}(reset_logic) @AS(transparent_level="high", reset_type="async_active_low_resetb") $STATIC_LATCH;
+//   {%pd #XT #XN #XO %pq} @AS(direction="left-to-right") $FLOW;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pd    = $IO_PORT @ATTACH &d      => @PLACE(2, 16)  => @ORIENT("R0");
+//   %pg    = $IO_PORT @ATTACH &gate   => @PLACE(2, 10)  => @ORIENT("R0");
+//   %pgb   = $IO_PORT @ATTACH &gateb  => @PLACE(2, 7)   => @ORIENT("R0");
+//   %prstb = $IO_PORT @ATTACH &resetb => @PLACE(12, 14) => @ORIENT("R0");
+//   %pq    = $IO_PORT @ATTACH &q      => @PLACE(36, 15) => @ORIENT("MY");
+//
+//   #XT @PLACE(9, 16)  => @ORIENT("R0");
+//   #XN @PLACE(19, 15) => @ORIENT("R0");
+//   #XO @PLACE(28, 15) => @ORIENT("R0");
+//   #XF @PLACE(19, 7)  => @ORIENT("MY");
+//
+//   /* --- 3. Primary Latch Loop Wiring & Flying-Wire Gate Labels --- */
+//   &d      @WIRE { %pd:p #XT:a };
+//   &resetb @WIRE { %prstb:p #XN:b };
+//
+//   %jx = (13, 16);
+//   $JUNCTION @ATTACH %jx;
+//   &x @WIRE { #XT:b %jx #XN:a };
+//   &x @WIRE { %jx (13, 7) #XF:b };
+//
+//   &qb @WIRE { #XN:y #XO:a };
+//
+//   %jq = (32, 15);
+//   $JUNCTION @ATTACH %jq;
+//   &q @WIRE { #XO:y %jq %pq:p };
+//   &q @WIRE { %jq (32, 7) #XF:a };
+//
+//   #XT:on  @TEXT("gate",  dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XT:off @TEXT("gateb", dx=0, dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//   #XF:on  @TEXT("gateb", dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XF:off @TEXT("gate",  dx=0, dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//
+//   /* --- 4. Annotations --- */
+//   (19, 23) @TEXT("tx_latch_r_pdk110_60: Resettable Static D-Latch with NAND2 Asynchronous Clear", halign="middle") => @SET-STYLE $title_style;
+//   (19, 21.3) @TEXT("Input Pass Gate (XT) + Resettable Forward NAND2 (XN) + Output Inverter (XO) + Feedback Pass Gate (XF)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends tx_latch_r_pdk110_60

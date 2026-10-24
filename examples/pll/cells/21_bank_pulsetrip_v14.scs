@@ -1,0 +1,282 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt bank_pulsetrip_v14_pdk110_21 (clk reset s0 s1 s2 s3 s4 s5 q1 out fllclk vdd vss)
+XPRE (q0 clk q0 vdd vss) ff_fbdelay50_v14_pdk110_22
+XPB0 (q0 qb0 vdd vss) pll_inv_pdk110_23
+XPB1 (qb0 q1 vdd vss) pll_inv_pdk110_24
+XD4 (d4b q1 d4b vdd vss) pll_tspc_inv_pdk110_25
+XB40 (d4b b40 vdd vss) pll_inv_pdk110_26
+XB41 (b40 b41 vdd vss) pll_inv_pdk110_27
+XB42 (b41 d4 vdd vss) pll_inv_pdk110_28
+XFAC0 (d4 fab vdd vss) pll_inv_pdk110_29
+XFAC1 (fab fllclk vdd vss) pll_inv_pdk110_27
+XD8 (d8b d4 d8b vdd vss) pll_tspc_inv_pdk110_25
+XB8 (d8b d8 vdd vss) pll_inv_pdk110_27
+XD12 (d4 d12 vdd vss) div3_fast_v14_pdk110_30
+XCT0 (q1 ct0 vdd vss) pll_inv_pdk110_36
+XCT1 (ct0 ct1 vdd vss) pll_inv_pdk110_37
+XCT2 (ct1 cb vdd vss) pll_inv_pdk110_38
+XCT3 (cb ck vdd vss) pll_inv_pdk110_39
+XD6 (ck d6 vdd vss) div3_fast_v14_pdk110_30
+XRL (reset ck loadb vdd vss) pll_tspc_inv_pdk110_25
+XRLI (loadb load vdd vss) pll_inv_pdk110_40
+XRK (load loadb vdd vss) pll_inv_pdk110_41
+XF0 (fb ck ck load loadb vdd r0 vdd vss) ring_sync_singlephase_v14_pdk110_42
+XF1 (r0 ck ck load loadb vdd r1 vdd vss) ring_sync_singlephase_v14_pdk110_42
+XF2 (r1 ck ck load loadb vdd r2 vdd vss) ring_sync_singlephase_v14_pdk110_42
+XF3 (r2 ck ck load loadb s5 r3 vdd vss) ring_sync_singlephase_v14_pdk110_42
+XF4 (r3 ck ck load loadb vss r4 vdd vss) ring_sync_singlephase_v14_pdk110_42
+XF5 (r4 ck ck load loadb vss s5 r5 vdd vss) ring_tail_singlephase_v14_pdk110_46
+XF6 (r5 ck ck load loadb vss s5 r6 vdd vss) ring_tail_singlephase_v14_pdk110_46
+XSI3 (s3 sb3 vdd vss) pll_inv_pdk110_7
+XSI5 (s5 sb5 vdd vss) pll_inv_pdk110_7
+XT5 (r4 fb s3 sb3 vdd vss) pll_tg_pdk110_43
+XT7 (r6 fb s5 sb5 vdd vss) pll_tg_pdk110_43
+RFB (fb vss) resistor r=10000000
+XRI (reset resetb vdd vss) pll_inv_pdk110_7
+XSEB0 (s0 resetb eb0 vdd vss) pll_nand2_pdk110_15
+XSE0 (eb0 es0 vdd vss) pll_inv_pdk110_7
+XMX0 (d4 mux es0 eb0 vdd vss) pll_tg_pdk110_16
+XSEB1 (s1 resetb eb1 vdd vss) pll_nand2_pdk110_15
+XSE1 (eb1 es1 vdd vss) pll_inv_pdk110_7
+XMX1 (d6 mux es1 eb1 vdd vss) pll_tg_pdk110_16
+XSEB2 (s2 resetb eb2 vdd vss) pll_nand2_pdk110_15
+XSE2 (eb2 es2 vdd vss) pll_inv_pdk110_7
+XMX2 (d8 mux es2 eb2 vdd vss) pll_tg_pdk110_16
+XSEB3 (s3 resetb eb3 vdd vss) pll_nand2_pdk110_15
+XSE3 (eb3 es3 vdd vss) pll_inv_pdk110_7
+XMX3 (r0 mux es3 eb3 vdd vss) pll_tg_pdk110_16
+XSEB4 (s4 resetb eb4 vdd vss) pll_nand2_pdk110_15
+XSE4 (eb4 es4 vdd vss) pll_inv_pdk110_7
+XMX4 (d12 mux es4 eb4 vdd vss) pll_tg_pdk110_16
+XSEB5 (s5 resetb eb5 vdd vss) pll_nand2_pdk110_15
+XSE5 (eb5 es5 vdd vss) pll_inv_pdk110_7
+XMX5 (r0 mux es5 eb5 vdd vss) pll_tg_pdk110_16
+MMUTE (mux reset vss vss) nch w=2e-06 l=1.8e-07 ad=9.599999999999999e-13 as=9.599999999999999e-13 pd=4.96e-06 ps=4.96e-06 nrd=0.135 nrs=0.135 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+RKEEP (mux vss) resistor r=10000000
+XO0 (mux ob vdd vss) pll_inv_pdk110_36
+XO1 (ob out vdd vss) pll_inv_pdk110_27
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $DIV_BANK_SYM;
+//
+//   /* --- 1. Circuit Semantics & Design Defect Annotation --- */
+//   %div = {#XPRE #XD4 #XD8 #XD6 #XD12}(prescalers) {#XF0 #XF1 #XF2 #XF3 #XF4 #XF5 #XF6 #XT5 #XT7 #RFB}(ring_stages) {#XSEB0 #XSE0 #XMX0 #XSEB1 #XSE1 #XMX1 #XSEB2 #XSE2 #XMX2 #XSEB3 #XSE3 #XMX3 #XSEB4 #XSE4 #XMX4 #XSEB5 #XSE5 #XMX5}(modulus_decode_muxes) {#XPB0 #XPB1 #XB40 #XB41 #XB42 #XFAC0 #XFAC1 #XB8 #XCT0 #XCT1 #XCT2 #XCT3 #XRL #XRLI #XRK #XRI #XSI3 #XSI5}(clock_tree) {#MMUTE #RKEEP #XO0 #XO1}(output_buffers) @AS(modulus_range="div_4_6_8_10_12_14") $PROGRAMMABLE_RING_DIVIDER;
+//   %kpr = #XRLI(forward_inv) #XRK(keeper_inv) @AS(keeper_length="180nm") $CROSS_COUPLED_KEEPER;
+//
+//   %defect_div = {#XD4 #XD8 #XF0 #XF1 #XF2 #XF3 #XF4 #XF5 #XF6}(culprit_devices) {&d4b &d8b &ck}(affected_nets) @AS(
+//     severity="high",
+//     category="unbuffered_TSPC_feedback_and_shorted_dual_clock_ports",
+//     mechanism="(1) XD4 and XD8 tie TSPC output y directly back to input d without the 50-kOhm RC hold-delay resistor used in XPRE (ff_fbdelay50), risking race/shoot-through during clock-high evaluation; (2) XF0..XF6 pass identical clock (ck, ck) to (clk, clkb)",
+//     recommendation="Use ff_fbdelay50_v14 (with 50k feedback delay resistor) for XD4 and XD8, and remove the redundant clkb port on XF0..XF6"
+//   ) $DESIGN_DEFECT;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   {&s1 &s2 &s3 &s4 &s5} @REMOVE-FROM $PORT_FILL_SET;
+//   %pclk  = $IO_PORT @ATTACH &clk    => @PLACE(2, 51)   => @ORIENT("R0");
+//   %prst  = $IO_PORT @ATTACH &reset  => @PLACE(2, 23)   => @ORIENT("R0");
+//   %ps    = $IO_PORT @ATTACH &s0     => @PLACE(2, 12)   => @ORIENT("R0");
+//   %ps @TEXT("s<5:0>", key="name");
+//   %pq1   = $IO_PORT @ATTACH &q1     => @PLACE(28, 56)  => @ORIENT("R270");
+//   %pfll  = $IO_PORT @ATTACH &fllclk => @PLACE(76, 56)  => @ORIENT("MY");
+//   %pout  = $IO_PORT @ATTACH &out    => @PLACE(182, 26) => @ORIENT("MY");
+//
+//   /* Top Band: /2 Prescaler (XPRE) + /4 (XD4) + /8 (XD8) + /12 (XD12) + fllclk */
+//   #XPRE  @PLACE(10, 52) => @ORIENT("R0");
+//   #XPB0  @PLACE(18, 52) => @ORIENT("R0");
+//   #XPB1  @PLACE(24, 52) => @ORIENT("R0");
+//   #XD4   @PLACE(34, 52) => @ORIENT("R0");
+//   #XB40  @PLACE(42, 52) => @ORIENT("R0");
+//   #XB41  @PLACE(48, 52) => @ORIENT("R0");
+//   #XB42  @PLACE(54, 52) => @ORIENT("R0");
+//   #XFAC0 @PLACE(62, 56) => @ORIENT("R0");
+//   #XFAC1 @PLACE(68, 56) => @ORIENT("R0");
+//   #XD8   @PLACE(64, 50) => @ORIENT("R0");
+//   #XB8   @PLACE(72, 50) => @ORIENT("R0");
+//   #XD12  @PLACE(64, 42) => @ORIENT("R0");
+//
+//   /* Second Band: Clock Tree (ck) + /6 Divider (XD6) */
+//   #XCT0  @PLACE(34, 36) => @ORIENT("R0");
+//   #XCT1  @PLACE(40, 36) => @ORIENT("R0");
+//   #XCT2  @PLACE(46, 36) => @ORIENT("R0");
+//   #XCT3  @PLACE(52, 36) => @ORIENT("R0");
+//   #XD6   @PLACE(64, 34) => @ORIENT("R0");
+//
+//   /* Third Band: 5/7-Stage Synchronous Ring Counter (/10 & /14) */
+//   #XRL   @PLACE(10, 24) => @ORIENT("R0");
+//   #XRLI  @PLACE(20, 24) => @ORIENT("R0");
+//   #XRK   @PLACE(20, 28) => @ORIENT("MY");
+//   #RFB   @PLACE(26, 12) => @ORIENT("R0");
+//   %grfb  = $GROUND @ATTACH &vss => @PLACE(26, 6);
+//
+//   #XF0   @PLACE(36, 18)  => @ORIENT("R0");
+//   #XF1   @PLACE(50, 18)  => @ORIENT("R0");
+//   #XF2   @PLACE(64, 18)  => @ORIENT("R0");
+//   #XF3   @PLACE(78, 18)  => @ORIENT("R0");
+//   #XF4   @PLACE(92, 18)  => @ORIENT("R0");
+//   #XF5   @PLACE(106, 18) => @ORIENT("R0");
+//   #XF6   @PLACE(120, 18) => @ORIENT("R0");
+//
+//   %sv0 = $SUPPLY @ATTACH #XF0:init;
+//   %sv1 = $SUPPLY @ATTACH #XF1:init;
+//   %sv2 = $SUPPLY @ATTACH #XF2:init;
+//   %gv4 = $GROUND @ATTACH #XF4:init;
+//   %gv5 = $GROUND @ATTACH #XF5:init;
+//   %gv6 = $GROUND @ATTACH #XF6:init;
+//
+//   #XSI3  @PLACE(78, 4)   => @ORIENT("R0");
+//   #XT5   @PLACE(88, 4)   => @ORIENT("R0");
+//   #XSI5  @PLACE(106, 4)  => @ORIENT("R0");
+//   #XT7   @PLACE(116, 4)  => @ORIENT("R0");
+//
+//   /* Right Column: 6-Way 1-Hot Output Transmission-Gate Mux & Buffer */
+//   #XRI   @PLACE(138, 50) => @ORIENT("R0");
+//   #XSEB0 @PLACE(138, 44) => @ORIENT("R0"); #XSE0 @PLACE(146, 44) => @ORIENT("R0"); #XMX0 @PLACE(154, 44) => @ORIENT("R0");
+//   #XSEB1 @PLACE(138, 38) => @ORIENT("R0"); #XSE1 @PLACE(146, 38) => @ORIENT("R0"); #XMX1 @PLACE(154, 38) => @ORIENT("R0");
+//   #XSEB2 @PLACE(138, 32) => @ORIENT("R0"); #XSE2 @PLACE(146, 32) => @ORIENT("R0"); #XMX2 @PLACE(154, 32) => @ORIENT("R0");
+//   #XSEB3 @PLACE(138, 26) => @ORIENT("R0"); #XSE3 @PLACE(146, 26) => @ORIENT("R0"); #XMX3 @PLACE(154, 26) => @ORIENT("R0");
+//   #XSEB4 @PLACE(138, 20) => @ORIENT("R0"); #XSE4 @PLACE(146, 20) => @ORIENT("R0"); #XMX4 @PLACE(154, 20) => @ORIENT("R0");
+//   #XSEB5 @PLACE(138, 14) => @ORIENT("R0"); #XSE5 @PLACE(146, 14) => @ORIENT("R0"); #XMX5 @PLACE(154, 14) => @ORIENT("R0");
+//
+//   #MMUTE @PLACE(164, 10) => @ORIENT("R0");
+//   #RKEEP @PLACE(170, 10) => @ORIENT("R0");
+//   %gmux  = $GROUND @ATTACH &vss => @PLACE(167, 4);
+//   #XO0   @PLACE(166, 26) => @ORIENT("R0");
+//   #XO1   @PLACE(174, 26) => @ORIENT("R0");
+//
+//   /* --- 3. Clean Local Signal Chains, Single-Line S<5:0> Bus & Flying-Wire Labels --- */
+//   {&s0 &s1 &s2 &s3 &s4 &s5} @WIRE { %ps:p (10, 12) } => @TEXT("S<5:0>") => @SET-STYLE $bus_label_style;
+//
+//   /* Top Band: Prescaler Chain (/2 -> /4 -> /8 & /12) */
+//   &clk @WIRE { %pclk:p #XPRE:ck };
+//   %jq0 = (14, 52); $JUNCTION @ATTACH %jq0;
+//   &q0  @WIRE { #XPRE:qb %jq0 #XPB0:a };
+//   &q0  @WIRE { %jq0 (14, 55) (6, 55) (6, 53) #XPRE:d };
+//   &qb0 @WIRE { #XPB0:y #XPB1:a };
+//   %jq1 = (28, 52); $JUNCTION @ATTACH %jq1;
+//   &q1  @WIRE { #XPB1:y %jq1 (30, 52) (30, 51) #XD4:ck };
+//   &q1  @WIRE { %jq1 %pq1:p };
+//
+//   %jd4b = (38, 52); $JUNCTION @ATTACH %jd4b;
+//   &d4b @WIRE { #XD4:qb %jd4b #XB40:a };
+//   &d4b @WIRE { %jd4b (38, 55) (30, 55) (30, 53) #XD4:d };
+//   &b40 @WIRE { #XB40:y #XB41:a };
+//   &b41 @WIRE { #XB41:y #XB42:a };
+//
+//   %jd4 = (58, 52); $JUNCTION @ATTACH %jd4;
+//   &d4 @WIRE { #XB42:y %jd4 (58, 49) #XD8:ck };
+//   &d4 @WIRE { %jd4 (58, 56) #XFAC0:a };
+//   &d4 @WIRE { %jd4 (58, 42) #XD12:clk } => @TEXT("d4") => @SET-STYLE $fly_label_style;
+//   &fab    @WIRE { #XFAC0:y #XFAC1:a };
+//   &fllclk @WIRE { #XFAC1:y %pfll:p };
+//
+//   %jd8b = (68, 50); $JUNCTION @ATTACH %jd8b;
+//   &d8b @WIRE { #XD8:qb %jd8b #XB8:a };
+//   &d8b @WIRE { %jd8b (68, 53) (60, 53) (60, 51) #XD8:d };
+//   &d8  @WIRE { #XB8:y (77, 50) } => @TEXT("d8") => @SET-STYLE $fly_label_style;
+//   &d12 @WIRE { #XD12:out (70, 42) } => @TEXT("d12") => @SET-STYLE $fly_label_style;
+//
+//   /* Second Band: Clock Tree (ck) & /6 Divider (XD6) */
+//   #XCT0:a @TEXT("q1", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &ct0 @WIRE { #XCT0:y #XCT1:a };
+//   &ct1 @WIRE { #XCT1:y #XCT2:a };
+//   &cb  @WIRE { #XCT2:y #XCT3:a };
+//   &ck  @WIRE { #XCT3:y (58, 36) (58, 34) #XD6:clk } => @TEXT("ck") => @SET-STYLE $fly_label_style;
+//   &d6  @WIRE { #XD6:out (70, 34) } => @TEXT("d6") => @SET-STYLE $fly_label_style;
+//
+//   /* Third Band: Reset/Load Latch & 7-Stage Synchronous Ring Counter */
+//   &reset @WIRE { %prst:p #XRL:d };
+//   #XRL:ck @TEXT("ck", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   %jl1 = (16, 24); $JUNCTION @ATTACH %jl1;
+//   &loadb @WIRE { #XRL:qb %jl1 #XRLI:a };
+//   &loadb @WIRE { %jl1 (16, 28) #XRK:y };
+//   %jl2 = (24, 24); $JUNCTION @ATTACH %jl2;
+//   &load  @WIRE { #XRLI:y %jl2 (24, 28) #XRK:a } => @TEXT("load") => @SET-STYLE $fly_label_style;
+//
+//   &fb @WIRE { #XF0:d (26, 22) (26, 14) #RFB:1 } => @TEXT("fb") => @SET-STYLE $fly_label_style;
+//   &vss @WIRE { #RFB:2 %grfb:p };
+//   &r0 @WIRE { #XF0:q (44, 18) (44, 22) #XF1:d } => @TEXT("r0") => @SET-STYLE $fly_label_style;
+//   &r1 @WIRE { #XF1:q (58, 18) (58, 22) #XF2:d };
+//   &r2 @WIRE { #XF2:q (72, 18) (72, 22) #XF3:d };
+//   &r3 @WIRE { #XF3:q (86, 18) (86, 22) #XF4:d };
+//   &r4 @WIRE { #XF4:q (100, 18) (100, 22) #XF5:d } => @TEXT("r4") => @SET-STYLE $fly_label_style;
+//   &r5 @WIRE { #XF5:q (114, 18) (114, 22) #XF6:d };
+//   &r6 @WIRE { #XF6:q (127, 18) } => @TEXT("r6") => @SET-STYLE $fly_label_style;
+//
+//   /* Ring Length Selector TGs (XT5 for /10, XT7 for /14) */
+//   #XSI3:a @TEXT("s3", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &sb3 @WIRE { #XSI3:y (84, 4) (84, 6) #XT5:off };
+//   #XT5:on @TEXT("s3", dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XT5:a  @TEXT("r4", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XT5:b  @TEXT("fb", dx=0.5,  dy=-0.3, halign="start") => @SET-STYLE $fly_label_style;
+//
+//   #XSI5:a @TEXT("s5", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &sb5 @WIRE { #XSI5:y (112, 4) (112, 6) #XT7:off };
+//   #XT7:on @TEXT("s5", dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XT7:a  @TEXT("r6", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XT7:b  @TEXT("fb", dx=0.5,  dy=-0.3, halign="start") => @SET-STYLE $fly_label_style;
+//
+//   /* Ring Stage Clock/Load Flying-Wire Terminal Labels */
+//   #XF0:clk @TEXT("ck", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XF0:clkb @TEXT("ck", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XF0:load @TEXT("load", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XF0:loadb @TEXT("loadb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XF1:clk @TEXT("ck", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XF1:clkb @TEXT("ck", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XF1:load @TEXT("load", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XF1:loadb @TEXT("loadb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XF2:clk @TEXT("ck", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XF2:clkb @TEXT("ck", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XF2:load @TEXT("load", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XF2:loadb @TEXT("loadb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XF3:clk @TEXT("ck", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XF3:clkb @TEXT("ck", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XF3:load @TEXT("load", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XF3:loadb @TEXT("loadb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XF3:init @TEXT("s5", dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XF4:clk @TEXT("ck", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XF4:clkb @TEXT("ck", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XF4:load @TEXT("load", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XF4:loadb @TEXT("loadb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XF5:clk @TEXT("ck", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XF5:clkb @TEXT("ck", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XF5:load @TEXT("load", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XF5:loadb @TEXT("loadb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XF5:selected @TEXT("s5", dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XF6:clk @TEXT("ck", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XF6:clkb @TEXT("ck", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   #XF6:load @TEXT("load", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XF6:loadb @TEXT("loadb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XF6:selected @TEXT("s5", dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//
+//   /* Right Column: 6-Way 1-Hot Output Mux & Buffer */
+//   #XRI:a @TEXT("reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &resetb @WIRE { #XRI:y (144, 50) } => @TEXT("resetb") => @SET-STYLE $fly_label_style;
+//
+//   #XSEB0:a @TEXT("s0", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XSEB0:b @TEXT("resetb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &eb0 @WIRE { #XSEB0:y #XSE0:a } => @TEXT("eb0") => @SET-STYLE $fly_label_style; &es0 @WIRE { #XSE0:y (150, 44) (150, 42) #XMX0:on }; #XMX0:off @TEXT("eb0", dx=0, dy=0.5, halign="middle") => @SET-STYLE $fly_label_style; #XMX0:a @TEXT("d4", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   #XSEB1:a @TEXT("s1", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XSEB1:b @TEXT("resetb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &eb1 @WIRE { #XSEB1:y #XSE1:a } => @TEXT("eb1") => @SET-STYLE $fly_label_style; &es1 @WIRE { #XSE1:y (150, 38) (150, 36) #XMX1:on }; #XMX1:off @TEXT("eb1", dx=0, dy=0.5, halign="middle") => @SET-STYLE $fly_label_style; #XMX1:a @TEXT("d6", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   #XSEB2:a @TEXT("s2", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XSEB2:b @TEXT("resetb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &eb2 @WIRE { #XSEB2:y #XSE2:a } => @TEXT("eb2") => @SET-STYLE $fly_label_style; &es2 @WIRE { #XSE2:y (150, 32) (150, 30) #XMX2:on }; #XMX2:off @TEXT("eb2", dx=0, dy=0.5, halign="middle") => @SET-STYLE $fly_label_style; #XMX2:a @TEXT("d8", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   #XSEB3:a @TEXT("s3", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XSEB3:b @TEXT("resetb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &eb3 @WIRE { #XSEB3:y #XSE3:a } => @TEXT("eb3") => @SET-STYLE $fly_label_style; &es3 @WIRE { #XSE3:y (150, 26) (150, 24) #XMX3:on }; #XMX3:off @TEXT("eb3", dx=0, dy=0.5, halign="middle") => @SET-STYLE $fly_label_style; #XMX3:a @TEXT("r0", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   #XSEB4:a @TEXT("s4", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XSEB4:b @TEXT("resetb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &eb4 @WIRE { #XSEB4:y #XSE4:a } => @TEXT("eb4") => @SET-STYLE $fly_label_style; &es4 @WIRE { #XSE4:y (150, 20) (150, 18) #XMX4:on }; #XMX4:off @TEXT("eb4", dx=0, dy=0.5, halign="middle") => @SET-STYLE $fly_label_style; #XMX4:a @TEXT("d12", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   #XSEB5:a @TEXT("s5", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style; #XSEB5:b @TEXT("resetb", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   &eb5 @WIRE { #XSEB5:y #XSE5:a } => @TEXT("eb5") => @SET-STYLE $fly_label_style; &es5 @WIRE { #XSE5:y (150, 14) (150, 12) #XMX5:on }; #XMX5:off @TEXT("eb5", dx=0, dy=0.5, halign="middle") => @SET-STYLE $fly_label_style; #XMX5:a @TEXT("r0", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//
+//   %jm1 = (160, 38); %jm2 = (160, 32); %jm3 = (160, 26); %jm4 = (160, 20); %jm5 = (160, 14);
+//   $JUNCTION @ATTACH %jm1; $JUNCTION @ATTACH %jm2; $JUNCTION @ATTACH %jm3; $JUNCTION @ATTACH %jm4; $JUNCTION @ATTACH %jm5;
+//   &mux @WIRE { #XMX0:b (160, 44) %jm1 %jm2 %jm3 %jm4 %jm5 (164, 14) #MMUTE:d };
+//   &mux @WIRE { %jm1 #XMX1:b }; &mux @WIRE { %jm2 #XMX2:b }; &mux @WIRE { %jm3 #XMX3:b };
+//   &mux @WIRE { %jm4 #XMX4:b }; &mux @WIRE { %jm5 #XMX5:b };
+//   &mux @WIRE { %jm3 #XO0:a };
+//   &mux @WIRE { (164, 14) (170, 14) #RKEEP:1 };
+//   #MMUTE:g @TEXT("reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
+//   %jgm = (167, 6); $JUNCTION @ATTACH %jgm;
+//   &vss @WIRE { #MMUTE:s (164, 6) %jgm (170, 6) #RKEEP:2 };
+//   &vss @WIRE { %jgm %gmux:p };
+//   &ob  @WIRE { #XO0:y #XO1:a };
+//   &out @WIRE { #XO1:y %pout:p };
+//
+//   /* --- 4. Annotations & Defect Callout --- */
+//   #RFB   @TEXT("10 M\Omega", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   #RKEEP @TEXT("10 M\Omega", key="value", dx=1.8,  dy=0, halign="start") => @SET-STYLE $param_style;
+//   (92, -3.5) @RECTANGLE(width=165, height=4.0) => @SET-STYLE $defect_box;
+//   (92, -2.7) @TEXT("DEFECT: (1) XD4 & XD8 Tie TSPC Output Directly to Input Without 50-kOhm Hold-Delay Resistor; (2) XF0..XF6 Tie (ck, ck) to (clk, clkb)", halign="middle") => @SET-STYLE $defect_style;
+//   (92, -4.3) @TEXT("Direct TSPC feedback risks race during clock-high transparency; compare XPRE (ff_fbdelay50_v14) which includes a 50-kOhm hold-time delay resistor", halign="middle") => @SET-STYLE $param_style;
+//   (92, 62) @TEXT("bank_pulsetrip_v14_pdk110_21: Programmable Multi-Modulus Divider Bank (/4, /6, /8, /10, /12, /14) + /4 FLL Clock", halign="middle") => @SET-STYLE $title_style;
+//   (92, 60.2) @TEXT("1-Hot Select Bus S<5:0> Chooses Prescaler Tap (d4, d6, d8, d12) or 5/7-Stage Synchronous Ring Counter (r0); fllclk Outputs VCO/4", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends bank_pulsetrip_v14_pdk110_21

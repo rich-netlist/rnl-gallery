@@ -1,0 +1,49 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt pll_inv_pdk110_45 (a y vdd vss)
+MN (y a vss vss) nch w=2.4e-07 l=1e-06 nf=1 ad=2.004e-13 as=2.004e-13 pd=1.88e-06 ps=1.88e-06 nrd=1.29167 nrs=1.29167 sa=5.2e-07 sb=5.2e-07 sd=6.2e-07 sca=0 scb=0 scc=0
+MP (y a vdd vdd) pch w=4.8e-07 l=1e-06 nf=1 ad=2.304e-13 as=2.304e-13 pd=1.92e-06 ps=1.92e-06 nrd=0.5625 nrs=0.5625 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $INVERTER;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %inv = #MP(pull_up) #MN(pull_down) @AS(role="long_L_keeper_tspc", skew="weak_long_channel", drive_strength="0.1x (Wp=0.5u/Wn=0.5u)", channel_length="1000nm") $CMOS_INVERTER;
+//   {#MP #MN} @AS $BRANCH;
+//   #MP:s @AS $SUPPLY_HIGH;
+//   #MN:s @AS $SUPPLY_LOW;
+//   {%pa #MP %py} @AS(direction="left-to-right") $FLOW;
+//   /* Static CMOS inverter has zero quiescent DC current; no static DC current annotated */
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pa  = $IO_PORT @ATTACH &a => @PLACE(4, 12) => @ORIENT("R0");
+//   %py  = $IO_PORT @ATTACH &y => @PLACE(20, 12) => @ORIENT("MY");
+//   %sup = $SUPPLY  @ATTACH &vdd => @PLACE(12, 20);
+//   %gnd = $GROUND  @ATTACH &vss => @PLACE(12, 4);
+//   #MP @PLACE(12, 16) => @ORIENT("R0");
+//   #MN @PLACE(12, 8)  => @ORIENT("R0");
+//
+//   /* --- 3. Explicit Manhattan Wiring --- */
+//   %jg = (7, 12);
+//   $JUNCTION @ATTACH %jg;
+//   &a @WIRE { %pa:p %jg };
+//   &a @WIRE { %jg (7, 16) #MP:g };
+//   &a @WIRE { %jg (7, 8)  #MN:g };
+//
+//   %jy = (12, 12);
+//   $JUNCTION @ATTACH %jy;
+//   &y @WIRE { #MP:d %jy #MN:d };
+//   &y @WIRE { %jy %py:p };
+//
+//   &vdd @WIRE { %sup:p #MP:s };
+//   &vss @WIRE { #MN:s %gnd:p };
+//
+//   /* --- 4. Annotations & Parameter Labels --- */
+//   #MP @TEXT("W=${w} L=${l}", key="wl", dx=3.5, dy=0, halign="start") => @SET-STYLE $param_style;
+//   #MN @TEXT("W=${w} L=${l}", key="wl", dx=3.5, dy=0, halign="start") => @SET-STYLE $param_style;
+//   (12, 25.5) @TEXT("pll_inv_pdk110_45: Long-channel (L=1um) TSPC output keeper inverter", halign="middle") => @SET-STYLE $title_style;
+//   (12, 23.8) @TEXT("Drive: 0.1x (Wp=0.5u/Wn=0.5u) | Skew: weak_long_channel | L=1000nm", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends pll_inv_pdk110_45

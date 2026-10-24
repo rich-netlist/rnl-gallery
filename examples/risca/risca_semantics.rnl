@@ -1,0 +1,292 @@
+/* Unified Circuit Semantics and Visual Styles Package for RISCA
+   (6-Channel Reconfigurable Shared-Bus Pipelined / Zoom / Noise-Shaping SAR ADC in 28nm) */
+@RNL(type="header", author="gemini-4-argon") {
+  @VERSION("0.3");
+  @PACKAGE(name="risca-semantics", version="0.3");
+
+  /* 28nm Primitive Transistors (Spectre terminal order: 1=d, 2=g, 3=s, 4=b) */
+  @DEVICE(name="*", model="nch_mac", terminals=["d", "g", "s", "b"]);
+  @DEVICE(name="*", model="nch_ulvt_mac", terminals=["d", "g", "s", "b"]);
+  @DEVICE(name="*", model="pch_mac", terminals=["d", "g", "s", "b"]);
+  @DEVICE(name="*", model="pch_lvt_mac", terminals=["d", "g", "s", "b"]);
+  @DEVICE(name="*", model="pch_ulvt_mac", terminals=["d", "g", "s", "b"]);
+  @DEVICE(name="*", model="pch_ehvt_mac", terminals=["d", "g", "s", "b"]);
+
+  /* Passive Devices & Protection Diodes */
+  @DEVICE(name="*", model="cfmom_2t", terminals=["p", "n"]);
+  @DEVICE(name="*", model="capacitor", terminals=["p", "n"]);
+  @DEVICE(name="*", model="rupolym", terminals=["p", "n"]);
+  @DEVICE(name="*", model="rmxw", terminals=["p", "n"]);
+  @DEVICE(name="*", model="rnmg", terminals=["p", "n"]);
+  @DEVICE(name="*", model="ndio", terminals=["p", "n"]);
+
+  /* Standard Cell Decap */
+  @DEVICE(name="*", model="DCAP4BWP12T30P140", terminals=["VDD", "VSS"])
+}
+
+@RNL(author="gemini-4-argon") {
+  /* =========================================================================
+   * 1. VISUAL STYLES FOR ANNOTATIONS & CALLOUTS
+   * ========================================================================= */
+  $risca_author_style = @DEFINE-STYLE(textcolor="#1e3a8a", bold=true, italic=true) {};
+  $risca_title_style = @DEFINE-STYLE(textcolor="#1e3a8a", bold=true) {};
+  $risca_subtitle_style = @DEFINE-STYLE(textcolor="#1d4ed8", italic=true) {};
+  $risca_analog_style = @DEFINE-STYLE(linecolor="#d97706", textcolor="#b45309", bold=true) {};
+  $risca_swcap_style = @DEFINE-STYLE(linecolor="#0d9488", textcolor="#0f766e", bold=true) {};
+  $risca_digital_style = @DEFINE-STYLE(linecolor="#2563eb", textcolor="#1d4ed8", bold=true) {};
+  $risca_bias_style = @DEFINE-STYLE(linecolor="#7c3aed", textcolor="#6d28d9", bold=true) {};
+  $risca_arch_style = @DEFINE-STYLE(linecolor="#059669", textcolor="#047857", bold=true) {};
+  $risca_anomaly_style = @DEFINE-STYLE(linecolor="#dc2626", textcolor="#b91c1c", bold=true) {};
+  $risca_note_box = @DEFINE-STYLE(linecolor="#1e40af", linestyle="dashed", fillcolor="#f8fafc") {};
+  $risca_anomaly_box = @DEFINE-STYLE(linecolor="#dc2626", linestyle="dashed", fillcolor="#fef2f2") {};
+  $risca_section_box = @DEFINE-STYLE(linecolor="#94a3b8", linestyle="dashed", fillcolor="#f8fafc") {};
+
+  /* =========================================================================
+   * 2. PASSIVE, DECOUPLING & ESD PROTECTION SEMANTICS
+   * ========================================================================= */
+  $MOM_DECAP = @DEFINE(
+    roles=["{caps}"],
+    parameters=[["role", "MOM_supply_decoupling_capacitor"], ["substrate_tap", "with_tap"]]
+  ) {};
+
+  $MOS_DECAP = @DEFINE(
+    roles=["{mos_caps}"],
+    parameters=[["role", "MOS_gate_oxide_decoupling_capacitor"]]
+  ) {};
+
+  $UNIT_CAP_CELL = @DEFINE(
+    roles=["{cap}"],
+    parameters=[["role", "unit_capacitor_cell"], ["capacitance", "1.1fF"]]
+  ) {};
+
+  $SERIES_RES_STRING = @DEFINE(
+    roles=["{segments}"],
+    parameters=[["role", "series_resistor_string"], ["nominal_r", "50_ohm"]]
+  ) {};
+
+  $DAMPING_ISOLATION_RES_BANK = @DEFINE(
+    roles=["{resistors}"],
+    parameters=[["role", "supply_and_reference_damping_isolation"]]
+  ) {};
+
+  $ESD_ANTENNA_DIODE = @DEFINE(
+    roles=["{diodes}"],
+    parameters=[["role", "reverse_biased_antenna_or_ESD_clamp_diode"]]
+  ) {};
+
+  /* =========================================================================
+   * 3. SWITCHES, BOOTSTRAPS, VOLTAGE DOUBLERS & DELAY TUNING SEMANTICS
+   * ========================================================================= */
+  $CMOS_TRANGATE = @DEFINE(
+    roles=[["pmos_pass", "instance"], ["nmos_pass", "instance"]],
+    parameters=[["role", "complementary_transmission_gate"], ["width", "5um"]]
+  ) {};
+
+  $STARVED_DELAY_INV = @DEFINE(
+    roles=["{core_inverter}", "{pmos_header_bank}", "{nmos_footer_bank}"],
+    parameters=[["role", "current_starved_delay_trimmed_inverter"], ["tuning_bits", "2b_P_plus_2b_N"]]
+  ) {};
+
+  $CLK_VOLTAGE_DOUBLER = @DEFINE(
+    roles=["{driver_inverter}", "{flying_cap}", "{precharge_switch}", "{boost_pass_switch}", "{discharge_switch}"],
+    parameters=[["role", "capacitive_clock_voltage_doubler"], ["boost_level", "2x_AVDD"]]
+  ) {};
+
+  $TUNABLE_GATED_BOOSTER = @DEFINE(
+    roles=["{tune_inverters}", "{gated_predriver}", "{programmable_pmos_header}", "{doubler_core}"],
+    parameters=[["role", "skew_tunable_sampling_clock_booster"], ["tuning_bits", 4]]
+  ) {};
+
+  $GATE_BOOTSTRAP_GEN = @DEFINE(
+    roles=["{clock_inverters}", "{flying_cap}", "{precharge_devices}", "{input_tracking_loop}", "{discharge_path}"],
+    parameters=[["role", "constant_Vgs_input_tracking_bootstrap"], ["boost_voltage", "VDD_plus_VIN"]]
+  ) {};
+
+  /* =========================================================================
+   * 4. BIAS DISTRIBUTION & OFFSET CALIBRATION RDAC SEMANTICS
+   * ========================================================================= */
+  $CASCODE_CURRENT_MIRROR_BANK = @DEFINE(
+    roles=["{reference_branch}", "{cascode_mirror_branches}", "{rc_noise_filter}"],
+    parameters=[["role", "high_swing_series_cascode_bias_mirror"], ["channels", 6]]
+  ) {};
+
+  $BINARY_CURRENT_STEERING_RDAC = @DEFINE(
+    roles=["{enable_and_ref_branch}", "{binary_current_sources}", "{differential_steering_switches}", "{resistive_load_network}"],
+    parameters=[["role", "binary_current_steering_offset_RDAC"], ["bits", 4]]
+  ) {};
+
+  /* =========================================================================
+   * 5. INPUT MUX, CDAC, BOTTOM-PLATE SWITCHES & BRIDGE CAP SEMANTICS
+   * ========================================================================= */
+  $CHOPPER_BOOTSTRAPPED_QUAD = @DEFINE(
+    roles=["{direct_switches}", "{flipped_switches}", "{bootstrap_drivers}", "{decode_gates}"],
+    parameters=[["role", "bootstrapped_polarity_reversing_input_mux_quad"], ["channel", 1]]
+  ) {};
+
+  $VCM_EQUALIZER_TRIAD = @DEFINE(
+    roles=["{vcm_tie_switches}", "{diff_short_switch}", "{bootstrap_driver}"],
+    parameters=[["role", "bootstrapped_VCM_reset_and_equalizer_triad"]]
+  ) {};
+
+  $CDAC_WEIGHTED_ARRAY = @DEFINE(
+    roles=["{msb_binary_array}", "{interstage_redundancy}", "{lsb_sub_array}", "{intrastage_redundancy}", "{termination_caps}"],
+    parameters=[["role", "split_redundant_unit_capacitor_CDAC"], ["total_unit_caps", "520C"], ["unit_c", "1.1fF"]]
+  ) {};
+
+  $DAC_BIT_SWITCH_SLICE = @DEFINE(
+    roles=["{pre_driver_gates}", ["pmos_vrefp", "instance"], ["nmos_vrefn", "instance"], ["nmos_vin_bootstrapped", "instance"]],
+    parameters=[["role", "three_state_bottom_plate_CDAC_switch_slice"], ["bit_name", "MSB"]]
+  ) {};
+
+  $NONOVERLAP_BS_DRIVER = @DEFINE(
+    roles=["{nonoverlap_delay_chain}", ["shared_bootstrap_gen", "instance"]],
+    parameters=[["role", "break_before_make_reference_and_sampling_driver"]]
+  ) {};
+
+  $BYPASSABLE_BRIDGE_CAP = @DEFINE(
+    roles=["{series_cap_bank}", "{bypass_trangates}", "{control_inverters}"],
+    parameters=[["role", "series_attenuation_bridge_cap_with_SRT_bypass"], ["capacitance", "17x9fF_153fF"]]
+  ) {};
+
+  $SWITCHED_RESIDUE_BRANCH = @DEFINE(
+    roles=["{branch_cap_bank}", "{residue_sample_switches}", "{cdac_couple_switches}", "{control_logic}"],
+    parameters=[["role", "switched_capacitor_residue_sampling_and_summing_branch"], ["weight", "5C_45fF"]]
+  ) {};
+
+  /* =========================================================================
+   * 6. DYNAMIC COMPARATOR & ASYNCHRONOUS SAR LOGIC SEMANTICS
+   * ========================================================================= */
+  $MIYAHARA_DYNAMIC_PREAMP = @DEFINE(
+    roles=[["tail_switch", "instance"], "{main_diff_pair}", "{offset_trim_pair}", "{precharge_loads}"],
+    parameters=[["role", "dynamic_integrating_preamplifier_with_VOS_trim"]]
+  ) {};
+
+  $DYNAMIC_REGEN_LATCH = @DEFINE(
+    roles=["{interstage_buffers}", "{eval_input_pair}", "{cross_coupled_latch}", "{precharge_switches}", "{output_buffers}"],
+    parameters=[["role", "regenerative_second_stage_latch"]]
+  ) {};
+
+  $ASYNC_SAR_BIT_SLICE = @DEFINE(
+    roles=["{window_enable_gate}", "{dop_sr_latch}", "{don_sr_latch}", "{completion_and_token_logic}"],
+    parameters=[["role", "asynchronous_SAR_bit_slice"], ["drive_strength", "X1"]]
+  ) {};
+
+  $SELF_TIMED_SAR_CLOCK_GEN = @DEFINE(
+    roles=["{completion_detector}", ["delay_trim_inverter", "instance"], "{tune_buffers}", "{loop_control_gates}"],
+    parameters=[["role", "self_timed_asynchronous_SAR_loop_oscillator"]]
+  ) {};
+
+  $SAR_SLICE_CHAIN = @DEFINE(
+    roles=["{msb_5b_chain}", "{continuous_split_mux}", "{lsb_6b_chain}", "{serial_dout_path}"],
+    parameters=[["role", "reconfigurable_5MSB_6LSB_async_SAR_controller"]]
+  ) {};
+
+  /* =========================================================================
+   * 7. RESIDUE TRANSCONDUCTOR (Gm) & CURRENT-MODE RECEIVER (Rx) SEMANTICS
+   * ========================================================================= */
+  $FVF_TRANSCONDUCTOR_HALF = @DEFINE(
+    roles=[["in_ref_device", "instance"], ["in_sig_device", "instance"], ["fvf_tail_source", "instance"], ["cascode_device", "instance"]],
+    parameters=[["role", "flipped_voltage_follower_transconductor_half"], ["polarity", "NMOS"]]
+  ) {};
+
+  $COMPLEMENTARY_CLASS_AB_GM_CORE = @DEFINE(
+    roles=["{nmos_fvf_halves}", "{pmos_fvf_halves}"],
+    parameters=[["role", "complementary_Class_AB_FVF_residue_transconductor_core"]]
+  ) {};
+
+  $CLASS_AB_FLOATING_BIAS = @DEFINE(
+    roles=["{floating_branch_p}", "{floating_branch_n}", "{vbo_replica_chain}", "{enable_switches}"],
+    parameters=[["role", "Class_AB_floating_battery_level_shifter_bias"]]
+  ) {};
+
+  $TUNABLE_GM_BIAS_DAC = @DEFINE(
+    roles=["{ibp_resistor_chain}", "{gtune_mirror_dac}", "{vdc1_cascode_chain}", "{vdc2_cascode_chain}"],
+    parameters=[["role", "4bit_GTUNE_programmable_Gm_bias_and_cascode_generator"]]
+  ) {};
+
+  $GM_OUTPUT_CHOPPER_ROUTER = @DEFINE(
+    roles=["{ftx_chopper_quad}", "{bus1_switches}", "{bus2_switches}", "{local_loop_switches}", "{vcm_clamp_switches}"],
+    parameters=[["role", "output_chopper_and_shared_bus_routing_matrix"]]
+  ) {};
+
+  $COMMON_GATE_CURRENT_BUFFER = @DEFINE(
+    roles=["{bus_select_switches}", ["pmos_cg", "instance"], ["pmos_en", "instance"], ["nmos_cg", "instance"], ["nmos_en", "instance"]],
+    parameters=[["role", "complementary_common_gate_current_input_stage"]]
+  ) {};
+
+  $CASCODE_MIRROR_GAIN_STAGE = @DEFINE(
+    roles=["{pmos_1to4_cascode_mirror}", "{nmos_1to4_cascode_mirror}"],
+    parameters=[["role", "complementary_1to4_cascode_current_mirror_amplifier"], ["current_gain", "4x"]]
+  ) {};
+
+  $TUNABLE_TIA_LOAD = @DEFINE(
+    roles=["{fixed_resistor}", "{programmable_resistor_branches}", "{rtune_switches}"],
+    parameters=[["role", "4bit_RTUNE_transimpedance_resistor_load"]]
+  ) {};
+
+  $SWITCHABLE_RC_FILTER = @DEFINE(
+    roles=["{series_resistors}", ["hbw_bypass_switch", "instance"], "{control_inverters}"],
+    parameters=[["role", "programmable_bandwidth_RC_filter"]]
+  ) {};
+
+  /* =========================================================================
+   * 8. CROSSBAR SYNTHESIZER, FRAME RING COUNTER, SPI & DATA BUS SEMANTICS
+   * ========================================================================= */
+  $SPI_CROSSBAR_CELL = @DEFINE(
+    roles=[["cfg_dff", "instance"], "{active_pulldown_path}", "{precharge_pullup_path}", ["rep_eval_nmos", "instance"]],
+    parameters=[["role", "1bit_SPI_dynamic_crossbar_switch_cell"]]
+  ) {};
+
+  $CROSSBAR_MATRIX_ARRAY = @DEFINE(
+    roles=["{frame_row_gates}", "{repet_row_gates}", "{crossbar_384_cells}", "{column_eval_and_shapers}"],
+    parameters=[["role", "16x24_SPI_programmable_frame_to_clock_crossbar"]]
+  ) {};
+
+  $DEGLITCH_PULSE_SHAPER = @DEFINE(
+    roles=[["delay_50ps", "instance"], ["nor_gate", "instance"], ["out_buffer", "instance"]],
+    parameters=[["role", "50ps_rising_edge_deglitch_pulse_shaper"]]
+  ) {};
+
+  $MODULUS_RING_COUNTER = @DEFINE(
+    roles=["{spi_repet_shift_reg}", "{ring_16_dffs}", "{wired_nor_modulus_mux}", "{nonoverlap_pulse_decoders}", "{global_clk_shapers}"],
+    parameters=[["role", "programmable_modulus_1to16_frame_ring_counter"]]
+  ) {};
+
+  $SPI_SHIFT_CONFIG_BANK = @DEFINE(
+    roles=["{shift_reg_22b}", "{reset_mask_gates}", "{sck_delay_repeater}"],
+    parameters=[["role", "22bit_SPI_configuration_register_with_100ps_SCK_skew"]]
+  ) {};
+
+  $SAR_DATA_DESERIALIZER_MUX = @DEFINE(
+    roles=["{serial_shift_reg_10b}", "{parallel_latch_bank_11b}", "{rdy_synchronizers}", "{daisy_chain_bus_mux_16b}"],
+    parameters=[["role", "11bit_SAR_deserializer_and_16bit_daisy_chain_bus_multiplexer"]]
+  ) {};
+
+  /* =========================================================================
+   * 9. CLOCK RECEIVER, SINGLE CHANNEL & TOP-LEVEL CHIP SEMANTICS
+   * ========================================================================= */
+  $BAZES_SELF_BIASED_CLK_AMP = @DEFINE(
+    roles=["{nmos_diff_pair_and_tail}", "{pmos_diff_pair_and_tail}", "{self_bias_diodes}", "{tapered_cmos_inverters}", "{mos_supply_decaps}"],
+    parameters=[["role", "complementary_self_biased_Bazes_clock_receiver"]]
+  ) {};
+
+  $RECONFIG_SAR_CHANNEL = @DEFINE(
+    roles=["{input_mux_and_samplers}", "{differential_cdac_and_switches}", "{differential_bridge_caps}", "{comparator_and_rdac}", "{async_sar_logic}", "{residue_gm_and_rx_pair}", "{clock_crossbar_conf_and_databus}"],
+    parameters=[["role", "reconfigurable_shared_bus_pipelined_zoom_NS_SAR_channel"]]
+  ) {};
+
+  $SHARED_BUS_ADC_CORE = @DEFINE(
+    roles=["{six_sar_channels}", ["frame_generator", "instance"], ["bias_mirror_bank", "instance"], "{spi_loopback_and_dclk}"],
+    parameters=[["role", "6channel_reconfigurable_shared_bus_ADC_core"]]
+  ) {};
+
+  $PAD_RING_DOMAIN_GROUP = @DEFINE(
+    roles=["{digital_output_pads}", "{digital_input_pads}", "{analog_signal_pads}", "{power_and_ground_pads}", "{poc_and_tie_resistors}"],
+    parameters=[["role", "multi_domain_mixed_signal_IO_and_ESD_pad_ring"]]
+  ) {};
+
+  $CIRCUIT_ANOMALY_NOTE = @DEFINE(
+    roles=["{affected_objects}"],
+    parameters=[["severity", "notable"], ["category", "netlist_or_schematic_quirk"], ["description", "unspecified"]]
+  ) {}
+}

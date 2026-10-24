@@ -1,0 +1,70 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt ring_tail_singlephase_v14_pdk110_46 (d clk clkb load loadb init selected q vdd vss)
+XEN (loadb selected dopen vdd vss) tx_and_pdk110_47
+XI (dopen dclose vdd vss) pll_inv_pdk110_7
+XDATA (d din dopen dclose vdd vss) pll_tg_pdk110_43
+XINIT (init din load loadb vdd vss) pll_tg_pdk110_43
+RKEEP (din vss) resistor r=10000000
+XF (din clk clkb q vdd vss) ff_singlephase_v14_pdk110_44
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $RING_TAIL_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %mux = {#XDATA #XINIT}(mux_cells) @AS(role="gated_modulus_tail_mux") $MULTIPLEXER_BANK;
+//   {#XEN #XI #XDATA #XF %pq} @AS(direction="left-to-right") $FLOW;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pd     = $IO_PORT @ATTACH &d        => @PLACE(2, 16)  => @ORIENT("R0");
+//   %pinit  = $IO_PORT @ATTACH &init     => @PLACE(2, 6)   => @ORIENT("R0");
+//   %pload  = $IO_PORT @ATTACH &load     => @PLACE(2, 2)   => @ORIENT("R0");
+//   %ploadb = $IO_PORT @ATTACH &loadb    => @PLACE(2, 24)  => @ORIENT("R0");
+//   %psel   = $IO_PORT @ATTACH &selected => @PLACE(2, 22)  => @ORIENT("R0");
+//   %pclk   = $IO_PORT @ATTACH &clk      => @PLACE(31, 12) => @ORIENT("R0");
+//   %pclkb  = $IO_PORT @ATTACH &clkb     => @PLACE(31, 10) => @ORIENT("R0");
+//   %pq     = $IO_PORT @ATTACH &q        => @PLACE(46, 12) => @ORIENT("MY");
+//   %gnd    = $GROUND  @ATTACH &vss      => @PLACE(27, 0);
+//
+//   #XEN   @PLACE(10, 23) => @ORIENT("R0");
+//   #XI    @PLACE(19, 23) => @ORIENT("R0");
+//   #XDATA @PLACE(22, 16) => @ORIENT("R0");
+//   #XINIT @PLACE(22, 6)  => @ORIENT("R0");
+//   #RKEEP @PLACE(27, 4)  => @ORIENT("R0");
+//   #XF    @PLACE(38, 12) => @ORIENT("R0");
+//
+//   /* --- 3. Primary Signal Flow & Flying-Wire Control Labels --- */
+//   &loadb    @WIRE { %ploadb:p #XEN:a };
+//   &selected @WIRE { %psel:p   #XEN:b };
+//   &dopen    @WIRE { #XEN:y    #XI:a } => @TEXT("dopen") => @SET-STYLE $fly_label_style;
+//   &dclose   @WIRE { #XI:y (24, 23) } => @TEXT("dclose") => @SET-STYLE $fly_label_style;
+//
+//   &d    @WIRE { %pd:p    #XDATA:a };
+//   &init @WIRE { %pinit:p #XINIT:a };
+//
+//   #XDATA:on  @TEXT("dopen",  dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XDATA:off @TEXT("dclose", dx=0, dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//   #XINIT:on  @TEXT("load",   dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XINIT:off @TEXT("loadb",  dx=0, dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
+//
+//   %jdin1 = (27, 14);
+//   %jdin2 = (27, 6);
+//   $JUNCTION @ATTACH %jdin1;
+//   $JUNCTION @ATTACH %jdin2;
+//   &din @WIRE { #XDATA:b (27, 16) %jdin1 #XF:d };
+//   &din @WIRE { %jdin1 %jdin2 #RKEEP:1 };
+//   &din @WIRE { #XINIT:b %jdin2 };
+//
+//   &vss  @WIRE { #RKEEP:2 %gnd:p };
+//   &clk  @WIRE { %pclk:p  #XF:clk };
+//   &clkb @WIRE { %pclkb:p #XF:clkb };
+//   &q    @WIRE { #XF:q    %pq:p };
+//
+//   /* --- 4. Annotations --- */
+//   #RKEEP @TEXT("10 M\Omega", key="value", dx=1.5, dy=-1, halign="start") => @SET-STYLE $param_style;
+//   (24, 29) @TEXT("ring_tail_singlephase_v14_pdk110_46: Programmable-Modulus Ring Divider Tail Stage", halign="middle") => @SET-STYLE $title_style;
+//   (24, 27.3) @TEXT("Gates Data Path When Selected=0 and Pulls din Low via RKEEP (10 MOhm) to Shorten Ring Length", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends ring_tail_singlephase_v14_pdk110_46

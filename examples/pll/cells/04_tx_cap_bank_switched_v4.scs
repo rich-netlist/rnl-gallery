@@ -1,0 +1,174 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt tx_cap_bank_switched_v4_pdk110_4 (tank b0 b1 b2 b3 b4 b5 b6 b7 vdd vss)
+C0 (tank x0) capacitor c=4.8e-15
+M0 (x0 b0 vss vss) nch w=1.2e-06 l=1.8e-07 ad=5.76e-13 as=5.76e-13 pd=3.36e-06 ps=3.36e-06 nrd=0.225 nrs=0.225 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+C1 (tank x1) capacitor c=9.6e-15
+M1 (x1 b1 vss vss) nch w=2.4e-06 l=1.8e-07 ad=1.152e-12 as=1.152e-12 pd=5.76e-06 ps=5.76e-06 nrd=0.1125 nrs=0.1125 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+C2 (tank x2) capacitor c=1.92e-14
+M2 (x2 b2 vss vss) nch w=4.8e-06 l=1.8e-07 ad=2.304e-12 as=2.304e-12 pd=1.056e-05 ps=1.056e-05 nrd=0.05625 nrs=0.05625 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+C3 (tank x3) capacitor c=3.84e-14
+M3 (x3 b3 vss vss) nch w=9.6e-06 l=1.8e-07 ad=4.608e-12 as=4.608e-12 pd=2.016e-05 ps=2.016e-05 nrd=0.028125 nrs=0.028125 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+C4 (tank x4) capacitor c=7.68e-14
+M4 (x4 b4 vss vss) nch w=1.92e-05 l=1.8e-07 ad=9.216e-12 as=9.216e-12 pd=3.936e-05 ps=3.936e-05 nrd=0.0140625 nrs=0.0140625 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+C5 (tank x5) capacitor c=1.536e-13
+M5 (x5 b5 vss vss) nch w=3.84e-05 l=1.8e-07 ad=1.8432e-11 as=1.8432e-11 pd=7.776e-05 ps=7.776e-05 nrd=0.00703125 nrs=0.00703125 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+C6 (tank x6) capacitor c=3.072e-13
+M6 (x6 b6 vss vss) nch w=7.68e-05 l=1.8e-07 ad=3.6864e-11 as=3.6864e-11 pd=0.00015456 ps=0.00015456 nrd=0.00351563 nrs=0.00351563 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+C7 (tank x7) capacitor c=6.144e-13
+M7 (x7 b7 vss vss) nch w=0.0001536 l=1.8e-07 ad=7.3728e-11 as=7.3728e-11 pd=0.00030816 ps=0.00030816 nrd=0.00175781 nrs=0.00175781 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MP0 (x0 b0 vdd vdd) pch w=3e-07 l=1.8e-07 ad=2.064e-13 as=2.064e-13 pd=1.88e-06 ps=1.88e-06 nrd=1.03333 nrs=1.03333 sa=5.2e-07 sb=5.2e-07 sd=6.2e-07 sca=0 scb=0 scc=0
+MP1 (x1 b1 vdd vdd) pch w=3e-07 l=1.8e-07 ad=2.064e-13 as=2.064e-13 pd=1.88e-06 ps=1.88e-06 nrd=1.03333 nrs=1.03333 sa=5.2e-07 sb=5.2e-07 sd=6.2e-07 sca=0 scb=0 scc=0
+MP2 (x2 b2 vdd vdd) pch w=3e-07 l=1.8e-07 ad=2.064e-13 as=2.064e-13 pd=1.88e-06 ps=1.88e-06 nrd=1.03333 nrs=1.03333 sa=5.2e-07 sb=5.2e-07 sd=6.2e-07 sca=0 scb=0 scc=0
+MP3 (x3 b3 vdd vdd) pch w=3e-07 l=1.8e-07 ad=2.064e-13 as=2.064e-13 pd=1.88e-06 ps=1.88e-06 nrd=1.03333 nrs=1.03333 sa=5.2e-07 sb=5.2e-07 sd=6.2e-07 sca=0 scb=0 scc=0
+MP4 (x4 b4 vdd vdd) pch w=3e-07 l=1.8e-07 ad=2.064e-13 as=2.064e-13 pd=1.88e-06 ps=1.88e-06 nrd=1.03333 nrs=1.03333 sa=5.2e-07 sb=5.2e-07 sd=6.2e-07 sca=0 scb=0 scc=0
+MP5 (x5 b5 vdd vdd) pch w=3e-07 l=1.8e-07 ad=2.064e-13 as=2.064e-13 pd=1.88e-06 ps=1.88e-06 nrd=1.03333 nrs=1.03333 sa=5.2e-07 sb=5.2e-07 sd=6.2e-07 sca=0 scb=0 scc=0
+MP6 (x6 b6 vdd vdd) pch w=3e-07 l=1.8e-07 ad=2.064e-13 as=2.064e-13 pd=1.88e-06 ps=1.88e-06 nrd=1.03333 nrs=1.03333 sa=5.2e-07 sb=5.2e-07 sd=6.2e-07 sca=0 scb=0 scc=0
+MP7 (x7 b7 vdd vdd) pch w=3e-07 l=1.8e-07 ad=2.064e-13 as=2.064e-13 pd=1.88e-06 ps=1.88e-06 nrd=1.03333 nrs=1.03333 sa=5.2e-07 sb=5.2e-07 sd=6.2e-07 sca=0 scb=0 scc=0
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $CAP_BANK_SYM;
+//
+//   /* --- 1. Circuit Semantics & Design Defect Annotation --- */
+//   %sl0 = #C0(mim_cap) #M0(nmos_switch) #MP0(pmos_pullup) @AS(bit_index=0, capacitance="4.8fF") $SWITCHED_CAP_SLICE;
+//   %sl1 = #C1(mim_cap) #M1(nmos_switch) #MP1(pmos_pullup) @AS(bit_index=1, capacitance="9.6fF") $SWITCHED_CAP_SLICE;
+//   %sl2 = #C2(mim_cap) #M2(nmos_switch) #MP2(pmos_pullup) @AS(bit_index=2, capacitance="19.2fF") $SWITCHED_CAP_SLICE;
+//   %sl3 = #C3(mim_cap) #M3(nmos_switch) #MP3(pmos_pullup) @AS(bit_index=3, capacitance="38.4fF") $SWITCHED_CAP_SLICE;
+//   %sl4 = #C4(mim_cap) #M4(nmos_switch) #MP4(pmos_pullup) @AS(bit_index=4, capacitance="76.8fF") $SWITCHED_CAP_SLICE;
+//   %sl5 = #C5(mim_cap) #M5(nmos_switch) #MP5(pmos_pullup) @AS(bit_index=5, capacitance="153.6fF") $SWITCHED_CAP_SLICE;
+//   %sl6 = #C6(mim_cap) #M6(nmos_switch) #MP6(pmos_pullup) @AS(bit_index=6, capacitance="307.2fF") $SWITCHED_CAP_SLICE;
+//   %sl7 = #C7(mim_cap) #M7(nmos_switch) #MP7(pmos_pullup) @AS(bit_index=7, capacitance="614.4fF") $SWITCHED_CAP_SLICE;
+//   %arr = {#C0 #C1 #C2 #C3 #C4 #C5 #C6 #C7}(slices) @AS(bits=8, weighting="binary_4.8fF_to_614.4fF") $BINARY_WEIGHTED_ARRAY;
+//   {#MP0 #MP1 #MP2 #MP3 #MP4 #MP5 #MP6 #MP7} @AS $MATCHED;
+//   %defect_q = {#MP0 #MP1 #MP2 #MP3 #MP4 #MP5 #MP6 #MP7}(culprit_devices) {&x0 &x1 &x2 &x3 &x4 &x5 &x6 &x7}(affected_nets) @AS(
+//     severity="high",
+//     category="off_state_Q_degradation_and_shoot_through",
+//     mechanism="Each bit slice drives NMOS switch Mi and PMOS pull-up MPi with the same gate bi: when bi=0 (off-state), MPi is in triode (Ron ~ few kOhm to VDD), shunting RF tank current through Ci and MPi to AC ground and degrading tank Q; transitions on bi also cause CMOS shoot-through current",
+//     recommendation="Replace MPi with a high-value pull-up resistor (e.g. >50 kOhm) tied to VDD or bias MPi as a weak high-resistance keeper"
+//   ) $DESIGN_DEFECT;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   {&b1 &b2 &b3 &b4 &b5 &b6 &b7} @REMOVE-FROM $PORT_FILL_SET;
+//   %ptank = $IO_PORT @ATTACH &tank => @PLACE(2, 22) => @ORIENT("R0");
+//   %pb    = $IO_PORT @ATTACH &b0   => @PLACE(2, 10) => @ORIENT("R0");
+//   %pb @TEXT("b<7:0>", key="name");
+//   %gnd   = $GROUND  @ATTACH &vss  => @PLACE(61, 0);
+//   %sup0 = $SUPPLY  @ATTACH &vdd => @PLACE(17, 17);
+//   #C0   @PLACE(12, 18)   => @ORIENT("R0");
+//   #M0   @PLACE(12, 6)    => @ORIENT("R0");
+//   #MP0  @PLACE(17, 13) => @ORIENT("R0");
+//   %sup1 = $SUPPLY  @ATTACH &vdd => @PLACE(31, 17);
+//   #C1   @PLACE(26, 18)   => @ORIENT("R0");
+//   #M1   @PLACE(26, 6)    => @ORIENT("R0");
+//   #MP1  @PLACE(31, 13) => @ORIENT("R0");
+//   %sup2 = $SUPPLY  @ATTACH &vdd => @PLACE(45, 17);
+//   #C2   @PLACE(40, 18)   => @ORIENT("R0");
+//   #M2   @PLACE(40, 6)    => @ORIENT("R0");
+//   #MP2  @PLACE(45, 13) => @ORIENT("R0");
+//   %sup3 = $SUPPLY  @ATTACH &vdd => @PLACE(59, 17);
+//   #C3   @PLACE(54, 18)   => @ORIENT("R0");
+//   #M3   @PLACE(54, 6)    => @ORIENT("R0");
+//   #MP3  @PLACE(59, 13) => @ORIENT("R0");
+//   %sup4 = $SUPPLY  @ATTACH &vdd => @PLACE(73, 17);
+//   #C4   @PLACE(68, 18)   => @ORIENT("R0");
+//   #M4   @PLACE(68, 6)    => @ORIENT("R0");
+//   #MP4  @PLACE(73, 13) => @ORIENT("R0");
+//   %sup5 = $SUPPLY  @ATTACH &vdd => @PLACE(87, 17);
+//   #C5   @PLACE(82, 18)   => @ORIENT("R0");
+//   #M5   @PLACE(82, 6)    => @ORIENT("R0");
+//   #MP5  @PLACE(87, 13) => @ORIENT("R0");
+//   %sup6 = $SUPPLY  @ATTACH &vdd => @PLACE(101, 17);
+//   #C6   @PLACE(96, 18)   => @ORIENT("R0");
+//   #M6   @PLACE(96, 6)    => @ORIENT("R0");
+//   #MP6  @PLACE(101, 13) => @ORIENT("R0");
+//   %sup7 = $SUPPLY  @ATTACH &vdd => @PLACE(115, 17);
+//   #C7   @PLACE(110, 18)   => @ORIENT("R0");
+//   #M7   @PLACE(110, 6)    => @ORIENT("R0");
+//   #MP7  @PLACE(115, 13) => @ORIENT("R0");
+//
+//   /* --- 3. Explicit Manhattan & Bus / Flying-Wire Wiring --- */
+//   {&b0 &b1 &b2 &b3 &b4 &b5 &b6 &b7} @WIRE { %pb:p (7, 10) } => @TEXT("B<7:0>") => @SET-STYLE $bus_label_style;
+//   %jt0 = (12, 22); %jt1 = (26, 22); %jt2 = (40, 22); %jt3 = (54, 22);
+//   %jt4 = (68, 22); %jt5 = (82, 22); %jt6 = (96, 22);
+//   $JUNCTION @ATTACH %jt0; $JUNCTION @ATTACH %jt1; $JUNCTION @ATTACH %jt2; $JUNCTION @ATTACH %jt3;
+//   $JUNCTION @ATTACH %jt4; $JUNCTION @ATTACH %jt5; $JUNCTION @ATTACH %jt6;
+//   &tank @WIRE { %ptank:p %jt0 %jt1 %jt2 %jt3 %jt4 %jt5 %jt6 (110, 22) #C7:1 };
+//   &tank @WIRE { %jt0 #C0:1 }; &tank @WIRE { %jt1 #C1:1 }; &tank @WIRE { %jt2 #C2:1 };
+//   &tank @WIRE { %jt3 #C3:1 }; &tank @WIRE { %jt4 #C4:1 }; &tank @WIRE { %jt5 #C5:1 };
+//   &tank @WIRE { %jt6 #C6:1 };
+//
+//   %jg0 = (12, 2); %jg1 = (26, 2); %jg2 = (40, 2); %jg3 = (54, 2);
+//   %jg_s = (61, 2); %jg4 = (68, 2); %jg5 = (82, 2); %jg6 = (96, 2);
+//   $JUNCTION @ATTACH %jg0; $JUNCTION @ATTACH %jg1; $JUNCTION @ATTACH %jg2; $JUNCTION @ATTACH %jg3;
+//   $JUNCTION @ATTACH %jg_s; $JUNCTION @ATTACH %jg4; $JUNCTION @ATTACH %jg5; $JUNCTION @ATTACH %jg6;
+//   &vss @WIRE { #M0:s %jg0 %jg1 %jg2 %jg3 %jg_s %jg4 %jg5 %jg6 (110, 2) #M7:s };
+//   &vss @WIRE { %jg_s %gnd:p };
+//   &vss @WIRE { %jg1 #M1:s }; &vss @WIRE { %jg2 #M2:s }; &vss @WIRE { %jg3 #M3:s };
+//   &vss @WIRE { %jg4 #M4:s }; &vss @WIRE { %jg5 #M5:s }; &vss @WIRE { %jg6 #M6:s };
+//   %jx0 = (12, 10);
+//   $JUNCTION @ATTACH %jx0;
+//   &x0   @WIRE { #C0:2 %jx0 #M0:d };
+//   &x0   @WIRE { %jx0 (17, 10) #MP0:d };
+//   &vdd  @WIRE { %sup0:p #MP0:s };
+//   &b0   @WIRE { #M0:g (9, 13) #MP0:g } => @TEXT("b0") => @SET-STYLE $fly_label_style;
+//   #C0   @TEXT("4.8 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   %jx1 = (26, 10);
+//   $JUNCTION @ATTACH %jx1;
+//   &x1   @WIRE { #C1:2 %jx1 #M1:d };
+//   &x1   @WIRE { %jx1 (31, 10) #MP1:d };
+//   &vdd  @WIRE { %sup1:p #MP1:s };
+//   &b1   @WIRE { #M1:g (23, 13) #MP1:g } => @TEXT("b1") => @SET-STYLE $fly_label_style;
+//   #C1   @TEXT("9.6 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   %jx2 = (40, 10);
+//   $JUNCTION @ATTACH %jx2;
+//   &x2   @WIRE { #C2:2 %jx2 #M2:d };
+//   &x2   @WIRE { %jx2 (45, 10) #MP2:d };
+//   &vdd  @WIRE { %sup2:p #MP2:s };
+//   &b2   @WIRE { #M2:g (37, 13) #MP2:g } => @TEXT("b2") => @SET-STYLE $fly_label_style;
+//   #C2   @TEXT("19.2 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   %jx3 = (54, 10);
+//   $JUNCTION @ATTACH %jx3;
+//   &x3   @WIRE { #C3:2 %jx3 #M3:d };
+//   &x3   @WIRE { %jx3 (59, 10) #MP3:d };
+//   &vdd  @WIRE { %sup3:p #MP3:s };
+//   &b3   @WIRE { #M3:g (51, 13) #MP3:g } => @TEXT("b3") => @SET-STYLE $fly_label_style;
+//   #C3   @TEXT("38.4 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   %jx4 = (68, 10);
+//   $JUNCTION @ATTACH %jx4;
+//   &x4   @WIRE { #C4:2 %jx4 #M4:d };
+//   &x4   @WIRE { %jx4 (73, 10) #MP4:d };
+//   &vdd  @WIRE { %sup4:p #MP4:s };
+//   &b4   @WIRE { #M4:g (65, 13) #MP4:g } => @TEXT("b4") => @SET-STYLE $fly_label_style;
+//   #C4   @TEXT("76.8 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   %jx5 = (82, 10);
+//   $JUNCTION @ATTACH %jx5;
+//   &x5   @WIRE { #C5:2 %jx5 #M5:d };
+//   &x5   @WIRE { %jx5 (87, 10) #MP5:d };
+//   &vdd  @WIRE { %sup5:p #MP5:s };
+//   &b5   @WIRE { #M5:g (79, 13) #MP5:g } => @TEXT("b5") => @SET-STYLE $fly_label_style;
+//   #C5   @TEXT("153.6 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   %jx6 = (96, 10);
+//   $JUNCTION @ATTACH %jx6;
+//   &x6   @WIRE { #C6:2 %jx6 #M6:d };
+//   &x6   @WIRE { %jx6 (101, 10) #MP6:d };
+//   &vdd  @WIRE { %sup6:p #MP6:s };
+//   &b6   @WIRE { #M6:g (93, 13) #MP6:g } => @TEXT("b6") => @SET-STYLE $fly_label_style;
+//   #C6   @TEXT("307.2 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   %jx7 = (110, 10);
+//   $JUNCTION @ATTACH %jx7;
+//   &x7   @WIRE { #C7:2 %jx7 #M7:d };
+//   &x7   @WIRE { %jx7 (115, 10) #MP7:d };
+//   &vdd  @WIRE { %sup7:p #MP7:s };
+//   &b7   @WIRE { #M7:g (107, 13) #MP7:g } => @TEXT("b7") => @SET-STYLE $fly_label_style;
+//   #C7   @TEXT("614.4 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//
+//   /* --- 4. Annotations & Defect Callout --- */
+//   (61, -6.0) @RECTANGLE(width=96, height=3.8) => @SET-STYLE $defect_box;
+//   (61, -5.3) @TEXT("DEFECT: Off-State PMOS Pull-Ups MP0..MP7 (Gate Tied to b0..b7) Degrade Tank Q & Cause Shoot-Through", halign="middle") => @SET-STYLE $defect_style;
+//   (61, -6.7) @TEXT("When bi=0, MPi is in strong triode (Ron ~ few kOhm to VDD), shunting RF tank current through Ci and MPi to AC ground instead of high-Z bias", halign="middle") => @SET-STYLE $param_style;
+//   (61, 27) @TEXT("tx_cap_bank_switched_v4_pdk110_4: 8-Bit Binary-Weighted Switched MIM Capacitor Bank (4.8 fF .. 614.4 fF)", halign="middle") => @SET-STYLE $title_style;
+//   (61, 25.2) @TEXT("Total Tunable Capacitance = 1.224 pF per Side (LSB = 4.8 fF); Controlled by FLL Coarse Word B<7:0>", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends tx_cap_bank_switched_v4_pdk110_4

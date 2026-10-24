@@ -1,0 +1,386 @@
+// RNL cell RISCA_JL/LB_bs_gen_V3
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// }
+subckt LB_bs_gen_V3 CLK CLKBS VDD VIN VSS
+    C0 (TOP BOT) cfmom_2t nr=84 lr=4u w=50n s=50n stm=2 spm=7 multi=1
+    M12 (CLKBUF PHIE VDD VDD) pch_ulvt_mac l=30n w=1.04u multi=1 nf=2 \
+        sd=100n ad=5.2e-14 as=7.8e-14 pd=1.24u ps=2.38u nrd=0.214709 \
+        nrs=0.214709 sa=112.742n sb=112.742n sa1=93.6047n sa2=112.078n \
+        sa3=163.715n sa4=110.059n sb1=93.6047n sb2=112.078n sb3=163.715n \
+        spa=100n spa1=100n spa2=100n spa3=100n sap=104.359n sapb=125.813n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M9 (net1 CLKBUF VDD VDD) pch_ulvt_mac l=30n w=1.04u multi=1 nf=2 \
+        sd=100n ad=5.2e-14 as=7.8e-14 pd=1.24u ps=2.38u nrd=0.214709 \
+        nrs=0.214709 sa=112.742n sb=112.742n sa1=93.6047n sa2=112.078n \
+        sa3=163.715n sa4=110.059n sb1=93.6047n sb2=112.078n sb3=163.715n \
+        spa=100n spa1=100n spa2=100n spa3=100n sap=104.359n sapb=125.813n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M6 (PHIE CLK VDD VDD) pch_ulvt_mac l=30n w=1.04u multi=1 nf=2 sd=100n \
+        ad=5.2e-14 as=7.8e-14 pd=1.24u ps=2.38u nrd=0.214709 nrs=0.214709 \
+        sa=112.742n sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n \
+        sa4=110.059n sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=104.359n sapb=125.813n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M4 (TOP CLKBS VDD TOP) pch_ulvt_mac l=30n w=1u multi=1 nf=2 sd=100n \
+        ad=5e-14 as=7.5e-14 pd=1.2u ps=2.3u nrd=0.212518 nrs=0.212518 \
+        sa=112.742n sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n \
+        sa4=110.059n sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=104.359n sapb=125.813n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M2 (CLKBS net1 TOP TOP) pch_ulvt_mac l=30n w=2u multi=1 nf=4 sd=100n \
+        ad=1e-13 as=1.25e-13 pd=2.4u ps=3.5u nrd=0.112393 nrs=0.112393 \
+        sa=179.203n sb=179.203n sa1=118.069n sa2=174.76n sa3=310.76n \
+        sa4=171.966n sb1=118.069n sb2=174.76n sb3=310.76n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=120.952n sapb=140.537n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M11 (CLKBUF PHIE VSS VSS) nch_ulvt_mac l=30n w=800n multi=1 nf=2 \
+        sd=100n ad=4e-14 as=6e-14 pd=1u ps=1.9u nrd=0.576527 nrs=0.576527 \
+        sa=112.742n sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n \
+        sa4=110.059n sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=104.359n sapb=125.813n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M124 (net1 CLKBS BOT VSS) nch_ulvt_mac l=30n w=1u multi=1 nf=2 sd=100n \
+        ad=5e-14 as=7.5e-14 pd=1.2u ps=2.3u nrd=0.425847 nrs=0.425847 \
+        sa=112.742n sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n \
+        sa4=110.059n sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=104.359n sapb=125.813n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M8 (net1 CLKBUF BOT VSS) nch_ulvt_mac l=30n w=800n multi=1 nf=2 \
+        sd=100n ad=4e-14 as=6e-14 pd=1u ps=1.9u nrd=0.576527 nrs=0.576527 \
+        sa=112.742n sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n \
+        sa4=110.059n sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=104.359n sapb=125.813n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M7 (CLKBS VDD net2 VSS) nch_ulvt_mac l=30n w=2u multi=1 nf=4 sd=100n \
+        ad=1e-13 as=1.25e-13 pd=2.4u ps=3.5u nrd=0.248269 nrs=0.248269 \
+        sa=179.203n sb=179.203n sa1=118.069n sa2=174.76n sa3=310.76n \
+        sa4=171.966n sb1=118.069n sb2=174.76n sb3=310.76n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=120.952n sapb=140.537n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M5 (PHIE CLK VSS VSS) nch_ulvt_mac l=30n w=800n multi=1 nf=2 sd=100n \
+        ad=4e-14 as=6e-14 pd=1u ps=1.9u nrd=0.576527 nrs=0.576527 \
+        sa=112.742n sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n \
+        sa4=110.059n sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=104.359n sapb=125.813n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M3 (net2 PHIE VSS VSS) nch_ulvt_mac l=30n w=2u multi=1 nf=4 sd=100n \
+        ad=1e-13 as=1.25e-13 pd=2.4u ps=3.5u nrd=0.248269 nrs=0.248269 \
+        sa=179.203n sb=179.203n sa1=118.069n sa2=174.76n sa3=310.76n \
+        sa4=171.966n sb1=118.069n sb2=174.76n sb3=310.76n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=120.952n sapb=140.537n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M1 (BOT PHIE VSS VSS) nch_ulvt_mac l=30n w=1u multi=1 nf=2 sd=100n \
+        ad=5e-14 as=7.5e-14 pd=1.2u ps=2.3u nrd=0.425847 nrs=0.425847 \
+        sa=112.742n sb=112.742n sa1=93.6047n sa2=112.078n sa3=163.715n \
+        sa4=110.059n sb1=93.6047n sb2=112.078n sb3=163.715n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=104.359n sapb=125.813n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+    M0 (VIN CLKBS BOT VSS) nch_ulvt_mac l=30n w=2u multi=1 nf=4 sd=100n \
+        ad=1e-13 as=1.25e-13 pd=2.4u ps=3.5u nrd=0.248269 nrs=0.248269 \
+        sa=179.203n sb=179.203n sa1=118.069n sa2=174.76n sa3=310.76n \
+        sa4=171.966n sb1=118.069n sb2=174.76n sb3=310.76n spa=100n \
+        spa1=100n spa2=100n spa3=100n sap=120.952n sapb=140.537n \
+        spba=115.715n spba1=117.043n dfm_flag=0 spmt=1.11111e+15 spomt=0 \
+        spomt1=1.11111e+60 spmb=1.11111e+15 spomb=0 spomb1=1.11111e+60
+// @RNL(author="rnl-virtuoso") {
+//   %block_symbol = @DEFINE-SYMBOL(box=[0, -5, 14, 9]) {
+//     @LINE {(0, 4) (6, 4)};
+//     @LINE {(0, 0) (6, 0)};
+//     @LINE {(0, -4) (7, -4)};
+//     @LINE {(7, 9) (7, 5)};
+//     @LINE {(7, -4) (7, -1)};
+//     @LINE {(7, 3) (7, 1)};
+//     (7, 4) @CIRCLE(radius=1);
+//     @LINE {(6, 2) (6, -2) (9, 0) (6, 2)};
+//     @RECTANGLE {(4, -5) (10, 7)};
+//     @LINE {(14, 0) (9, 0)};
+//     (7, 3) @TEXT("+", size=1, halign="middle", valign="baseline");
+//     (7, 4) @TEXT("-", size=1, halign="middle", valign="baseline");
+//     ? @TEXT("${name}", size=1, halign="start", valign="middle", key="name") => @PLACE(10, 4);
+//     ? @TEXT("${model}", size=1, halign="middle", valign="middle", key="model") => @PLACE(7, -6);
+//     (7, 9) @PIN(terminal="VIN");
+//     (4.6, 8) @TEXT("VIN", size=1, halign="start", valign="middle");
+//     (0, 4) @PIN(terminal="VDD");
+//     (0.6, 5) @TEXT("VDD", size=1, halign="start", valign="middle");
+//     (0, -4) @PIN(terminal="VSS");
+//     (0.6, -3) @TEXT("VSS", size=1, halign="start", valign="middle");
+//     (14, 0) @PIN(terminal="CLKBS");
+//     (13.4, 1) @TEXT("CLKBS", size=1, halign="end", valign="middle");
+//     (0, 0) @PIN(terminal="CLK");
+//     (0.6, 1) @TEXT("CLK", size=1, halign="start", valign="middle")
+//   };
+//   # @SET-SYMBOL %block_symbol;
+//   %symbol_0 = @DEFINE-SYMBOL(box=[-0.1, -2.8, 3.8, 2.8]) {
+//     @LINE {(2, 1.5) (4, 1.5) (4, 3)};
+//     @LINE {(2, -1.5) (2, 1.5)};
+//     @LINE {(3, -1) (4, -1.5) (3, -2)};
+//     @LINE {(0, 0) (1.5, 0)};
+//     @LINE {(1.5, 1.5) (1.5, -1.5)};
+//     @LINE {(2, -1.5) (4, -1.5) (4, -3)};
+//     ? @TEXT("${name}", size=0.8, halign="start", valign="baseline", key="name") => @PLACE(5, 3.5);
+//     ? @TEXT("${model}", size=0.8, halign="end", valign="baseline", key="model") => @PLACE(3.2, 3.2);
+//     (4, -1) @PIN(terminal=4);
+//     (4, -3) @PIN(terminal=3);
+//     (4, 3) @PIN(terminal=1);
+//     (0, 0) @PIN(terminal=2)
+//   };
+//   #"M1" @SET-SYMBOL %symbol_0;
+//   #"M1" @PLACE(6, -13) => @ORIENT("R0");
+//   #"M3" @SET-SYMBOL %symbol_0;
+//   #"M3" @PLACE(48, 6) => @ORIENT("R90");
+//   #"M124" @SET-SYMBOL %symbol_0;
+//   #"M124" @PLACE(24, -1) => @ORIENT("MY");
+//   %symbol_1 = @DEFINE-SYMBOL(box=[-2, -6, 2, 0]) {
+//     @LINE {(1, -2.2) (-1, -2.2)};
+//     @LINE {(0, 0) (0, -2.2)};
+//     @LINE {(0, -2.8) (0, -6)};
+//     @ARC {(1, -3.2) (0, -2.8) (-1, -3.2)};
+//     ? @TEXT("${name}", size=0.8, halign="start", valign="baseline", key="name") => @PLACE(1.4, 0.1);
+//     ? @TEXT("${model}", size=0.8, halign="end", valign="baseline", key="model") => @PLACE(-1.1, 0.3);
+//     (0, 0) @PIN(terminal=1);
+//     (0, -6) @PIN(terminal=2)
+//   };
+//   #"C0" @SET-SYMBOL %symbol_1;
+//   #"C0" @PLACE(10, 2) => @ORIENT("R0");
+//   #"M0" @SET-SYMBOL %symbol_0;
+//   #"M0" @PLACE(26, -3) => @ORIENT("R270");
+//   %symbol_2 = @DEFINE-SYMBOL(box=[-0.1, -2.8, 3.8, 2.8]) {
+//     @LINE {(0, 0) (0.7, 0)};
+//     @LINE {(1.5, 1.5) (1.5, -1.5)};
+//     @LINE {(2, -1.5) (4, -1.5) (4, -3)};
+//     @LINE {(2, 1.5) (4, 1.5) (4, 3)};
+//     (1.1, 0) @CIRCLE(radius=0.4);
+//     @LINE {(3.7, 2) (2.7, 1.5) (3.7, 1)};
+//     @LINE {(2, -1.5) (2, 1.5)};
+//     ? @TEXT("${name}", size=0.8, halign="start", valign="baseline", key="name") => @PLACE(4.9, 3.4);
+//     ? @TEXT("${model}", size=0.8, halign="end", valign="baseline", key="model") => @PLACE(3.3, 3.2);
+//     (4, 3) @PIN(terminal=3);
+//     (4, 1) @PIN(terminal=4);
+//     (0, 0) @PIN(terminal=2);
+//     (4, -3) @PIN(terminal=1)
+//   };
+//   #"M2" @SET-SYMBOL %symbol_2;
+//   #"M2" @PLACE(19, 4) => @ORIENT("R90");
+//   #"M4" @SET-SYMBOL %symbol_2;
+//   #"M4" @PLACE(15, 18) => @ORIENT("MY");
+//   #"M9" @SET-SYMBOL %symbol_2;
+//   #"M9" @PLACE(-6, 9) => @ORIENT("R0");
+//   #"M7" @SET-SYMBOL %symbol_0;
+//   #"M7" @PLACE(38, 6) => @ORIENT("R90");
+//   #"M11" @SET-SYMBOL %symbol_0;
+//   #"M11" @PLACE(-27, -3) => @ORIENT("R0");
+//   #"M8" @SET-SYMBOL %symbol_0;
+//   #"M8" @PLACE(-6, -2) => @ORIENT("R0");
+//   #"M5" @SET-SYMBOL %symbol_0;
+//   #"M5" @PLACE(-37, -3) => @ORIENT("R0");
+//   #"M6" @SET-SYMBOL %symbol_2;
+//   #"M6" @PLACE(-37, 8) => @ORIENT("R0");
+//   #"M12" @SET-SYMBOL %symbol_2;
+//   #"M12" @PLACE(-27, 8) => @ORIENT("R0");
+//   %port_0 = $IO_PORT @ATTACH &"CLKBS" => @PLACE(-45, 5) => @ORIENT("R0");
+//   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
+//       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
+//       (0, 0) @PIN(terminal=1, direction="right");
+//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//     };
+//   %port_1 = $IO_PORT @ATTACH &"CLK" => @PLACE(-45, -1) => @ORIENT("R0");
+//   %port_1 @SET-SYMBOL %input_port_symbol;
+//   %port_1 @TEXT("CLK", key="name");
+//   %port_2 = $IO_PORT @ATTACH &"VDD" => @PLACE(-46, -6) => @ORIENT("R0");
+//   %port_3 = $IO_PORT @ATTACH &"VSS" => @PLACE(-46, -10) => @ORIENT("R0");
+//   %port_4 = $IO_PORT @ATTACH &"VIN" => @PLACE(-45, 9) => @ORIENT("R0");
+//   %p0 = (20, -7);
+//   %wire_0 = &"BOT" @WIRE(mode="straight") {%p0 #"M124":3};
+//   %p1 = (10, -5);
+//   %wire_1 = &"BOT" @WIRE(mode="straight") {%p1 #"C0":2};
+//   %wire_2 = &"BOT" @WIRE(mode="straight") {%p0 #"M0":3};
+//   %p2 = (10, -7);
+//   %wire_3 = &"BOT" @WIRE(mode="straight") {%p2 %p0};
+//   %wire_4 = &"BOT" @WIRE(mode="straight") {#"M8":3 %p1};
+//   %wire_5 = &"BOT" @WIRE(mode="straight") {#"M1":1 %p2};
+//   %wire_6 = &"BOT" @WIRE(mode="straight") {%p2 %p1};
+//   %wire_3 @TEXT("BOT", size=1, halign="middle", valign="baseline") => @PLACE(15.7, -6.3);
+//   %wire_7 = &"CLKBUF" @WIRE(mode="straight") {#"M11":1 #"M12":1};
+//   %p3 = (-10, -2);
+//   %wire_8 = &"CLKBUF" @WIRE(mode="straight") {%p3 #"M8":2};
+//   %p4 = (-10, 9);
+//   %wire_9 = &"CLKBUF" @WIRE(mode="straight") {%p4 #"M9":2};
+//   %wire_10 = &"CLKBUF" @WIRE(mode="straight") {%p3 %p4};
+//   %wire_10 @TEXT("CLKBUF", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-10.7, 4);
+//   %wire_7 @TEXT("CLKBUF", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-23.7, 2);
+//   %wire_11 = &"net2" @WIRE(mode="straight") {#"M7":3 #"M3":1};
+//   %p5 = (8, 8);
+//   %p6 = (8, 19);
+//   %wire_12 = &"TOP" @WIRE(mode="straight") {%p5 %p6};
+//   %p7 = (10, 8);
+//   %p8 = (11, 8);
+//   %wire_13 = &"TOP" @WIRE(mode="straight") {%p7 %p8};
+//   %p9 = (14, 8);
+//   %wire_14 = &"TOP" @WIRE(mode="straight") {%p8 %p9};
+//   %wire_15 = &"TOP" @WIRE(mode="straight") {%p8 #"M4":1};
+//   %wire_16 = &"TOP" @WIRE(mode="straight") {#"M4":4 %p6};
+//   %p10 = (14, 11);
+//   %wire_17 = &"TOP" @WIRE(mode="straight") {%p9 %p10};
+//   %wire_18 = &"TOP" @WIRE(mode="straight") {%p9 #"M2":3};
+//   %p11 = (18, 11);
+//   %wire_19 = &"TOP" @WIRE(mode="straight") {%p10 %p11};
+//   %wire_20 = &"TOP" @WIRE(mode="straight") {#"M2":4 %p11};
+//   %wire_21 = &"TOP" @WIRE(mode="straight") {%p5 %p7};
+//   %wire_22 = &"TOP" @WIRE(mode="straight") {#"C0":1 %p7};
+//   %wire_12 @TEXT("TOP", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(7.3, 10);
+//   %p12 = (20, 3);
+//   %wire_23 = &"net1" @WIRE(mode="straight") {#"M124":1 %p12};
+//   %p13 = (19, 3);
+//   %wire_24 = &"net1" @WIRE(mode="straight") {%p13 %p12};
+//   %p14 = (-2, 3);
+//   %wire_25 = &"net1" @WIRE(mode="straight") {%p14 %p13};
+//   %wire_26 = &"net1" @WIRE(mode="straight") {%p13 #"M2":2};
+//   %wire_27 = &"net1" @WIRE(mode="straight") {#"M8":1 %p14};
+//   %wire_28 = &"net1" @WIRE(mode="straight") {%p14 #"M9":1};
+//   %p15 = (-23, -9);
+//   %wire_29 = &"VSS" @WIRE(mode="straight") {%p15 #"M11":3};
+//   %p16 = (-19, -4);
+//   %wire_30 = &"VSS" @WIRE(mode="straight") {%p16 #"M11":4};
+//   %p17 = (2, -3);
+//   %wire_31 = &"VSS" @WIRE(mode="straight") {%p17 #"M8":4};
+//   %p18 = (39, 14);
+//   %wire_32 = &"VSS" @WIRE(mode="straight") {%p18 #"M7":4};
+//   %p19 = (-33, -9);
+//   %wire_33 = &"VSS" @WIRE(mode="straight") {%p19 #"M5":3};
+//   %p20 = (-29, -4);
+//   %wire_34 = &"VSS" @WIRE(mode="straight") {%p20 #"M5":4};
+//   %p21 = (54, 10);
+//   %wire_35 = &"VSS" @WIRE(mode="straight") {%p21 #"M3":3};
+//   %p22 = (16, -2);
+//   %wire_36 = &"VSS" @WIRE(mode="straight") {%p22 #"M124":4};
+//   %p23 = (10, -19);
+//   %wire_37 = &"VSS" @WIRE(mode="straight") {%p23 #"M1":3};
+//   %p24 = (14, -14);
+//   %wire_38 = &"VSS" @WIRE(mode="straight") {%p24 #"M1":4};
+//   %p25 = (25, -10);
+//   %wire_39 = &"VSS" @WIRE(mode="straight") {%p25 #"M0":4};
+//   %p26 = (49, 14);
+//   %wire_40 = &"VSS" @WIRE(mode="straight") {%p26 #"M3":4};
+//   %wire_39 @TEXT("VSS", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(24.3, -9);
+//   %wire_38 @TEXT("VSS", size=1, halign="middle", valign="top") => @PLACE(12, -14.7);
+//   %wire_37 @TEXT("VSS", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(9.3, -18);
+//   %wire_40 @TEXT("VSS", size=1, halign="middle", valign="top", rotate=90) => @PLACE(49.7, 12);
+//   %wire_35 @TEXT("VSS", size=1, halign="middle", valign="top") => @PLACE(53, 9.3);
+//   %wire_34 @TEXT("VSS", size=1, halign="middle", valign="top") => @PLACE(-31, -2.7);
+//   %wire_33 @TEXT("VSS", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-33.7, -8);
+//   %wire_32 @TEXT("VSS", size=1, halign="middle", valign="top", rotate=90) => @PLACE(39.7, 12);
+//   %wire_31 @TEXT("VSS", size=1, halign="middle", valign="top") => @PLACE(0, -1.7);
+//   %wire_36 @TEXT("VSS", size=1, halign="middle", valign="top") => @PLACE(18, -0.7);
+//   %wire_30 @TEXT("VSS", size=1, halign="middle", valign="top") => @PLACE(-21, -2.7);
+//   %wire_29 @TEXT("VSS", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-23.7, -8);
+//   %p27 = (34, -7);
+//   %wire_41 = &"VIN" @WIRE(mode="straight") {#"M0":1 %p27};
+//   %wire_41 @TEXT("VIN", size=1, halign="middle", valign="baseline") => @PLACE(32, -6.3);
+//   %p28 = (-23, 15);
+//   %wire_42 = &"VDD" @WIRE(mode="straight") {#"M12":3 %p28};
+//   %p29 = (1, 10);
+//   %wire_43 = &"VDD" @WIRE(mode="straight") {#"M9":4 %p29};
+//   %p30 = (-2, 16);
+//   %wire_44 = &"VDD" @WIRE(mode="straight") {#"M9":3 %p30};
+//   %p31 = (-20, 9);
+//   %wire_45 = &"VDD" @WIRE(mode="straight") {#"M12":4 %p31};
+//   %p32 = (-33, 15);
+//   %wire_46 = &"VDD" @WIRE(mode="straight") {#"M6":3 %p32};
+//   %p33 = (-30, 9);
+//   %wire_47 = &"VDD" @WIRE(mode="straight") {#"M6":4 %p33};
+//   %p34 = (11, 25);
+//   %wire_48 = &"VDD" @WIRE(mode="straight") {#"M4":3 %p34};
+//   %p35 = (38, 2);
+//   %wire_49 = &"VDD" @WIRE(mode="straight") {#"M7":2 %p35};
+//   %wire_49 @TEXT("VDD", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(37.3, 4);
+//   %wire_48 @TEXT("VDD", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(10.3, 24);
+//   %wire_46 @TEXT("VDD", size=1, halign="middle", valign="top", rotate=90) => @PLACE(-32.3, 14);
+//   %wire_47 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(-31, 9.7);
+//   %wire_44 @TEXT("VDD", size=1, halign="middle", valign="top", rotate=90) => @PLACE(-1.3, 15);
+//   %wire_43 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(0, 10.7);
+//   %wire_45 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(-21, 9.7);
+//   %wire_42 @TEXT("VDD", size=1, halign="middle", valign="top", rotate=90) => @PLACE(-22.3, 14);
+//   %p36 = (-27, 2);
+//   %wire_50 = &"PHIE" @WIRE(mode="straight") {%p36 #"M12":2};
+//   %p37 = (-33, 2);
+//   %wire_51 = &"PHIE" @WIRE(mode="straight") {%p37 %p36};
+//   %wire_52 = &"PHIE" @WIRE(mode="straight") {#"M11":2 %p36};
+//   %wire_53 = &"PHIE" @WIRE(mode="straight") {%p37 #"M6":1};
+//   %wire_54 = &"PHIE" @WIRE(mode="straight") {#"M5":1 %p37};
+//   %p38 = (48, 1);
+//   %wire_55 = &"PHIE" @WIRE(mode="straight") {%p38 #"M3":2};
+//   %p39 = (1, -13);
+//   %wire_56 = &"PHIE" @WIRE(mode="straight") {%p39 #"M1":2};
+//   %wire_56 @TEXT("PHIE", size=1, halign="middle", valign="baseline") => @PLACE(3, -12.3);
+//   %wire_55 @TEXT("PHIE", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(47.3, 3);
+//   %wire_51 @TEXT("PHIE", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-33.7, 2);
+//   %p40 = (26, -1);
+//   %wire_57 = &"CLKBS" @WIRE(mode="straight") {#"M124":2 %p40};
+//   %p41 = (26, 8);
+//   %wire_58 = &"CLKBS" @WIRE(mode="straight") {%p40 %p41};
+//   %p42 = (28, 8);
+//   %p43 = (28, 10);
+//   %wire_59 = &"CLKBS" @WIRE(mode="straight") {%p42 %p43};
+//   %wire_60 = &"CLKBS" @WIRE(mode="straight") {%p43 #"M7":1};
+//   %wire_61 = &"CLKBS" @WIRE(mode="straight") {%p41 %p42};
+//   %p44 = (25, 8);
+//   %p45 = (25, 18);
+//   %wire_62 = &"CLKBS" @WIRE(mode="straight") {%p44 %p45};
+//   %wire_63 = &"CLKBS" @WIRE(mode="straight") {%p44 %p41};
+//   %wire_64 = &"CLKBS" @WIRE(mode="straight") {#"M4":2 %p45};
+//   %wire_65 = &"CLKBS" @WIRE(mode="straight") {#"M0":2 %p40};
+//   %wire_66 = &"CLKBS" @WIRE(mode="straight") {#"M2":1 %p44};
+//   %wire_58 @TEXT("CLKBS", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(25.3, 1);
+//   %p46 = (-39, -3);
+//   %p47 = (-39, 8);
+//   %wire_67 = &"CLK" @WIRE(mode="straight") {%p46 %p47};
+//   %wire_68 = &"CLK" @WIRE(mode="straight") {%p46 #"M5":2};
+//   %wire_69 = &"CLK" @WIRE(mode="straight") {%p47 #"M6":2};
+//   %wire_67 @TEXT("CLK", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-39.7, 4);
+//   $JUNCTION @ATTACH %p0;
+//   $JUNCTION @ATTACH %p1;
+//   $JUNCTION @ATTACH %p2;
+//   $JUNCTION @ATTACH %p7;
+//   $JUNCTION @ATTACH %p8;
+//   $JUNCTION @ATTACH %p9;
+//   $JUNCTION @ATTACH %p13;
+//   $JUNCTION @ATTACH %p14;
+//   $JUNCTION @ATTACH %p36;
+//   $JUNCTION @ATTACH %p37;
+//   $JUNCTION @ATTACH %p40;
+//   $JUNCTION @ATTACH %p41;
+//   $JUNCTION @ATTACH %p44
+// }
+// @RNL(author="gemini-4-argon") {
+//   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
+//   /* LB_bs_gen_V3: Input-Tracking Constant-Vgs Gate Bootstrap Switch Generator (nr=84, lr=4u) */
+//   {#"M6" #"M5" #"M12" #"M11"}(clock_inverters) #"C0"(flying_cap) {#"M4" #"M1"}(precharge_devices) {#"M0" #"M2" #"M8" #"M9" #"M124"}(input_tracking_loop) {#"M7" #"M3"}(discharge_path) @AS(role="constant_Vgs_input_tracking_bootstrap", boost_voltage="VDD_plus_VIN_nr84_lr4u") $GATE_BOOTSTRAP_GEN;
+//   {#"M6" #"M5"}(members) @AS $BRANCH;
+//   {#"M12" #"M11"}(members) @AS $BRANCH;
+//   {#"M7" #"M3"}(members) @AS $BRANCH;
+//   {#"M6" #"M12" #"M8" #"M2"}(path) @AS(direction="left-to-right") $FLOW;
+//   {#"M9" #"M8"}(members) @AS $BRANCH;
+//   {#"M4" #"C0" #"M1"}(members) @AS $BRANCH;
+//   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
+//   (-64, 69.29) @TEXT("Comment by Gemini-4-Argon", size=2) => @SET-STYLE $risca_author_style;
+//   @RECTANGLE {(-64, 52.02) (135.54, 67.29)} => @SET-STYLE $risca_note_box;
+//   (-61, 62.24) @TEXT("LB_bs_gen_V3: Constant-Vgs Input-Tracking Gate-Bootstrap Generator (C0: cfmom_2t nr=84 lr=4u, Shared by 11 Bottom-Plate Switches in L3_DAC_swi_V2)", size=2.2) => @SET-STYLE $risca_title_style;
+//   (-61, 58.64) @TEXT("1. Precharge (CLK=0): M4+M1 charge C0 (TOP=VDD, BOT=VSS); M9 holds net1=VDD (M2 off); cascode M7+M3 discharge CLKBS=VSS safely.", size=1.8) => @SET-STYLE $risca_swcap_style;
+//   (-61, 55.04) @TEXT("2. Boost & Track (CLK=1): M8+M124 tie M2 gate (net1) to BOT=VIN (via M0), driving CLKBS = VDD + VIN with signal-independent Vgs=VDD across all CDAC sampling switches.", size=1.8) => @SET-STYLE $risca_swcap_style
+// }
+ends LB_bs_gen_V3

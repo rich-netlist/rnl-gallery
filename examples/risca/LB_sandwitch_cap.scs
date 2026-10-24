@@ -1,0 +1,43 @@
+// RNL cell RISCA_JL/LB_sandwitch_cap
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// }
+subckt LB_sandwitch_cap BOT TOP
+    C0 (TOP BOT) capacitor c=9f
+// @RNL(author="rnl-virtuoso") {
+//   %block_symbol = @DEFINE-SYMBOL(box=[-2, -6, 2, 0]) {
+//     @LINE {(0, 0) (0, -2.2)};
+//     @LINE {(1, -2.2) (-1, -2.2)};
+//     @ARC {(1, -3.2) (0, -2.8) (-1, -3.2)};
+//     @LINE {(0, -2.8) (0, -6)};
+//     ? @TEXT("${name}", size=1, halign="start", valign="middle", key="name") => @PLACE(1, -1);
+//     (0, 0) @PIN(terminal="TOP");
+//     (0, -6) @PIN(terminal="BOT")
+//   };
+//   # @SET-SYMBOL %block_symbol;
+//   #"C0" @SET-SYMBOL $CAPACITOR;
+//   #"C0" @PLACE(-2, 10) => @ORIENT("R0");
+//   %port_0 = $IO_PORT @ATTACH &"TOP" => @PLACE(-12, 16) => @ORIENT("R0");
+//   %port_1 = $IO_PORT @ATTACH &"BOT" => @PLACE(-12, 4) => @ORIENT("R0");
+//   %p0 = (-13, 4);
+//   %p1 = (-2, 4);
+//   %wire_0 = &"BOT" @WIRE(mode="straight") {%p0 %port_1:p %p1};
+//   %wire_1 = &"BOT" @WIRE(mode="straight") {%p1 #"C0":2};
+//   %p2 = (-2, 16);
+//   %wire_2 = &"TOP" @WIRE(mode="straight") {#"C0":1 %p2};
+//   %wire_3 = &"TOP" @WIRE(mode="straight") {%port_0:p %p2}
+// }
+// @RNL(author="gemini-4-argon") {
+//   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
+//   /* LB_sandwitch_cap: 9fF Unit Sandwich Capacitor for Bridge and Residue Summing Network */
+//   #"C0"(cap) @AS(role="bridge_and_residue_summing_unit_capacitor", capacitance="9.0fF") $UNIT_CAP_CELL;
+//   #"C0"(members) @AS $BRANCH;
+//   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
+//   (-22, 41.96) @TEXT("Comment by Gemini-4-Argon", size=1.5) => @SET-STYLE $risca_author_style;
+//   @RECTANGLE {(-22, 32.01) (97.33, 40.51)} => @SET-STYLE $risca_note_box;
+//   (-20, 36.8) @TEXT("LB_sandwitch_cap: 9.0fF Unit Sandwich Capacitor for Programmable Bridge & Residue Summing Network (L3_bridge_cap_V2)", size=1.65) => @SET-STYLE $risca_title_style;
+//   (-20, 34.2) @TEXT("Note: Used in 17C (153fF) series bridge array, 5C (45fF) Branch-1 residue injector, and 10C (90fF) Branch-2 residue injector.", size=1.35) => @SET-STYLE $risca_swcap_style
+// }
+ends LB_sandwitch_cap

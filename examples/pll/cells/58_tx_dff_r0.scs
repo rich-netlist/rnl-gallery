@@ -1,0 +1,51 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt tx_dff_r0_pdk110_58 (d clk reset q vdd vss)
+XC (clk clkb vdd vss) pll_inv_pdk110_59
+XR (reset resetb vdd vss) pll_inv_pdk110_7
+XM (d clkb clk resetb qm vdd vss) tx_latch_r_pdk110_60
+XS (qm clk clkb resetb q vdd vss) tx_latch_r_pdk110_60
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $DFF_R_SYM;
+//
+//   /* --- 1. Circuit Semantics --- */
+//   %dff = {#XC #XR}(clock_buffers) {#XM}(master_latch) {#XS}(slave_latch) @AS(edge="rising", async_reset="active_high_reset_to_0") $MASTER_SLAVE_DFF;
+//   {#XM #XS} @AS $MATCHED;
+//   {%pd #XM #XS %pq} @AS(direction="left-to-right") $FLOW;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pd   = $IO_PORT @ATTACH &d     => @PLACE(2, 16)  => @ORIENT("R0");
+//   %pclk = $IO_PORT @ATTACH &clk   => @PLACE(2, 6)   => @ORIENT("R0");
+//   %prst = $IO_PORT @ATTACH &reset => @PLACE(2, 2)   => @ORIENT("R0");
+//   %pq   = $IO_PORT @ATTACH &q     => @PLACE(38, 14) => @ORIENT("MY");
+//
+//   #XC @PLACE(10, 6)  => @ORIENT("R0");
+//   #XR @PLACE(10, 2)  => @ORIENT("R0");
+//   #XM @PLACE(20, 14) => @ORIENT("R0");
+//   #XS @PLACE(32, 14) => @ORIENT("R0");
+//
+//   /* --- 3. Primary Data Path Wiring & Flying-Wire Clock/Reset Labels --- */
+//   &d  @WIRE { %pd:p #XM:d };
+//   &qm @WIRE { #XM:q (25, 14) (25, 16) #XS:d };
+//   &q  @WIRE { #XS:q %pq:p };
+//
+//   &clk    @WIRE { %pclk:p #XC:a };
+//   &clkb   @WIRE { #XC:y (16, 6) } => @TEXT("clkb") => @SET-STYLE $fly_label_style;
+//   &reset  @WIRE { %prst:p #XR:a };
+//   &resetb @WIRE { #XR:y (16, 2) } => @TEXT("resetb") => @SET-STYLE $fly_label_style;
+//
+//   #XM:gate   @TEXT("clkb",   dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
+//   #XM:gateb  @TEXT("clk",    dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
+//   #XM:resetb @TEXT("resetb", dx=0,    dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//   #XS:gate   @TEXT("clk",    dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
+//   #XS:gateb  @TEXT("clkb",   dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
+//   #XS:resetb @TEXT("resetb", dx=0,    dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
+//
+//   /* --- 4. Annotations --- */
+//   (20, 22) @TEXT("tx_dff_r0_pdk110_58: Rising-Edge D Flip-Flop with Active-High Asynchronous Reset to 0", halign="middle") => @SET-STYLE $title_style;
+//   (20, 20.3) @TEXT("Master Latch (XM) + Slave Latch (XS) + Local Clock/Reset Inverters (106 Instances in Digital Controllers)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends tx_dff_r0_pdk110_58

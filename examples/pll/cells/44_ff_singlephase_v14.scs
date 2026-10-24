@@ -1,0 +1,55 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt ff_singlephase_v14_pdk110_44 (d clk clkb q vdd vss)
+XF (d clk qb vdd vss) pll_tspc_inv_pdk110_25
+XO (qb q vdd vss) pll_inv_pdk110_27
+XK (q qb vdd vss) pll_inv_pdk110_45
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $FF_2CLK_SYM;
+//
+//   /* --- 1. Circuit Semantics & Design Defect Annotation --- */
+//   %keeper = #XO(forward_inv) #XK(keeper_inv) @AS(keeper_length="1000nm") $CROSS_COUPLED_KEEPER;
+//   %bug_clkb = {#XF}(culprit_devices) {&clkb}(affected_nets) @AS(
+//     severity="medium",
+//     category="unconnected_port_interface_bug",
+//     mechanism="Port clkb is declared in subckt header but completely floating/unconnected inside because XF (pll_tspc_inv) is single-phase clocked; in 21_bank_pulsetrip_v14, XF0..XF6 tie both clk and clkb to ck",
+//     recommendation="Remove unused clkb port from ff_singlephase_v14 interface or use true complementary-clocked latch"
+//   ) $DESIGN_DEFECT;
+//   {%pd #XF #XO %pq} @AS(direction="left-to-right") $FLOW;
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %pd    = $IO_PORT @ATTACH &d    => @PLACE(2, 15)  => @ORIENT("R0");
+//   %pclk  = $IO_PORT @ATTACH &clk  => @PLACE(2, 13)  => @ORIENT("R0");
+//   %pclkb = $IO_PORT @ATTACH &clkb => @PLACE(2, 5)   => @ORIENT("R0");
+//   %pq    = $IO_PORT @ATTACH &q    => @PLACE(36, 14) => @ORIENT("MY");
+//   $NO_CONNECT @ATTACH %pclkb:p;
+//
+//   #XF @PLACE(12, 14) => @ORIENT("R0");
+//   #XO @PLACE(25, 14) => @ORIENT("R0");
+//   #XK @PLACE(25, 8)  => @ORIENT("MY");
+//
+//   /* --- 3. Explicit Manhattan Wiring --- */
+//   &d   @WIRE { %pd:p   #XF:d };
+//   &clk @WIRE { %pclk:p #XF:ck };
+//
+//   %jqb = (19, 14);
+//   $JUNCTION @ATTACH %jqb;
+//   &qb @WIRE { #XF:qb %jqb #XO:a };
+//   &qb @WIRE { %jqb (19, 8) #XK:y };
+//
+//   %jq = (30, 14);
+//   $JUNCTION @ATTACH %jq;
+//   &q @WIRE { #XO:y %jq %pq:p };
+//   &q @WIRE { %jq (30, 8) #XK:a };
+//
+//   /* --- 4. Annotations & Defect Callout --- */
+//   (18, 2.5) @RECTANGLE(width=30, height=3.8) => @SET-STYLE $defect_box;
+//   (18, 3.2) @TEXT("DEFECT: Port clkb is UNCONNECTED internally (XF is single-phase TSPC)", halign="middle") => @SET-STYLE $defect_style;
+//   (18, 1.8) @TEXT("In 21_bank_pulsetrip_v14, XF0..XF6 also pass (ck ck) to (clk clkb) instead of (ck cb)", halign="middle") => @SET-STYLE $param_style;
+//   (19, 21) @TEXT("ff_singlephase_v14_pdk110_44: Single-Phase TSPC Flip-Flop with Long-Channel Keeper (XK)", halign="middle") => @SET-STYLE $title_style;
+//   (19, 19.3) @TEXT("9T Inverting TSPC Core (XF) + Output Buffer (XO) + L=1um Weak Keeper Inverter (XK)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends ff_singlephase_v14_pdk110_44

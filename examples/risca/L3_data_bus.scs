@@ -1,0 +1,696 @@
+// RNL cell RISCA_JL/L3_data_bus
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// }
+subckt L3_data_bus BUSIN_15 BUSIN_14 BUSIN_13 BUSIN_12 BUSIN_11 BUSIN_10 \
+        BUSIN_9 BUSIN_8 BUSIN_7 BUSIN_6 BUSIN_5 BUSIN_4 BUSIN_3 BUSIN_2 \
+        BUSIN_1 BUSIN_0 BUSOUT_15 BUSOUT_14 BUSOUT_13 BUSOUT_12 BUSOUT_11 \
+        BUSOUT_10 BUSOUT_9 BUSOUT_8 BUSOUT_7 BUSOUT_6 BUSOUT_5 BUSOUT_4 \
+        BUSOUT_3 BUSOUT_2 BUSOUT_1 BUSOUT_0 CLK DIN GND UPDATE VDD ADDR_2 \
+        ADDR_1 ADDR_0 RDY_1 RDY_0 UDI UDO
+    I13_2 (BUSIN_15 ADDR_2 SEL_BUS BUSOUT_15 VDD GND) MUX2D2BWP12T30P140
+    I13_1 (BUSIN_14 ADDR_1 SEL_BUS BUSOUT_14 VDD GND) MUX2D2BWP12T30P140
+    I13_0 (BUSIN_13 ADDR_0 SEL_BUS BUSOUT_13 VDD GND) MUX2D2BWP12T30P140
+    I11_1 (BUSIN_12 RDQ_1 SEL_BUS BUSOUT_12 VDD GND) MUX2D2BWP12T30P140
+    I11_0 (BUSIN_11 RDQ_0 SEL_BUS BUSOUT_11 VDD GND) MUX2D2BWP12T30P140
+    I1_10 (BUSIN_10 LH_10 SEL_BUS BUSOUT_10 VDD GND) MUX2D2BWP12T30P140
+    I1_9 (BUSIN_9 LH_9 SEL_BUS BUSOUT_9 VDD GND) MUX2D2BWP12T30P140
+    I1_8 (BUSIN_8 LH_8 SEL_BUS BUSOUT_8 VDD GND) MUX2D2BWP12T30P140
+    I1_7 (BUSIN_7 LH_7 SEL_BUS BUSOUT_7 VDD GND) MUX2D2BWP12T30P140
+    I1_6 (BUSIN_6 LH_6 SEL_BUS BUSOUT_6 VDD GND) MUX2D2BWP12T30P140
+    I1_5 (BUSIN_5 LH_5 SEL_BUS BUSOUT_5 VDD GND) MUX2D2BWP12T30P140
+    I1_4 (BUSIN_4 LH_4 SEL_BUS BUSOUT_4 VDD GND) MUX2D2BWP12T30P140
+    I1_3 (BUSIN_3 LH_3 SEL_BUS BUSOUT_3 VDD GND) MUX2D2BWP12T30P140
+    I1_2 (BUSIN_2 LH_2 SEL_BUS BUSOUT_2 VDD GND) MUX2D2BWP12T30P140
+    I1_1 (BUSIN_1 LH_1 SEL_BUS BUSOUT_1 VDD GND) MUX2D2BWP12T30P140
+    I1_0 (BUSIN_0 LH_0 SEL_BUS BUSOUT_0 VDD GND) MUX2D2BWP12T30P140
+    I9 (net4 RST_BUS VDD GND) INVD4BWP12T30P140
+    I10 (net2 LH_BUS VDD GND) INVD4BWP12T30P140
+    I2 (CLK CLK_BUS VDD GND) BUFFD4BWP12T30P140
+    I3 (DIN DIN_DEL VDD GND) DEL025D1BWP12T30P140
+    I4_10 (Q_9 LH_BUS LH_10 VDD GND) LHQD1BWP12T30P140
+    I4_9 (Q_8 LH_BUS LH_9 VDD GND) LHQD1BWP12T30P140
+    I4_8 (Q_7 LH_BUS LH_8 VDD GND) LHQD1BWP12T30P140
+    I4_7 (Q_6 LH_BUS LH_7 VDD GND) LHQD1BWP12T30P140
+    I4_6 (Q_5 LH_BUS LH_6 VDD GND) LHQD1BWP12T30P140
+    I4_5 (Q_4 LH_BUS LH_5 VDD GND) LHQD1BWP12T30P140
+    I4_4 (Q_3 LH_BUS LH_4 VDD GND) LHQD1BWP12T30P140
+    I4_3 (Q_2 LH_BUS LH_3 VDD GND) LHQD1BWP12T30P140
+    I4_2 (Q_1 LH_BUS LH_2 VDD GND) LHQD1BWP12T30P140
+    I4_1 (Q_0 LH_BUS LH_1 VDD GND) LHQD1BWP12T30P140
+    I4_0 (DIN_DEL LH_BUS LH_0 VDD GND) LHQD1BWP12T30P140
+    I0_9 (Q_8 CLK_BUS RST_BUS Q_9 VDD GND) DFCNQD1BWP12T30P140
+    I0_8 (Q_7 CLK_BUS RST_BUS Q_8 VDD GND) DFCNQD1BWP12T30P140
+    I0_7 (Q_6 CLK_BUS RST_BUS Q_7 VDD GND) DFCNQD1BWP12T30P140
+    I0_6 (Q_5 CLK_BUS RST_BUS Q_6 VDD GND) DFCNQD1BWP12T30P140
+    I0_5 (Q_4 CLK_BUS RST_BUS Q_5 VDD GND) DFCNQD1BWP12T30P140
+    I0_4 (Q_3 CLK_BUS RST_BUS Q_4 VDD GND) DFCNQD1BWP12T30P140
+    I0_3 (Q_2 CLK_BUS RST_BUS Q_3 VDD GND) DFCNQD1BWP12T30P140
+    I0_2 (Q_1 CLK_BUS RST_BUS Q_2 VDD GND) DFCNQD1BWP12T30P140
+    I0_1 (Q_0 CLK_BUS RST_BUS Q_1 VDD GND) DFCNQD1BWP12T30P140
+    I0_0 (DIN_DEL CLK_BUS RST_BUS Q_0 VDD GND) DFCNQD1BWP12T30P140
+    I12_1 (net1_0 SEL_BUS RDQ_1 VDD GND) DFQD1BWP12T30P140
+    I12_0 (net1_1 SEL_BUS RDQ_0 VDD GND) DFQD1BWP12T30P140
+    I14_1 (RDY_1 net1_0 VDD GND) DEL050D1BWP12T30P140
+    I14_0 (RDY_0 net1_1 VDD GND) DEL050D1BWP12T30P140
+    I8 (SEL_BUS net4 VDD GND) DEL050D1BWP12T30P140
+    I15 (UPDATE net2 VDD GND) DEL050D1BWP12T30P140
+    I5 (LH_BUS SEL_BUS VDD GND) INVD8BWP12T30P140
+    I16_1 (VDD GND) DCAPBWP12T30P140
+    I16_2 (VDD GND) DCAPBWP12T30P140
+    I16_3 (VDD GND) DCAPBWP12T30P140
+    I16_4 (VDD GND) DCAPBWP12T30P140
+    I16_5 (VDD GND) DCAPBWP12T30P140
+    I16_6 (VDD GND) DCAPBWP12T30P140
+    I17_1 (VDD GND) DCAP4BWP12T30P140
+    I17_2 (VDD GND) DCAP4BWP12T30P140
+    I17_3 (VDD GND) DCAP4BWP12T30P140
+    I17_4 (VDD GND) DCAP4BWP12T30P140
+    I17_5 (VDD GND) DCAP4BWP12T30P140
+    I17_6 (VDD GND) DCAP4BWP12T30P140
+    I17_7 (VDD GND) DCAP4BWP12T30P140
+    I17_8 (VDD GND) DCAP4BWP12T30P140
+    I17_9 (VDD GND) DCAP4BWP12T30P140
+    I17_10 (VDD GND) DCAP4BWP12T30P140
+    I17_11 (VDD GND) DCAP4BWP12T30P140
+    I128 (UDI UPDATE UDO VDD GND) OR2D2BWP12T30P140
+// @RNL(author="rnl-virtuoso") {
+//   %block_symbol = @DEFINE-SYMBOL(box=[0, -14, 26, 8]) {
+//     @LINE {(0, -6) (7, -6)};
+//     @LINE {(0, -2) (7, -2)};
+//     @LINE {(0, 0) (7, 0)};
+//     @LINE {(14, 8) (14, 4)};
+//     @LINE {(14, -14) (14, -10)};
+//     @LINE {(26, -4) (22, -4)};
+//     @LINE {(26, -6) (22, -6)};
+//     @RECTANGLE {(7, -10) (22, 4)};
+//     @LINE {(26, 0) (22, 0)};
+//     @LINE {(0, -4) (7, -4)};
+//     @LINE {(10, 8) (10, 4)};
+//     @LINE {(10, -14) (10, -10)};
+//     ? @TEXT("${name}", size=1, halign="start", valign="middle", key="name") => @PLACE(20, 6);
+//     ? @TEXT("${model}", size=1, halign="middle", valign="middle", key="model") => @PLACE(13, -3);
+//     (0, -6) @PIN(terminal="UPDATE");
+//     (0.6, -5) @TEXT("UPDATE", size=1, halign="start", valign="middle");
+//     (0, -2) @PIN(terminal="DIN");
+//     (0.6, -1) @TEXT("DIN", size=1, halign="start", valign="middle");
+//     (0, 0) @PIN(terminal="CLK");
+//     (0.6, 1) @TEXT("CLK", size=1, halign="start", valign="middle");
+//     (14, 8) @PIN(terminal=["BUSIN_15", "BUSIN_14", "BUSIN_13", "BUSIN_12", "BUSIN_11", "BUSIN_10", "BUSIN_9", "BUSIN_8", "BUSIN_7", "BUSIN_6", "BUSIN_5", "BUSIN_4", "BUSIN_3", "BUSIN_2", "BUSIN_1", "BUSIN_0"]);
+//     (9.6, 3) @TEXT("BUSIN<15:0>", size=1, halign="start", valign="middle");
+//     (14, -14) @PIN(terminal=["BUSOUT_15", "BUSOUT_14", "BUSOUT_13", "BUSOUT_12", "BUSOUT_11", "BUSOUT_10", "BUSOUT_9", "BUSOUT_8", "BUSOUT_7", "BUSOUT_6", "BUSOUT_5", "BUSOUT_4", "BUSOUT_3", "BUSOUT_2", "BUSOUT_1", "BUSOUT_0"]);
+//     (20.4, -9) @TEXT("BUSOUT<15:0>", size=1, halign="end", valign="middle");
+//     (26, -4) @PIN(terminal="VDD");
+//     (21.4, -4) @TEXT("VDD", size=1, halign="end", valign="middle");
+//     (26, -6) @PIN(terminal="GND");
+//     (21.4, -6) @TEXT("GND", size=1, halign="end", valign="middle");
+//     (26, 0) @PIN(terminal=["ADDR_2", "ADDR_1", "ADDR_0"]);
+//     (21.4, 0) @TEXT("ADDR<2:0>", size=1, halign="end", valign="middle");
+//     (0, -4) @PIN(terminal=["RDY_1", "RDY_0"]);
+//     (0.6, -3) @TEXT("RDY<1:0>", size=1, halign="start", valign="middle");
+//     (10, -14) @PIN(terminal="UDO");
+//     (9.4, -12) @TEXT("UDO", size=1, halign="end", valign="middle");
+//     (10, 8) @PIN(terminal="UDI");
+//     (7.6, 6) @TEXT("UDI", size=1, halign="start", valign="middle")
+//   };
+//   # @SET-SYMBOL %block_symbol;
+//   %bundle_0 = {#"I14_1" #"I14_0"} @BUNDLE;
+//   %symbol_0 = @DEFINE-SYMBOL(box=[-4, -10, 8, -4]) {
+//     @LINE {(2, -4) (2, -5)};
+//     @LINE {(2, -10) (2, -9)};
+//     @LINE {(-4, -7) (-2, -7)};
+//     @LINE {(6, -7) (8, -7)};
+//     @RECTANGLE {(-2, -9) (6, -5)};
+//     ? @TEXT("${model}", size=0.4, halign="end", valign="baseline", key="model") => @PLACE(8, -10);
+//     ? @TEXT("${name}", size=0.4, halign="end", valign="top", key="name") => @PLACE(8, -4);
+//     (2, -10) @PIN(terminal=4);
+//     (2.9, -10) @TEXT("VSS", size=0.4, halign="start", valign="middle");
+//     (2, -4) @PIN(terminal=3);
+//     (2.9, -4) @TEXT("VDD", size=0.4, halign="start", valign="middle");
+//     (8, -7) @PIN(terminal=2);
+//     (7, -6.6) @TEXT("Z", size=0.4, halign="end", valign="middle");
+//     (-4, -7) @PIN(terminal=1);
+//     (-2.9, -6.6) @TEXT("I", size=0.4, halign="start", valign="middle")
+//   };
+//   %bundle_0 @SET-SYMBOL %symbol_0;
+//   %bundle_0 @PLACE(86, 27) => @ORIENT("R0");
+//   %bundle_0 @TEXT("I14<1:0>", key="name");
+//   %symbol_1 = @DEFINE-SYMBOL(box=[-1, -10, 8, -2]) {
+//     @ARC {(3, -8) (4.8, -7.5) (6, -6)};
+//     @ARC {(5.9, -6.1) (4.8, -4.6) (3, -4.1)};
+//     @LINE {(-1, -7) (1.7, -7)};
+//     @LINE {(-1, -5) (1.7, -5)};
+//     @ARC {(0, -8) (2, -6) (0, -4)};
+//     @LINE {(0, -8) (3, -8)};
+//     @LINE {(0, -4) (3, -4)};
+//     @LINE {(3, -10) (3, -8)};
+//     @LINE {(6, -6) (7, -6)};
+//     @LINE {(3, -2) (3, -4)};
+//     @LINE {(7, -6) (8, -6)};
+//     ? @TEXT("${name}", size=0.4, halign="end", valign="top", key="name") => @PLACE(8, -2);
+//     ? @TEXT("${model}", size=0.4, halign="end", valign="baseline", key="model") => @PLACE(8, -10);
+//     (3, -2) @PIN(terminal=4);
+//     (3.9, -2) @TEXT("VDD", size=0.4, halign="start", valign="middle");
+//     (8, -6) @PIN(terminal=3);
+//     (5.6, -6) @TEXT("Z", size=0.4, halign="end", valign="middle");
+//     (3, -10) @PIN(terminal=5);
+//     (3.9, -10) @TEXT("VSS", size=0.4, halign="start", valign="middle");
+//     (-1, -5) @PIN(terminal=1);
+//     (2.4, -5) @TEXT("A1", size=0.4, halign="start", valign="middle");
+//     (-1, -7) @PIN(terminal=2);
+//     (2.4, -7) @TEXT("A2", size=0.4, halign="start", valign="middle")
+//   };
+//   #"I128" @SET-SYMBOL %symbol_1;
+//   #"I128" @PLACE(-43, -31) => @ORIENT("R0");
+//   %symbol_2 = @DEFINE-SYMBOL(box=[-8, -8, -1, -2]) {
+//     @LINE {(-6, -3) (-6, -7)};
+//     @LINE {(-8, -5) (-6, -5)};
+//     @LINE {(-6, -3) (-3, -5)};
+//     @LINE {(-6, -7) (-3, -5)};
+//     @LINE {(-2, -5) (-1, -5)};
+//     @LINE {(-5, -2) (-5, -3.7)};
+//     @LINE {(-5, -8) (-5, -6.4)};
+//     (-2.5, -5) @CIRCLE(radius=0.5);
+//     ? @TEXT("${model}", size=0.4, halign="end", valign="baseline", key="model") => @PLACE(-1, -8);
+//     ? @TEXT("${name}", size=0.4, halign="end", valign="top", key="name") => @PLACE(-1, -2);
+//     (-5, -8) @PIN(terminal=4);
+//     (-4.1, -8) @TEXT("VSS", size=0.4, halign="start", valign="middle");
+//     (-5, -2) @PIN(terminal=3);
+//     (-4.1, -2) @TEXT("VDD", size=0.4, halign="start", valign="middle");
+//     (-1, -5) @PIN(terminal=2);
+//     (-3.4, -5) @TEXT("ZN", size=0.4, halign="end", valign="middle");
+//     (-8, -5) @PIN(terminal=1);
+//     (-5.8, -5) @TEXT("I", size=0.4, halign="start", valign="middle")
+//   };
+//   #"I10" @SET-SYMBOL %symbol_2;
+//   #"I10" @PLACE(-23, -13) => @ORIENT("R0");
+//   %symbol_3 = @DEFINE-SYMBOL(box=[-4, -10, 8, -4]) {
+//     @LINE {(2, -4) (2, -5)};
+//     @LINE {(2, -10) (2, -9)};
+//     @LINE {(-4, -7) (-2, -7)};
+//     @LINE {(6, -7) (8, -7)};
+//     @RECTANGLE {(-2, -9) (6, -5)};
+//     ? @TEXT("${model}", size=0.4, halign="end", valign="baseline", key="model") => @PLACE(8, -10);
+//     ? @TEXT("${name}", size=0.4, halign="end", valign="top", key="name") => @PLACE(8, -4);
+//     (2, -10) @PIN(terminal=4);
+//     (2.9, -10) @TEXT("VSS", size=0.4, halign="start", valign="middle");
+//     (2, -4) @PIN(terminal=3);
+//     (2.9, -4) @TEXT("VDD", size=0.4, halign="start", valign="middle");
+//     (8, -7) @PIN(terminal=2);
+//     (7, -6.6) @TEXT("Z", size=0.4, halign="end", valign="middle");
+//     (-4, -7) @PIN(terminal=1);
+//     (-2.9, -6.6) @TEXT("I", size=0.4, halign="start", valign="middle")
+//   };
+//   #"I3" @SET-SYMBOL %symbol_3;
+//   #"I3" @PLACE(-42, 25) => @ORIENT("R0");
+//   %bundle_1 = {#"I1_10" #"I1_9" #"I1_8" #"I1_7" #"I1_6" #"I1_5" #"I1_4" #"I1_3" #"I1_2" #"I1_1" #"I1_0"} @BUNDLE;
+//   %symbol_4 = @DEFINE-SYMBOL(box=[22, -3, 30, 7]) {
+//     @LINE {(28, 0) (24, -2)};
+//     @LINE {(24, 6) (28, 4)};
+//     @LINE {(24, 0) (24, -2)};
+//     @LINE {(28, 4) (28, 0)};
+//     @LINE {(24, 6) (24, 0)};
+//     @LINE {(29, 2) (30, 2)};
+//     @LINE {(24, 7) (24, 5)};
+//     @LINE {(28, 2) (29, 2)};
+//     @LINE {(24, -3) (24, -1)};
+//     @LINE {(24, 4) (22, 4)};
+//     @LINE {(22, 0) (24, 0)};
+//     @LINE {(26, -3) (26, -1)};
+//     ? @TEXT("${model}", size=0.4, halign="end", valign="baseline", key="model") => @PLACE(30, -3);
+//     ? @TEXT("${name}", size=0.4, halign="end", valign="top", key="name") => @PLACE(30, 7);
+//     (24, -3) @PIN(terminal=6);
+//     (22.4, -3) @TEXT("VSS", size=0.4, halign="start", valign="middle");
+//     (24, 7) @PIN(terminal=5);
+//     (22.4, 7) @TEXT("VDD", size=0.4, halign="start", valign="middle");
+//     (30, 2) @PIN(terminal=4);
+//     (27.9, 2) @TEXT("Z", size=0.4, halign="end", valign="middle");
+//     (22, 4) @PIN(terminal=1);
+//     (24.4, 4) @TEXT("I0", size=0.4, halign="start", valign="middle");
+//     (22, 0) @PIN(terminal=2);
+//     (24.4, 0) @TEXT("I1", size=0.4, halign="start", valign="middle");
+//     (26, -3) @PIN(terminal=3);
+//     (25.8, -0.4) @TEXT("S", size=0.4, halign="start", valign="middle")
+//   };
+//   %bundle_1 @SET-SYMBOL %symbol_4;
+//   %bundle_1 @PLACE(68, 29) => @ORIENT("R270");
+//   %bundle_1 @TEXT("I1<10:0>", key="name");
+//   #"I8" @SET-SYMBOL %symbol_0;
+//   #"I8" @PLACE(-5, -11) => @ORIENT("R0");
+//   %bundle_2 = {#"I17_1" #"I17_2" #"I17_3" #"I17_4" #"I17_5" #"I17_6" #"I17_7" #"I17_8" #"I17_9" #"I17_10" #"I17_11"} @BUNDLE;
+//   %symbol_5 = @DEFINE-SYMBOL(box=[1, 3, 3, 6]) {
+//     @LINE {(2, 3) (2, 4)};
+//     @LINE {(1, 5) (3, 5)};
+//     @LINE {(2, 6) (2, 5)};
+//     @LINE {(1, 4) (3, 4)};
+//     ? @TEXT("${name}", size=0.4, halign="end", valign="top", key="name") => @PLACE(3, 6);
+//     ? @TEXT("${model}", size=0.4, halign="end", valign="baseline", key="model") => @PLACE(3, 3);
+//     (2, 6) @PIN(terminal=1);
+//     (2.9, 6) @TEXT("VDD", size=0.4, halign="start", valign="middle");
+//     (2, 3) @PIN(terminal=2);
+//     (2.9, 3) @TEXT("VSS", size=0.4, halign="start", valign="middle")
+//   };
+//   %bundle_2 @SET-SYMBOL %symbol_5;
+//   %bundle_2 @PLACE(-63, 14) => @ORIENT("R0");
+//   %bundle_2 @TEXT("I17<1:11>", key="name");
+//   %bundle_3 = {#"I11_1" #"I11_0"} @BUNDLE;
+//   %bundle_3 @SET-SYMBOL %symbol_4;
+//   %bundle_3 @PLACE(115, 29) => @ORIENT("R270");
+//   %bundle_3 @TEXT("I11<1:0>", key="name");
+//   %symbol_6 = @DEFINE-SYMBOL(box=[-8, -8, -1, -2]) {
+//     @LINE {(-6, -3) (-6, -7)};
+//     @LINE {(-8, -5) (-6, -5)};
+//     @LINE {(-6, -3) (-3, -5)};
+//     @LINE {(-6, -7) (-3, -5)};
+//     @LINE {(-2, -5) (-1, -5)};
+//     @LINE {(-5, -2) (-5, -3.7)};
+//     @LINE {(-5, -8) (-5, -6.4)};
+//     (-2.5, -5) @CIRCLE(radius=0.5);
+//     ? @TEXT("${model}", size=0.4, halign="end", valign="baseline", key="model") => @PLACE(-1, -8);
+//     ? @TEXT("${name}", size=0.4, halign="end", valign="top", key="name") => @PLACE(-1, -2);
+//     (-5, -8) @PIN(terminal=4);
+//     (-4.1, -8) @TEXT("VSS", size=0.4, halign="start", valign="middle");
+//     (-5, -2) @PIN(terminal=3);
+//     (-4.1, -2) @TEXT("VDD", size=0.4, halign="start", valign="middle");
+//     (-1, -5) @PIN(terminal=2);
+//     (-3.4, -5) @TEXT("ZN", size=0.4, halign="end", valign="middle");
+//     (-8, -5) @PIN(terminal=1);
+//     (-5.8, -5) @TEXT("I", size=0.4, halign="start", valign="middle")
+//   };
+//   #"I5" @SET-SYMBOL %symbol_6;
+//   #"I5" @PLACE(-12, -13) => @ORIENT("R0");
+//   #"I9" @SET-SYMBOL %symbol_2;
+//   #"I9" @PLACE(13, -13) => @ORIENT("R0");
+//   %bundle_4 = {#"I16_1" #"I16_2" #"I16_3" #"I16_4" #"I16_5" #"I16_6"} @BUNDLE;
+//   %symbol_7 = @DEFINE-SYMBOL(box=[1, 3, 3, 6]) {
+//     @LINE {(2, 3) (2, 4)};
+//     @LINE {(1, 5) (3, 5)};
+//     @LINE {(2, 6) (2, 5)};
+//     @LINE {(1, 4) (3, 4)};
+//     ? @TEXT("${name}", size=0.4, halign="end", valign="top", key="name") => @PLACE(3, 6);
+//     ? @TEXT("${model}", size=0.4, halign="end", valign="baseline", key="model") => @PLACE(3, 3);
+//     (2, 6) @PIN(terminal=1);
+//     (2.9, 6) @TEXT("VDD", size=0.4, halign="start", valign="middle");
+//     (2, 3) @PIN(terminal=2);
+//     (2.9, 3) @TEXT("VSS", size=0.4, halign="start", valign="middle")
+//   };
+//   %bundle_4 @SET-SYMBOL %symbol_7;
+//   %bundle_4 @PLACE(-71, 14) => @ORIENT("R0");
+//   %bundle_4 @TEXT("I16<1:6>", key="name");
+//   %bundle_5 = {#"I0_9" #"I0_8" #"I0_7" #"I0_6" #"I0_5" #"I0_4" #"I0_3" #"I0_2" #"I0_1" #"I0_0"} @BUNDLE;
+//   %symbol_8 = @DEFINE-SYMBOL(box=[9, -3, 19, 10]) {
+//     @LINE {(11, 2) (12, 1) (11, 0)};
+//     @RECTANGLE {(11, -1) (17, 9)};
+//     @LINE {(12, 10) (12, 9)};
+//     @LINE {(9, 6) (11, 6)};
+//     @LINE {(9, 1) (11, 1)};
+//     @LINE {(17, 6) (19, 6)};
+//     (15, -1.5) @CIRCLE(radius=0.5);
+//     @LINE {(15, -3) (15, -2)};
+//     @LINE {(12, -3) (12, -1)};
+//     ? @TEXT("${model}", size=0.4, halign="end", valign="baseline", key="model") => @PLACE(19, -3);
+//     ? @TEXT("${name}", size=0.4, halign="end", valign="top", key="name") => @PLACE(19, 10);
+//     (12, -3) @PIN(terminal=6);
+//     (12.5, -2) @TEXT("VSS", size=0.4, halign="start", valign="middle");
+//     (12, 10) @PIN(terminal=5);
+//     (12.9, 10) @TEXT("VDD", size=0.4, halign="start", valign="middle");
+//     (19, 6) @PIN(terminal=4);
+//     (16.6, 6) @TEXT("Q", size=0.4, halign="end", valign="middle");
+//     (9, 6) @PIN(terminal=1);
+//     (11.4, 6) @TEXT("D", size=0.4, halign="start", valign="middle");
+//     (9, 1) @PIN(terminal=2);
+//     (12.4, 1) @TEXT("CP", size=0.4, halign="start", valign="middle");
+//     (15, -3) @PIN(terminal=3);
+//     (15.4, -2) @TEXT("CDN", size=0.4, halign="start", valign="middle")
+//   };
+//   %bundle_5 @SET-SYMBOL %symbol_8;
+//   %bundle_5 @PLACE(7, 12) => @ORIENT("R0");
+//   %bundle_5 @TEXT("I0<9:0>", key="name");
+//   #"I15" @SET-SYMBOL %symbol_0;
+//   #"I15" @PLACE(-42, -11) => @ORIENT("R0");
+//   %bundle_6 = {#"I13_2" #"I13_1" #"I13_0"} @BUNDLE;
+//   %bundle_6 @SET-SYMBOL %symbol_4;
+//   %bundle_6 @PLACE(144, 29) => @ORIENT("R270");
+//   %bundle_6 @TEXT("I13<2:0>", key="name");
+//   %bundle_7 = {#"I12_1" #"I12_0"} @BUNDLE;
+//   %symbol_9 = @DEFINE-SYMBOL(box=[12, -1, 20, 9]) {
+//     @LINE {(12, 2) (14, 2)};
+//     @LINE {(14, 6) (12, 6)};
+//     @LINE {(16, 9) (16, 8)};
+//     @LINE {(16, 0) (16, -1)};
+//     @LINE {(14, 8) (14, 0)};
+//     @LINE {(14, 3) (15.4, 2) (14, 1)};
+//     @LINE {(18, 8) (18, 0)};
+//     @LINE {(14, 8) (18, 8)};
+//     @LINE {(14, 0) (18, 0)};
+//     @LINE {(20, 4) (18, 4)};
+//     ? @TEXT("${model}", size=0.4, halign="end", valign="baseline", key="model") => @PLACE(20, -1);
+//     ? @TEXT("${name}", size=0.4, halign="end", valign="top", key="name") => @PLACE(20, 9);
+//     (16, -1) @PIN(terminal=5);
+//     (14.4, -1) @TEXT("VSS", size=0.4, halign="start", valign="middle");
+//     (16, 9) @PIN(terminal=4);
+//     (14.4, 9) @TEXT("VDD", size=0.4, halign="start", valign="middle");
+//     (20, 4) @PIN(terminal=3);
+//     (17.9, 4) @TEXT("Q", size=0.4, halign="end", valign="middle");
+//     (12, 6) @PIN(terminal=1);
+//     (14.4, 6) @TEXT("D", size=0.4, halign="start", valign="middle");
+//     (12, 2) @PIN(terminal=2);
+//     (14.1, 2) @TEXT("CP", size=0.4, halign="start", valign="middle")
+//   };
+//   %bundle_7 @SET-SYMBOL %symbol_9;
+//   %bundle_7 @PLACE(85, 14) => @ORIENT("R0");
+//   %bundle_7 @TEXT("I12<1:0>", key="name");
+//   %bundle_8 = {#"I4_10" #"I4_9" #"I4_8" #"I4_7" #"I4_6" #"I4_5" #"I4_4" #"I4_3" #"I4_2" #"I4_1" #"I4_0"} @BUNDLE;
+//   %symbol_10 = @DEFINE-SYMBOL(box=[-3, -2, 7, 10]) {
+//     @LINE {(2, -2) (2, -1)};
+//     @RECTANGLE {(-1, -1) (5, 9)};
+//     @LINE {(-3, 6) (-1, 6)};
+//     @LINE {(2, 10) (2, 9)};
+//     @LINE {(-3, 1) (-1, 1)};
+//     @LINE {(5, 6) (7, 6)};
+//     @LINE {(-1, 2) (0, 1) (-1, 0)};
+//     ? @TEXT("${model}", size=0.4, halign="end", valign="baseline", key="model") => @PLACE(7, -2);
+//     ? @TEXT("${name}", size=0.4, halign="end", valign="top", key="name") => @PLACE(7, 10);
+//     (2, 10) @PIN(terminal=4);
+//     (2.9, 10) @TEXT("VDD", size=0.4, halign="start", valign="middle");
+//     (2, -2) @PIN(terminal=5);
+//     (2.5, -2) @TEXT("VSS", size=0.4, halign="start", valign="middle");
+//     (7, 6) @PIN(terminal=3);
+//     (4.6, 6) @TEXT("Q", size=0.4, halign="end", valign="middle");
+//     (-3, 1) @PIN(terminal=2);
+//     (0.4, 1) @TEXT("E", size=0.4, halign="start", valign="middle");
+//     (-3, 6) @PIN(terminal=1);
+//     (-0.6, 6) @TEXT("D", size=0.4, halign="start", valign="middle")
+//   };
+//   %bundle_8 @SET-SYMBOL %symbol_10;
+//   %bundle_8 @PLACE(54, 12) => @ORIENT("R0");
+//   %bundle_8 @TEXT("I4<10:0>", key="name");
+//   %symbol_11 = @DEFINE-SYMBOL(box=[-11, -4, -4, 2]) {
+//     @LINE {(-8, 2) (-8, 0.3)};
+//     @LINE {(-6, -1) (-4, -1)};
+//     @LINE {(-8, -4) (-8, -2.4)};
+//     @LINE {(-9, 1) (-9, -3)};
+//     @LINE {(-9, 1) (-6, -1)};
+//     @LINE {(-9, -3) (-6, -1)};
+//     @LINE {(-11, -1) (-9, -1)};
+//     ? @TEXT("${model}", size=0.4, halign="end", valign="baseline", key="model") => @PLACE(-4, -4);
+//     ? @TEXT("${name}", size=0.4, halign="end", valign="top", key="name") => @PLACE(-4, 2);
+//     (-8, 2) @PIN(terminal=3);
+//     (-7.1, 2) @TEXT("VDD", size=0.4, halign="start", valign="middle");
+//     (-8, -4) @PIN(terminal=4);
+//     (-7.1, -4) @TEXT("VSS", size=0.4, halign="start", valign="middle");
+//     (-4, -1) @PIN(terminal=2);
+//     (-6.4, -1) @TEXT("Z", size=0.4, halign="end", valign="middle");
+//     (-11, -1) @PIN(terminal=1);
+//     (-8.8, -1) @TEXT("I", size=0.4, halign="start", valign="middle")
+//   };
+//   #"I2" @SET-SYMBOL %symbol_11;
+//   #"I2" @PLACE(-32, 1) => @ORIENT("R0");
+//   %port_0 = $IO_PORT @ATTACH &"VDD" => @PLACE(-81, 21) => @ORIENT("R0");
+//   %port_1 = $IO_PORT @ATTACH &"GND" => @PLACE(-81, 17) => @ORIENT("R0");
+//   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
+//       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
+//       (0, 0) @PIN(terminal=1, direction="right");
+//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//     };
+//   %port_2 = $IO_PORT @ATTACH &"DIN" => @PLACE(-80, 13) => @ORIENT("R0");
+//   %port_2 @SET-SYMBOL %input_port_symbol;
+//   %port_2 @TEXT("DIN", key="name");
+//   %port_3 = $IO_PORT @ATTACH &"CLK" => @PLACE(-80, 9) => @ORIENT("R0");
+//   %port_3 @SET-SYMBOL %input_port_symbol;
+//   %port_3 @TEXT("CLK", key="name");
+//   %bus_port_type_4 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"], ["p3", "net"], ["p4", "net"], ["p5", "net"], ["p6", "net"], ["p7", "net"], ["p8", "net"], ["p9", "net"], ["p10", "net"], ["p11", "net"], ["p12", "net"], ["p13", "net"], ["p14", "net"], ["p15", "net"]]) {};
+//   %bus_port_type_4_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])};
+//   {&"BUSIN_15" &"BUSIN_14" &"BUSIN_13" &"BUSIN_12" &"BUSIN_11" &"BUSIN_10" &"BUSIN_9" &"BUSIN_8" &"BUSIN_7" &"BUSIN_6" &"BUSIN_5" &"BUSIN_4" &"BUSIN_3" &"BUSIN_2" &"BUSIN_1" &"BUSIN_0"} @REMOVE-FROM $PORT_FILL_SET;
+//   %port_4 = %bus_port_type_4 @ATTACH &"BUSIN_15" &"BUSIN_14" &"BUSIN_13" &"BUSIN_12" &"BUSIN_11" &"BUSIN_10" &"BUSIN_9" &"BUSIN_8" &"BUSIN_7" &"BUSIN_6" &"BUSIN_5" &"BUSIN_4" &"BUSIN_3" &"BUSIN_2" &"BUSIN_1" &"BUSIN_0" => @PLACE(-80, 1) => @ORIENT("R0");
+//   %port_4 @SET-SYMBOL %bus_port_type_4_symbol;
+//   %port_4_marker = $IO_PORT @ATTACH &"BUSIN_15" => @PLACE(-80, 1) => @ORIENT("R0");
+//   %port_4_marker @SET-SYMBOL %input_port_symbol;
+//   %port_4_marker @TEXT("BUSIN<15:0>", key="name");
+//   %port_5 = $IO_PORT @ATTACH &"UPDATE" => @PLACE(-80, 5) => @ORIENT("R0");
+//   %port_5 @SET-SYMBOL %input_port_symbol;
+//   %port_5 @TEXT("UPDATE", key="name");
+//   %output_port_symbol = @DEFINE-SYMBOL(box=[0, -1, 2, 1]) {
+//       @LINE(fill="linecolor", linestyle="none") {(0, -0.9) (0, 0.9) (1.1, 0.9) (2, 0) (1.1, -0.9) (0, -0.9)};
+//       (0, 0) @PIN(terminal=1, direction="left");
+//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(1, 1.6)
+//     };
+//   %bus_port_type_6 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"], ["p3", "net"], ["p4", "net"], ["p5", "net"], ["p6", "net"], ["p7", "net"], ["p8", "net"], ["p9", "net"], ["p10", "net"], ["p11", "net"], ["p12", "net"], ["p13", "net"], ["p14", "net"], ["p15", "net"]]) {};
+//   %bus_port_type_6_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])};
+//   {&"BUSOUT_15" &"BUSOUT_14" &"BUSOUT_13" &"BUSOUT_12" &"BUSOUT_11" &"BUSOUT_10" &"BUSOUT_9" &"BUSOUT_8" &"BUSOUT_7" &"BUSOUT_6" &"BUSOUT_5" &"BUSOUT_4" &"BUSOUT_3" &"BUSOUT_2" &"BUSOUT_1" &"BUSOUT_0"} @REMOVE-FROM $PORT_FILL_SET;
+//   %port_6 = %bus_port_type_6 @ATTACH &"BUSOUT_15" &"BUSOUT_14" &"BUSOUT_13" &"BUSOUT_12" &"BUSOUT_11" &"BUSOUT_10" &"BUSOUT_9" &"BUSOUT_8" &"BUSOUT_7" &"BUSOUT_6" &"BUSOUT_5" &"BUSOUT_4" &"BUSOUT_3" &"BUSOUT_2" &"BUSOUT_1" &"BUSOUT_0" => @PLACE(-82, -3) => @ORIENT("R0");
+//   %port_6 @SET-SYMBOL %bus_port_type_6_symbol;
+//   %port_6_marker = $IO_PORT @ATTACH &"BUSOUT_15" => @PLACE(-82, -3) => @ORIENT("R0");
+//   %port_6_marker @SET-SYMBOL %output_port_symbol;
+//   %port_6_marker @TEXT("BUSOUT<15:0>", key="name");
+//   %bus_port_type_7 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"]]) {};
+//   %bus_port_type_7_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3])};
+//   {&"ADDR_2" &"ADDR_1" &"ADDR_0"} @REMOVE-FROM $PORT_FILL_SET;
+//   %port_7 = %bus_port_type_7 @ATTACH &"ADDR_2" &"ADDR_1" &"ADDR_0" => @PLACE(-80, -11) => @ORIENT("R0");
+//   %port_7 @SET-SYMBOL %bus_port_type_7_symbol;
+//   %port_7_marker = $IO_PORT @ATTACH &"ADDR_2" => @PLACE(-80, -11) => @ORIENT("R0");
+//   %port_7_marker @SET-SYMBOL %input_port_symbol;
+//   %port_7_marker @TEXT("ADDR<2:0>", key="name");
+//   %bus_port_type_8 = @DEFINE(roles=[["p", "net"], ["p1", "net"]]) {};
+//   %bus_port_type_8_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2])};
+//   {&"RDY_1" &"RDY_0"} @REMOVE-FROM $PORT_FILL_SET;
+//   %port_8 = %bus_port_type_8 @ATTACH &"RDY_1" &"RDY_0" => @PLACE(-80, -7) => @ORIENT("R0");
+//   %port_8 @SET-SYMBOL %bus_port_type_8_symbol;
+//   %port_8_marker = $IO_PORT @ATTACH &"RDY_1" => @PLACE(-80, -7) => @ORIENT("R0");
+//   %port_8_marker @SET-SYMBOL %input_port_symbol;
+//   %port_8_marker @TEXT("RDY<1:0>", key="name");
+//   %port_9 = $IO_PORT @ATTACH &"UDI" => @PLACE(-80, -15) => @ORIENT("R0");
+//   %port_9 @SET-SYMBOL %input_port_symbol;
+//   %port_9 @TEXT("UDI", key="name");
+//   %port_10 = $IO_PORT @ATTACH &"UDO" => @PLACE(-82, -19) => @ORIENT("R0");
+//   %port_10 @SET-SYMBOL %output_port_symbol;
+//   %port_10 @TEXT("UDO", key="name");
+//   %wire_0 = &"net2" @WIRE(mode="straight") {#"I15":2 #"I10":1};
+//   %p0 = (-52, -36);
+//   %wire_1 = &"UDI" @WIRE(mode="straight") {#"I128":1 %p0};
+//   %wire_1 @TEXT("UDI", size=1, halign="middle", valign="top") => @PLACE(-50, -34.7);
+//   %wire_2 = {&"net1_0" &"net1_1"} @WIRE(mode="straight") {%bundle_0:2 %bundle_7:1};
+//   %p1 = (5, 18);
+//   %wire_3 = {&"Q_8" &"Q_7" &"Q_6" &"Q_5" &"Q_4" &"Q_3" &"Q_2" &"Q_1" &"Q_0" &"DIN_DEL"} @WIRE(mode="straight") {%p1 %bundle_5:1};
+//   %wire_3 @TEXT("Q<8:0>,DIN\_DEL", size=1, halign="middle", valign="baseline") => @PLACE(9, 18.7);
+//   %p2 = (38, 18);
+//   %wire_4 = {&"Q_8" &"Q_7" &"Q_6" &"Q_5" &"Q_4" &"Q_3" &"Q_2" &"Q_1" &"Q_0" &"DIN_DEL" &"Q_9"} @WIRE(mode="straight") {%p2 %bundle_8:1};
+//   %wire_4 @TEXT("Q<9:0>,DIN\_DEL", size=1, halign="middle", valign="baseline") => @PLACE(45, 18.7);
+//   %p3 = (95, 3);
+//   %p4 = (95, 16);
+//   %wire_5 = &"SEL_BUS" @WIRE(mode="straight") {%p3 %p4};
+//   %wire_6 = &"SEL_BUS" @WIRE(mode="straight") {%bundle_1:3 %p3};
+//   %wire_7 = &"SEL_BUS" @WIRE(mode="straight") {%p4 %bundle_7:2};
+//   %wire_8 = &"SEL_BUS" @WIRE(mode="straight") {%p3 %bundle_3:3};
+//   %wire_9 = &"SEL_BUS" @WIRE(mode="straight") {%bundle_3:3 %bundle_6:3};
+//   %p5 = (-11, -18);
+//   %wire_10 = &"SEL_BUS" @WIRE(mode="straight") {%p5 #"I8":1};
+//   %p6 = (-11, -10);
+//   %wire_11 = &"SEL_BUS" @WIRE(mode="straight") {%p5 %p6};
+//   %p7 = (50, -10);
+//   %wire_12 = &"SEL_BUS" @WIRE(mode="straight") {%p6 %p7};
+//   %wire_13 = &"SEL_BUS" @WIRE(mode="straight") {#"I5":2 %p5};
+//   %p8 = (50, 3);
+//   %wire_14 = &"SEL_BUS" @WIRE(mode="straight") {%p8 %bundle_1:3};
+//   %wire_15 = &"SEL_BUS" @WIRE(mode="straight") {%p7 %p8};
+//   %wire_12 @TEXT("SEL\_BUS", size=1, halign="middle", valign="baseline") => @PLACE(-8, -9.3);
+//   %p9 = (34, 18);
+//   %wire_16 = {&"Q_8" &"Q_7" &"Q_6" &"Q_5" &"Q_4" &"Q_3" &"Q_2" &"Q_1" &"Q_0" &"Q_9"} @WIRE(mode="straight") {%bundle_5:4 %p9};
+//   %wire_16 @TEXT("Q<9:0>", size=1, halign="middle", valign="baseline") => @PLACE(30, 18.7);
+//   %p10 = (22, -18);
+//   %wire_17 = &"RST_BUS" @WIRE(mode="straight") {#"I9":2 %p10};
+//   %wire_18 = &"RST_BUS" @WIRE(mode="straight") {%p10 %bundle_5:3};
+//   %wire_17 @TEXT("RST\_BUS", size=1, halign="middle", valign="baseline") => @PLACE(17, -16.3);
+//   %p11 = (72, 32);
+//   %wire_19 = {&"BUSIN_10" &"BUSIN_9" &"BUSIN_8" &"BUSIN_7" &"BUSIN_6" &"BUSIN_5" &"BUSIN_4" &"BUSIN_3" &"BUSIN_2" &"BUSIN_1" &"BUSIN_0"} @WIRE(mode="straight") {%bundle_1:1 %p11};
+//   %wire_19 @TEXT("BUSIN<10:0>", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(71.3, 27);
+//   %wire_20 = &"net4" @WIRE(mode="straight") {#"I8":2 #"I9":1};
+//   %p12 = (-22, -18);
+//   %p13 = (-22, -7);
+//   %wire_21 = &"LH_BUS" @WIRE(mode="straight") {%p12 %p13};
+//   %wire_22 = &"LH_BUS" @WIRE(mode="straight") {%p12 #"I5":1};
+//   %p14 = (47, -7);
+//   %p15 = (47, 13);
+//   %wire_23 = &"LH_BUS" @WIRE(mode="straight") {%p14 %p15};
+//   %wire_24 = &"LH_BUS" @WIRE(mode="straight") {%p15 %bundle_8:2};
+//   %wire_25 = &"LH_BUS" @WIRE(mode="straight") {#"I10":2 %p12};
+//   %wire_26 = &"LH_BUS" @WIRE(mode="straight") {%p13 %p14};
+//   %wire_26 @TEXT("LH\_BUS", size=1, halign="middle", valign="baseline") => @PLACE(-18, -6.3);
+//   %p16 = (-25, -37);
+//   %wire_27 = &"UDO" @WIRE(mode="straight") {%p16 #"I128":3};
+//   %wire_27 @TEXT("UDO", size=1, halign="middle", valign="top") => @PLACE(-29, -34.7);
+//   %p17 = (115, 18);
+//   %wire_28 = {&"RDQ_1" &"RDQ_0"} @WIRE(mode="straight") {%bundle_7:3 %p17};
+//   %wire_29 = {&"RDQ_1" &"RDQ_0"} @WIRE(mode="straight") {%bundle_3:2 %p17};
+//   %wire_28 @TEXT("RDQ<1:0>", size=1, halign="middle", valign="baseline") => @PLACE(112, 18.7);
+//   %p18 = (146, -21);
+//   %wire_30 = {&"BUSOUT_15" &"BUSOUT_14" &"BUSOUT_13"} @WIRE(mode="straight") {%p18 %bundle_6:4};
+//   %wire_30 @TEXT("BUSOUT<15:13>", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(145.3, -15);
+//   %p19 = (148, 32);
+//   %wire_31 = {&"BUSIN_15" &"BUSIN_14" &"BUSIN_13"} @WIRE(mode="straight") {%bundle_6:1 %p19};
+//   %wire_31 @TEXT("BUSIN<15:13>", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(147.3, 27);
+//   %p20 = (77, 20);
+//   %wire_32 = {&"RDY_1" &"RDY_0"} @WIRE(mode="straight") {%p20 %bundle_0:1};
+//   %wire_32 @TEXT("RDY<1:0>", size=1, halign="middle", valign="baseline") => @PLACE(79, 20.7);
+//   %p21 = (144, 19);
+//   %wire_33 = {&"ADDR_2" &"ADDR_1" &"ADDR_0"} @WIRE(mode="straight") {%bundle_6:2 %p21};
+//   %wire_33 @TEXT("ADDR<2:0>", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(143.3, 15);
+//   %p22 = (70, -21);
+//   %wire_34 = {&"BUSOUT_10" &"BUSOUT_9" &"BUSOUT_8" &"BUSOUT_7" &"BUSOUT_6" &"BUSOUT_5" &"BUSOUT_4" &"BUSOUT_3" &"BUSOUT_2" &"BUSOUT_1" &"BUSOUT_0"} @WIRE(mode="straight") {%p22 %bundle_1:4};
+//   %wire_34 @TEXT("BUSOUT<10:0>", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(69.3, -15);
+//   %p23 = (119, 32);
+//   %wire_35 = {&"BUSIN_12" &"BUSIN_11"} @WIRE(mode="straight") {%bundle_3:1 %p23};
+//   %wire_35 @TEXT("BUSIN<12:11>", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(118.3, 27);
+//   %p24 = (117, -21);
+//   %wire_36 = {&"BUSOUT_12" &"BUSOUT_11"} @WIRE(mode="straight") {%p24 %bundle_3:4};
+//   %wire_36 @TEXT("BUSOUT<12:11>", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(116.3, -15);
+//   %p25 = (68, 18);
+//   %wire_37 = {&"LH_10" &"LH_9" &"LH_8" &"LH_7" &"LH_6" &"LH_5" &"LH_4" &"LH_3" &"LH_2" &"LH_1" &"LH_0"} @WIRE(mode="straight") {%bundle_1:2 %p25};
+//   %wire_38 = {&"LH_10" &"LH_9" &"LH_8" &"LH_7" &"LH_6" &"LH_5" &"LH_4" &"LH_3" &"LH_2" &"LH_1" &"LH_0"} @WIRE(mode="straight") {%bundle_8:3 %p25};
+//   %wire_38 @TEXT("LH<10:0>", size=1, halign="middle", valign="baseline") => @PLACE(65, 18.7);
+//   %p26 = (-2, 0);
+//   %p27 = (-2, 13);
+//   %wire_39 = &"CLK_BUS" @WIRE(mode="straight") {%p26 %p27};
+//   %wire_40 = &"CLK_BUS" @WIRE(mode="straight") {%p27 %bundle_5:2};
+//   %wire_41 = &"CLK_BUS" @WIRE(mode="straight") {#"I2":2 %p26};
+//   %wire_41 @TEXT("CLK\_BUS", size=1, halign="middle", valign="baseline") => @PLACE(-29, 0.7);
+//   %p28 = (-26, 18);
+//   %wire_42 = &"DIN_DEL" @WIRE(mode="straight") {#"I3":2 %p28};
+//   %wire_42 @TEXT("DIN\_DEL", size=1, halign="middle", valign="baseline") => @PLACE(-29, 18.7);
+//   %p29 = (-52, -38);
+//   %wire_43 = &"UPDATE" @WIRE(mode="straight") {#"I128":2 %p29};
+//   %p30 = (-54, -18);
+//   %wire_44 = &"UPDATE" @WIRE(mode="straight") {%p30 #"I15":1};
+//   %wire_44 @TEXT("UPDATE", size=1, halign="middle", valign="baseline") => @PLACE(-51, -17.3);
+//   %wire_43 @TEXT("UPDATE", size=1, halign="end", valign="top") => @PLACE(-46.4, -36.7);
+//   %p31 = (-54, 0);
+//   %wire_45 = &"CLK" @WIRE(mode="straight") {%p31 #"I2":1};
+//   %wire_45 @TEXT("CLK", size=1, halign="middle", valign="baseline") => @PLACE(-52, 0.7);
+//   %p32 = (-54, 18);
+//   %wire_46 = &"DIN" @WIRE(mode="straight") {%p32 #"I3":1};
+//   %wire_46 @TEXT("DIN", size=1, halign="middle", valign="baseline") => @PLACE(-52, 18.7);
+//   %p33 = (-44, -41);
+//   %wire_47 = &"GND" @WIRE(mode="straight") {%p33 #"I128":5};
+//   %p34 = (-61, 13);
+//   %wire_48 = &"GND" @WIRE(mode="straight") {%p34 %bundle_2:2};
+//   %p35 = (-69, 13);
+//   %wire_49 = &"GND" @WIRE(mode="straight") {%p35 %bundle_4:2};
+//   %p36 = (-44, -21);
+//   %wire_50 = &"GND" @WIRE(mode="straight") {%p36 #"I15":4};
+//   %p37 = (84, 17);
+//   %wire_51 = &"GND" @WIRE(mode="straight") {%p37 %bundle_0:4};
+//   %p38 = (141, 9);
+//   %wire_52 = &"GND" @WIRE(mode="straight") {%p38 %bundle_6:6};
+//   %p39 = (97, 13);
+//   %wire_53 = &"GND" @WIRE(mode="straight") {%p39 %bundle_7:5};
+//   %p40 = (112, 9);
+//   %wire_54 = &"GND" @WIRE(mode="straight") {%p40 %bundle_3:6};
+//   %p41 = (-32, -21);
+//   %wire_55 = &"GND" @WIRE(mode="straight") {%p41 #"I10":4};
+//   %p42 = (4, -21);
+//   %wire_56 = &"GND" @WIRE(mode="straight") {%p42 #"I9":4};
+//   %p43 = (-7, -21);
+//   %wire_57 = &"GND" @WIRE(mode="straight") {%p43 #"I8":4};
+//   %p44 = (-21, -21);
+//   %wire_58 = &"GND" @WIRE(mode="straight") {%p44 #"I5":4};
+//   %p45 = (65, 9);
+//   %wire_59 = &"GND" @WIRE(mode="straight") {%p45 %bundle_1:6};
+//   %p46 = (52, 10);
+//   %wire_60 = &"GND" @WIRE(mode="straight") {%p46 %bundle_8:5};
+//   %p47 = (-44, -3);
+//   %wire_61 = &"GND" @WIRE(mode="straight") {%p47 #"I2":4};
+//   %p48 = (-44, 15);
+//   %wire_62 = &"GND" @WIRE(mode="straight") {%p48 #"I3":4};
+//   %p49 = (15, 9);
+//   %wire_63 = &"GND" @WIRE(mode="straight") {%p49 %bundle_5:6};
+//   %wire_63 @TEXT("GND", size=1, halign="middle", valign="top") => @PLACE(17, 8.3);
+//   %wire_62 @TEXT("GND", size=1, halign="middle", valign="top") => @PLACE(-42, 14.3);
+//   %wire_61 @TEXT("GND", size=1, halign="middle", valign="top") => @PLACE(-42, -3.7);
+//   %wire_60 @TEXT("GND", size=1, halign="middle", valign="top") => @PLACE(54, 9.3);
+//   %wire_59 @TEXT("GND", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(64.3, 7);
+//   %wire_58 @TEXT("GND", size=1, halign="middle", valign="top") => @PLACE(-19, -21.7);
+//   %wire_55 @TEXT("GND", size=1, halign="middle", valign="top") => @PLACE(-30, -21.7);
+//   %wire_57 @TEXT("GND", size=1, halign="middle", valign="top") => @PLACE(-5, -21.7);
+//   %wire_56 @TEXT("GND", size=1, halign="middle", valign="top") => @PLACE(6, -21.7);
+//   %wire_54 @TEXT("GND", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(111.3, 7);
+//   %wire_53 @TEXT("GND", size=1, halign="middle", valign="top") => @PLACE(99, 12.3);
+//   %wire_52 @TEXT("GND", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(140.3, 7);
+//   %wire_51 @TEXT("GND", size=1, halign="middle", valign="top") => @PLACE(86, 16.3);
+//   %wire_50 @TEXT("GND", size=1, halign="middle", valign="top") => @PLACE(-42, -21.7);
+//   %wire_49 @TEXT("GND", size=1, halign="end", valign="baseline", rotate=90) => @PLACE(-69.7, 16.6);
+//   %wire_48 @TEXT("GND", size=1, halign="end", valign="baseline", rotate=90) => @PLACE(-61.7, 16.6);
+//   %wire_47 @TEXT("GND", size=1, halign="middle", valign="top") => @PLACE(-42, -41.7);
+//   %p50 = (-44, -33);
+//   %wire_64 = &"VDD" @WIRE(mode="straight") {%p50 #"I128":4};
+//   %p51 = (-61, 24);
+//   %wire_65 = &"VDD" @WIRE(mode="straight") {%bundle_2:1 %p51};
+//   %p52 = (-44, -15);
+//   %wire_66 = &"VDD" @WIRE(mode="straight") {%p52 #"I15":3};
+//   %p53 = (84, 23);
+//   %wire_67 = &"VDD" @WIRE(mode="straight") {%p53 %bundle_0:3};
+//   %p54 = (151, 9);
+//   %wire_68 = &"VDD" @WIRE(mode="straight") {%p54 %bundle_6:5};
+//   %p55 = (97, 23);
+//   %wire_69 = &"VDD" @WIRE(mode="straight") {%p55 %bundle_7:4};
+//   %p56 = (122, 9);
+//   %wire_70 = &"VDD" @WIRE(mode="straight") {%p56 %bundle_3:5};
+//   %p57 = (-32, -15);
+//   %wire_71 = &"VDD" @WIRE(mode="straight") {%p57 #"I10":3};
+//   %p58 = (4, -15);
+//   %wire_72 = &"VDD" @WIRE(mode="straight") {%p58 #"I9":3};
+//   %p59 = (-69, 24);
+//   %wire_73 = &"VDD" @WIRE(mode="straight") {%bundle_4:1 %p59};
+//   %p60 = (-21, -15);
+//   %wire_74 = &"VDD" @WIRE(mode="straight") {%p60 #"I5":3};
+//   %p61 = (-7, -15);
+//   %wire_75 = &"VDD" @WIRE(mode="straight") {%p61 #"I8":3};
+//   %p62 = (75, 9);
+//   %wire_76 = &"VDD" @WIRE(mode="straight") {%p62 %bundle_1:5};
+//   %p63 = (52, 22);
+//   %wire_77 = &"VDD" @WIRE(mode="straight") {%p63 %bundle_8:4};
+//   %p64 = (-44, 3);
+//   %wire_78 = &"VDD" @WIRE(mode="straight") {%p64 #"I2":3};
+//   %p65 = (-44, 21);
+//   %wire_79 = &"VDD" @WIRE(mode="straight") {%p65 #"I3":3};
+//   %p66 = (15, 22);
+//   %wire_80 = &"VDD" @WIRE(mode="straight") {%p66 %bundle_5:5};
+//   %wire_80 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(17, 22.7);
+//   %wire_79 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(-42, 21.7);
+//   %wire_78 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(-42, 3.7);
+//   %wire_77 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(54, 22.7);
+//   %wire_76 @TEXT("VDD", size=1, halign="middle", valign="top", rotate=90) => @PLACE(75.7, 7);
+//   %wire_74 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(-19, -14.3);
+//   %wire_71 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(-30, -14.3);
+//   %wire_75 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(-5, -14.3);
+//   %wire_72 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(6, -14.3);
+//   %wire_70 @TEXT("VDD", size=1, halign="middle", valign="top", rotate=90) => @PLACE(122.7, 7);
+//   %wire_69 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(99, 23.7);
+//   %wire_68 @TEXT("VDD", size=1, halign="middle", valign="top", rotate=90) => @PLACE(151.7, 7);
+//   %wire_67 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(86, 23.7);
+//   %wire_66 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(-42, -14.3);
+//   %wire_73 @TEXT("VDD", size=1, halign="start", valign="baseline", rotate=90) => @PLACE(-69.7, 20.4);
+//   %wire_65 @TEXT("VDD", size=1, halign="start", valign="baseline", rotate=90) => @PLACE(-61.7, 20.4);
+//   %wire_64 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(-42, -32.3);
+//   $JUNCTION @ATTACH %p3;
+//   $JUNCTION @ATTACH %p5;
+//   $JUNCTION @ATTACH %p12
+// }
+// @RNL(author="gemini-4-argon") {
+//   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
+//   /* L3_data_bus: 11-Bit SAR Serial-to-Parallel Deserializer & 16-Bit Daisy-Chained Readout Bus Multiplexer */
+//   {#"I3" #"I2" #"I9" #"I8" %bundle_4}(serial_shift_reg_10b) {#"I15" #"I10" #"I5" %bundle_5}(parallel_latch_bank_11b) {%bundle_8 %bundle_7}(rdy_synchronizers) {#"I128" %bundle_1 %bundle_6 %bundle_3}(daisy_chain_bus_mux_16b) @AS(role="11bit_SAR_deserializer_and_16bit_daisy_chain_bus_multiplexer") $SAR_DATA_DESERIALIZER_MUX;
+//   {%bundle_0 %bundle_2}(caps) @AS(role="data_bus_supply_decap", substrate_tap="8x_DCAP8_plus_11x_DCAP4") $MOM_DECAP;
+//   {#"I3" %bundle_4 %bundle_5 %bundle_3}(path) @AS(direction="left-to-right") $FLOW;
+//   {%bundle_8 %bundle_7}(affected_objects) @AS(severity="harmless_internal_net_swap", category="cross_indexed_net_names", description="Delay cell I14_1 (on RDY_1) drives net1_0 into I12_1 (RDQ_1), while I14_0 (on RDY_0) drives net1_1 into I12_0 (RDQ_0)") $CIRCUIT_ANOMALY_NOTE;
+//   {#"I3" #"I15"}(members) @AS $BRANCH;
+//   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
+//   (-116, 107.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;
+//   @RECTANGLE {(-116, 78.03) (196.28, 104.23)} => @SET-STYLE $risca_note_box;
+//   (-112, 97.25) @TEXT("L3_data_bus: 11-Bit Serial-to-Parallel SAR Data Deserializer & 16-Bit Daisy-Chain Packet Readout Multiplexer", size=3) => @SET-STYLE $risca_title_style;
+//   (-112, 92.25) @TEXT("1. Deserializer: DEL025 I3 delays serial SAR bit DIN into 10-bit shift register I0<9:0> (clocked by DCLK); UPDATE latches 11-bit word {Q<9:0>, DIN_DEL} into LH<10:0>.", size=2.5) => @SET-STYLE $risca_digital_style;
+//   (-112, 87.25) @TEXT("2. 16-Bit Packet Injection: When UPDATE=1, MUX2D2 bank injects {ADDR<2:0>, RDQ<1:0>, LH<10:0>} onto BUSOUT<15:0> and asserts UDO=1 via OR2 I128; else passes BUSIN<15:0>.", size=2.5) => @SET-STYLE $risca_digital_style;
+//   (-112, 82.25) @TEXT("[Netlist Naming Note] In %bundle_8/%bundle_7, I14_1 (RDY_1) uses internal wire name net1_0 -> I12_1 (RDQ_1), and I14_0 (RDY_0) uses net1_1 -> I12_0 (RDQ_0); polarity/bit order at RDQ<1:0> is unaffected.", size=2.5) => @SET-STYLE $risca_anomaly_style
+// }
+ends L3_data_bus

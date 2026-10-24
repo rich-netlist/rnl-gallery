@@ -1,0 +1,134 @@
+simulator lang=spectre
+// @RNL(type="header") {
+//   @VERSION("0.3");
+//   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
+// }
+subckt cp_physical_v14_pdk110_14 (hp hn pulse enable out vdd vss)
+RREF (vdd nb) resistor r=24000
+MB (nb nb vss vss) nch w=9.999999999999999e-06 l=1e-06 ad=4.8e-12 as=4.8e-12 pd=2.096e-05 ps=2.096e-05 nrd=0.027 nrs=0.027 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+XG (pulse enable gateb vdd vss) pll_nand2_pdk110_15
+XGI (gateb gate vdd vss) pll_inv_pdk110_7
+XT (nb ng gate gateb vdd vss) pll_tg_pdk110_16
+MOFF (ng gateb vss vss) nch w=1e-06 l=1.8e-07 ad=4.8e-13 as=4.8e-13 pd=2.96e-06 ps=2.96e-06 nrd=0.27 nrs=0.27 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MT (tail ng vss vss) nch w=9.999999999999999e-06 l=1e-06 ad=4.8e-12 as=4.8e-12 pd=2.096e-05 ps=2.096e-05 nrd=0.027 nrs=0.027 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MIP (out hp tail vss) nch w=8e-06 l=1e-06 ad=3.84e-12 as=3.84e-12 pd=1.696e-05 ps=1.696e-05 nrd=0.03375 nrs=0.03375 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MIN (mir hn tail vss) nch w=8e-06 l=1e-06 ad=3.84e-12 as=3.84e-12 pd=1.696e-05 ps=1.696e-05 nrd=0.03375 nrs=0.03375 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MPD (mir mir vdd vdd) pch w=4e-06 l=1e-06 ad=1.92e-12 as=1.92e-12 pd=8.960000000000001e-06 ps=8.960000000000001e-06 nrd=0.0675 nrs=0.0675 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+MPO (out mir vdd vdd) pch w=4e-06 l=1e-06 ad=1.92e-12 as=1.92e-12 pd=8.960000000000001e-06 ps=8.960000000000001e-06 nrd=0.0675 nrs=0.0675 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
+// @RNL(author="gemini-4-argon") {
+//   # @SET-SYMBOL $CP_SYM;
+//
+//   /* --- 1. Circuit Semantics & Static DC Currents --- */
+//   %cp  = #MIP(gm_p) #MIN(gm_n) {#MT #XT #MOFF}(tail_switches) {#MPD #MPO}(mirror_loads) {#RREF #MB}(bleeders) @AS(architecture="pulsed_transconductance_CP") $PULSED_GM_CHARGE_PUMP;
+//   %dp  = #MIP(in_p) #MIN(in_n) {#MT}(tail) @AS $DIFFERENTIAL_PAIR;
+//   %cm1 = {#MPD}(ref) {#MPO}(out) @AS $CURRENT_MIRROR;
+//   %cm2 = {#MB}(ref)  {#MT}(out)  @AS $CURRENT_MIRROR;
+//   {#MIP #MIN} @AS $MATCHED;
+//   {#MPD #MPO} @AS $MATCHED;
+//   {#MB #MT}   @AS $MATCHED;
+//   %ax = (38, _);
+//   #MIN(a) #MIP(b) %ax(axis) @AS $MIRRORED;
+//   #MPD(a) #MPO(b) %ax(axis) @AS $MIRRORED;
+//
+//   /* Static / Gated DC Bias Currents */
+//   #RREF:1 @CURRENT("in"); #RREF:2 @CURRENT("out");
+//   #MB:d   @CURRENT("in"); #MB:s   @CURRENT("out");
+//   #MPD:s  @CURRENT("in"); #MPD:d  @CURRENT("out");
+//   #MPO:s  @CURRENT("in"); #MPO:d  @CURRENT("out");
+//   #MIN:d  @CURRENT("in"); #MIN:s  @CURRENT("out");
+//   #MIP:d  @CURRENT("in"); #MIP:s  @CURRENT("out");
+//   #MT:d   @CURRENT("in"); #MT:s   @CURRENT("out");
+//
+//   /* --- 2. Schematic Placement & Orientation --- */
+//   %ppulse = $IO_PORT @ATTACH &pulse  => @PLACE(8, 17)  => @ORIENT("R0");
+//   %pen    = $IO_PORT @ATTACH &enable => @PLACE(8, 15)  => @ORIENT("R0");
+//   %phn    = $IO_PORT @ATTACH &hn     => @PLACE(28, 16) => @ORIENT("R0");
+//   %php    = $IO_PORT @ATTACH &hp     => @PLACE(50, 16) => @ORIENT("MY");
+//   %pout   = $IO_PORT @ATTACH &out    => @PLACE(50, 20) => @ORIENT("MY");
+//
+//   %sup1 = $SUPPLY @ATTACH &vdd => @PLACE(-2, 22);
+//   %sup2 = $SUPPLY @ATTACH &vdd => @PLACE(38, 30);
+//   %gnd  = $GROUND @ATTACH &vss => @PLACE(26, 0);
+//
+//   /* Bias & Pulse Gating Section (Left) */
+//   #RREF @PLACE(-2, 16) => @ORIENT("R0");
+//   #MB   @PLACE(-2, 6)  => @ORIENT("MY");
+//   #XG   @PLACE(14, 16) => @ORIENT("R0");
+//   #XGI  @PLACE(21, 16) => @ORIENT("R0");
+//   #XT   @PLACE(21, 9)  => @ORIENT("R0");
+//   #MOFF @PLACE(26, 4)  => @ORIENT("R0");
+//
+//   /* Differential Pulsed-gm Core (Right, Symmetry Axis x=38) */
+//   #MPD  @PLACE(32, 24) => @ORIENT("MY");
+//   #MPO  @PLACE(44, 24) => @ORIENT("R0");
+//   #MIN  @PLACE(32, 16) => @ORIENT("R0");
+//   #MIP  @PLACE(44, 16) => @ORIENT("MY");
+//   #MT   @PLACE(38, 6)  => @ORIENT("R0");
+//
+//   /* --- 3. Explicit Manhattan Wiring --- */
+//   &vdd @WIRE { %sup1:p #RREF:1 };
+//   %jvdd = (38, 28);
+//   $JUNCTION @ATTACH %jvdd;
+//   &vdd @WIRE { %sup2:p %jvdd };
+//   &vdd @WIRE { %jvdd (32, 28) #MPD:s };
+//   &vdd @WIRE { %jvdd (44, 28) #MPO:s };
+//
+//   &pulse  @WIRE { %ppulse:p #XG:a };
+//   &enable @WIRE { %pen:p    #XG:b };
+//
+//   %jgb1 = (17, 16);
+//   %jgb2 = (17, 12);
+//   $JUNCTION @ATTACH %jgb1;
+//   $JUNCTION @ATTACH %jgb2;
+//   &gateb @WIRE { #XG:y %jgb1 #XGI:a };
+//   &gateb @WIRE { %jgb1 %jgb2 (21, 12) #XT:off };
+//   &gateb @WIRE { %jgb2 (17, 4) #MOFF:g };
+//
+//   &gate @WIRE { #XGI:y (24, 16) (24, 6) (21, 6) #XT:on };
+//
+//   %jnb1 = (-2, 9);
+//   %jnb2 = (1, 9);
+//   $JUNCTION @ATTACH %jnb1;
+//   $JUNCTION @ATTACH %jnb2;
+//   &nb @WIRE { #RREF:2 %jnb1 #MB:d };
+//   &nb @WIRE { %jnb1 %jnb2 #XT:a };
+//   &nb @WIRE { %jnb2 (1, 6) #MB:g };
+//
+//   %jng = (26, 9);
+//   $JUNCTION @ATTACH %jng;
+//   &ng @WIRE { #XT:b %jng #MOFF:d };
+//   &ng @WIRE { %jng (34, 9) (34, 6) #MT:g };
+//
+//   &hn @WIRE { %phn:p #MIN:g };
+//   &hp @WIRE { %php:p #MIP:g };
+//
+//   %jtail = (38, 11);
+//   $JUNCTION @ATTACH %jtail;
+//   &tail @WIRE { #MIN:s (32, 11) %jtail (44, 11) #MIP:s };
+//   &tail @WIRE { %jtail #MT:d };
+//
+//   %jmir1 = (32, 20);
+//   %jmir2 = (35, 20);
+//   $JUNCTION @ATTACH %jmir1;
+//   $JUNCTION @ATTACH %jmir2;
+//   &mir @WIRE { #MPD:d %jmir1 #MIN:d };
+//   &mir @WIRE { %jmir1 %jmir2 (35, 24) #MPD:g };
+//   &mir @WIRE { %jmir2 (40, 20) (40, 24) #MPO:g };
+//
+//   %jout = (44, 20);
+//   $JUNCTION @ATTACH %jout;
+//   &out @WIRE { #MPO:d %jout #MIP:d };
+//   &out @WIRE { %jout %pout:p };
+//
+//   %jg1 = (26, 2);
+//   $JUNCTION @ATTACH %jg1;
+//   &vss @WIRE { #MB:s (-2, 2) %jg1 (38, 2) #MT:s };
+//   &vss @WIRE { %jg1 #MOFF:s };
+//   &vss @WIRE { %jg1 %gnd:p };
+//
+//   /* --- 4. Annotations --- */
+//   #RREF @TEXT("24 k\Omega", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
+//   (26, 36) @TEXT("cp_physical_v14_pdk110_14: Pulsed-Transconductance (gm) Sub-Sampling Charge Pump", halign="middle") => @SET-STYLE $title_style;
+//   (26, 34.2) @TEXT("Converts Differential Sampled Hold Voltages (hp, hn) into Proportional Pump Current (out) During Pulse Window", halign="middle") => @SET-STYLE $subtitle_style
+// }
+ends cp_physical_v14_pdk110_14
