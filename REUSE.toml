@@ -15,17 +15,3 @@ path = ["README.md", "README.zh.md", "CONTRIBUTING.md", "REUSE.toml", ".gitignor
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 many-question"
 SPDX-License-Identifier = "CC0-1.0"
-
-# Each example is under the licence of its own directory, which also holds the text (LICENSE) and is named by
-# `license` in its entry; the checks compare the two.
-[[annotations]]
-path = ["examples/pll/**"]
-precedence = "aggregate"
-SPDX-FileCopyrightText = "2026 Lu Jie"
-SPDX-License-Identifier = "CC0-1.0"
-
-[[annotations]]
-path = ["examples/risca/**"]
-precedence = "aggregate"
-SPDX-FileCopyrightText = "2026 Lu Jie"
-SPDX-License-Identifier = "CC-BY-4.0"
