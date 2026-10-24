@@ -44,8 +44,8 @@ for (const id of wanted) {
     try { entry = JSON.parse(readFileSync(join(entriesDir, `${id}.json`), "utf8")); } catch (e) { throw new EntryError(`not valid JSON: ${e.message}`); }
     validateEntry(id, entry);
     const source = openSource(id, entry, { selfCommit });
-    const { manifest, level, warnings } = await resolveEntry(id, entry, source, { core });
-    const thumb = thumbnail(level.svg, fonts);
+    const { manifest, svg, warnings } = await resolveEntry(id, entry, source, { core });
+    const thumb = thumbnail(svg, fonts);
     const thumbPath = `thumbs/${id}.${thumb.hash}.png`;
     writeFileSync(join(outDir, thumbPath), thumb.png);
     writeFileSync(join(outDir, "manifests", `${id}.json`), JSON.stringify(manifest, null, 2) + "\n");
@@ -55,6 +55,7 @@ for (const id of wanted) {
       description: manifest.description,
       author: manifest.author,
       license: manifest.license,
+      tags: manifest.tags,
       licenseBy: manifest.licenseBy,
       source: { repo: manifest.source.repo, commit: manifest.source.commit, url: manifest.source.url },
       files: manifest.files.length,

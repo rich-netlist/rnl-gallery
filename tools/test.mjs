@@ -34,6 +34,18 @@ test("entries: the fields and their limits", () => {
   bad({ ...base, packages: [{ url: "https://example.com/p.rnl" }] });
   bad({ ...base }, "Bad_Id");
   bad({ ...base, license: "CC-BY-NC-4.0" });
+  // the cover: a cell's schematic or symbol; `level` is the older way to name a schematic
+  validateEntry("ota", { ...base, cover: { cell: "amp", view: "symbol" }, tags: ["adc", "sar-adc", "mixed-signal"] });
+  validateEntry("ota", { ...base, cover: { view: "schematic" } });
+  bad({ ...base, cover: { cell: "amp" }, level: "amp" });
+  bad({ ...base, cover: { view: "symbol" } });
+  bad({ ...base, cover: { cell: "(top)", view: "symbol" } });
+  bad({ ...base, cover: { cell: "amp", view: "layout" } });
+  bad({ ...base, cover: { cell: "amp", extra: 1 } });
+  bad({ ...base, tags: ["Upper"] });
+  bad({ ...base, tags: ["a", "a"] });
+  bad({ ...base, tags: "adc" });
+  bad({ ...base, tags: Array.from({ length: 9 }, (_, i) => `t${i}`) });
   validateEntry("ota", { ...base, license: "CC-BY-4.0" });
 });
 
@@ -104,4 +116,23 @@ test("search directories give what rnl --path gives: files directly in them, pac
   assert.deepEqual(searchCandidates(list, "lib"), ["lib/a.inc"]);
   assert.deepEqual(searchCandidates(list, "pkgs"), ["pkgs/1.0/x.rnl", "pkgs/z.rnl"]);
   assert.deepEqual(searchCandidates(list, ""), ["top.sp", "pkgs/z.rnl"]);
+});
+
+test("the cover is a schematic or the symbol of a cell", async (t) => {
+  const core = startCore();
+  t.after(() => core.terminate());
+  const sub = new LocalSource({ repo: "example/sub", commit: "c".repeat(40), dir: join(dirname(fileURLToPath(import.meta.url)), "test", "fixtures", "sub"), licenseId: "CC0-1.0" });
+  const symbol = await resolveEntry("sub", { ...base, cover: { cell: "amp", view: "symbol" }, tags: ["amplifier"] }, sub, { core });
+  assert.deepEqual(symbol.manifest.cover, { cell: "amp", view: "symbol" });
+  assert.equal(symbol.manifest.level, "amp");
+  assert.deepEqual(symbol.manifest.tags, ["amplifier"]);
+  assert.match(symbol.svg, /^<svg /);
+  assert.notEqual(symbol.svg, symbol.level.svg);
+  const thumb = thumbnail(symbol.svg, await ensureFonts());
+  assert.equal(thumb.width, 640);
+  // `level` still names a schematic; the cover of the manifest says so
+  const old = await resolveEntry("sub", { ...base, level: "amp" }, sub, { core });
+  assert.deepEqual(old.manifest.cover, { cell: "amp", view: "schematic" });
+  assert.deepEqual(old.manifest.tags, []);
+  await assert.rejects(resolveEntry("sub", { ...base, cover: { cell: "nothing", view: "symbol" } }, sub, { core }), /level "nothing" is not one of/);
 });
