@@ -55,6 +55,7 @@ for (const id of wanted) {
       description: manifest.description,
       author: manifest.author,
       license: manifest.license,
+      licenseBy: manifest.licenseBy,
       source: { repo: manifest.source.repo, commit: manifest.source.commit, url: manifest.source.url },
       files: manifest.files.length,
       viewer: manifest.files.length === 1 ? { url: manifest.base + manifest.entry, ...(manifest.level !== "(top)" ? { level: manifest.level } : {}) } : { manifest: `manifests/${id}.json` },

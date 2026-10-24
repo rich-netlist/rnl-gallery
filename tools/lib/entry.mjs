@@ -1,11 +1,12 @@
 import { EntryError } from "./util.mjs";
+import { ALLOWED } from "./license.mjs";
 
 export const LIMITS = { files: 300, fileBytes: 2 * 1024 * 1024, totalBytes: 20 * 1024 * 1024 };
 
 const ID = /^[a-z0-9][a-z0-9-]{1,62}$/;
 const COMMIT = /^[0-9a-f]{40}$/;
 const REPO = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/;
-const KEYS = ["title", "description", "author", "source", "entry", "paths", "add", "packages", "level"];
+const KEYS = ["title", "description", "author", "license", "source", "entry", "paths", "add", "packages", "level"];
 
 function text(value, what, max) {
   if (typeof value !== "string" || !value.trim()) throw new EntryError(`${what} must be a non-empty string`);
@@ -44,6 +45,7 @@ export function validateEntry(id, entry) {
   texts(entry.title, "title", 80);
   texts(entry.description, "description", 400);
   text(entry.author, "author", 80);
+  if (entry.license !== undefined && !ALLOWED.includes(entry.license)) throw new EntryError(`license "${entry.license}" is not an accepted SPDX id (${ALLOWED.join(", ")})`);
   if (entry.source !== undefined) {
     const source = entry.source;
     if (!source || typeof source !== "object") throw new EntryError("source must be {repo, commit}");

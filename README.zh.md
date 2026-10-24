@@ -19,7 +19,7 @@
   "entry": "top.scs",
   "paths": ["cells"],
   "add": ["models/"],
-  "packages": [{"name": "eda-symbol", "version": "0.3"}, {"path": "pll_semantics.rnl"}],
+  "packages": [{"name": "eda-symbol", "version": "0.3"}, {"path": "semantics.rnl"}],
   "level": "lc_vco"
 }
 ```
@@ -27,6 +27,7 @@
 | 字段 | 说明 |
 | --- | --- |
 | `title`、`description`、`author` | 图库上显示的内容。`title`、`description` 必须有 `en`，可以再加 `zh` 等。 |
+| `license` | 别的仓库里的设计可以不写（不写就读它仓库的许可证）；放在本仓库里的例子必须写。从下面的清单里选一个 SPDX 名。见[许可证](#许可证)。 |
 | `source` | 仓库（GitHub 上的 `owner/name`）和**完整的提交号**：不能写分支或标签，这样显示的永远是审核过的那一版。本仓库 `examples/<id>/` 里的例子不写 `source`。 |
 | `entry` | Viewer 打开的网表（SPICE：`.sp`、`.spi`、`.cir`、`.net`；Spectre：`.scs`），相对仓库根目录。 |
 | `paths` | 只写了文件名的 include 在哪些目录里找，按顺序；默认是入口所在的目录。 |
@@ -38,7 +39,7 @@
 
 PR 上和合并之后，`tools/build.mjs` 对每个条目：
 
-1. 读取仓库的许可证，不在接受清单里就拒绝（见下）；
+1. 找出设计的许可证，不在接受清单里就拒绝（见下）：放在本仓库里的例子，看条目的 `license`，它必须和目录里 `LICENSE` 文件的许可证一致；别的仓库里的设计，看仓库的许可证，条目写了 `license` 就以它为准；
 2. 列出那个提交的文件，取网表需要的：入口、它 include 的、包、`paths` 和 `add` 指的；
 3. 用和 Viewer 同一个核心（`@rich-netlist/runtime`，WebAssembly）读这些文件：**有错误就不通过**，警告只显示；
 4. 给选定的那一层画缩略图（PNG，宽 640 像素）；
@@ -50,9 +51,12 @@ PR 上和合并之后，`tools/build.mjs` 对每个条目：
 
 ## 许可证
 
-图库会为每个设计生成并发布一张图，所以只收仓库许可证允许这样做的设计：CC0-1.0、CC-BY-4.0、CC-BY-SA-4.0、MIT、MIT-0、BSD-2-Clause、BSD-3-Clause、ISC、Apache-2.0、Unlicense、MPL-2.0、0BSD、Zlib，以及 GPL、LGPL、AGPL 系列。**没有许可证**（保留所有权利）、非商业或禁止演绎的许可证、自定义许可证的仓库，检查会拒绝。清单在 `tools/lib/license.mjs`。文件本身仍然按它所在仓库的许可证，Viewer 直接从那里读。
+**每个设计有自己的许可证**，卡片上会和作者的名字一起显示。
 
-读到的是整个仓库的许可证。如果一个设计在别的许可证的仓库里有自己的许可证，请在 PR 里说明，由维护者决定。
+- **放在本仓库里的例子**（`examples/<id>/`）有自己的 `LICENSE` 文件，里面是许可证的文本，条目的 `license`（SPDX 名）写明是哪个，检查会核对两者。这类例子只接受几种许可证（CC0-1.0、CC-BY-4.0、CC-BY-SA-4.0、MIT、Apache-2.0、Unlicense），这样才能认出文本。
+- **别的仓库里的设计**按那个仓库的许可证：检查读取仓库的许可证。条目写了 `license` 的，卡片显示它，由审核人对照仓库核对（用于：仓库里某个设计有自己的许可证、而仓库是另一个；或者 GitHub 认不出的许可证）。
+
+图库会为每个设计生成并发布一张图，所以只收许可证允许这样做的设计：CC0-1.0、CC-BY-4.0、CC-BY-SA-4.0、MIT、MIT-0、BSD-2-Clause、BSD-3-Clause、ISC、Apache-2.0、Unlicense、MPL-2.0、0BSD、Zlib，以及 GPL、LGPL、AGPL 系列。**没有许可证**（保留所有权利）、非商业或禁止演绎的许可证、自定义许可证的设计，检查会拒绝。清单在 `tools/lib/license.mjs`。设计的文件仍按它的许可证，Viewer 直接从它所在的地方读。
 
 **撤下条目**：设计的所有者或有理由的人，可以开 issue 要求撤下。条目会被删除，缩略图和清单在下一次发布时一起消失。
 
@@ -80,6 +84,6 @@ GITHUB_TOKEN=… node tools/build.mjs --out dist     # 令牌可不给；只是�
 
 `--only id,id` 只构建某几个条目。`RNL_GALLERY_LOCAL` 是一个 JSON 对象（文本或文件路径），从 `"owner/name"` 到 `{"dir": "…", "license": "CC0-1.0"}`：这些仓库改为从该目录读取，用来在推送前试一个条目。
 
-## 许可证（本仓库）
+## 本仓库的许可证
 
-`tools/` 里的代码按 [MIT 许可证](tools/LICENSE)。其余（`examples/` 里的例子、`entries/` 里的条目）的许可证由本仓库的所有者决定，定下来后会写在这里和 `LICENSE` 文件里；在那之前不授予任何许可。
+按 [REUSE](https://reuse.software) 的做法：[`REUSE.toml`](REUSE.toml) 写明每个路径的许可证，文本在 [`LICENSES/`](LICENSES)。`tools/` 里的代码和工作流按 MIT；条目、schema 和文档按 CC0-1.0；每个例子按它自己目录的许可证，见上。
