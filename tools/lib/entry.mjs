@@ -6,7 +6,7 @@ export const LIMITS = { files: 300, fileBytes: 2 * 1024 * 1024, totalBytes: 20 *
 const ID = /^[a-z0-9][a-z0-9-]{1,62}$/;
 const COMMIT = /^[0-9a-f]{40}$/;
 const REPO = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/;
-const KEYS = ["title", "description", "author", "license", "tags", "source", "entry", "paths", "add", "packages", "level", "cover"];
+const KEYS = ["title", "description", "author", "license", "tags", "source", "entry", "paths", "add", "packages", "formats", "level", "cover"];
 const TAG = /^[a-z0-9][a-z0-9-]{0,31}$/;
 
 function text(value, what, max) {
@@ -79,6 +79,16 @@ export function validateEntry(id, entry) {
         if (Object.keys(p).length !== 1) throw new EntryError(`${what}: only "url"`);
       }
     });
+  }
+  if (entry.formats !== undefined) {
+    const formats = entry.formats;
+    if (!formats || typeof formats !== "object" || Array.isArray(formats)) throw new EntryError('formats is {"path": "spice" | "spectre", …}: the files that have to be told how to be read');
+    const paths = Object.keys(formats);
+    if (paths.length > 50) throw new EntryError("formats names at most 50 files");
+    for (const path of paths) {
+      repoPath(path, `formats["${path}"]`);
+      text(formats[path], `formats["${path}"]`, 32);
+    }
   }
   if (entry.level !== undefined) text(entry.level, "level", 200);
   if (entry.cover !== undefined) {
