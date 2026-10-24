@@ -55,13 +55,14 @@
       "type": "string"
     },
     "tags": {
-      "description": "Up to 8 tags to find the design by.",
+      "description": "Up to 8 tags, written as they are to be shown; compared without regard to case, a space counting as a hyphen.",
       "type": "array",
       "maxItems": 8,
-      "uniqueItems": true,
       "items": {
         "type": "string",
-        "pattern": "^[a-z0-9][a-z0-9-]{0,31}$"
+        "minLength": 1,
+        "maxLength": 32,
+        "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9.+/-]| (?! ))*$"
       }
     },
     "source": {

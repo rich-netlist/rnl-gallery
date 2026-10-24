@@ -16,8 +16,8 @@
   ],
   "license": "CC-BY-4.0",
   "tags": [
-    "28nm-cmos",
-    "adc",
+    "28nm CMOS",
+    "ADC",
     "silicon-proven"
   ],
   "entry": "top.scs",

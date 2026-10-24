@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { startCore } from "@rich-netlist/runtime";
-import { validateEntry, authorList } from "./lib/entry.mjs";
+import { validateEntry, authorList, tagKey } from "./lib/entry.mjs";
 import { checkLicense } from "./lib/license.mjs";
 import { LocalSource } from "./lib/sources.mjs";
 import { resolveEntry, searchCandidates } from "./lib/resolve.mjs";
@@ -35,14 +35,22 @@ test("entries: the fields and their limits", () => {
   bad({ ...base }, "Bad_Id");
   bad({ ...base, license: "CC-BY-NC-4.0" });
   // the cover: a cell's schematic or symbol; `level` is the older way to name a schematic
-  validateEntry("ota", { ...base, cover: { cell: "amp", view: "symbol" }, tags: ["adc", "sar-adc", "mixed-signal"] });
+  validateEntry("ota", { ...base, cover: { cell: "amp", view: "symbol" }, tags: ["ADC", "SAR ADC", "180nm CMOS", "AI-gen", "silicon-proven", "I/O"] });
   validateEntry("ota", { ...base, cover: { view: "schematic" } });
   bad({ ...base, cover: { cell: "amp" }, level: "amp" });
   bad({ ...base, cover: { view: "symbol" } });
   bad({ ...base, cover: { cell: "(top)", view: "symbol" } });
   bad({ ...base, cover: { cell: "amp", view: "layout" } });
   bad({ ...base, cover: { cell: "amp", extra: 1 } });
-  bad({ ...base, tags: ["Upper"] });
+  bad({ ...base, tags: [" lead"] });
+  bad({ ...base, tags: ["trail "] });
+  bad({ ...base, tags: ["two  spaces"] });
+  bad({ ...base, tags: ["under_score"] });
+  bad({ ...base, tags: ["PLL", "pll"] });
+  bad({ ...base, tags: ["SAR ADC", "sar-adc"] });
+  bad({ ...base, tags: ["x".repeat(33)] });
+  bad({ ...base, tags: [""] });
+  assert.equal(tagKey("180nm CMOS"), "180nm-cmos");
   // authors: a name, or a list of names with an optional https link
   validateEntry("ota", { ...base, author: [{ name: "Ada", url: "https://github.com/ada" }, { name: "Gemini" }] });
   bad({ ...base, author: [] });
@@ -57,7 +65,6 @@ test("entries: the fields and their limits", () => {
   bad({ ...base, formats: ["top.sp"] });
   bad({ ...base, formats: { "../x.inc": "spice" } });
   bad({ ...base, formats: { "lib/models.inc": 1 } });
-  bad({ ...base, tags: ["a", "a"] });
   bad({ ...base, tags: "adc" });
   bad({ ...base, tags: Array.from({ length: 9 }, (_, i) => `t${i}`) });
   validateEntry("ota", { ...base, license: "CC-BY-4.0" });
@@ -136,10 +143,10 @@ test("the cover is a schematic or the symbol of a cell", async (t) => {
   const core = startCore();
   t.after(() => core.terminate());
   const sub = new LocalSource({ repo: "example/sub", commit: "c".repeat(40), dir: join(dirname(fileURLToPath(import.meta.url)), "test", "fixtures", "sub"), licenseId: "CC0-1.0" });
-  const symbol = await resolveEntry("sub", { ...base, cover: { cell: "amp", view: "symbol" }, tags: ["amplifier"] }, sub, { core });
+  const symbol = await resolveEntry("sub", { ...base, cover: { cell: "amp", view: "symbol" }, tags: ["Amplifier"] }, sub, { core });
   assert.deepEqual(symbol.manifest.cover, { cell: "amp", view: "symbol" });
   assert.equal(symbol.manifest.level, "amp");
-  assert.deepEqual(symbol.manifest.tags, ["amplifier"]);
+  assert.deepEqual(symbol.manifest.tags, ["Amplifier"]);
   assert.match(symbol.svg, /^<svg /);
   assert.notEqual(symbol.svg, symbol.level.svg);
   const thumb = thumbnail(symbol.svg, await ensureFonts());
