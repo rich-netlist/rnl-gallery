@@ -35,6 +35,7 @@
 | `add` | 除了网表 include 到的文件，还要带上的文件或目录（目录连同它下面的一起）。很少需要：网表 include 的文件会通过读它自动找到。 |
 | `packages` | 要载入的包：`{"name", "version"}` 是[公开目录](https://rich-netlist.github.io/rnl-packages/catalog.json)里的包，`{"path"}` 是仓库里的包文件，`{"url"}` 是 raw.githubusercontent.com 的地址。标准包不用写。 |
 | `tags` | 最多 8 个标签，小写字母、数字和连字符，用来找到这个设计；图库页可以按标签筛选。自由填写，建议用[推荐标签](#标签)，这样同一件事的标签一致。 |
+| `formats` | 要手动指定读法的文件：`{"models/n.lib": "spectre"}`，设计里的一个文件，值是 `"spice"` 或 `"spectre"`。只写核心会猜错的文件（核心按后缀和开头几行猜）；不需要就不写。检查和查看器都按这些格式读文件。 |
 | `cover` | 缩略图画什么，也是查看器先打开的：`{"cell": "lc_vco", "view": "schematic"}`，或 `"view": "symbol"` 表示这个单元的符号（这个单元自己的块符号，网表里要定义了它）。`cell` 是子电路名，或 `"(top)"` 表示网表自己这一层；`view` 不写就是 `"schematic"`；不写 `cell` 就是第一张有内容的层。请选最能代表这个设计的。 |
 | `level` | `{"cover": {"cell": …}}`（原理图）的旧写法；不能和 `cover` 一起写。 |
 

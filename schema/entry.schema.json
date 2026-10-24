@@ -126,6 +126,14 @@
         ]
       }
     },
+    "formats": {
+      "description": "The files that have to be told how to be read, by path: the format of each, a name the core lists (spice or spectre).",
+      "type": "object",
+      "maxProperties": 50,
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
     "cover": {
       "description": "What the thumbnail shows and the viewer opens first: the schematic of a cell, or its symbol. Not together with level.",
       "type": "object",

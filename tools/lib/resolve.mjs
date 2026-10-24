@@ -108,6 +108,16 @@ export async function resolveEntry(id, entry, source, { core }) {
   if (pool.length > LIMITS.files) throw new EntryError(`more than ${LIMITS.files} candidate files; list fewer in "paths" and "add"`);
   push(entry.entry, false);
 
+  // Files that have to be told how to be read (the core guesses from the suffix and the first lines otherwise).
+  const formats = Object.fromEntries(Object.entries(entry.formats ?? {}).map(([path, name]) => [ROOT + path, name]));
+  if (entry.formats) {
+    const known = (await core.formats({ formats: {} })).list.map((f) => f.name);
+    for (const [path, name] of Object.entries(entry.formats)) {
+      if (!known.includes(name)) throw new EntryError(`formats["${path}"]: "${name}" is not a format of the core (${known.join(", ")})`);
+      if (!present.has(path) && !virtual.has(path)) throw new EntryError(`formats: "${path}" is not a file of the design`);
+    }
+  }
+
   const get = async (path) => virtual.get(path) ?? fetched(path);
   const missing = [];
   await mapLimit(pool, 8, async (path) => { if (!(await get(path))) missing.push(path); });
@@ -127,7 +137,7 @@ export async function resolveEntry(id, entry, source, { core }) {
 
   const orderedPool = pool.filter((p) => p !== entry.entry);
   const files = Object.fromEntries(pool.map((p) => [ROOT + p, textOf(p)]));
-  const { document: full } = await collect(core, { entry: ROOT + entry.entry, files, pool: orderedPool.map((p) => ROOT + p) }, read);
+  const { document: full } = await collect(core, { entry: ROOT + entry.entry, files, pool: orderedPool.map((p) => ROOT + p), formats }, read);
 
   // What the build used: the host files the Document lists, what the reading provided, and what the entry names.
   const entryDir = posix.dirname(ROOT + entry.entry);
@@ -141,14 +151,14 @@ export async function resolveEntry(id, entry, source, { core }) {
   const unsure = pool.filter((p) => PACKAGE.test(p) && !used.has(p));
   for (const p of unsure) {
     if (unsure.length > 20) { used.add(p); continue; }
-    const without = await core.build({ entry: ROOT + entry.entry, files: Object.fromEntries(pool.filter((q) => q !== p).map((q) => [ROOT + q, textOf(q)])), pool: orderedPool.filter((q) => q !== p).map((q) => ROOT + q) });
+    const without = await core.build({ entry: ROOT + entry.entry, files: Object.fromEntries(pool.filter((q) => q !== p).map((q) => [ROOT + q, textOf(q)])), pool: orderedPool.filter((q) => q !== p).map((q) => ROOT + q), formats });
     if (!sameDocument(without, full)) used.add(p);
   }
   const kept = [...used].filter((p) => bytesOf.get(p) || virtual.has(p));
   const keptPool = orderedPool.filter((p) => used.has(p));
 
   // Build again from exactly these files: it must give the Document the candidates gave.
-  const request = { entry: ROOT + entry.entry, files: Object.fromEntries(kept.map((p) => [ROOT + p, textOf(p)])), pool: keptPool.map((p) => ROOT + p) };
+  const request = { entry: ROOT + entry.entry, files: Object.fromEntries(kept.map((p) => [ROOT + p, textOf(p)])), pool: keptPool.map((p) => ROOT + p), formats };
   const document = await core.build(request);
   if (!sameDocument(document, full)) throw new Error(`${id}: the build from the listed files differs from the build from all the candidates`);
 
@@ -161,6 +171,9 @@ export async function resolveEntry(id, entry, source, { core }) {
   const cover = pickCover(document, entry);
   const level = cover.level;
 
+  for (const path of Object.keys(entry.formats ?? {})) {
+    if (!kept.includes(path)) throw new EntryError(`formats: "${path}" is not one of the files the netlist reads`);
+  }
   const order = [entry.entry, ...kept.filter((p) => p !== entry.entry).sort()];
   const manifestFiles = order.map((path) => {
     const f = virtual.get(path) ?? bytesOf.get(path);
@@ -187,6 +200,7 @@ export async function resolveEntry(id, entry, source, { core }) {
     level: level.kind === "file" ? "(top)" : level.title,
     cover: { cell: level.kind === "file" ? "(top)" : level.title, view: cover.view },
     tags: entry.tags ?? [],
+    ...(entry.formats && Object.keys(entry.formats).length ? { formats: entry.formats } : {}),
   };
   return { manifest, document, level, svg: cover.svg, warnings, totalBytes: total };
 }

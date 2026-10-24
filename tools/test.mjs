@@ -43,6 +43,10 @@ test("entries: the fields and their limits", () => {
   bad({ ...base, cover: { cell: "amp", view: "layout" } });
   bad({ ...base, cover: { cell: "amp", extra: 1 } });
   bad({ ...base, tags: ["Upper"] });
+  validateEntry("ota", { ...base, formats: { "lib/models.inc": "spice" } });
+  bad({ ...base, formats: ["top.sp"] });
+  bad({ ...base, formats: { "../x.inc": "spice" } });
+  bad({ ...base, formats: { "lib/models.inc": 1 } });
   bad({ ...base, tags: ["a", "a"] });
   bad({ ...base, tags: "adc" });
   bad({ ...base, tags: Array.from({ length: 9 }, (_, i) => `t${i}`) });
@@ -135,4 +139,16 @@ test("the cover is a schematic or the symbol of a cell", async (t) => {
   assert.deepEqual(old.manifest.cover, { cell: "amp", view: "schematic" });
   assert.deepEqual(old.manifest.tags, []);
   await assert.rejects(resolveEntry("sub", { ...base, cover: { cell: "nothing", view: "symbol" } }, sub, { core }), /level "nothing" is not one of/);
+});
+
+test("formats: told to the core, checked against its list, and carried in the manifest", async (t) => {
+  const core = startCore();
+  t.after(() => core.terminate());
+  const entry = { ...base, paths: ["lib"], formats: { "top.sp": "spice", "lib/models.inc": "spice" } };
+  const { manifest } = await resolveEntry("mini", entry, source(), { core });
+  assert.deepEqual(manifest.formats, { "top.sp": "spice", "lib/models.inc": "spice" });
+  assert.equal((await resolveEntry("mini", { ...base, paths: ["lib"] }, source(), { core })).manifest.formats, undefined);
+  await assert.rejects(resolveEntry("mini", { ...entry, formats: { "top.sp": "cdl" } }, source(), { core }), /is not a format of the core \(spice, spectre\)/);
+  await assert.rejects(resolveEntry("mini", { ...entry, formats: { "nowhere.inc": "spice" } }, source(), { core }), /is not a file of the design/);
+  await assert.rejects(resolveEntry("mini", { ...entry, formats: { "lib/unused.inc": "spice" } }, source(), { core }), /is not one of the files the netlist reads/);
 });
