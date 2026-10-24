@@ -11,7 +11,7 @@ You add a design by adding one small file. You do not copy the design into this 
 
 To **change** an entry, for example to show a newer commit of the design, edit its file in a pull request. To **remove** one, delete the file in a pull request, or open an issue.
 
-A design that is not in a public repository, or whose licence the checks refuse, can be made an example of this repository instead, in `examples/<id>/` with an entry without `source`: ask in an issue first.
+A design that is not in a public repository, or whose licence the checks refuse, can be made an example of this repository instead, in `examples/<id>/` with an entry without `source`, a `license` in the entry and the text of that licence in `examples/<id>/LICENSE`: ask in an issue first.
 
 To try an entry before pushing, see "Build it here" in the [README](README.md#build-it-here).
 

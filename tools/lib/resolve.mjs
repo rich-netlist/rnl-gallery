@@ -2,7 +2,7 @@ import { posix } from "node:path";
 import { collect, decodeText } from "@rich-netlist/runtime";
 import { sha256, mapLimit, fetchRetry, EntryError } from "./util.mjs";
 import { repoPath, LIMITS } from "./entry.mjs";
-import { checkLicense } from "./license.mjs";
+import { checkLicense, checkDirectoryLicense } from "./license.mjs";
 
 /** Where the files of an entry sit in the workspace the core reads. The manifest itself has paths without it. */
 export const ROOT = "/w/";
@@ -45,7 +45,22 @@ async function urlPackage(url) {
  * the manifest lists (checked to be what it builds from all the candidates), and the level to draw.
  */
 export async function resolveEntry(id, entry, source, { core }) {
-  const spdx = await source.license();
+  // The licence: of its own directory for an example kept in this repository, which must show the text of the
+  // licence its entry declares; of the entry, when it declares one for a design in another repository (a
+  // reviewer checks that); else of that repository.
+  let spdx, licenseBy;
+  if (source.self) {
+    if (!entry.license) throw new EntryError('an example of this repository needs a "license" in its entry, and the text of that licence in a LICENSE file in its directory');
+    const text = await source.read("LICENSE");
+    if (!text) throw new EntryError(`${source.prefix}LICENSE is missing`);
+    const problem = checkDirectoryLicense(entry.license, text.toString("utf8"), `${source.prefix}LICENSE`);
+    if (problem) throw new EntryError(problem);
+    [spdx, licenseBy] = [entry.license, "directory"];
+  } else if (entry.license) {
+    [spdx, licenseBy] = [entry.license, "entry"];
+  } else {
+    [spdx, licenseBy] = [await source.license(), "repo"];
+  }
   const licenseProblem = checkLicense(spdx);
   if (licenseProblem) throw new EntryError(`${source.repo}: ${licenseProblem}`);
 
@@ -68,7 +83,7 @@ export async function resolveEntry(id, entry, source, { core }) {
   const explicit = new Set();
   const push = (path, keep) => { if (!pool.includes(path)) pool.push(path); if (keep) explicit.add(path); };
   for (const dir of (entry.paths ?? [dirOf(entry.entry)]).map(strip)) {
-    const files = list.filter((f) => dirOf(f) === dir && NET_EXT.test(f));
+    const files = searchCandidates(list, dir);
     if (!files.length && entry.paths) throw new EntryError(`paths: "${dir}" has no netlist or package files`);
     files.forEach((f) => push(f, false));
   }
@@ -163,6 +178,7 @@ export async function resolveEntry(id, entry, source, { core }) {
     author: entry.author,
     source: { repo: source.repo, commit: source.commit, url: source.htmlUrl },
     license: spdx,
+    licenseBy,
     base: source.rawBase,
     entry: entry.entry,
     files: manifestFiles,
@@ -170,6 +186,14 @@ export async function resolveEntry(id, entry, source, { core }) {
     level: level.kind === "file" ? "(top)" : level.title,
   };
   return { manifest, document, level, warnings, totalBytes: total };
+}
+
+/**
+ * What a search directory offers, as `rnl --path DIR` does: the netlists and package files directly in it, and the
+ * package files one directory down, which is how a package sits under a version (pkgs/1.0/x.rnl).
+ */
+export function searchCandidates(list, dir) {
+  return list.filter((f) => (dirOf(f) === dir && NET_EXT.test(f)) || (PACKAGE.test(f) && dirOf(dirOf(f)) === dir && dirOf(f) !== dir && dirOf(f) !== ""));
 }
 
 /** Whether two builds drew the same levels and found the same problems. */

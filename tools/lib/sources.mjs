@@ -11,7 +11,7 @@ export const SELF_REPO = "rich-netlist/rnl-gallery";
  */
 export class GitHubSource {
   constructor({ repo, commit, prefix = "", token = process.env.GITHUB_TOKEN }) {
-    Object.assign(this, { repo, commit, prefix, token, kind: "github" });
+    Object.assign(this, { repo, commit, prefix, token, kind: "github", self: false });
   }
   get rawBase() { return `https://raw.githubusercontent.com/${this.repo}/${this.commit}/${this.prefix}`; }
   get htmlUrl() { return `https://github.com/${this.repo}/tree/${this.commit}/${this.prefix}`.replace(/\/$/, ""); }
@@ -46,8 +46,8 @@ export class GitHubSource {
 
 /** A directory standing in for a repository, for tests and for checking before a push. */
 export class LocalSource {
-  constructor({ repo, commit, prefix = "", dir, licenseId }) {
-    Object.assign(this, { repo, commit, prefix, dir, licenseId, kind: "local" });
+  constructor({ repo, commit, prefix = "", dir, licenseId, self = false }) {
+    Object.assign(this, { repo, commit, prefix, dir, licenseId, self, kind: "local" });
   }
   get rawBase() { return `https://raw.githubusercontent.com/${this.repo}/${this.commit}/${this.prefix}`; }
   get htmlUrl() { return `https://github.com/${this.repo}/tree/${this.commit}/${this.prefix}`.replace(/\/$/, ""); }
@@ -86,6 +86,8 @@ export function openSource(id, entry, { selfCommit } = {}) {
   const commit = self ? (selfCommit ?? process.env.GITHUB_SHA ?? "0".repeat(40)) : entry.source.commit;
   const prefix = self ? `examples/${id}/` : "";
   const l = local[repo];
-  if (l) return new LocalSource({ repo, commit: self ? commit : (l.commit ?? commit), prefix, dir: l.dir, licenseId: l.license });
-  return new GitHubSource({ repo, commit, prefix });
+  if (l) return new LocalSource({ repo, commit: self ? commit : (l.commit ?? commit), prefix, dir: l.dir, licenseId: l.license, self });
+  const github = new GitHubSource({ repo, commit, prefix });
+  github.self = self;
+  return github;
 }
