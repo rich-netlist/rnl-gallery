@@ -1,0 +1,85 @@
+# RNL gallery
+
+[中文](README.zh.md)
+
+Examples of circuits drawn with [RNL](https://github.com/rich-netlist/rnl) (Rich Netlist), shown on the project's site: <https://rich-netlist.github.io/rnl/gallery.html>.
+
+The gallery is a **list**. Each entry points to a design in a public GitHub repository, at one commit; nothing of the design is copied here. Opening an entry opens that commit's files in the [web viewer](https://rich-netlist.github.io/rnl/viewer/). Examples of our own are kept in this repository, in `examples/`, and are entries like any other.
+
+## Add a design
+
+Open a pull request that adds one file, `entries/<id>.json` (see [CONTRIBUTING.md](CONTRIBUTING.md)). The designer does not have to do anything: anybody may suggest a design from a public repository with a licence that allows it (below).
+
+```json
+{
+  "title": {"en": "Phase-locked loop", "zh": "锁相环"},
+  "description": {"en": "A hierarchical PLL …", "zh": "…"},
+  "author": "Name",
+  "source": {"repo": "owner/name", "commit": "<the full 40-digit commit id>"},
+  "entry": "top.scs",
+  "paths": ["cells"],
+  "add": ["models/"],
+  "packages": [{"name": "eda-symbol", "version": "0.3"}, {"path": "pll_semantics.rnl"}],
+  "level": "lc_vco"
+}
+```
+
+| Field | |
+| --- | --- |
+| `title`, `description`, `author` | What the gallery shows. `title` and `description` have an `en` text and may have others (`zh`). |
+| `source` | The repository (`owner/name`, on GitHub) and the **full commit id**: never a branch or a tag, so that what is shown is what was reviewed. Leave it out for an example kept in `examples/<id>/` of this repository. |
+| `entry` | The netlist (SPICE, `.sp`/`.spi`/`.cir`/`.net`, or Spectre, `.scs`) the viewer opens, relative to the repository. |
+| `paths` | Directories searched for include files written with a bare name, in order (the directory of the entry by default). |
+| `add` | Files or directories to take in besides what the netlist includes. A directory is taken with what is below it. Rarely needed: the files the netlist includes are found by reading it. |
+| `packages` | Packages to load: `{"name", "version"}` from the [public catalog](https://rich-netlist.github.io/rnl-packages/catalog.json), `{"path"}` a file of the repository, or `{"url"}` a raw.githubusercontent.com address. The standard packages need no entry. |
+| `level` | The level drawn as the thumbnail and shown first: a subcircuit name, or `"(top)"` for the netlist's own. Default: the first level that draws something. Pick the one that shows the design best. |
+
+## What the checks do
+
+On a pull request, and when it is merged, `tools/build.mjs` takes each entry and:
+
+1. reads the repository's licence and refuses the entry unless it is one of the accepted licences (below);
+2. lists the files of the commit and fetches the ones the netlist needs: the entry, what it includes, the packages, what `paths` and `add` name;
+3. runs the same core as the viewer (`@rich-netlist/runtime`, as WebAssembly) on exactly these files: **errors fail the check**, warnings are shown;
+4. draws the thumbnail (a PNG, 640 pixels wide) of the chosen level;
+5. writes a *manifest* for the entry, with every file's address and SHA-256, the order in which bare includes are searched, the packages and the level. The viewer opens an entry from its manifest, and checks every file against it.
+
+The merged result is published to this repository's GitHub Pages: `index.json`, `manifests/<id>.json` and `thumbs/…png`, at <https://rich-netlist.github.io/rnl-gallery/>. The site reads `index.json` and the thumbnails there, so that a new entry shows up a few minutes after it is merged, with no change to the site. Nothing but GitHub's static files is used: no server, and no GitHub API from the browser.
+
+Limits: at most 300 files, 2 MB each and 20 MB together, per entry. Only public GitHub repositories are supported: other hosts do not send the headers a browser needs to read their files from another site.
+
+## Licences
+
+The gallery shows a picture of each design that it makes itself, so it takes only designs whose repository has a licence that allows that: CC0-1.0, CC-BY-4.0, CC-BY-SA-4.0, MIT, MIT-0, BSD-2-Clause, BSD-3-Clause, ISC, Apache-2.0, Unlicense, MPL-2.0, 0BSD, Zlib, and the GPL, LGPL and AGPL families. A repository with **no licence** (all rights are reserved), a non-commercial or no-derivatives licence, or a licence of its own is refused by the checks. The list is in `tools/lib/license.mjs`. The files themselves stay under the licence of the repository they are in; the viewer reads them from there.
+
+The licence is read for the whole repository. If a design sits under a licence of its own in a repository with another one, say so in the pull request; a maintainer decides.
+
+**Taking an entry down.** The owner of a design, or anybody else with a reason, can ask in an issue to have its entry removed. It is deleted, and its thumbnail and manifest go with the next publication.
+
+Material under an NDA, or foundry data that may not be published, does not belong here, in this repository or in any repository an entry points to.
+
+## The files of this repository
+
+| Path | |
+| --- | --- |
+| `entries/<id>.json` | The list: one file per entry. |
+| `examples/<id>/` | The files of the examples kept here. They are entries without a `source`, and their paths are relative to this directory. |
+| `schema/entry.schema.json` | The entry's JSON Schema, for editors. `tools/lib/entry.mjs` is what the checks run. |
+| `tools/` | The checks and the build (Node, MIT licence, see below). |
+| `.github/workflows/` | `check.yml` on pull requests, `pages.yml` on merges and every night. |
+
+### Build it here
+
+Node 22 or later. The core and the rasteriser come from npm, the fonts are downloaded and checked against pinned SHA-256 sums.
+
+```bash
+npm ci --prefix tools
+node --test tools/test.mjs
+GITHUB_TOKEN=… node tools/build.mjs --out dist     # the token is optional; it only lifts the API's rate limit
+```
+
+`--only id,id` builds some entries. `RNL_GALLERY_LOCAL` is a JSON object, as text or as the path of a file, from `"owner/name"` to `{"dir": "…", "license": "CC0-1.0"}`: those repositories are read from the directory instead of GitHub, to try an entry before it is pushed.
+
+## Licence
+
+The code in `tools/` is under the [MIT licence](tools/LICENSE). The licence of the rest (the examples in `examples/`, the entries in `entries/`) is to be decided by the owner of this repository and will be written here and in a `LICENSE` file; until then no licence is granted to it.

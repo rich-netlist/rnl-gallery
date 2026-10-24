@@ -1,0 +1,10 @@
+{
+  "name": "rnl-gallery-tools",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "dependencies": {
+    "@rich-netlist/runtime": "0.3.0",
+    "@resvg/resvg-js": "2.6.2"
+  }
+}
