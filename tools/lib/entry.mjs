@@ -27,6 +27,24 @@ function texts(value, what, max) {
   return value;
 }
 
+/** The authors: a name, or a list of {"name", "url"} (the link is optional and has to be https). */
+export function authors(value) {
+  if (typeof value === "string") { text(value, "author", 80); return; }
+  if (!Array.isArray(value) || value.length < 1 || value.length > 8) throw new EntryError('author is a name, or a list of 1 to 8 {"name", "url"}');
+  value.forEach((a, i) => {
+    const what = `author[${i}]`;
+    if (!a || typeof a !== "object" || Array.isArray(a)) throw new EntryError(`${what} is {"name": …, "url": …}`);
+    for (const key of Object.keys(a)) if (!["name", "url"].includes(key)) throw new EntryError(`unknown field "${what}.${key}"`);
+    text(a.name, `${what}.name`, 80);
+    if (a.url !== undefined && !/^https:\/\/[^\s"<>]+$/.test(a.url)) throw new EntryError(`${what}.url must be an https address`);
+  });
+}
+
+/** The authors of an entry as a list of {name, url?}, which is how the manifest and the index give them. */
+export function authorList(value) {
+  return typeof value === "string" ? [{ name: value }] : value.map((a) => ({ name: a.name, ...(a.url ? { url: a.url } : {}) }));
+}
+
 /** A path inside a repository: relative, with no `..`, no backslash, no leading slash. */
 export function repoPath(value, what, { dir = false } = {}) {
   text(value, what, 300);
@@ -45,7 +63,7 @@ export function validateEntry(id, entry) {
   for (const key of Object.keys(entry)) if (!KEYS.includes(key)) throw new EntryError(`unknown field "${key}"`);
   texts(entry.title, "title", 80);
   texts(entry.description, "description", 400);
-  text(entry.author, "author", 80);
+  authors(entry.author);
   if (entry.license !== undefined && !ALLOWED.includes(entry.license)) throw new EntryError(`license "${entry.license}" is not an accepted SPDX id (${ALLOWED.join(", ")})`);
   if (entry.source !== undefined) {
     const source = entry.source;

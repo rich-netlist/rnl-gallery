@@ -27,7 +27,7 @@ Open a pull request that adds one file, `entries/<id>.json` (see [CONTRIBUTING.m
 
 | Field | |
 | --- | --- |
-| `title`, `description`, `author` | What the gallery shows. `title` and `description` have an `en` text and may have others (`zh`). |
+| `title`, `description`, `author` | What the gallery shows. `title` and `description` have an `en` text and may have others (`zh`). `author` is a name, or a list of `{"name": "…", "url": "…"}` (the link is optional and has to be https): the card shows the names in order, and a name with a link can be clicked. |
 | `license` | Optional for a design in another repository (its repository's licence is read otherwise), required for an example kept here. An SPDX id from the list below. See [Licences](#licences). |
 | `source` | The repository (`owner/name`, on GitHub) and the **full commit id**: never a branch or a tag, so that what is shown is what was reviewed. Leave it out for an example kept in `examples/<id>/` of this repository. |
 | `entry` | The netlist (SPICE, `.sp`/`.spi`/`.cir`/`.net`, or Spectre, `.scs`) the viewer opens, relative to the repository. |

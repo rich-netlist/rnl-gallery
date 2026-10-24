@@ -27,7 +27,7 @@
 
 | 字段 | 说明 |
 | --- | --- |
-| `title`、`description`、`author` | 图库上显示的内容。`title`、`description` 必须有 `en`，可以再加 `zh` 等。 |
+| `title`、`description`、`author` | 图库上显示的内容。`title`、`description` 必须有 `en`，可以再加 `zh` 等。`author` 可以是一个名字，也可以是列表，每项 `{"name": "…", "url": "…"}`（链接可省，必须是 https）：卡片上按顺序显示名字，有链接的名字可以点。 |
 | `license` | 别的仓库里的设计可以不写（不写就读它仓库的许可证）；放在本仓库里的例子必须写。从下面的清单里选一个 SPDX 名。见[许可证](#许可证)。 |
 | `source` | 仓库（GitHub 上的 `owner/name`）和**完整的提交号**：不能写分支或标签，这样显示的永远是审核过的那一版。本仓库 `examples/<id>/` 里的例子不写 `source`。 |
 | `entry` | Viewer 打开的网表（SPICE：`.sp`、`.spi`、`.cir`、`.net`；Spectre：`.scs`），相对仓库根目录。 |

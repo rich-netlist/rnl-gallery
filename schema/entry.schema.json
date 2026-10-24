@@ -18,9 +18,37 @@
       "$ref": "#/$defs/texts"
     },
     "author": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 80
+      "description": "A name, or a list of authors, each with a name and an optional https link.",
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "url": {
+                "type": "string",
+                "pattern": "^https://"
+              }
+            }
+          }
+        }
+      ]
     },
     "license": {
       "description": "An SPDX id. Required for an example kept in this repository, whose directory then holds a LICENSE with that text; for a design in another repository it replaces the licence of the repository (a reviewer checks it).",

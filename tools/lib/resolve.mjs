@@ -1,7 +1,7 @@
 import { posix } from "node:path";
 import { collect, decodeText } from "@rich-netlist/runtime";
 import { sha256, mapLimit, fetchRetry, EntryError } from "./util.mjs";
-import { repoPath, LIMITS } from "./entry.mjs";
+import { repoPath, authorList, LIMITS } from "./entry.mjs";
 import { checkLicense, checkDirectoryLicense } from "./license.mjs";
 
 /** Where the files of an entry sit in the workspace the core reads. The manifest itself has paths without it. */
@@ -189,7 +189,7 @@ export async function resolveEntry(id, entry, source, { core }) {
     id,
     title: entry.title,
     description: entry.description,
-    author: entry.author,
+    author: authorList(entry.author),
     source: { repo: source.repo, commit: source.commit, url: source.htmlUrl },
     license: spdx,
     licenseBy,
