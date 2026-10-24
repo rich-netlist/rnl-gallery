@@ -15,9 +15,9 @@
   ],
   "license": "CC0-1.0",
   "tags": [
-    "180nm-cmos",
-    "pll",
-    "ai-gen"
+    "180nm CMOS",
+    "PLL",
+    "AI-gen"
   ],
   "entry": "top.scs"
 }

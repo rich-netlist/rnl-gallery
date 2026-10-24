@@ -34,14 +34,14 @@ Open a pull request that adds one file, `entries/<id>.json` (see [CONTRIBUTING.m
 | `paths` | Directories searched for include files written with a bare name, in order (the directory of the entry by default). |
 | `add` | Files or directories to take in besides what the netlist includes. A directory is taken with what is below it. Rarely needed: the files the netlist includes are found by reading it. |
 | `packages` | Packages to load: `{"name", "version"}` from the [public catalog](https://rich-netlist.github.io/rnl-packages/catalog.json), `{"path"}` a file of the repository, or `{"url"}` a raw.githubusercontent.com address. The standard packages need no entry. |
-| `tags` | Up to 8 tags, lower case letters, digits and hyphens, to find the design by; the gallery page filters by them. Free to choose; the [suggested tags](#tags) keep them alike. |
+| `tags` | Up to 8 tags to find the design by, written as they are to be shown (`"180nm CMOS"`, `"PLL"`, `"AI-gen"`): letters, digits, single spaces and `- . + /`, at most 32 characters. The gallery shows them as written and filters by them without regard to case, a space counting as a hyphen (`180nm-cmos` in an address), so `PLL` and `pll` are one tag. They are not translated. |
 | `formats` | The files that have to be told how to be read: `{"models/n.lib": "spectre"}`, a file of the design and `"spice"` or `"spectre"`. Only the files the core would guess wrong (it goes by the suffix and the first lines); leave it out otherwise. The checks and the viewer read the files with these formats. |
 | `cover` | What the thumbnail shows, and what the viewer opens first: `{"cell": "lc_vco", "view": "schematic"}`, or `"view": "symbol"` for the symbol of that cell (the cell's own block symbol, which its netlist has to define). `cell` is a subcircuit name, or `"(top)"` for the netlist's own level; `view` is `"schematic"` unless it says otherwise; without `cell`, the first level that draws something. Pick what shows the design best. |
 | `level` | The older way to say `{"cover": {"cell": …}}` (a schematic); not together with `cover`. |
 
 ### Tags
 
-Suggested, so that the same thing has the same tag: `amplifier`, `opamp`, `ota`, `comparator`, `bandgap`, `reference`, `bias`, `ldo`, `power`, `oscillator`, `vco`, `pll`, `adc`, `sar-adc`, `dac`, `filter`, `switched-capacitor`, `mixed-signal`, `digital`, `rf`, `lna`, `mixer`, `hierarchical`, `transistor-level`, `virtuoso-export`. Other tags are allowed; the checks look only at their form.
+Tags are shown as they are written, in every language, so write them in the form to show: the capitals of `PLL`, `ADC`, `CMOS`, `AI-gen`. Suggested, so that the same thing has the same tag: `Amplifier`, `Op-amp`, `OTA`, `Comparator`, `Bandgap`, `Reference`, `Bias`, `LDO`, `Power`, `Oscillator`, `VCO`, `PLL`, `ADC`, `SAR ADC`, `DAC`, `Filter`, `Switched-capacitor`, `Mixed-signal`, `Digital`, `RF`, `LNA`, `Mixer`, `Hierarchical`, `Transistor-level`, `Virtuoso export`, and the process, such as `28nm CMOS`. Others are allowed; the checks look only at the form.
 
 ## What the checks do
 

@@ -7,7 +7,11 @@ const ID = /^[a-z0-9][a-z0-9-]{1,62}$/;
 const COMMIT = /^[0-9a-f]{40}$/;
 const REPO = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/;
 const KEYS = ["title", "description", "author", "license", "tags", "source", "entry", "paths", "add", "packages", "formats", "level", "cover"];
-const TAG = /^[a-z0-9][a-z0-9-]{0,31}$/;
+// A tag is written as it is to be shown ("180nm CMOS", "PLL"): letters, digits, single spaces and - . + /, 1 to 32 characters.
+const TAG = /^[A-Za-z0-9](?:[A-Za-z0-9.+/-]| (?! ))*$/;
+
+/** What tags are compared by, in the gallery's filter and addresses: lower case, with hyphens for spaces. */
+export const tagKey = (tag) => tag.toLowerCase().replace(/ /g, "-");
 
 function text(value, what, max) {
   if (typeof value !== "string" || !value.trim()) throw new EntryError(`${what} must be a non-empty string`);
@@ -120,8 +124,10 @@ export function validateEntry(id, entry) {
   }
   if (entry.tags !== undefined) {
     if (!Array.isArray(entry.tags) || entry.tags.length > 8) throw new EntryError("tags is a list of at most 8 tags");
-    for (const tag of entry.tags) if (typeof tag !== "string" || !TAG.test(tag)) throw new EntryError(`tag "${tag}": lower case letters, digits and hyphens, at most 32 characters`);
-    if (new Set(entry.tags).size !== entry.tags.length) throw new EntryError("a tag is given twice");
+    for (const tag of entry.tags) {
+      if (typeof tag !== "string" || tag.length > 32 || !TAG.test(tag) || tag.endsWith(" ")) throw new EntryError(`tag "${tag}": letters, digits, single spaces and - . + /, at most 32 characters, written as it is to be shown`);
+    }
+    if (new Set(entry.tags.map(tagKey)).size !== entry.tags.length) throw new EntryError("a tag is given twice (tags are compared without regard to case, and a space is a hyphen)");
   }
   return entry;
 }

@@ -34,14 +34,14 @@
 | `paths` | 只写了文件名的 include 在哪些目录里找，按顺序；默认是入口所在的目录。 |
 | `add` | 除了网表 include 到的文件，还要带上的文件或目录（目录连同它下面的一起）。很少需要：网表 include 的文件会通过读它自动找到。 |
 | `packages` | 要载入的包：`{"name", "version"}` 是[公开目录](https://rich-netlist.github.io/rnl-packages/catalog.json)里的包，`{"path"}` 是仓库里的包文件，`{"url"}` 是 raw.githubusercontent.com 的地址。标准包不用写。 |
-| `tags` | 最多 8 个标签，小写字母、数字和连字符，用来找到这个设计；图库页可以按标签筛选。自由填写，建议用[推荐标签](#标签)，这样同一件事的标签一致。 |
+| `tags` | 最多 8 个标签，用来找到这个设计，写成要显示的样子（`"180nm CMOS"`、`"PLL"`、`"AI-gen"`）：字母、数字、单个空格和 `- . + /`，最多 32 个字符。图库按原样显示，筛选时不分大小写、空格当作连字符（网址里是 `180nm-cmos`），所以 `PLL` 和 `pll` 是同一个标签。标签不翻译。 |
 | `formats` | 要手动指定读法的文件：`{"models/n.lib": "spectre"}`，设计里的一个文件，值是 `"spice"` 或 `"spectre"`。只写核心会猜错的文件（核心按后缀和开头几行猜）；不需要就不写。检查和查看器都按这些格式读文件。 |
 | `cover` | 缩略图画什么，也是查看器先打开的：`{"cell": "lc_vco", "view": "schematic"}`，或 `"view": "symbol"` 表示这个单元的符号（这个单元自己的块符号，网表里要定义了它）。`cell` 是子电路名，或 `"(top)"` 表示网表自己这一层；`view` 不写就是 `"schematic"`；不写 `cell` 就是第一张有内容的层。请选最能代表这个设计的。 |
 | `level` | `{"cover": {"cell": …}}`（原理图）的旧写法；不能和 `cover` 一起写。 |
 
 ### 标签
 
-推荐的标签，让同一件事用同一个标签：`amplifier`、`opamp`、`ota`、`comparator`、`bandgap`、`reference`、`bias`、`ldo`、`power`、`oscillator`、`vco`、`pll`、`adc`、`sar-adc`、`dac`、`filter`、`switched-capacitor`、`mixed-signal`、`digital`、`rf`、`lna`、`mixer`、`hierarchical`、`transistor-level`、`virtuoso-export`。别的标签也可以，检查只看格式。
+标签在所有语言里都按写的样子显示，所以请写成要显示的形式：`PLL`、`ADC`、`CMOS`、`AI-gen` 的大写。推荐的标签，让同一件事用同一个标签：`Amplifier`, `Op-amp`, `OTA`, `Comparator`, `Bandgap`, `Reference`, `Bias`, `LDO`, `Power`, `Oscillator`, `VCO`, `PLL`, `ADC`, `SAR ADC`, `DAC`, `Filter`, `Switched-capacitor`, `Mixed-signal`, `Digital`, `RF`, `LNA`, `Mixer`, `Hierarchical`, `Transistor-level`, `Virtuoso export`, and the process, such as `28nm CMOS`。别的标签也可以，检查只看格式。
 
 ## 检查做什么
 
