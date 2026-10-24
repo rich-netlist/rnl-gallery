@@ -19,7 +19,7 @@
   "entry": "top.scs",
   "paths": ["cells"],
   "add": ["models/"],
-  "packages": [{"name": "eda-symbol", "version": "0.3"}, {"path": "pll_semantics.rnl"}],
+  "packages": [{"name": "eda-symbol", "version": "0.3"}, {"path": "semantics.rnl"}],
   "level": "lc_vco"
 }
 ```
