@@ -83,7 +83,7 @@ export async function resolveEntry(id, entry, source, { core }) {
   const explicit = new Set();
   const push = (path, keep) => { if (!pool.includes(path)) pool.push(path); if (keep) explicit.add(path); };
   for (const dir of (entry.paths ?? [dirOf(entry.entry)]).map(strip)) {
-    const files = list.filter((f) => dirOf(f) === dir && NET_EXT.test(f));
+    const files = searchCandidates(list, dir);
     if (!files.length && entry.paths) throw new EntryError(`paths: "${dir}" has no netlist or package files`);
     files.forEach((f) => push(f, false));
   }
@@ -186,6 +186,14 @@ export async function resolveEntry(id, entry, source, { core }) {
     level: level.kind === "file" ? "(top)" : level.title,
   };
   return { manifest, document, level, warnings, totalBytes: total };
+}
+
+/**
+ * What a search directory offers, as `rnl --path DIR` does: the netlists and package files directly in it, and the
+ * package files one directory down, which is how a package sits under a version (pkgs/1.0/x.rnl).
+ */
+export function searchCandidates(list, dir) {
+  return list.filter((f) => (dirOf(f) === dir && NET_EXT.test(f)) || (PACKAGE.test(f) && dirOf(dirOf(f)) === dir && dirOf(f) !== dir && dirOf(f) !== ""));
 }
 
 /** Whether two builds drew the same levels and found the same problems. */

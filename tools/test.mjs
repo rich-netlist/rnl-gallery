@@ -7,7 +7,7 @@ import { startCore } from "@rich-netlist/runtime";
 import { validateEntry } from "./lib/entry.mjs";
 import { checkLicense } from "./lib/license.mjs";
 import { LocalSource } from "./lib/sources.mjs";
-import { resolveEntry } from "./lib/resolve.mjs";
+import { resolveEntry, searchCandidates } from "./lib/resolve.mjs";
 import { thumbnail } from "./lib/thumb.mjs";
 import { ensureFonts } from "./fonts.mjs";
 import { EntryError, sha256 } from "./lib/util.mjs";
@@ -97,4 +97,11 @@ test("licences of the examples kept here and of entries that declare one", async
   assert.equal(declared.manifest.licenseBy, "entry");
   const inherited = await resolveEntry("mini", { ...base, paths: ["lib"] }, source("MIT"), { core });
   assert.deepEqual([inherited.manifest.license, inherited.manifest.licenseBy], ["MIT", "repo"]);
+});
+
+test("search directories give what rnl --path gives: files directly in them, packages one version directory down", () => {
+  const list = ["top.sp", "lib/a.inc", "lib/b.txt", "lib/sub/c.inc", "pkgs/1.0/x.rnl", "pkgs/1.0/deep/y.rnl", "pkgs/z.rnl", "pkgs/1.0/n.sp"];
+  assert.deepEqual(searchCandidates(list, "lib"), ["lib/a.inc"]);
+  assert.deepEqual(searchCandidates(list, "pkgs"), ["pkgs/1.0/x.rnl", "pkgs/z.rnl"]);
+  assert.deepEqual(searchCandidates(list, ""), ["top.sp", "pkgs/z.rnl"]);
 });
