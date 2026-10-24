@@ -62,13 +62,6 @@ The gallery makes a picture of each design itself, so it takes only designs whos
 
 Material under an NDA, or foundry data that may not be published, does not belong here, in this repository or in any repository an entry points to.
 
-### The examples kept here
-
-| Example | Licence | If you reuse it |
-| --- | --- | --- |
-| `pll` | CC0-1.0 | Nothing is required. |
-| `risca` | CC-BY-4.0 | Credit the author (Lu Jie), link to this repository and to the licence, and say if you changed it. The RNL records in it were written by a language model (Gemini) as a test of writing RNL. The thumbnail in the gallery is credited on its card. |
-
 ## The files of this repository
 
 | Path | |
