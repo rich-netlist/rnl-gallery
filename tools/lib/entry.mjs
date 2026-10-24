@@ -6,7 +6,8 @@ export const LIMITS = { files: 300, fileBytes: 2 * 1024 * 1024, totalBytes: 20 *
 const ID = /^[a-z0-9][a-z0-9-]{1,62}$/;
 const COMMIT = /^[0-9a-f]{40}$/;
 const REPO = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/;
-const KEYS = ["title", "description", "author", "license", "source", "entry", "paths", "add", "packages", "level"];
+const KEYS = ["title", "description", "author", "license", "tags", "source", "entry", "paths", "add", "packages", "level", "cover"];
+const TAG = /^[a-z0-9][a-z0-9-]{0,31}$/;
 
 function text(value, what, max) {
   if (typeof value !== "string" || !value.trim()) throw new EntryError(`${what} must be a non-empty string`);
@@ -80,5 +81,19 @@ export function validateEntry(id, entry) {
     });
   }
   if (entry.level !== undefined) text(entry.level, "level", 200);
+  if (entry.cover !== undefined) {
+    const cover = entry.cover;
+    if (entry.level !== undefined) throw new EntryError('give "cover" or "level", not both: {"level": X} is {"cover": {"cell": X}}');
+    if (!cover || typeof cover !== "object" || Array.isArray(cover)) throw new EntryError('cover is {"cell": …, "view": "schematic" | "symbol"}');
+    for (const key of Object.keys(cover)) if (!["cell", "view"].includes(key)) throw new EntryError(`unknown field "cover.${key}"`);
+    if (cover.cell !== undefined) text(cover.cell, "cover.cell", 200);
+    if (cover.view !== undefined && !["schematic", "symbol"].includes(cover.view)) throw new EntryError('cover.view is "schematic" or "symbol"');
+    if (cover.view === "symbol" && (cover.cell === undefined || cover.cell === "(top)")) throw new EntryError("the symbol of a cell needs the cell: a subcircuit name");
+  }
+  if (entry.tags !== undefined) {
+    if (!Array.isArray(entry.tags) || entry.tags.length > 8) throw new EntryError("tags is a list of at most 8 tags");
+    for (const tag of entry.tags) if (typeof tag !== "string" || !TAG.test(tag)) throw new EntryError(`tag "${tag}": lower case letters, digits and hyphens, at most 32 characters`);
+    if (new Set(entry.tags).size !== entry.tags.length) throw new EntryError("a tag is given twice");
+  }
   return entry;
 }

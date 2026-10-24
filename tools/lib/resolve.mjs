@@ -158,7 +158,8 @@ export async function resolveEntry(id, entry, source, { core }) {
   if (errors.length) throw new EntryError(`rnl check reports ${errors.length} error${errors.length === 1 ? "" : "s"}:\n  ${errors.slice(0, 8).map(describe).join("\n  ")}`);
   const warnings = document.diagnostics.filter((d) => d.severity === "warning").map(describe);
 
-  const level = pickLevel(document, entry.level);
+  const cover = pickCover(document, entry);
+  const level = cover.level;
 
   const order = [entry.entry, ...kept.filter((p) => p !== entry.entry).sort()];
   const manifestFiles = order.map((path) => {
@@ -184,8 +185,10 @@ export async function resolveEntry(id, entry, source, { core }) {
     files: manifestFiles,
     pool: keptPool,
     level: level.kind === "file" ? "(top)" : level.title,
+    cover: { cell: level.kind === "file" ? "(top)" : level.title, view: cover.view },
+    tags: entry.tags ?? [],
   };
-  return { manifest, document, level, warnings, totalBytes: total };
+  return { manifest, document, level, svg: cover.svg, warnings, totalBytes: total };
 }
 
 /**
@@ -199,6 +202,21 @@ export function searchCandidates(list, dir) {
 /** Whether two builds drew the same levels and found the same problems. */
 const sameDocument = (a, b) => a.missing.length === b.missing.length && a.diagnostics.length === b.diagnostics.length &&
   a.levels.length === b.levels.length && a.levels.every((l, i) => l.title === b.levels[i].title && l.svg === b.levels[i].svg);
+
+/**
+ * What the thumbnail shows: the schematic of a level, or the symbol of a cell (a subcircuit's own block symbol).
+ * `cover.cell` (or the older `level`) names the level; the first that draws something is the default for a schematic.
+ */
+export function pickCover(document, entry) {
+  const cell = entry.cover?.cell ?? entry.level;
+  const view = entry.cover?.view ?? "schematic";
+  const level = pickLevel(document, cell);
+  if (view === "schematic") return { level, view, svg: level.svg };
+  if (level.symbol == null) throw new EntryError(`cover: ${level.title} has no symbol of its own`);
+  const symbol = document.symbols[level.symbol];
+  if (!symbol?.svg) throw new EntryError(`cover: the core gives no drawing of the symbol of ${level.title}`);
+  return { level, view, svg: symbol.svg };
+}
 
 /** The level the entry draws: its `level`, "(top)" for the file's own, else the first that draws something. */
 export function pickLevel(document, want) {
