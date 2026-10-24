@@ -167,7 +167,7 @@ export async function resolveEntry(id, entry, source, { core }) {
     entry: entry.entry,
     files: manifestFiles,
     pool: keptPool,
-    level: level.title,
+    level: level.kind === "file" ? "(top)" : level.title,
   };
   return { manifest, document, level, warnings, totalBytes: total };
 }
