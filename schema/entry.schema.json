@@ -26,6 +26,16 @@
       "description": "An SPDX id. Required for an example kept in this repository, whose directory then holds a LICENSE with that text; for a design in another repository it replaces the licence of the repository (a reviewer checks it).",
       "type": "string"
     },
+    "tags": {
+      "description": "Up to 8 tags to find the design by.",
+      "type": "array",
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9-]{0,31}$"
+      }
+    },
     "source": {
       "description": "A public GitHub repository at one commit. Leave it out for an example kept in this repository, in examples/<id>/.",
       "type": "object",
@@ -116,8 +126,26 @@
         ]
       }
     },
+    "cover": {
+      "description": "What the thumbnail shows and the viewer opens first: the schematic of a cell, or its symbol. Not together with level.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cell": {
+          "type": "string",
+          "description": "A subcircuit name, or \"(top)\" for the netlist's own level."
+        },
+        "view": {
+          "enum": [
+            "schematic",
+            "symbol"
+          ],
+          "default": "schematic"
+        }
+      }
+    },
     "level": {
-      "description": "The level drawn as the thumbnail and shown first: a subcircuit name, or \"(top)\" for the netlist's own. Default: the first that draws something.",
+      "description": "The older way to say {\"cover\": {\"cell\": …}}: a subcircuit name, or \"(top)\". Not together with cover.",
       "type": "string"
     }
   },

@@ -20,7 +20,8 @@ Open a pull request that adds one file, `entries/<id>.json` (see [CONTRIBUTING.m
   "paths": ["cells"],
   "add": ["models/"],
   "packages": [{"name": "eda-symbol", "version": "0.3"}, {"path": "semantics.rnl"}],
-  "level": "lc_vco"
+  "tags": ["pll", "mixed-signal"],
+  "cover": {"cell": "lc_vco", "view": "schematic"}
 }
 ```
 
@@ -33,7 +34,13 @@ Open a pull request that adds one file, `entries/<id>.json` (see [CONTRIBUTING.m
 | `paths` | Directories searched for include files written with a bare name, in order (the directory of the entry by default). |
 | `add` | Files or directories to take in besides what the netlist includes. A directory is taken with what is below it. Rarely needed: the files the netlist includes are found by reading it. |
 | `packages` | Packages to load: `{"name", "version"}` from the [public catalog](https://rich-netlist.github.io/rnl-packages/catalog.json), `{"path"}` a file of the repository, or `{"url"}` a raw.githubusercontent.com address. The standard packages need no entry. |
-| `level` | The level drawn as the thumbnail and shown first: a subcircuit name, or `"(top)"` for the netlist's own. Default: the first level that draws something. Pick the one that shows the design best. |
+| `tags` | Up to 8 tags, lower case letters, digits and hyphens, to find the design by; the gallery page filters by them. Free to choose; the [suggested tags](#tags) keep them alike. |
+| `cover` | What the thumbnail shows, and what the viewer opens first: `{"cell": "lc_vco", "view": "schematic"}`, or `"view": "symbol"` for the symbol of that cell (the cell's own block symbol, which its netlist has to define). `cell` is a subcircuit name, or `"(top)"` for the netlist's own level; `view` is `"schematic"` unless it says otherwise; without `cell`, the first level that draws something. Pick what shows the design best. |
+| `level` | The older way to say `{"cover": {"cell": …}}` (a schematic); not together with `cover`. |
+
+### Tags
+
+Suggested, so that the same thing has the same tag: `amplifier`, `opamp`, `ota`, `comparator`, `bandgap`, `reference`, `bias`, `ldo`, `power`, `oscillator`, `vco`, `pll`, `adc`, `sar-adc`, `dac`, `filter`, `switched-capacitor`, `mixed-signal`, `digital`, `rf`, `lna`, `mixer`, `hierarchical`, `transistor-level`, `virtuoso-export`. Other tags are allowed; the checks look only at their form.
 
 ## What the checks do
 
@@ -42,7 +49,7 @@ On a pull request, and when it is merged, `tools/build.mjs` takes each entry and
 1. finds the licence of the design and refuses the entry unless it is one of the accepted licences (below): for an example kept here, the entry's `license`, which has to be the licence of the `LICENSE` file in its directory; for a design in another repository, the repository's licence, or the entry's `license` when it declares one;
 2. lists the files of the commit and fetches the ones the netlist needs: the entry, what it includes, the packages, what `paths` and `add` name;
 3. runs the same core as the viewer (`@rich-netlist/runtime`, as WebAssembly) on exactly these files: **errors fail the check**, warnings are shown;
-4. draws the thumbnail (a PNG, 640 pixels wide) of the chosen level;
+4. draws the thumbnail (a PNG, 640 pixels wide): the schematic of the chosen cell, or its symbol;
 5. writes a *manifest* for the entry, with every file's address and SHA-256, the order in which bare includes are searched, the packages and the level. The viewer opens an entry from its manifest, and checks every file against it.
 
 The merged result is published to this repository's GitHub Pages: `index.json`, `manifests/<id>.json` and `thumbs/…png`, at <https://rich-netlist.github.io/rnl-gallery/>. The site reads `index.json` and the thumbnails there, so that a new entry shows up a few minutes after it is merged, with no change to the site. Nothing but GitHub's static files is used: no server, and no GitHub API from the browser.

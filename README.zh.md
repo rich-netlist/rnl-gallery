@@ -20,7 +20,8 @@
   "paths": ["cells"],
   "add": ["models/"],
   "packages": [{"name": "eda-symbol", "version": "0.3"}, {"path": "semantics.rnl"}],
-  "level": "lc_vco"
+  "tags": ["pll", "mixed-signal"],
+  "cover": {"cell": "lc_vco", "view": "schematic"}
 }
 ```
 
@@ -33,7 +34,13 @@
 | `paths` | 只写了文件名的 include 在哪些目录里找，按顺序；默认是入口所在的目录。 |
 | `add` | 除了网表 include 到的文件，还要带上的文件或目录（目录连同它下面的一起）。很少需要：网表 include 的文件会通过读它自动找到。 |
 | `packages` | 要载入的包：`{"name", "version"}` 是[公开目录](https://rich-netlist.github.io/rnl-packages/catalog.json)里的包，`{"path"}` 是仓库里的包文件，`{"url"}` 是 raw.githubusercontent.com 的地址。标准包不用写。 |
-| `level` | 缩略图画哪一层，也是先显示的一层：子电路名，或 `"(top)"` 表示网表自己这一层。默认是第一张有内容的层。请选最能代表这个设计的一层。 |
+| `tags` | 最多 8 个标签，小写字母、数字和连字符，用来找到这个设计；图库页可以按标签筛选。自由填写，建议用[推荐标签](#标签)，这样同一件事的标签一致。 |
+| `cover` | 缩略图画什么，也是查看器先打开的：`{"cell": "lc_vco", "view": "schematic"}`，或 `"view": "symbol"` 表示这个单元的符号（这个单元自己的块符号，网表里要定义了它）。`cell` 是子电路名，或 `"(top)"` 表示网表自己这一层；`view` 不写就是 `"schematic"`；不写 `cell` 就是第一张有内容的层。请选最能代表这个设计的。 |
+| `level` | `{"cover": {"cell": …}}`（原理图）的旧写法；不能和 `cover` 一起写。 |
+
+### 标签
+
+推荐的标签，让同一件事用同一个标签：`amplifier`、`opamp`、`ota`、`comparator`、`bandgap`、`reference`、`bias`、`ldo`、`power`、`oscillator`、`vco`、`pll`、`adc`、`sar-adc`、`dac`、`filter`、`switched-capacitor`、`mixed-signal`、`digital`、`rf`、`lna`、`mixer`、`hierarchical`、`transistor-level`、`virtuoso-export`。别的标签也可以，检查只看格式。
 
 ## 检查做什么
 
@@ -42,7 +49,7 @@ PR 上和合并之后，`tools/build.mjs` 对每个条目：
 1. 找出设计的许可证，不在接受清单里就拒绝（见下）：放在本仓库里的例子，看条目的 `license`，它必须和目录里 `LICENSE` 文件的许可证一致；别的仓库里的设计，看仓库的许可证，条目写了 `license` 就以它为准；
 2. 列出那个提交的文件，取网表需要的：入口、它 include 的、包、`paths` 和 `add` 指的；
 3. 用和 Viewer 同一个核心（`@rich-netlist/runtime`，WebAssembly）读这些文件：**有错误就不通过**，警告只显示；
-4. 给选定的那一层画缩略图（PNG，宽 640 像素）；
+4. 画缩略图（PNG，宽 640 像素）：选定单元的原理图，或它的符号；
 5. 给条目写一份"清单"：每个文件的地址和 SHA-256、只写文件名的 include 的搜索顺序、包和层。Viewer 按清单打开条目，并逐个文件核对。
 
 合并后的结果发布在本仓库的 GitHub Pages 上：`index.json`、`manifests/<id>.json` 和 `thumbs/…png`，地址是 <https://rich-netlist.github.io/rnl-gallery/>。网站读那里的 `index.json` 和缩略图，所以新条目合并几分钟后就出现，不用改网站。只用 GitHub 的静态文件：没有服务器，浏览器里也不调用 GitHub API。
