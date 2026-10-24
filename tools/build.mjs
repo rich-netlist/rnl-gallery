@@ -57,7 +57,7 @@ for (const id of wanted) {
       license: manifest.license,
       source: { repo: manifest.source.repo, commit: manifest.source.commit, url: manifest.source.url },
       files: manifest.files.length,
-      viewer: manifest.files.length === 1 ? { url: manifest.base + manifest.entry } : { manifest: `manifests/${id}.json` },
+      viewer: manifest.files.length === 1 ? { url: manifest.base + manifest.entry, ...(manifest.level !== "(top)" ? { level: manifest.level } : {}) } : { manifest: `manifests/${id}.json` },
       thumb: { path: thumbPath, width: thumb.width, height: thumb.height },
     });
     console.log(`ok   ${id}: ${manifest.files.length} files, level "${manifest.level}", thumbnail ${thumb.png.length} bytes, ${Math.round(performance.now() - started)} ms`);
