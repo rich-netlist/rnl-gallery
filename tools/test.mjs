@@ -13,6 +13,7 @@ import { ensureFonts } from "./fonts.mjs";
 import { EntryError, sha256 } from "./lib/util.mjs";
 
 const mini = join(dirname(fileURLToPath(import.meta.url)), "test", "fixtures", "mini");
+const selfDir = join(dirname(fileURLToPath(import.meta.url)), "test", "fixtures", "self");
 const base = { title: { en: "T" }, description: { en: "D" }, author: "A", entry: "top.sp" };
 const source = (license = "CC0-1.0") => new LocalSource({ repo: "example/mini", commit: "a".repeat(40), dir: mini, licenseId: license });
 
@@ -32,6 +33,8 @@ test("entries: the fields and their limits", () => {
   bad({ ...base, packages: [{ name: "x" }] });
   bad({ ...base, packages: [{ url: "https://example.com/p.rnl" }] });
   bad({ ...base }, "Bad_Id");
+  bad({ ...base, license: "CC-BY-NC-4.0" });
+  validateEntry("ota", { ...base, license: "CC-BY-4.0" });
 });
 
 test("licences: a recognised, permitting licence is required", () => {
@@ -71,4 +74,27 @@ test("resolving: refusals", async (t) => {
   await assert.rejects(resolveEntry("mini", { ...base, add: ["missing.inc"] }, source(), { core }), /add: "missing.inc"/);
   // without `paths`, models.inc is looked for beside top.sp only, so the include cannot be found
   await assert.rejects(resolveEntry("mini", { ...base }, source(), { core }), EntryError);
+});
+
+const own = (id) => new LocalSource({ repo: "rich-netlist/rnl-gallery", commit: "b".repeat(40), prefix: `examples/${id}/`, dir: selfDir, self: true });
+
+test("licences of the examples kept here and of entries that declare one", async (t) => {
+  const core = startCore();
+  t.after(() => core.terminate());
+  const example = { ...base, paths: ["lib"], license: "CC0-1.0" };
+  const { manifest } = await resolveEntry("mini", example, own("mini"), { core });
+  assert.equal(manifest.license, "CC0-1.0");
+  assert.equal(manifest.licenseBy, "directory");
+  assert.equal(manifest.base, `https://raw.githubusercontent.com/rich-netlist/rnl-gallery/${"b".repeat(40)}/examples/mini/`);
+  // the entry must declare it, and the directory must show the text of that licence
+  await assert.rejects(resolveEntry("mini", { ...base, paths: ["lib"] }, own("mini"), { core }), /needs a "license"/);
+  await assert.rejects(resolveEntry("mini", { ...example, license: "CC-BY-4.0" }, own("mini"), { core }), /is not the text of CC-BY-4.0/);
+  await assert.rejects(resolveEntry("mini", { ...example, license: "MPL-2.0" }, own("mini"), { core }), /not one an example of this repository may have/);
+  await assert.rejects(resolveEntry("nolicense", { ...base, license: "CC0-1.0" }, own("nolicense"), { core }), /LICENSE is missing/);
+  // an entry for another repository: its own licence wins over what the repository says, and without one the repository's is used
+  const declared = await resolveEntry("mini", { ...base, paths: ["lib"], license: "CC-BY-4.0" }, source(null), { core });
+  assert.equal(declared.manifest.license, "CC-BY-4.0");
+  assert.equal(declared.manifest.licenseBy, "entry");
+  const inherited = await resolveEntry("mini", { ...base, paths: ["lib"] }, source("MIT"), { core });
+  assert.deepEqual([inherited.manifest.license, inherited.manifest.licenseBy], ["MIT", "repo"]);
 });

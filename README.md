@@ -27,6 +27,7 @@ Open a pull request that adds one file, `entries/<id>.json` (see [CONTRIBUTING.m
 | Field | |
 | --- | --- |
 | `title`, `description`, `author` | What the gallery shows. `title` and `description` have an `en` text and may have others (`zh`). |
+| `license` | Optional for a design in another repository (its repository's licence is read otherwise), required for an example kept here. An SPDX id from the list below. See [Licences](#licences). |
 | `source` | The repository (`owner/name`, on GitHub) and the **full commit id**: never a branch or a tag, so that what is shown is what was reviewed. Leave it out for an example kept in `examples/<id>/` of this repository. |
 | `entry` | The netlist (SPICE, `.sp`/`.spi`/`.cir`/`.net`, or Spectre, `.scs`) the viewer opens, relative to the repository. |
 | `paths` | Directories searched for include files written with a bare name, in order (the directory of the entry by default). |
@@ -38,7 +39,7 @@ Open a pull request that adds one file, `entries/<id>.json` (see [CONTRIBUTING.m
 
 On a pull request, and when it is merged, `tools/build.mjs` takes each entry and:
 
-1. reads the repository's licence and refuses the entry unless it is one of the accepted licences (below);
+1. finds the licence of the design and refuses the entry unless it is one of the accepted licences (below): for an example kept here, the entry's `license`, which has to be the licence of the `LICENSE` file in its directory; for a design in another repository, the repository's licence, or the entry's `license` when it declares one;
 2. lists the files of the commit and fetches the ones the netlist needs: the entry, what it includes, the packages, what `paths` and `add` name;
 3. runs the same core as the viewer (`@rich-netlist/runtime`, as WebAssembly) on exactly these files: **errors fail the check**, warnings are shown;
 4. draws the thumbnail (a PNG, 640 pixels wide) of the chosen level;
@@ -50,13 +51,23 @@ Limits: at most 300 files, 2 MB each and 20 MB together, per entry. Only public 
 
 ## Licences
 
-The gallery shows a picture of each design that it makes itself, so it takes only designs whose repository has a licence that allows that: CC0-1.0, CC-BY-4.0, CC-BY-SA-4.0, MIT, MIT-0, BSD-2-Clause, BSD-3-Clause, ISC, Apache-2.0, Unlicense, MPL-2.0, 0BSD, Zlib, and the GPL, LGPL and AGPL families. A repository with **no licence** (all rights are reserved), a non-commercial or no-derivatives licence, or a licence of its own is refused by the checks. The list is in `tools/lib/license.mjs`. The files themselves stay under the licence of the repository they are in; the viewer reads them from there.
+**Each design has its own licence**, and the gallery shows it on the card with the author's name.
 
-The licence is read for the whole repository. If a design sits under a licence of its own in a repository with another one, say so in the pull request; a maintainer decides.
+- **An example kept here** (`examples/<id>/`) has its own `LICENSE` file, with the text of its licence, and its entry says which in `license` (an SPDX id). The checks compare the two. Only some licences are accepted for these (CC0-1.0, CC-BY-4.0, CC-BY-SA-4.0, MIT, Apache-2.0, Unlicense), so that the text can be recognised.
+- **A design in another repository** is licensed as its repository is: the checks read the repository's licence. When the entry has a `license` field, that is what the card shows, and a reviewer checks it against the repository (for a design with a licence of its own in a repository with another one, or whose licence GitHub cannot recognise).
+
+The gallery makes a picture of each design itself, so it takes only designs whose licence allows showing one: CC0-1.0, CC-BY-4.0, CC-BY-SA-4.0, MIT, MIT-0, BSD-2-Clause, BSD-3-Clause, ISC, Apache-2.0, Unlicense, MPL-2.0, 0BSD, Zlib, and the GPL, LGPL and AGPL families. A design with **no licence** (all rights are reserved), under a non-commercial or no-derivatives licence, or under a licence of its own, is refused by the checks. The list is in `tools/lib/license.mjs`. The files of a design stay under its licence; the viewer reads them from where they are.
 
 **Taking an entry down.** The owner of a design, or anybody else with a reason, can ask in an issue to have its entry removed. It is deleted, and its thumbnail and manifest go with the next publication.
 
 Material under an NDA, or foundry data that may not be published, does not belong here, in this repository or in any repository an entry points to.
+
+### The examples kept here
+
+| Example | Licence | If you reuse it |
+| --- | --- | --- |
+| `pll` | CC0-1.0 | Nothing is required. |
+| `risca` | CC-BY-4.0 | Credit the author (Lu Jie), link to this repository and to the licence, and say if you changed it. The RNL records in it were written by a language model (Gemini) as a test of writing RNL. The thumbnail in the gallery is credited on its card. |
 
 ## The files of this repository
 
@@ -80,6 +91,6 @@ GITHUB_TOKEN=… node tools/build.mjs --out dist     # the token is optional; it
 
 `--only id,id` builds some entries. `RNL_GALLERY_LOCAL` is a JSON object, as text or as the path of a file, from `"owner/name"` to `{"dir": "…", "license": "CC0-1.0"}`: those repositories are read from the directory instead of GitHub, to try an entry before it is pushed.
 
-## Licence
+## Licence of this repository
 
-The code in `tools/` is under the [MIT licence](tools/LICENSE). The licence of the rest (the examples in `examples/`, the entries in `entries/`) is to be decided by the owner of this repository and will be written here and in a `LICENSE` file; until then no licence is granted to it.
+It follows [REUSE](https://reuse.software): [`REUSE.toml`](REUSE.toml) says the licence of each path, and the texts are in [`LICENSES/`](LICENSES). The code in `tools/` and the workflows are under the MIT licence; the entries, the schema and the documentation are under CC0-1.0; each example is under the licence of its own directory, as above.

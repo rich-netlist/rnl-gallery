@@ -1,0 +1,31 @@
+version = 1
+SPDX-PackageName = "rnl-gallery"
+SPDX-PackageDownloadLocation = "https://github.com/rich-netlist/rnl-gallery"
+
+# The code of the checks, and the workflows.
+[[annotations]]
+path = ["tools/*.mjs", "tools/lib/**", "tools/package.json", "tools/package-lock.json", ".github/workflows/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 many-question"
+SPDX-License-Identifier = "MIT"
+
+# The entries, the schema, the documents, and what the tests of the checks read.
+[[annotations]]
+path = ["README.md", "README.zh.md", "CONTRIBUTING.md", "REUSE.toml", ".gitignore", ".gitattributes", ".github/PULL_REQUEST_TEMPLATE.md", "schema/**", "entries/**", "tools/test/fixtures/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 many-question"
+SPDX-License-Identifier = "CC0-1.0"
+
+# Each example is under the licence of its own directory, which also holds the text (LICENSE) and is named by
+# `license` in its entry; the checks compare the two.
+[[annotations]]
+path = ["examples/pll/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Lu Jie"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = ["examples/risca/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Lu Jie"
+SPDX-License-Identifier = "CC-BY-4.0"

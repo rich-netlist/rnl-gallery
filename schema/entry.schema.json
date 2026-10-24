@@ -3,45 +3,137 @@
   "title": "A gallery entry: entries/<id>.json",
   "description": "tools/lib/entry.mjs is what the checks run; this file is for editors and for reading.",
   "type": "object",
-  "required": ["title", "description", "author", "entry"],
+  "required": [
+    "title",
+    "description",
+    "author",
+    "entry"
+  ],
   "additionalProperties": false,
   "properties": {
-    "title": { "$ref": "#/$defs/texts" },
-    "description": { "$ref": "#/$defs/texts" },
-    "author": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "title": {
+      "$ref": "#/$defs/texts"
+    },
+    "description": {
+      "$ref": "#/$defs/texts"
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "license": {
+      "description": "An SPDX id. Required for an example kept in this repository, whose directory then holds a LICENSE with that text; for a design in another repository it replaces the licence of the repository (a reviewer checks it).",
+      "type": "string"
+    },
     "source": {
       "description": "A public GitHub repository at one commit. Leave it out for an example kept in this repository, in examples/<id>/.",
       "type": "object",
-      "required": ["repo", "commit"],
+      "required": [
+        "repo",
+        "commit"
+      ],
       "additionalProperties": false,
       "properties": {
-        "repo": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
-        "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+        "repo": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        }
       }
     },
-    "entry": { "description": "The netlist the Viewer opens, relative to the repository (or to examples/<id>/).", "type": "string", "pattern": "\\.(sp|spi|cir|net|scs)$" },
-    "paths": { "description": "Directories searched for include files given by name only, in order. Default: the entry's directory.", "type": "array", "maxItems": 50, "items": { "type": "string" } },
-    "add": { "description": "Files or directories to add besides what the netlist includes (a directory is taken with what is below it).", "type": "array", "maxItems": 50, "items": { "type": "string" } },
+    "entry": {
+      "description": "The netlist the Viewer opens, relative to the repository (or to examples/<id>/).",
+      "type": "string",
+      "pattern": "\\.(sp|spi|cir|net|scs)$"
+    },
+    "paths": {
+      "description": "Directories searched for include files given by name only, in order. Default: the entry's directory.",
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "type": "string"
+      }
+    },
+    "add": {
+      "description": "Files or directories to add besides what the netlist includes (a directory is taken with what is below it).",
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "type": "string"
+      }
+    },
     "packages": {
       "description": "Packages to load: from the public catalog, a file of the repository, or a raw.githubusercontent.com address.",
       "type": "array",
       "maxItems": 20,
       "items": {
         "oneOf": [
-          { "type": "object", "required": ["name", "version"], "additionalProperties": false, "properties": { "name": { "type": "string" }, "version": { "type": "string" } } },
-          { "type": "object", "required": ["path"], "additionalProperties": false, "properties": { "path": { "type": "string" } } },
-          { "type": "object", "required": ["url"], "additionalProperties": false, "properties": { "url": { "type": "string", "pattern": "^https://raw\\.githubusercontent\\.com/" } } }
+          {
+            "type": "object",
+            "required": [
+              "name",
+              "version"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "path"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "url"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "url": {
+                "type": "string",
+                "pattern": "^https://raw\\.githubusercontent\\.com/"
+              }
+            }
+          }
         ]
       }
     },
-    "level": { "description": "The level drawn as the thumbnail and shown first: a subcircuit name, or \"(top)\" for the netlist's own. Default: the first that draws something.", "type": "string" }
+    "level": {
+      "description": "The level drawn as the thumbnail and shown first: a subcircuit name, or \"(top)\" for the netlist's own. Default: the first that draws something.",
+      "type": "string"
+    }
   },
   "$defs": {
     "texts": {
       "type": "object",
-      "required": ["en"],
-      "additionalProperties": { "type": "string", "minLength": 1 },
-      "propertyNames": { "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]+)?$" }
+      "required": [
+        "en"
+      ],
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      },
+      "propertyNames": {
+        "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]+)?$"
+      }
     }
   }
 }
