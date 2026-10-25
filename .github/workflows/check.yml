@@ -45,7 +45,8 @@ jobs:
           ids=$(node tools/changed.mjs "origin/${{ github.base_ref }}")
           echo "changed: $ids"
           case "$ids" in
-            none) mkdir -p dist ;;
+            # the artifact refuses an empty folder: a change that touches no entry keeps a note of it
+            none) mkdir -p dist && echo "This change touches no entry." > dist/none.txt ;;
             all) node tools/build.mjs --out dist ;;
             *) node tools/build.mjs --out dist --only "$ids" ;;
           esac

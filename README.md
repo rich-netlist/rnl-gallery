@@ -1,7 +1,5 @@
 # RNL gallery
 
-[中文](README.zh.md)
-
 Examples of circuits drawn with [RNL](https://github.com/rich-netlist/rnl) (Rich Netlist), shown on the project's site: <https://rich-netlist.github.io/rnl/gallery.html>.
 
 The gallery is a **list**. Each entry points to a design in a public GitHub repository, at one commit; nothing of the design is copied here. Opening an entry opens that commit's files in the [web viewer](https://rich-netlist.github.io/rnl/viewer/). Examples of our own are kept in this repository, in `examples/`, and are entries like any other.
