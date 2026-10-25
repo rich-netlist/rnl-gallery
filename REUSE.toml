@@ -11,7 +11,7 @@ SPDX-License-Identifier = "MIT"
 
 # The entries, the schema, the documents, and what the tests of the checks read.
 [[annotations]]
-path = ["README.md", "README.zh.md", "CONTRIBUTING.md", "REUSE.toml", ".gitignore", ".gitattributes", ".github/PULL_REQUEST_TEMPLATE.md", "schema/**", "entries/**", "tools/test/fixtures/**"]
+path = ["README.md", "CONTRIBUTING.md", "REUSE.toml", ".gitignore", ".gitattributes", ".github/PULL_REQUEST_TEMPLATE.md", "schema/**", "entries/**", "tools/test/fixtures/**"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 many-question"
 SPDX-License-Identifier = "CC0-1.0"
