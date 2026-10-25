@@ -33,6 +33,9 @@ jobs:
       - run: npm ci --prefix tools
       - name: Tests of the tools
         run: node --test tools/test.mjs
+      # A warning, never a failure: English is RNL's only core language, and a translation follows it.
+      - name: Translations left behind their English
+        run: node tools/translations.mjs "origin/${{ github.base_ref }}"
       # Entries are checked against their sources: the files at the commit, the repository's licence,
       # `rnl check` through the core as WebAssembly, and the thumbnail. A change to the tools checks all of them.
       - name: Check the entries this change touches
