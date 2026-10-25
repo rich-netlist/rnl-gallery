@@ -11,11 +11,23 @@ import { resolveEntry, searchCandidates } from "./lib/resolve.mjs";
 import { thumbnail } from "./lib/thumb.mjs";
 import { ensureFonts } from "./fonts.mjs";
 import { EntryError, sha256 } from "./lib/util.mjs";
+import { staleTranslations } from "./lib/translations.mjs";
 
 const mini = join(dirname(fileURLToPath(import.meta.url)), "test", "fixtures", "mini");
 const selfDir = join(dirname(fileURLToPath(import.meta.url)), "test", "fixtures", "self");
 const base = { title: { en: "T" }, description: { en: "D" }, author: "A", entry: "top.sp" };
 const source = (license = "CC0-1.0") => new LocalSource({ repo: "example/mini", commit: "a".repeat(40), dir: mini, licenseId: license });
+
+test("translations: one left as it was when its English changed is reported", () => {
+  const before = { ...base, title: { en: "Phase-locked loop", zh: "锁相环" }, description: { en: "A PLL.", zh: "一个锁相环。", ja: "PLL。" } };
+  assert.deepEqual(staleTranslations(before, before), []);
+  assert.deepEqual(staleTranslations(before, { ...before, title: { en: "Phase-locked  loop", zh: "锁相环" } }), []); // white space only
+  assert.deepEqual(staleTranslations(before, { ...before, title: { en: "Integer-N PLL", zh: "锁相环" } }), [{ field: "title", lang: "zh" }]);
+  assert.deepEqual(staleTranslations(before, { ...before, description: { en: "A PLL, 1 GHz.", zh: "一个 1 GHz 的锁相环。", ja: "PLL。" } }),
+    [{ field: "description", lang: "ja" }]);
+  assert.deepEqual(staleTranslations(before, { ...before, title: { en: "Integer-N PLL" } }), []); // removed: the English is shown
+  assert.deepEqual(staleTranslations({ ...base }, { ...base, title: { en: "New", zh: "新" } }), []); // added with its English
+});
 
 test("entries: the fields and their limits", () => {
   validateEntry("ota", { ...base });
