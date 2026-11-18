@@ -177,7 +177,7 @@ test("formats: told to the core, checked against its list, and carried in the ma
   const { manifest } = await resolveEntry("mini", entry, source(), { core });
   assert.deepEqual(manifest.formats, { "top.sp": "spice", "lib/models.inc": "spice" });
   assert.equal((await resolveEntry("mini", { ...base, paths: ["lib"] }, source(), { core })).manifest.formats, undefined);
-  await assert.rejects(resolveEntry("mini", { ...entry, formats: { "top.sp": "cdl" } }, source(), { core }), /is not a format of the core \(spice, spectre\)/);
+  await assert.rejects(resolveEntry("mini", { ...entry, formats: { "top.sp": "cdl" } }, source(), { core }), /is not a format of the core \(spice, spectre, rnl, text\)/);
   await assert.rejects(resolveEntry("mini", { ...entry, formats: { "nowhere.inc": "spice" } }, source(), { core }), /is not a file of the design/);
   await assert.rejects(resolveEntry("mini", { ...entry, formats: { "lib/unused.inc": "spice" } }, source(), { core }), /is not one of the files the netlist reads/);
 });
