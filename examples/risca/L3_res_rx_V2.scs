@@ -316,7 +316,6 @@ R24_9__dmy0  (R24_8__dmy0 net6 ) rupolym l=585.00n w=200n m=1 multi=(1)
 //   %expanded_type_2 = @DEFINE(roles=["{parts}", ["p1", "terminal"], ["p2", "terminal"]]) {};
 //   %expanded_members_symbol = @DEFINE-SYMBOL {};
 //   {#"R19" #"R19_2__dmy0"} @SET-SYMBOL %expanded_members_symbol;
-//   /* rnl upgrade: placing a set now places every member; preserve the old collective placement with explicit points or usages (11.1) */
 // {#"R19" #"R19_2__dmy0"} @PLACE(-24, 73);
 //   %expanded_0 = {#"R19" #"R19_2__dmy0"}(parts) #"R19":1(p1) #"R19_2__dmy0":2(p2) @AS %expanded_type_2;
 //   %symbol_4 = @DEFINE-SYMBOL(box=[-2, -6, 2, 0]) {
@@ -388,7 +387,6 @@ R24_9__dmy0  (R24_8__dmy0 net6 ) rupolym l=585.00n w=200n m=1 multi=(1)
 //   #"I43" @PLACE(75, 95) => @ORIENT("R0");
 //   #"I20" @PLACE(-24, 54) => @ORIENT("R0");
 //   {#"R23" #"R23_2__dmy0" #"R23_3__dmy0" #"R23_4__dmy0"} @SET-SYMBOL %expanded_members_symbol;
-//   /* rnl upgrade: placing a set now places every member; preserve the old collective placement with explicit points or usages (11.1) */
 // {#"R23" #"R23_2__dmy0" #"R23_3__dmy0" #"R23_4__dmy0"} @PLACE(-38, 38);
 //   %expanded_1 = {#"R23" #"R23_2__dmy0" #"R23_3__dmy0" #"R23_4__dmy0"}(parts) #"R23":1(p1) #"R23_4__dmy0":2(p2) @AS %expanded_type_2;
 //   %expanded_1 @SET-SYMBOL %symbol_4;
@@ -411,7 +409,6 @@ R24_9__dmy0  (R24_8__dmy0 net6 ) rupolym l=585.00n w=200n m=1 multi=(1)
 //   #"M35" @SET-SYMBOL %symbol_2;
 //   #"M35" @PLACE(38, 100) => @ORIENT("MY");
 //   {#"R22" #"R22_2__dmy0"} @SET-SYMBOL %expanded_members_symbol;
-//   /* rnl upgrade: placing a set now places every member; preserve the old collective placement with explicit points or usages (11.1) */
 // {#"R22" #"R22_2__dmy0"} @PLACE(-38, 46);
 //   %expanded_2 = {#"R22" #"R22_2__dmy0"}(parts) #"R22":1(p1) #"R22_2__dmy0":2(p2) @AS %expanded_type_2;
 //   %expanded_2 @SET-SYMBOL %symbol_4;
@@ -430,7 +427,6 @@ R24_9__dmy0  (R24_8__dmy0 net6 ) rupolym l=585.00n w=200n m=1 multi=(1)
 //   #"I46" @SET-SYMBOL %symbol_3;
 //   #"I46" @PLACE(-87, 107) => @ORIENT("R0");
 //   {#"R24" #"R24_2__dmy0" #"R24_3__dmy0" #"R24_4__dmy0" #"R24_5__dmy0" #"R24_6__dmy0" #"R24_7__dmy0" #"R24_8__dmy0" #"R24_9__dmy0"} @SET-SYMBOL %expanded_members_symbol;
-//   /* rnl upgrade: placing a set now places every member; preserve the old collective placement with explicit points or usages (11.1) */
 // {#"R24" #"R24_2__dmy0" #"R24_3__dmy0" #"R24_4__dmy0" #"R24_5__dmy0" #"R24_6__dmy0" #"R24_7__dmy0" #"R24_8__dmy0" #"R24_9__dmy0"} @PLACE(-38, 31);
 //   %expanded_3 = {#"R24" #"R24_2__dmy0" #"R24_3__dmy0" #"R24_4__dmy0" #"R24_5__dmy0" #"R24_6__dmy0" #"R24_7__dmy0" #"R24_8__dmy0" #"R24_9__dmy0"}(parts) #"R24":1(p1) #"R24_9__dmy0":2(p2) @AS %expanded_type_2;
 //   %expanded_3 @SET-SYMBOL %symbol_4;
@@ -495,11 +491,11 @@ R24_9__dmy0  (R24_8__dmy0 net6 ) rupolym l=585.00n w=200n m=1 multi=(1)
 //   %wire_0 = &"VB" @WIRE(mode="straight") {%p0 #"M6":2};
 //   %wire_0 @TEXT("VB", size=1, halign="middle", valign="baseline") => @PLACE(21, 68.7);
 //   %wire_1 = &"net4" @WIRE(mode="straight") {#"R21":2 #"I20":1};
-//   %wire_2 = &"net3" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_2 = &"net3" @WIRE(mode="straight") {
 // %expanded_2:p2 #"I21":1};
-//   %wire_3 = &"net5" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_3 = &"net5" @WIRE(mode="straight") {
 // %expanded_1:p2 #"I22":1};
-//   %wire_4 = &"net6" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_4 = &"net6" @WIRE(mode="straight") {
 // %expanded_3:p2 #"I23":1};
 //   %p1 = (71, 70);
 //   %wire_5 = &"EN_N" @WIRE(mode="straight") {%p1 #"I44":5};
@@ -687,7 +683,7 @@ R24_9__dmy0  (R24_8__dmy0 net6 ) rupolym l=585.00n w=200n m=1 multi=(1)
 //   %p49 = (-7, 86);
 //   %wire_85 = &"VOP" @WIRE(mode="straight") {%p48 %p49};
 //   %wire_86 = &"VOP" @WIRE(mode="straight") {#"I32":2 %p49};
-//   %wire_87 = &"VOP" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_87 = &"VOP" @WIRE(mode="straight") {
 // %expanded_0:p2 %p48};
 //   %p50 = (-10, 63);
 //   %wire_88 = &"VOP" @WIRE(mode="straight") {#"R20":2 %p50};
@@ -794,7 +790,7 @@ R24_9__dmy0  (R24_8__dmy0 net6 ) rupolym l=585.00n w=200n m=1 multi=(1)
 //   %wire_139 = &"VCM" @WIRE(mode="straight") {%p81 #"R21":1};
 //   %wire_140 = &"VCM" @WIRE(mode="straight") {%p81 %p80};
 //   %p82 = (-43, 38);
-//   %wire_141 = &"VCM" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_141 = &"VCM" @WIRE(mode="straight") {
 // %p82 %expanded_1:p1};
 //   %wire_142 = &"VCM" @WIRE(mode="straight") {%p80 #"R20":1};
 //   %p83 = (45, 100);
@@ -809,10 +805,10 @@ R24_9__dmy0  (R24_8__dmy0 net6 ) rupolym l=585.00n w=200n m=1 multi=(1)
 //   %wire_147 = &"VCM" @WIRE(mode="straight") {#"M27":2 %p87};
 //   %p88 = (-43, 46);
 //   %wire_148 = &"VCM" @WIRE(mode="straight") {%p88 %p81};
-//   %wire_149 = &"VCM" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_149 = &"VCM" @WIRE(mode="straight") {
 // %p88 %expanded_2:p1};
 //   %wire_150 = &"VCM" @WIRE(mode="straight") {%p82 %p88};
-//   %wire_151 = &"VCM" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_151 = &"VCM" @WIRE(mode="straight") {
 // %p85 %expanded_3:p1};
 //   %wire_138 @TEXT("VCM", size=1, halign="middle", valign="baseline") => @PLACE(-47, 63.7);
 //   %wire_147 @TEXT("VCM", size=1, halign="middle", valign="baseline") => @PLACE(42.4, 27.7);
@@ -861,7 +857,7 @@ R24_9__dmy0  (R24_8__dmy0 net6 ) rupolym l=585.00n w=200n m=1 multi=(1)
 //   %p103 = (-33, 86);
 //   %wire_169 = &"VOUT" @WIRE(mode="straight") {%p102 %p103};
 //   %wire_170 = &"VOUT" @WIRE(mode="straight") {%p103 #"I32":1};
-//   %wire_171 = &"VOUT" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_171 = &"VOUT" @WIRE(mode="straight") {
 // %p102 %expanded_0:p1};
 //   %p104 = (-49, 73);
 //   %wire_172 = &"VOUT" @WIRE(mode="straight") {%p104 %p102};
@@ -933,9 +929,7 @@ R24_9__dmy0  (R24_8__dmy0 net6 ) rupolym l=585.00n w=200n m=1 multi=(1)
 //   {#"M27" #"M29"}(members) @AS $MATCHED;
 //   {#"I38" #"I39" #"I44"}(members) @AS $MATCHED;
 //   {#"I20" #"I21" #"I22" #"I23"}(members) @AS $MATCHED;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M39" #"M35" #"M54" #"M8" #"M6" #"M57" #"M27" #"M26"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M1" #"M36" #"M29" #"M0"} @ALIGN("x", priority="low");
 //   /* Deterministic Static DC Quiescent Currents (65uA Reference Column & 260uA 4x Output Column when EN=1) */
 //   #"M39":3 @CURRENT("in"); #"M39":1 @CURRENT("out");
@@ -949,9 +943,7 @@ R24_9__dmy0  (R24_8__dmy0 net6 ) rupolym l=585.00n w=200n m=1 multi=(1)
 //   #"M36":3 @CURRENT("in"); #"M36":1 @CURRENT("out");
 //   #"M29":1 @CURRENT("in"); #"M29":3 @CURRENT("out");
 //   #"M0":1 @CURRENT("in"); #"M0":3 @CURRENT("out");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"R21" %expanded_2 %expanded_1 %expanded_3} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I20" #"I21" #"I22" #"I23"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-172, 204.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;

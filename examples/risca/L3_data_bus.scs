@@ -685,7 +685,6 @@ subckt L3_data_bus BUSIN_15 BUSIN_14 BUSIN_13 BUSIN_12 BUSIN_11 BUSIN_10 \
 //   {%bundle_0 %bundle_2}(caps) @AS(role="data_bus_supply_decap", substrate_tap="8x_DCAP8_plus_11x_DCAP4") $MOM_DECAP;
 //   {#"I3" %bundle_4 %bundle_5 %bundle_3}(path) @AS $SIGNAL_FLOW; {#I3 %bundle_4 %bundle_5 %bundle_3} @ORDER("left-to-right", priority="low");
 //   {%bundle_8 %bundle_7}(affected_objects) @AS(severity="harmless_internal_net_swap", category="cross_indexed_net_names", description="Delay cell I14_1 (on RDY_1) drives net1_0 into I12_1 (RDQ_1), while I14_0 (on RDY_0) drives net1_1 into I12_0 (RDQ_0)") $CIRCUIT_ANOMALY_NOTE;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I3" #"I15"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-116, 107.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;

@@ -47,7 +47,6 @@ subckt V1_decap_notap GND VDD
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="../risca_semantics.rnl");
 //   /* V1_decap_notap: MOM Supply Decoupling Capacitor Cell without Substrate Tap (stm=1, spm=7, multi=2) */
 //   #"C0"(caps) @AS(role="MOM_supply_decoupling_capacitor", substrate_tap="no_substrate_tap_stm1") $MOM_DECAP;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // #"C0"(members) @AS $BRANCH;
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-40, 42.96) @TEXT("Comment by Gemini-4-Argon", size=1.5) => @SET-STYLE $risca_author_style;

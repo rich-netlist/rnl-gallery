@@ -13,7 +13,6 @@ X3 (c out vdd vss) pll_inv_pdk110_10
 //
 //   /* --- 1. Circuit Semantics --- */
 //   %buf = {#X0 #X1 #X2 #X3}(stages) @AS(purpose="4_stage_2x_tapered_refclk_buffer") $TAPERED_BUFFER_CHAIN;
-//   /* rnl upgrade: CHAIN was removed in 0.4; retain the intended ordering or series topology explicitly (16.3) */
 // {%p_in #X0 #X1 #X2 #X3 %p_out} @ORDER("left-to-right", priority="low");
 //   {%p_in #X0 #X1 #X2 #X3 %p_out} @AS $SIGNAL_FLOW; {%p_in #X0 #X1 #X2 #X3 %p_out} @ORDER("left-to-right", priority="low");
 //

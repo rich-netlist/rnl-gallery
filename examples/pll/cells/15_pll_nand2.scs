@@ -15,7 +15,6 @@ MP1 (y b vdd vdd) pch w=1.25e-06 l=1.8e-07 ad=6e-13 as=6e-13 pd=3.46e-06 ps=3.46
 //   %nand = {#MP0 #MP1}(pull_up_parallel) {#MN0 #MN1}(pull_down_series) @AS(role="static_cmos_nand2") $CMOS_NAND2;
 //   {#MP0 #MP1} @AS $MATCHED;
 //   {#MN0 #MN1} @AS $MATCHED;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#MN0 #MN1} @ALIGN("x", priority="low");
 //   {%pa #MN0 %py} @AS $SIGNAL_FLOW; {%pa #MN0 %py} @ORDER("left-to-right", priority="low");
 //   /* Static CMOS NAND2 has zero quiescent DC current; no static DC current annotated */

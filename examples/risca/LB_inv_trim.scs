@@ -304,13 +304,10 @@ subckt LB_inv_trim A GND SN_1 SN_0 SP_1 SP_0 VDD Y
 //   {#"M1" #"M0"}(core_inverter) {#"M3" #"M6" #"M4" #"M5"}(pmos_header_bank) {#"M7" #"M2" #"M8" #"M9"}(nmos_footer_bank) @AS(role="current_starved_delay_trimmed_inverter", tuning_bits="2b_SP_plus_2b_SN") $STARVED_DELAY_INV;
 //   {#"M3" #"M6" #"M4" #"M5"}(members) @AS $MATCHED;
 //   {#"M7" #"M2" #"M8" #"M9"}(members) @AS $MATCHED;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M3" #"M6" #"M1" #"M0" #"M7" #"M2"} @ALIGN("x", priority="low");
 //   {%p4 #M1 %p7} @ORDER("left-to-right", priority="low");
 //   {%p4 #M0 %p7} @ORDER("left-to-right", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M4" #"M8"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M5" #"M9"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-63, 66.29) @TEXT("Comment by Gemini-4-Argon", size=2) => @SET-STYLE $risca_author_style;

@@ -95,18 +95,18 @@ subckt LB_trangate A B GND N P VDD
 //   %wire_1 = &"B" @WIRE(mode="straight") {#"M0":3 %p0};
 //   %wire_2 = &"B" @WIRE(mode="straight") {%p0 #"M1":1};
 //   %p2 = (-7, 4);
-//   %wire_3 = &"A" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_3 = &"A" @WIRE(mode="straight") {
 // %port_4:p %p2};
 //   %wire_4 = &"A" @WIRE(mode="straight") {%p2 #"M1":3};
 //   %wire_5 = &"A" @WIRE(mode="straight") {#"M0":1 %p2};
 //   %p3 = (-7, 14);
 //   %p4 = (-4, 14);
-//   %wire_6 = &"N" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_6 = &"N" @WIRE(mode="straight") {
 // %p3 %port_3:p %p4};
 //   %wire_7 = &"N" @WIRE(mode="straight") {#"M1":2 %p4};
 //   %p5 = (-7, -7);
 //   %p6 = (-4, -7);
-//   %wire_8 = &"P" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_8 = &"P" @WIRE(mode="straight") {
 // %p5 %port_2:p %p6};
 //   %wire_9 = &"P" @WIRE(mode="straight") {%p6 #"M0":2};
 //   %p7 = (-5, 3);
@@ -125,7 +125,6 @@ subckt LB_trangate A B GND N P VDD
 //   {#"M0" #"M1"}(members) @AS $MATCHED;
 //   {%port_4 #"M0" %port_5}(path) @AS $SIGNAL_FLOW; {%port_4 #M0 %port_5} @ORDER("left-to-right", priority="low");
 //   {%port_4 #"M1" %port_5}(path) @AS $SIGNAL_FLOW; {%port_4 #M1 %port_5} @ORDER("left-to-right", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M1" #"M0"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-33, 40.96) @TEXT("Comment by Gemini-4-Argon", size=1.5) => @SET-STYLE $risca_author_style;

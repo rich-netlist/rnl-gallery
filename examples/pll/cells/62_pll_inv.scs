@@ -11,7 +11,6 @@ MP (y a vdd vdd) pch w=2e-06 l=1.8e-07 nf=1 ad=9.599999999999999e-13 as=9.599999
 //
 //   /* --- 1. Circuit Semantics --- */
 //   %inv = #MP(pull_up) #MN(pull_down) @AS(role="latch_keeper_inv", skew="weak_keeper", drive_strength="0.25x (Wp=0.625u/Wn=0.25u)", channel_length="180nm") $CMOS_INVERTER;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#MP #MN} @ALIGN("x", priority="low");
 //   {%pa #MP %py} @AS $SIGNAL_FLOW; {%pa #MP %py} @ORDER("left-to-right", priority="low");
 //   /* Static CMOS inverter has zero quiescent DC current; no static DC current annotated */

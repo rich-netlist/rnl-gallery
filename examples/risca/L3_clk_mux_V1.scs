@@ -16896,9 +16896,7 @@ subckt L3_clk_mux_V1 FRAME_15 FRAME_14 FRAME_13 FRAME_12 FRAME_11 FRAME_10 \
 //   #"I1552"(delay_50ps) #"I1551"(nor_gate) #"I1550"(out_buffer) @AS(role="OUT23_50ps_deglitch_pulse_shaper") $DEGLITCH_PULSE_SHAPER;
 //   {#"I1215" #"I1220" #"I1218" #"I1213" #"I1210" #"I1205" #"I1207" #"I1212" #"I1199" #"I1204" #"I1202" #"I1197" #"I1195" #"I1193" #"I1191" #"I1189"}(members) @AS $MATCHED;
 //   {#"I1535" #"I1538" #"I1537"}(path) @AS $SIGNAL_FLOW; {#I1535 #I1538 #I1537} @ORDER("left-to-right", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I1260" #"I1215" #"I1220" #"I1218" #"I1213" #"I1210" #"I1205" #"I1207" #"I1212" #"I1199" #"I1204" #"I1202" #"I1197" #"I1195" #"I1193" #"I1191" #"I1189"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I1637" #"I1621" #"I1622" #"I1623" #"I1635" #"I1624" #"I1625" #"I1626" #"I1627" #"I1628" #"I1629" #"I1630" #"I1631" #"I1632" #"I1633" #"I1634"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-130, 185.12) @TEXT("Comment by Gemini-4-Argon", size=4.2) => @SET-STYLE $risca_author_style;

@@ -371,17 +371,12 @@ subckt LB_bs_gen_V2 CLK CLKBS VDD VIN VSS
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
 //   /* LB_bs_gen_V2: Input-Tracking Constant-Vgs Gate Bootstrap Switch Generator (nr=52, lr=7u) */
 //   {#"M6" #"M5" #"M12" #"M11"}(clock_inverters) #"C0"(flying_cap) {#"M4" #"M1"}(precharge_devices) {#"M0" #"M2" #"M8" #"M9" #"nch_ulvt_dnw_mac"}(input_tracking_loop) {#"M7" #"M3"}(discharge_path) @AS(role="constant_Vgs_input_tracking_bootstrap", boost_voltage="VDD_plus_VIN_nr52_lr7u") $GATE_BOOTSTRAP_GEN;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M6" #"M5"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M12" #"M11"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M7" #"M3"} @ALIGN("x", priority="low");
 //   {#"M6" #"M12" #"M8" #"M2"}(path) @AS $SIGNAL_FLOW; {#M6 #M12 #M8 #M2} @ORDER("left-to-right", priority="low");
 //   #"nch_ulvt_dnw_mac"(affected_objects) @AS(severity="minor_naming_typo", category="instance_named_after_model", description="Instance at (1,12) is named nch_ulvt_dnw_mac instead of M124 as in LB_bs_gen_V3") $CIRCUIT_ANOMALY_NOTE;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M9" #"M8"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M4" #"C0" #"M1"}(members) @AS $BRANCH;
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-64, 72.89) @TEXT("Comment by Gemini-4-Argon", size=2) => @SET-STYLE $risca_author_style;

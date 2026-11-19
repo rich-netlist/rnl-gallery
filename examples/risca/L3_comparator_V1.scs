@@ -333,7 +333,7 @@ subckt L3_comparator_V1 CLK DCMPN DCMPP GND VDD VINN VINP VOSN VOSP
 //   %port_9 = $IO_PORT @ATTACH &"CLK" => @PLACE(-35, -46) => @ORIENT("R0");
 //   %port_9 @SET-SYMBOL %input_port_symbol;
 //   %port_9 @TEXT("CLK", key="netname");
-//   %wire_0 = &"VOSP" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_0 = &"VOSP" @WIRE(mode="straight") {
 // %port_8:p %port_7:p};
 //   %p0 = (156, -52);
 //   %wire_1 = &"net2" @WIRE(mode="straight") {%p0 #"M27":1};
@@ -641,9 +641,7 @@ subckt L3_comparator_V1 CLK DCMPN DCMPP GND VDD VINN VINP VOSN VOSP
 //   /* L3_comparator_V1: Two-Stage Dynamic Miyahara Comparator with Auxiliary Offset-Calibration Differential Pair */
 //   #"M29"(tail_switch) {#"M0" #"M1"}(main_diff_pair) {#"M35" #"M36"}(offset_trim_pair) {#"M9" #"M8"}(precharge_loads) @AS(role="dynamic_integrating_preamplifier_with_VOS_trim") $MIYAHARA_DYNAMIC_PREAMP;
 //   {#"M15" #"M19" #"M18" #"M23"}(interstage_buffers) {#"M20" #"M24"}(eval_input_pair) {#"M6" #"M3" #"M5" #"M4"}(cross_coupled_latch) {#"M25" #"M26" #"M27" #"M28"}(precharge_switches) {#"M12" #"M11" #"M14" #"M13"}(output_buffers) @AS(role="regenerative_second_stage_latch") $DYNAMIC_REGEN_LATCH;
-//   /* rnl upgrade: DIFFERENTIAL_PAIR was split into DIFFERENTIAL_PAIR_N and DIFFERENTIAL_PAIR_P with left/right roles and a tail that must be filled; choose the matching polarity and side order explicitly, or PSEUDO_DIFFERENTIAL_PAIR for a pair with no tail (16.3) */
 // {#"M0" {#"M29"} #"M1"} @DISTRIBUTE("left-to-right", priority="low");
-//   /* rnl upgrade: DIFFERENTIAL_PAIR was split into DIFFERENTIAL_PAIR_N and DIFFERENTIAL_PAIR_P with left/right roles and a tail that must be filled; choose the matching polarity and side order explicitly, or PSEUDO_DIFFERENTIAL_PAIR for a pair with no tail (16.3) */
 // {#"M35" {#"M29"} #"M36"} @DISTRIBUTE("left-to-right", priority="low");
 //   /* Differential Matching & Symmetry Across Vertical Center Axes */
 //   {#"M0" #"M1"}(members) @AS $MATCHED;
@@ -672,21 +670,13 @@ subckt L3_comparator_V1 CLK DCMPN DCMPP GND VDD VINN VINP VOSN VOSP
 //   #"M20"(left) #"M24"(right) %ax_stg2(axis) @AS $MIRRORED_LAYOUT;
 //   {#"M0" #"M18" #"M24" #"M4" #"M14"}(path) @AS $SIGNAL_FLOW; {#M0 #M18 #M24 #M4 #M14} @ORDER("left-to-right", priority="low");
 //   {%port_7 %port_8}(affected_objects) @AS(severity="schematic_annotation_quirk", category="duplicate_overlapping_port", description="Two overlapping IO_PORT symbols (%port_7 and %port_8) are placed on net VOSP at (-35, -55)") $CIRCUIT_ANOMALY_NOTE;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M9" #"M0" #"M35" #"M29"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M8" #"M1" #"M36" #"M29"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M15" #"M19"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M18" #"M23"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M12" #"M11"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M6" #"M3" #"M20"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M5" #"M4" #"M24"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M14" #"M13"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-57, 36.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;

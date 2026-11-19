@@ -14,7 +14,6 @@ C0 (vmid vss) capacitor c=9.999999999999999e-12
 //   %bnet = {#R0 #R1}(divider_resistors) {#C0}(bypass_caps) @AS(bias_level="0.500_VDD") $AC_COUPLED_BIAS_NETWORK;
 //   %rcf  = {#R0 #R1}(resistors) {#C0}(capacitors) @AS(cutoff_role="318kHz_midrail_decoupling") $RC_NOISE_FILTER;
 //   {#R0 #R1} @AS $MATCHED;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#R0 #R1} @AS $BRANCH;
 //   #R0:1 @CURRENT("in"); #R0:2 @CURRENT("out");
 //   #R1:1 @CURRENT("in"); #R1:2 @CURRENT("out");

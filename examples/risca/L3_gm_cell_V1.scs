@@ -438,7 +438,6 @@ R0 (VDCAP_3 IBP ) rupolym l=900n w=100n m=1 multi=(1)
     I8 (GTUNE_2 net26 VDDSWI GNDSWI) INVD1BWP12T30P140
     I12 (GTUNE_0 net12 VDDSWI GNDSWI) INVD1BWP12T30P140
 // @RNL(author="rnl-virtuoso") {
-//   /* rnl upgrade: later PIN bindings no longer remove displaced pins; remove displaced bindings while preserving any referenced input points (9.2.4) */
 // %block_symbol = @DEFINE-SYMBOL(box=[-18, -33, 10, -5]) {
 //     @LINE {(10, -9) (6, -9)};
 //     @LINE {(10, -11) (6, -11)};
@@ -1925,13 +1924,9 @@ R0 (VDCAP_3 IBP ) rupolym l=900n w=100n m=1 multi=(1)
 //   {#"I47" #"I50" #"I49" #"I51"}(ftx_chopper_quad) {#"I65" #"I66" #"I22" #"I21"}(bus1_switches) {#"I64" #"I67" #"I27"}(bus2_switches) {#"I60" #"I63"}(local_loop_switches) {#"I45" #"I44" #"I30"}(vcm_clamp_switches) @AS(role="output_chopper_and_shared_bus_routing_matrix") $GM_OUTPUT_CHOPPER_ROUTER;
 //   {#"I32" #"I33" #"I6" #"I5" #"I7" #"I31" #"I34"}(caps) @AS(role="switch_driver_supply_decap", substrate_tap="7x_DCAP4_stdcell") $MOM_DECAP;
 //   /* Current Mirror & Differential Pair Relationships */
-//   /* rnl upgrade: DIFFERENTIAL_PAIR was split into DIFFERENTIAL_PAIR_N and DIFFERENTIAL_PAIR_P with left/right roles and a tail that must be filled; choose the matching polarity and side order explicitly, or PSEUDO_DIFFERENTIAL_PAIR for a pair with no tail (16.3) */
 // {#"M27" {#"M26"} #"M29"} @DISTRIBUTE("left-to-right", priority="low");
-//   /* rnl upgrade: DIFFERENTIAL_PAIR was split into DIFFERENTIAL_PAIR_N and DIFFERENTIAL_PAIR_P with left/right roles and a tail that must be filled; choose the matching polarity and side order explicitly, or PSEUDO_DIFFERENTIAL_PAIR for a pair with no tail (16.3) */
 // {#"M30" {#"M7"} #"M28"} @DISTRIBUTE("left-to-right", priority="low");
-//   /* rnl upgrade: DIFFERENTIAL_PAIR was split into DIFFERENTIAL_PAIR_N and DIFFERENTIAL_PAIR_P with left/right roles and a tail that must be filled; choose the matching polarity and side order explicitly, or PSEUDO_DIFFERENTIAL_PAIR for a pair with no tail (16.3) */
 // {#"M35" {#"M39"} #"M36"} @DISTRIBUTE("left-to-right", priority="low");
-//   /* rnl upgrade: DIFFERENTIAL_PAIR was split into DIFFERENTIAL_PAIR_N and DIFFERENTIAL_PAIR_P with left/right roles and a tail that must be filled; choose the matching polarity and side order explicitly, or PSEUDO_DIFFERENTIAL_PAIR for a pair with no tail (16.3) */
 // {#"M34" {#"M38"} #"M37"} @DISTRIBUTE("left-to-right", priority="low");
 //   /* Device Matching */
 //   {#"M27" #"M29" #"M30" #"M28"}(members) @AS $MATCHED;
@@ -1976,35 +1971,20 @@ R0 (VDCAP_3 IBP ) rupolym l=900n w=100n m=1 multi=(1)
 //   #"M28":1 @CURRENT("in"); #"M28":3 @CURRENT("out");
 //   #"M7":1 @CURRENT("in"); #"M7":3 @CURRENT("out");
 //   #"M42":1 @CURRENT("in"); #"M42":3 @CURRENT("out");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M68" #"R1" #"R0"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M75" #"M76"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M72" #"M77"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M80" #"M81" #"M78"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M82" #"M83" #"M84" #"M85" #"M79"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M6" #"M60" #"M71" #"M70" #"M69"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M67" #"M66" #"M65" #"M64"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M63" #"M58" #"M3" #"M2" #"M59"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M36" #"M40" #"M33" #"M29"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M39" #"M26"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M50" #"M51"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M35" #"M54" #"M57" #"M27"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M34" #"M55" #"M52" #"M53" #"M56" #"M30"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M38" #"M7"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M37" #"M41" #"M42" #"M28"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-121, 81.12) @TEXT("Comment by Gemini-4-Argon", size=4.2) => @SET-STYLE $risca_author_style;

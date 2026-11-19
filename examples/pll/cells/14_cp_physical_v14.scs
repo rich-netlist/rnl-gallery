@@ -20,7 +20,6 @@ MPO (out mir vdd vdd) pch w=4e-06 l=1e-06 ad=1.92e-12 as=1.92e-12 pd=8.960000000
 //
 //   /* --- 1. Circuit Semantics & Static DC Currents --- */
 //   %cp  = #MIP(gm_p) #MIN(gm_n) {#MT #XT #MOFF}(tail_switches) {#MPD #MPO}(mirror_loads) {#RREF #MB}(bleeders) @AS(architecture="pulsed_transconductance_CP") $PULSED_GM_CHARGE_PUMP;
-//   /* rnl upgrade: CURRENT_MIRROR was split into CURRENT_MIRROR_N and CURRENT_MIRROR_P, which add low-priority ALIGN y, orientation relations, the orientation of the source or emitter pins and model/topology assertions; choose the matching polarity or retain only the intended facts (16.3) */
 // {#MIP {#MT} #MIN} @DISTRIBUTE("left-to-right", priority="low");
 // %cm1 = {#MPD}(ref) {#MPO}(out) @AS $CURRENT_MIRROR_P;
 //   {#MIP #MIN} @AS $MATCHED;

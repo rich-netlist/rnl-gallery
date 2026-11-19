@@ -10,7 +10,6 @@ XI (n y vdd vss) pll_inv_pdk110_48
 //   # @SET-SYMBOL(terminals=[[1, "a"], [2, "b"], [3, "y"]]) $AND_2INPUT;
 //
 //   /* --- 1. Circuit Semantics --- */
-//   /* rnl upgrade: CHAIN was removed in 0.4; retain the intended ordering or series topology explicitly (16.3) */
 // {#XN #XI %py} @ORDER("left-to-right", priority="low");
 //   {%pa #XN #XI %py} @AS $SIGNAL_FLOW; {%pa #XN #XI %py} @ORDER("left-to-right", priority="low");
 //

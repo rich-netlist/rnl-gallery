@@ -66,9 +66,9 @@ R0 (A net2 ) rmxw l=25.0u w=2u multi=(1)
 //   %p0 = (16, -7);
 //   %wire_7 = &"B" @WIRE(mode="straight") {#"R12":2 %p0};
 //   %p1 = (18, -7);
-//   %wire_8 = &"B" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_8 = &"B" @WIRE(mode="straight") {
 // %p0 %port_1:p %p1};
-//   %wire_9 = &"A" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_9 = &"A" @WIRE(mode="straight") {
 // %port_0:p #"R0":1}
 // }
 // @RNL(author="gemini-4-argon") {
@@ -76,7 +76,6 @@ R0 (A net2 ) rmxw l=25.0u w=2u multi=(1)
 //   /* LB_RES50: 8-Segment Series Metal Resistor Forming On-Chip 50-Ohm Input Termination */
 //   {#"R0" #"R1" #"R2" #"R3" #"R4" #"R5" #"R14" #"R12"}(segments) @AS(role="on_chip_50ohm_input_termination", nominal_r="50_ohm_8x_rmxw") $SERIES_RES_STRING;
 //   {#"R0" #"R1" #"R2" #"R3" #"R4" #"R5" #"R14" #"R12"}(members) @AS $MATCHED;
-//   /* rnl upgrade: CHAIN was removed in 0.4; retain the intended ordering or series topology explicitly (16.3) */
 // {#"R0" {#"R1" #"R2" #"R3" #"R4" #"R5" #"R14"} #"R12"} @ORDER("left-to-right", priority="low");
 //   {%port_0 #"R0" #"R1" #"R2" #"R3" #"R4" #"R5" #"R14" #"R12" %port_1}(path) @AS $SIGNAL_FLOW; {%port_0 #R0 #R1 #R2 #R3 #R4 #R5 #R14 #R12 %port_1} @ORDER("left-to-right", priority="low");
 //   %ax_res = (-2, -4);
@@ -84,15 +83,13 @@ R0 (A net2 ) rmxw l=25.0u w=2u multi=(1)
 //   #"R1"(left) #"R14"(right) %ax_res(axis) @AS $MIRRORED_LAYOUT;
 //   #"R2"(left) #"R5"(right) %ax_res(axis) @AS $MIRRORED_LAYOUT;
 //   #"R3"(left) #"R4"(right) %ax_res(axis) @AS $MIRRORED_LAYOUT;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// #"R0"(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// #"R1"(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// #"R2"(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// #"R0"(members) @AS $BRANCH;
+// #"R1"(members) @AS $BRANCH;
+// #"R2"(members) @AS $BRANCH;
 // #"R3"(members) @AS $BRANCH;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// #"R4"(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// #"R5"(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// #"R14"(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// #"R4"(members) @AS $BRANCH;
+// #"R5"(members) @AS $BRANCH;
+// #"R14"(members) @AS $BRANCH;
 // #"R12"(members) @AS $BRANCH;
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-32, 32.69) @TEXT("Comment by Gemini-4-Argon", size=2) => @SET-STYLE $risca_author_style;

@@ -431,11 +431,8 @@ subckt LB_logicseg_X2 CMPN CMPO CMPP DON DOP ENB GND NEXTB RST VDD
 //   {#"I7" #"I36"}(members) @AS $MATCHED;
 //   {#"I9" #"I6" #"I2" #"I4"}(path) @AS $SIGNAL_FLOW; {#I9 #I6 #I2 #I4} @ORDER("left-to-right", priority="low");
 //   {#"I9" #"I30" #"I2" #"I4"}(path) @AS $SIGNAL_FLOW; {#I9 #I30 #I2 #I4} @ORDER("left-to-right", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I3" #"I4" #"I2"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I7" #"I36"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I6" #"I30"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-99, 128.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;

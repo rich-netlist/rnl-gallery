@@ -652,11 +652,8 @@ subckt L3_input_MUX_V1 FLIP GND ON_2 ON_1 ON_0 VCM VDD VINN_2 VINN_1 \
 //   {#"I19" #"I6" #"M3"}(path) @AS $SIGNAL_FLOW; {#I19 #I6 #M3} @ORDER("left-to-right", priority="low");
 //   {#"I21" #"I7" #"M4"}(path) @AS $SIGNAL_FLOW; {#I21 #I7 #M4} @ORDER("left-to-right", priority="low");
 //   {#"I20" #"I8" #"M11"}(path) @AS $SIGNAL_FLOW; {#I20 #I8 #M11} @ORDER("left-to-right", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M10" #"M3" #"M4" #"M11" #"M14"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M9" #"M7" #"M2" #"M12" #"M13"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I5" #"I6" #"I7" #"I8" #"I11"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-229, 137.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;

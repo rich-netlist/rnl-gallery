@@ -24,19 +24,18 @@ subckt LB_DAC_cunit BOT TOP
 //   %port_1 = $IO_PORT @ATTACH &"BOT" => @PLACE(-12, 4) => @ORIENT("R0");
 //   %p0 = (-13, 4);
 //   %p1 = (-2, 4);
-//   %wire_0 = &"BOT" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_0 = &"BOT" @WIRE(mode="straight") {
 // %p0 %port_1:p %p1};
 //   %wire_1 = &"BOT" @WIRE(mode="straight") {%p1 #"C0":2};
 //   %p2 = (-2, 16);
 //   %wire_2 = &"TOP" @WIRE(mode="straight") {#"C0":1 %p2};
-//   %wire_3 = &"TOP" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_3 = &"TOP" @WIRE(mode="straight") {
 // %port_0:p %p2}
 // }
 // @RNL(author="gemini-4-argon") {
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
 //   /* LB_DAC_cunit: 1.1fF Unit Capacitor Cell for Binary-Weighted SAR CDAC Array */
 //   #"C0"(cap) @AS(role="SAR_CDAC_unit_capacitor", capacitance="1.1fF") $UNIT_CAP_CELL;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // #"C0"(members) @AS $BRANCH;
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-22, 41.96) @TEXT("Comment by Gemini-4-Argon", size=1.5) => @SET-STYLE $risca_author_style;

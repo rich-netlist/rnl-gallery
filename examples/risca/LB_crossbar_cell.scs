@@ -464,11 +464,8 @@ subckt LB_crossbar_cell COL GND PRE ROW SCK SDI SDO VDD BUS REP
 //   #"I22"(caps) @AS(role="local_cell_supply_decap", substrate_tap="DCAP4_stdcell") $MOM_DECAP;
 //   {#"M2" #"M3" #"M4" #"M5"}(members) @AS $MATCHED;
 //   {#"I21" #"M3" #"M0"}(path) @AS $SIGNAL_FLOW; {#I21 #M3 #M0} @ORDER("left-to-right", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M5" #"M4"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M7" #"M3" #"M2"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M1" #"M0"}(members) @AS $BRANCH;
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-56, 111.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;

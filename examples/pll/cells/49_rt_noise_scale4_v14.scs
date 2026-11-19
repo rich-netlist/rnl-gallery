@@ -12,7 +12,6 @@ X1 (ob out vdd vss) pll_inv_pdk110_52
 //
 //   /* --- 1. Circuit Semantics --- */
 //   %ret = {#XFF}(retimer_ffs) {#X0 #X1}(skewed_buffers) @AS(stages=1, scale="4x_low_noise") $RETIMER_STAGE;
-//   /* rnl upgrade: CHAIN was removed in 0.4; retain the intended ordering or series topology explicitly (16.3) */
 // {%pdata #XFF #X0 #X1 %pout} @ORDER("left-to-right", priority="low");
 //   {%pdata #XFF #X0 #X1 %pout} @AS $SIGNAL_FLOW; {%pdata #XFF #X0 #X1 %pout} @ORDER("left-to-right", priority="low");
 //

@@ -1624,18 +1624,16 @@ subckt L3_DAC_swi_V2 DLSB_5 DLSB_4 DLSB_3 DLSB_2 DLSB_1 DLSB_0 DMSB_4 \
 //   {#"M3" #"M0" #"M6" #"M9" #"M12" #"M18" #"M29" #"M26" #"M23" #"M16" #"M31"}(members) @AS $MATCHED;
 //   {#"I23" #"I24" #"I21" #"I22"}(path) @AS $SIGNAL_FLOW; {#I23 #I24 #I21 #I22} @ORDER("left-to-right", priority="low");
 //   {#"I20" #"I25" #"I59"}(path) @AS $SIGNAL_FLOW; {#I20 #I25 #I59} @ORDER("left-to-right", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// {#"M2" #"M1"}(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// {#"M4" #"M5"}(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// {#"M7" #"M8"}(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// {#"M10" #"M11"}(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"M2" #"M1"}(members) @AS $BRANCH;
+// {#"M4" #"M5"}(members) @AS $BRANCH;
+// {#"M7" #"M8"}(members) @AS $BRANCH;
+// {#"M10" #"M11"}(members) @AS $BRANCH;
 // {#"M13" #"M14"}(members) @AS $BRANCH;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// {#"M19" #"M17"}(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// {#"M28" #"M27"}(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// {#"M25" #"M24"}(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// {#"M22" #"M21"}(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// {#"M20" #"M15"}(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"M19" #"M17"}(members) @AS $BRANCH;
+// {#"M28" #"M27"}(members) @AS $BRANCH;
+// {#"M25" #"M24"}(members) @AS $BRANCH;
+// {#"M22" #"M21"}(members) @AS $BRANCH;
+// {#"M20" #"M15"}(members) @AS $BRANCH;
 // {#"M30" #"M32"}(members) @AS $BRANCH;
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-122, 227.12) @TEXT("Comment by Gemini-4-Argon", size=4.2) => @SET-STYLE $risca_author_style;

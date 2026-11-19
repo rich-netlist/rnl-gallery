@@ -26506,7 +26506,6 @@ I31 (IN1N INCM_C) LB_RES50
 I30 (INCM_C IN1P) LB_RES50
 DO1 (GNDA_CORE IB) ndio area=1.35e-11 pj=2.1e-05 m=(1)
 // @RNL(author="rnl-virtuoso") {
-//   /* rnl upgrade: later PIN bindings no longer remove displaced pins; remove displaced bindings while preserving any referenced input points (9.2.4) */
 // %block_symbol = @DEFINE-SYMBOL(box=[0, -37, 53, 10]) {
 //     @LINE {(0, -26) (4, -26)};
 //     @LINE {(0, -24) (4, -24)};
@@ -27079,13 +27078,13 @@ DO1 (GNDA_CORE IB) ndio area=1.35e-11 pj=2.1e-05 m=(1)
 //   %wire_60 = &"VCKB_C" @WIRE(mode="straight") {%bundle_7:2 %p36};
 //   %wire_61 = &"VCKB_C" @WIRE(mode="straight") {%p35 #"I1":1};
 //   %wire_61 @TEXT("VCKB\_C", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-32.7, -100);
-//   %wire_62 = &"VIOH" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_62 = &"VIOH" @WIRE(mode="straight") {
 // %port_45:p #"I2":73};
-//   %wire_63 = &"DCLK" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_63 = &"DCLK" @WIRE(mode="straight") {
 // %port_46:p #"I2":35};
 //   %p37 = (132, 56);
 //   %wire_64 = &"VIOL" @WIRE(mode="straight") {#"R34":2 %p37};
-//   %wire_65 = &"VIOL" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_65 = &"VIOL" @WIRE(mode="straight") {
 // %port_47:p #"I2":74};
 //   %wire_64 @TEXT("VIOL", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(131.3, 55);
 //   %p38 = (96, 45);
@@ -27095,7 +27094,7 @@ DO1 (GNDA_CORE IB) ndio area=1.35e-11 pj=2.1e-05 m=(1)
 //   %p40 = (41, 4);
 //   %wire_68 = &"GCLK" @WIRE(mode="straight") {%p40 %p38};
 //   %wire_69 = &"GCLK" @WIRE(mode="straight") {#"I0":21 %p40};
-//   %wire_70 = &"GCLK" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_70 = &"GCLK" @WIRE(mode="straight") {
 // %port_48:p #"I2":40};
 //   %wire_69 @TEXT("GCLK", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(40.3, -1);
 //   %wire_67 @TEXT("GCLK", size=1, halign="end", valign="top", rotate=90) => @PLACE(94.7, 56.6);
@@ -27108,7 +27107,7 @@ DO1 (GNDA_CORE IB) ndio area=1.35e-11 pj=2.1e-05 m=(1)
 //   %wire_73 @TEXT("DCLK\_FIFO", size=1, halign="middle", valign="baseline") => @PLACE(128, 24.7);
 //   %p43 = (108, 56);
 //   %wire_74 = &"VCLK" @WIRE(mode="straight") {#"R35":2 %p43};
-//   %wire_75 = &"VCLK" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_75 = &"VCLK" @WIRE(mode="straight") {
 // %port_49:p #"I2":70};
 //   %wire_74 @TEXT("VCLK", size=1, halign="end", valign="top", rotate=90) => @PLACE(106.7, 56.6);
 //   %p44 = (84, 45);
@@ -27118,18 +27117,18 @@ DO1 (GNDA_CORE IB) ndio area=1.35e-11 pj=2.1e-05 m=(1)
 //   %p46 = (37, 4);
 //   %wire_78 = &"GREC" @WIRE(mode="straight") {%p44 %p46};
 //   %wire_79 = &"GREC" @WIRE(mode="straight") {#"I0":24 %p46};
-//   %wire_80 = &"GREC" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_80 = &"GREC" @WIRE(mode="straight") {
 // %port_50:p #"I2":46};
 //   %wire_79 @TEXT("GREC", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(36.3, -1);
 //   %wire_77 @TEXT("GREC", size=1, halign="end", valign="baseline", rotate=90) => @PLACE(83.3, 56.6);
 //   %p47 = (72, 56);
 //   %wire_81 = &"VREC" @WIRE(mode="straight") {#"R27":2 %p47};
-//   %wire_82 = &"VREC" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_82 = &"VREC" @WIRE(mode="straight") {
 // %port_51:p #"I2":75};
 //   %wire_81 @TEXT("VREC", size=1, halign="end", valign="baseline", rotate=90) => @PLACE(71.3, 56.6);
 //   %p48 = (60, 56);
 //   %wire_83 = &"VAMP" @WIRE(mode="straight") {#"R26":2 %p48};
-//   %wire_84 = &"VAMP" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_84 = &"VAMP" @WIRE(mode="straight") {
 // %port_52:p #"I2":64};
 //   %wire_83 @TEXT("VAMP", size=1, halign="end", valign="baseline", rotate=90) => @PLACE(59.3, 56.6);
 //   %p49 = (48, 45);
@@ -27139,20 +27138,20 @@ DO1 (GNDA_CORE IB) ndio area=1.35e-11 pj=2.1e-05 m=(1)
 //   %p51 = (29, 4);
 //   %wire_87 = &"GAMP" @WIRE(mode="straight") {%p49 %p51};
 //   %wire_88 = &"GAMP" @WIRE(mode="straight") {#"I0":19 %p51};
-//   %wire_89 = &"GAMP" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_89 = &"GAMP" @WIRE(mode="straight") {
 // %port_53:p #"I2":37};
 //   %wire_88 @TEXT("GAMP", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(28.3, -1);
 //   %wire_85 @TEXT("GAMP", size=1, halign="end", valign="baseline", rotate=90) => @PLACE(47.3, 56.6);
 //   %p52 = (36, 56);
 //   %wire_90 = &"VBS" @WIRE(mode="straight") {#"R25":2 %p52};
-//   %wire_91 = &"VBS" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_91 = &"VBS" @WIRE(mode="straight") {
 // %port_54:p #"I2":67};
 //   %wire_90 @TEXT("VBS", size=1, halign="end", valign="baseline", rotate=90) => @PLACE(35.3, 56.6);
-//   %wire_92 = &"VANA" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_92 = &"VANA" @WIRE(mode="straight") {
 // %port_55:p #"I2":65};
 //   %p53 = (-12, 56);
 //   %wire_93 = &"VDIG" @WIRE(mode="straight") {#"R22":2 %p53};
-//   %wire_94 = &"VDIG" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_94 = &"VDIG" @WIRE(mode="straight") {
 // %port_56:p #"I2":72};
 //   %wire_93 @TEXT("VDIG", size=1, halign="end", valign="baseline", rotate=90) => @PLACE(-12.7, 55.6);
 //   %p54 = (-24, 45);
@@ -27162,18 +27161,18 @@ DO1 (GNDA_CORE IB) ndio area=1.35e-11 pj=2.1e-05 m=(1)
 //   %p56 = (11, 4);
 //   %wire_97 = &"GDIG" @WIRE(mode="straight") {%p56 %p54};
 //   %wire_98 = &"GDIG" @WIRE(mode="straight") {#"I0":23 %p56};
-//   %wire_99 = &"GDIG" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_99 = &"GDIG" @WIRE(mode="straight") {
 // %port_57:p #"I2":41};
 //   %wire_98 @TEXT("GDIG", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(10.3, -1);
 //   %wire_96 @TEXT("GDIG", size=1, halign="end", valign="baseline", rotate=90) => @PLACE(-24.7, 55.6);
 //   %p57 = (24, 56);
 //   %wire_100 = &"VCM" @WIRE(mode="straight") {#"R24":2 %p57};
-//   %wire_101 = &"VCM" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_101 = &"VCM" @WIRE(mode="straight") {
 // %port_58:p #"I2":71};
 //   %wire_100 @TEXT("VCM", size=1, halign="end", valign="baseline", rotate=90) => @PLACE(23.3, 55.6);
 //   %p58 = (-36, 56);
 //   %wire_102 = &"VSAM" @WIRE(mode="straight") {#"R21":2 %p58};
-//   %wire_103 = &"VSAM" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_103 = &"VSAM" @WIRE(mode="straight") {
 // %port_59:p #"I2":77};
 //   %wire_102 @TEXT("VSAM", size=1, halign="end", valign="baseline", rotate=90) => @PLACE(-36.7, 55.6);
 //   %p59 = (-21, 5);
@@ -27187,7 +27186,7 @@ DO1 (GNDA_CORE IB) ndio area=1.35e-11 pj=2.1e-05 m=(1)
 //   %p63 = (-48, 56);
 //   %wire_108 = &"VREF" @WIRE(mode="straight") {%p60 %p63};
 //   %wire_109 = &"VREF" @WIRE(mode="straight") {%p59 %p61};
-//   %wire_110 = &"VREF" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_110 = &"VREF" @WIRE(mode="straight") {
 // %port_60:p #"I2":76};
 //   %wire_104 @TEXT("VREF", size=1, halign="middle", valign="top") => @PLACE(-24, 4.3);
 //   %wire_106 @TEXT("VREF", size=1, halign="middle", valign="baseline") => @PLACE(-12, -16.3);
@@ -27203,7 +27202,7 @@ DO1 (GNDA_CORE IB) ndio area=1.35e-11 pj=2.1e-05 m=(1)
 //   %wire_114 = &"GREF" @WIRE(mode="straight") {%p67 %p68};
 //   %wire_115 = &"GREF" @WIRE(mode="straight") {%p67 %p65};
 //   %wire_116 = &"GREF" @WIRE(mode="straight") {%p66 #"I0":46};
-//   %wire_117 = &"GREF" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_117 = &"GREF" @WIRE(mode="straight") {
 // %port_61:p #"I2":47};
 //   %wire_114 @TEXT("GREF", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-60.7, 50);
 //   %wire_116 @TEXT("GREF", size=1, halign="middle", valign="baseline") => @PLACE(-12, -20.3);
@@ -27212,29 +27211,29 @@ DO1 (GNDA_CORE IB) ndio area=1.35e-11 pj=2.1e-05 m=(1)
 //   %wire_118 = &"IN2N" @WIRE(mode="straight") {#"I29":1 %p69};
 //   %p70 = (-68, 0);
 //   %wire_119 = &"IN2N" @WIRE(mode="straight") {%p70 #"I29":1};
-//   %wire_120 = &"IN2N" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_120 = &"IN2N" @WIRE(mode="straight") {
 // %port_12:p #"I2":51};
 //   %wire_118 @TEXT("IN2N", size=1, halign="middle", valign="baseline") => @PLACE(-45, 0.7);
-//   %wire_121 = &"GCKB" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_121 = &"GCKB" @WIRE(mode="straight") {
 // %port_13:p #"I2":38};
 //   %p71 = (-92, -84);
-//   %wire_122 = &"GCKB" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_122 = &"GCKB" @WIRE(mode="straight") {
 // %port_14:p %p71};
 //   %p72 = (-64, -96);
 //   %wire_123 = &"CLKP" @WIRE(mode="straight") {%p72 #"I1":5};
 //   %p73 = (-68, -96);
 //   %wire_124 = &"CLKP" @WIRE(mode="straight") {%p73 %p72};
-//   %wire_125 = &"CLKP" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_125 = &"CLKP" @WIRE(mode="straight") {
 // %port_15:p #"I2":2};
 //   %wire_123 @TEXT("CLKP", size=1, halign="middle", valign="baseline") => @PLACE(-45, -82.3);
 //   %p74 = (-64, -108);
 //   %wire_126 = &"CLKN" @WIRE(mode="straight") {#"I1":4 %p74};
-//   %wire_127 = &"CLKN" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_127 = &"CLKN" @WIRE(mode="straight") {
 // %port_16:p #"I2":1};
 //   %p75 = (-68, -108);
 //   %wire_128 = &"CLKN" @WIRE(mode="straight") {%p75 %p74};
 //   %wire_126 @TEXT("CLKN", size=1, halign="middle", valign="baseline") => @PLACE(-45, -86.3);
-//   %wire_129 = &"VCKB" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_129 = &"VCKB" @WIRE(mode="straight") {
 // %port_17:p #"I2":68};
 //   %p76 = (47, 4);
 //   %p77 = (120, 45);
@@ -27261,32 +27260,32 @@ DO1 (GNDA_CORE IB) ndio area=1.35e-11 pj=2.1e-05 m=(1)
 //   %p86 = (-36, -115);
 //   %wire_142 = &"GIOL" @WIRE(mode="straight") {%p86 %p85};
 //   %p87 = (-36, -139);
-//   %wire_143 = &"GIOL" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_143 = &"GIOL" @WIRE(mode="straight") {
 // %port_20:p %p87};
 //   %p88 = (-24, -139);
-//   %wire_144 = &"GIOL" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_144 = &"GIOL" @WIRE(mode="straight") {
 // %port_19:p %p88};
-//   %wire_145 = &"GIOL" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_145 = &"GIOL" @WIRE(mode="straight") {
 // %port_18:p #"I2":43};
 //   %wire_134 @TEXT("GIOL", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(46.3, -1);
 //   %p89 = (132, -139);
-//   %wire_146 = &"GIOH" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_146 = &"GIOH" @WIRE(mode="straight") {
 // %port_23:p %p89};
 //   %p90 = (-12, -139);
-//   %wire_147 = &"GIOH" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_147 = &"GIOH" @WIRE(mode="straight") {
 // %port_24:p %p90};
-//   %wire_148 = &"GIOH" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_148 = &"GIOH" @WIRE(mode="straight") {
 // %port_21:p #"I2":42};
 //   %p91 = (161, -108);
-//   %wire_149 = &"GIOH" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_149 = &"GIOH" @WIRE(mode="straight") {
 // %port_22:p %p91};
-//   %wire_150 = &"RST" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_150 = &"RST" @WIRE(mode="straight") {
 // %port_25:p #"I2":54};
-//   %wire_151 = &"SCK" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_151 = &"SCK" @WIRE(mode="straight") {
 // %port_26:p #"I2":56};
-//   %wire_152 = &"SDI" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_152 = &"SDI" @WIRE(mode="straight") {
 // %port_27:p #"I2":58};
-//   %wire_153 = &"SDO" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_153 = &"SDO" @WIRE(mode="straight") {
 // %port_28:p #"I2":60};
 //   %p92 = (-20, -30);
 //   %p93 = (-42, -12);
@@ -27295,42 +27294,42 @@ DO1 (GNDA_CORE IB) ndio area=1.35e-11 pj=2.1e-05 m=(1)
 //   %wire_155 = {&"IN2P" &"IN1P"} @WIRE(mode="straight") {%p94 %p92};
 //   %wire_156 = {&"IN2P" &"IN1P"} @WIRE(mode="straight") {%p92 #"I0":44};
 //   %wire_156 @TEXT("IN2P,IN1P", size=1, halign="middle", valign="baseline") => @PLACE(-13, -29.3);
-//   %wire_157 = &"D0" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_157 = &"D0" @WIRE(mode="straight") {
 // %port_29:p #"I2":3};
-//   %wire_158 = &"D1" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_158 = &"D1" @WIRE(mode="straight") {
 // %port_30:p #"I2":5};
-//   %wire_159 = &"D2" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_159 = &"D2" @WIRE(mode="straight") {
 // %port_31:p #"I2":7};
-//   %wire_160 = &"D3" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_160 = &"D3" @WIRE(mode="straight") {
 // %port_32:p #"I2":9};
-//   %wire_161 = &"D4" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_161 = &"D4" @WIRE(mode="straight") {
 // %port_33:p #"I2":11};
-//   %wire_162 = &"D5" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_162 = &"D5" @WIRE(mode="straight") {
 // %port_34:p #"I2":13};
-//   %wire_163 = &"D6" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_163 = &"D6" @WIRE(mode="straight") {
 // %port_35:p #"I2":15};
-//   %wire_164 = &"D15" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_164 = &"D15" @WIRE(mode="straight") {
 // %port_44:p #"I2":33};
-//   %wire_165 = &"D7" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_165 = &"D7" @WIRE(mode="straight") {
 // %port_36:p #"I2":17};
-//   %wire_166 = &"D13" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_166 = &"D13" @WIRE(mode="straight") {
 // %port_42:p #"I2":29};
 //   %p95 = (0, 80);
-//   %wire_167 = &"GNDA" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_167 = &"GNDA" @WIRE(mode="straight") {
 // %port_1:p %p95};
 //   %p96 = (-92, -72);
-//   %wire_168 = &"GNDA" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_168 = &"GNDA" @WIRE(mode="straight") {
 // %port_2:p %p96};
 //   %p97 = (-92, -60);
-//   %wire_169 = &"GNDA" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_169 = &"GNDA" @WIRE(mode="straight") {
 // %port_3:p %p97};
 //   %p98 = (-92, -24);
-//   %wire_170 = &"GNDA" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_170 = &"GNDA" @WIRE(mode="straight") {
 // %port_4:p %p98};
 //   %p99 = (-92, 12);
-//   %wire_171 = &"GNDA" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_171 = &"GNDA" @WIRE(mode="straight") {
 // %port_0:p %p99};
-//   %wire_172 = &"GNDA" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_172 = &"GNDA" @WIRE(mode="straight") {
 // %port_5:p #"I2":44};
 //   %p100 = (-30, 36);
 //   %p101 = (-1, 4);
@@ -27339,40 +27338,40 @@ DO1 (GNDA_CORE IB) ndio area=1.35e-11 pj=2.1e-05 m=(1)
 //   %wire_174 = &"IB" @WIRE(mode="straight") {%p102 #"DO1":2};
 //   %wire_175 = &"IB" @WIRE(mode="straight") {#"I0":26 %p101};
 //   %wire_176 = &"IB" @WIRE(mode="straight") {#"DO1":2 %p100};
-//   %wire_177 = &"IB" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_177 = &"IB" @WIRE(mode="straight") {
 // %port_6:p #"I2":48};
 //   %wire_174 @TEXT("IB", size=1, halign="start", valign="baseline") => @PLACE(-65.6, 36.7);
 //   %wire_175 @TEXT("IB", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-1.7, -3);
 //   %p103 = (-68, 24);
 //   %wire_178 = &"INCM" @WIRE(mode="straight") {%p103 #"R0":1};
-//   %wire_179 = &"INCM" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_179 = &"INCM" @WIRE(mode="straight") {
 // %port_7:p #"I2":53};
 //   %wire_178 @TEXT("INCM", size=1, halign="start", valign="baseline") => @PLACE(-67.6, 24.7);
-//   %wire_180 = &"D8" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_180 = &"D8" @WIRE(mode="straight") {
 // %port_37:p #"I2":19};
-//   %wire_181 = &"D9" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_181 = &"D9" @WIRE(mode="straight") {
 // %port_38:p #"I2":21};
-//   %wire_182 = &"D10" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_182 = &"D10" @WIRE(mode="straight") {
 // %port_39:p #"I2":23};
-//   %wire_183 = &"D11" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_183 = &"D11" @WIRE(mode="straight") {
 // %port_40:p #"I2":25};
 //   %p104 = (-68, -48);
 //   %wire_184 = &"IN1P" @WIRE(mode="straight") {%p104 #"I30":2};
 //   %wire_185 = &"IN1P" @WIRE(mode="straight") {#"I30":2 %p94};
-//   %wire_186 = &"IN1P" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_186 = &"IN1P" @WIRE(mode="straight") {
 // %port_9:p #"I2":50};
 //   %wire_185 @TEXT("IN1P", size=1, halign="middle", valign="baseline") => @PLACE(-45, -49.3);
 //   %p105 = (-68, -36);
 //   %wire_187 = &"IN1N" @WIRE(mode="straight") {%p105 #"I31":1};
 //   %p106 = (-42, -36);
 //   %wire_188 = &"IN1N" @WIRE(mode="straight") {#"I31":1 %p106};
-//   %wire_189 = &"IN1N" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_189 = &"IN1N" @WIRE(mode="straight") {
 // %port_10:p #"I2":49};
 //   %wire_188 @TEXT("IN1N", size=1, halign="middle", valign="baseline") => @PLACE(-45, -35.3);
 //   %wire_190 = &"IN2P" @WIRE(mode="straight") {#"I28":2 %p93};
 //   %p107 = (-68, -12);
 //   %wire_191 = &"IN2P" @WIRE(mode="straight") {%p107 #"I28":2};
-//   %wire_192 = &"IN2P" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_192 = &"IN2P" @WIRE(mode="straight") {
 // %port_11:p #"I2":52};
 //   %wire_190 @TEXT("IN2P", size=1, halign="middle", valign="baseline") => @PLACE(-45, -13.3);
 //   %p108 = (72, -100);
@@ -27388,7 +27387,7 @@ DO1 (GNDA_CORE IB) ndio area=1.35e-11 pj=2.1e-05 m=(1)
 //   %wire_197 = &"VANA_C" @WIRE(mode="straight") {%bundle_3:2 %p111};
 //   %wire_198 = &"VANA_C" @WIRE(mode="straight") {#"I0":35 %p110};
 //   %wire_198 @TEXT("VANA\_C", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(18.3, -1);
-//   %wire_199 = &"D12" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_199 = &"D12" @WIRE(mode="straight") {
 // %port_41:p #"I2":27};
 //   %p112 = (119, -36);
 //   %p113 = (120, -35);
@@ -27416,14 +27415,14 @@ DO1 (GNDA_CORE IB) ndio area=1.35e-11 pj=2.1e-05 m=(1)
 //   %wire_218 = {&"DC_15" &"DC_14" &"DC_13" &"DC_12" &"DC_11" &"DC_10" &"DC_9" &"DC_8" &"DC_7" &"DC_6" &"DC_5" &"DC_4" &"DC_1" &"DC_0" &"DC_3" &"DC_2"} @WIRE(mode="straight") {%p112 %p114};
 //   %wire_219 = {&"DC_15" &"DC_14" &"DC_13" &"DC_12" &"DC_11" &"DC_10" &"DC_9" &"DC_8" &"DC_7" &"DC_6" &"DC_5" &"DC_4" &"DC_1" &"DC_0" &"DC_3" &"DC_2"} @WIRE(mode="straight") {%p108 %p116};
 //   %wire_212 @TEXT("DC<15:0>", size=1, halign="middle", valign="baseline") => @PLACE(111, -35.3);
-//   %wire_220 = &"D14" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_220 = &"D14" @WIRE(mode="straight") {
 // %port_43:p #"I2":31};
 //   %p117 = (-20, -32);
 //   %wire_221 = {&"IN2N" &"IN1N"} @WIRE(mode="straight") {%p106 %p117};
 //   %wire_222 = {&"IN2N" &"IN1N"} @WIRE(mode="straight") {%p69 %p117};
 //   %wire_223 = {&"IN2N" &"IN1N"} @WIRE(mode="straight") {%p117 #"I0":42};
 //   %wire_223 @TEXT("IN2N,IN1N", size=1, halign="middle", valign="baseline") => @PLACE(-13, -31.3);
-//   %wire_224 = &"SLP" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_224 = &"SLP" @WIRE(mode="straight") {
 // %port_8:p #"I2":62};
 //   %wire_225 = &"DC_2" @WIRE(mode="straight") {#"I2":8 %p116};
 //   %wire_225 @TEXT("DC\_2", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(83.3, -105);
@@ -27774,7 +27773,6 @@ DO1 (GNDA_CORE IB) ndio area=1.35e-11 pj=2.1e-05 m=(1)
 //   /* Deterministic Static DC Master Bias Current Path (IB -> R41 -> IB_C -> L1_RISCA_core_V1) */
 //   #"R41":1 @CURRENT("in"); #"R41":2 @CURRENT("out");
 //   #"I0":26 @CURRENT("in");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I28" #"I29" #"I30" #"I31"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-183, 221.12) @TEXT("Comment by Gemini-4-Argon", size=4.2) => @SET-STYLE $risca_author_style;

@@ -175,10 +175,10 @@ subckt LB_vcmbooster_LV AVDD AVSS CLK VBTSTP
 //   %wire_2 = &"CLK" @WIRE(mode="straight") {%p2 #"M1":2};
 //   %wire_3 = &"CLK" @WIRE(mode="straight") {%p1 #"M0":2};
 //   %p3 = (-12, 0);
-//   %wire_4 = &"CLK" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_4 = &"CLK" @WIRE(mode="straight") {
 // %p3 %port_1:p %p0};
 //   %p4 = (67, 16);
-//   %wire_5 = &"VBTSTP" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_5 = &"VBTSTP" @WIRE(mode="straight") {
 // %p4 %port_3:p};
 //   %p5 = (67, 0);
 //   %wire_6 = &"VBTSTP" @WIRE(mode="straight") {%p5 %p4};
@@ -249,10 +249,8 @@ subckt LB_vcmbooster_LV AVDD AVSS CLK VBTSTP
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
 //   /* LB_vcmbooster_LV: Low-Voltage Capacitive Clock Voltage Doubler (CLK=0 -> VBTSTP=2*AVDD, CLK=1 -> VBTSTP=AVSS) */
 //   {#"M0" #"M1"}(driver_inverter) #"C0"(flying_cap) #"M7"(precharge_switch) #"M4"(boost_pass_switch) #"M2"(discharge_switch) @AS(role="capacitive_clock_voltage_doubler", boost_level="2x_AVDD_on_CLK_low") $CLK_VOLTAGE_DOUBLER;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M0" #"M1"} @ALIGN("x", priority="low");
 //   {%port_1 #"M0" #"C0" #"M4" %port_3}(path) @AS $SIGNAL_FLOW; {%port_1 #M0 #C0 #M4 %port_3} @ORDER("left-to-right", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M4" #"M2"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-41, 104.29) @TEXT("Comment by Gemini-4-Argon", size=2) => @SET-STYLE $risca_author_style;

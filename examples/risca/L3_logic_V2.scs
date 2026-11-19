@@ -1317,15 +1317,11 @@ subckt L3_logic_V2 CMPCK CMPN CMPP CNT DCLK DLSBN_5 DLSBN_4 DLSBN_3 \
 //   {#"I147" #"I146"}(members) @AS $MATCHED;
 //   {#"I149" #"I150" #"I151" #"I152" #"I153" #"I154" #"I155" #"I156" #"I157"}(members) @AS $MATCHED;
 //   {#"I212" #"I209"}(members) @AS $MATCHED;
-//   /* rnl upgrade: CHAIN was removed in 0.4; retain the intended ordering or series topology explicitly (16.3) */
 // {#"I147" {#"I146" #"I149" #"I150" #"I151" #"I221" #"I152" #"I153" #"I154" #"I155" #"I156"} #"I157"} @ORDER("left-to-right", priority="low");
 //   {#"I157" #"I156" #"I155" #"I154" #"I153" #"I152" #"I221" #"I151" #"I150" #"I149" #"I146" #"I147"}(path) @AS $SIGNAL_FLOW; {#I157 #I156 #I155 #I154 #I153 #I152 #I221 #I151 #I150 #I149 #I146 #I147} @ORDER("right-to-left", priority="low");
 //   {#"I166" #"I226" #"I203" #"I169" #"I177"}(path) @AS $SIGNAL_FLOW; {#I166 #I226 #I203 #I169 #I177} @ORDER("left-to-right", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I209" #"I212"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I203" #"I204"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I219" #"I220"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (0, 123.12) @TEXT("Comment by Gemini-4-Argon", size=4.2) => @SET-STYLE $risca_author_style;

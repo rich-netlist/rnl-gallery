@@ -1178,7 +1178,6 @@ subckt L1_RISCA_core_V1 CLKIN DCLK DOUT_15 DOUT_14 DOUT_13 DOUT_12 DOUT_11 \
 //   #"C0"(caps) @AS(role="bias_mirror_VDCAP_filter_capacitor", substrate_tap="cfmom_2t_nr200_lr10u") $MOM_DECAP;
 //   {#"I35" #"I36" #"I37" #"I38" #"I40" #"I41"}(diodes) @AS(role="reverse_biased_antenna_or_ESD_clamp_diode") $ESD_ANTENNA_DIODE;
 //   {#"I5" #"I4" #"I3" #"I2" #"I1" #"I0"}(members) @AS $MATCHED;
-//   /* rnl upgrade: CHAIN was removed in 0.4; retain the intended ordering or series topology explicitly (16.3) */
 // {#"I5" {#"I4" #"I3" #"I2" #"I1"} #"I0"} @ORDER("left-to-right", priority="low");
 //   {#"I5" #"I4" #"I3" #"I2" #"I1" #"I0"}(path) @AS $SIGNAL_FLOW; {#I5 #I4 #I3 #I2 #I1 #I0} @ORDER("left-to-right", priority="low");
 //   /* Deterministic Static DC Bias Current Distribution (15uA In -> 6 x 15uA Channel Sinks) */
@@ -1187,9 +1186,7 @@ subckt L1_RISCA_core_V1 CLKIN DCLK DOUT_15 DOUT_14 DOUT_13 DOUT_12 DOUT_11 \
 //   #"I31":6 @CURRENT("in"); #"I31":7 @CURRENT("in"); #"I31":8 @CURRENT("in");
 //   #"I5":74 @CURRENT("out"); #"I4":74 @CURRENT("out"); #"I3":74 @CURRENT("out");
 //   #"I2":74 @CURRENT("out"); #"I1":74 @CURRENT("out"); #"I0":74 @CURRENT("out");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I0" #"I1" #"I2" #"I3" #"I4" #"I5"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I35" #"I36" #"I37"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-65, 151.12) @TEXT("Comment by Gemini-4-Argon", size=4.2) => @SET-STYLE $risca_author_style;

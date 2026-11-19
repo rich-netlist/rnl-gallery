@@ -18,10 +18,8 @@ XI1 (inv out vdd vss) pll_inv_pdk110_7
 //
 //   /* --- 1. Circuit Semantics & Static DC Currents --- */
 //   %ota = #MP(in_p) #MN(in_n) #PL(load_ref) #PR(load_out) #MT(tail) {#XI0 #XI1}(output_stage) @AS(topology="5T_OTA_plus_push_pull_inverter") $OTA_COMPARATOR;
-//   /* rnl upgrade: CURRENT_MIRROR was split into CURRENT_MIRROR_N and CURRENT_MIRROR_P, which add low-priority ALIGN y, orientation relations, the orientation of the source or emitter pins and model/topology assertions; choose the matching polarity or retain only the intended facts (16.3) */
 // {#MP {#MT} #MN} @DISTRIBUTE("left-to-right", priority="low");
 // %cm1 = {#PL}(ref) {#PR}(out) @AS $CURRENT_MIRROR_P;
-//   /* rnl upgrade: CURRENT_MIRROR was split into CURRENT_MIRROR_N and CURRENT_MIRROR_P, which add low-priority ALIGN y, orientation relations, the orientation of the source or emitter pins and model/topology assertions; choose the matching polarity or retain only the intended facts (16.3) */
 // %cm2 = {#MB}(ref) {#MT}(out) @AS $CURRENT_MIRROR_N;
 //   {#MP #MN} @AS $MATCHED;
 //   {#PL #PR} @AS $MATCHED;

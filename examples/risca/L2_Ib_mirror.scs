@@ -176,7 +176,6 @@ R0_6__dmy0  (R0_5__dmy0 VDCAP ) rupolym l=835.00n w=200n m=1 multi=(1)
 //   %expanded_type_2 = @DEFINE(roles=["{parts}", ["p1", "terminal"], ["p2", "terminal"]]) {};
 //   %expanded_members_symbol = @DEFINE-SYMBOL {};
 //   {#"R0" #"R0_2__dmy0" #"R0_3__dmy0" #"R0_4__dmy0" #"R0_5__dmy0" #"R0_6__dmy0"} @SET-SYMBOL %expanded_members_symbol;
-//   /* rnl upgrade: placing a set now places every member; preserve the old collective placement with explicit points or usages (11.1) */
 // {#"R0" #"R0_2__dmy0" #"R0_3__dmy0" #"R0_4__dmy0" #"R0_5__dmy0" #"R0_6__dmy0"} @PLACE(28, 15);
 //   %expanded_0 = {#"R0" #"R0_2__dmy0" #"R0_3__dmy0" #"R0_4__dmy0" #"R0_5__dmy0" #"R0_6__dmy0"}(parts) #"R0":1(p1) #"R0_6__dmy0":2(p2) @AS %expanded_type_2;
 //   %symbol_1 = @DEFINE-SYMBOL(box=[-2, -6, 2, 0]) {
@@ -222,7 +221,7 @@ R0_6__dmy0  (R0_5__dmy0 VDCAP ) rupolym l=835.00n w=200n m=1 multi=(1)
 //   %p0 = (38, -12);
 //   %wire_0 = &"VDCAP" @WIRE(mode="straight") {%p0 #"M0":2};
 //   %p1 = (38, -27);
-//   %wire_1 = &"VDCAP" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_1 = &"VDCAP" @WIRE(mode="straight") {
 // %p1 %port_0:p};
 //   %wire_2 = &"VDCAP" @WIRE(mode="straight") {#"M8":2 #"M11":2};
 //   %wire_3 = &"VDCAP" @WIRE(mode="straight") {#"M11":2 #"M12":2};
@@ -230,14 +229,14 @@ R0_6__dmy0  (R0_5__dmy0 VDCAP ) rupolym l=835.00n w=200n m=1 multi=(1)
 //   %wire_5 = &"VDCAP" @WIRE(mode="straight") {#"M7":2 #"M8":2};
 //   %wire_6 = &"VDCAP" @WIRE(mode="straight") {#"M0":2 #"M4":2};
 //   %p2 = (28, 6);
-//   %wire_7 = &"VDCAP" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_7 = &"VDCAP" @WIRE(mode="straight") {
 // %p2 %expanded_0:p2};
 //   %wire_8 = &"VDCAP" @WIRE(mode="straight") {#"M3":1 %p2};
 //   %p3 = (34, -12);
 //   %p4 = (34, 6);
 //   %wire_9 = &"VDCAP" @WIRE(mode="straight") {%p3 %p4};
 //   %wire_10 = &"VDCAP" @WIRE(mode="straight") {%p2 %p4};
-//   %wire_11 = &"VDCAP" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_11 = &"VDCAP" @WIRE(mode="straight") {
 // %port_0:p %p0};
 //   %wire_12 = &"VDCAP" @WIRE(mode="straight") {#"M1":2 %p3};
 //   %wire_13 = &"VDCAP" @WIRE(mode="straight") {%p3 %p0};
@@ -268,7 +267,7 @@ R0_6__dmy0  (R0_5__dmy0 VDCAP ) rupolym l=835.00n w=200n m=1 multi=(1)
 //   %wire_26 = &"IIN" @WIRE(mode="straight") {#"M9":2 #"M10":2};
 //   %wire_27 = &"IIN" @WIRE(mode="straight") {#"M10":2 #"M13":2};
 //   %p11 = (28, 18);
-//   %wire_28 = &"IIN" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_28 = &"IIN" @WIRE(mode="straight") {
 // %expanded_0:p1 %p11};
 //   %p12 = (38, 18);
 //   %wire_29 = &"IIN" @WIRE(mode="straight") {%p11 %p12};
@@ -395,19 +394,12 @@ R0_6__dmy0  (R0_5__dmy0 VDCAP ) rupolym l=835.00n w=200n m=1 multi=(1)
 //   {#"M3" #"M1"}(reference_branch) {#"M13" #"M12" #"M10" #"M11" #"M9" #"M8" #"M6" #"M7" #"M5" #"M4" #"M2" #"M0"}(cascode_mirror_branches) %expanded_0(rc_noise_filter) @AS(role="high_swing_series_cascode_bias_mirror", channels=6) $CASCODE_CURRENT_MIRROR_BANK;
 //   {#"M3" #"M13" #"M10" #"M9" #"M6" #"M5" #"M2"}(members) @AS $MATCHED;
 //   {#"M1" #"M12" #"M11" #"M8" #"M7" #"M4" #"M0"}(members) @AS $MATCHED;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M3" #"M1"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M13" #"M12"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M10" #"M11"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M9" #"M8"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M6" #"M7"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M5" #"M4"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M2" #"M0"} @ALIGN("x", priority="low");
 //   /* Deterministic Static DC Currents (15uA Reference & 6 x 15uA Channel Bias Sinks) */
 //   #"M3":1 @CURRENT("in"); #"M3":3 @CURRENT("out");

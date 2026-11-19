@@ -1230,7 +1230,6 @@ R0_4__dmy0  (R0_3__dmy0 net55 ) rupolym l=1u w=100n m=1 multi=(1)
 //   %expanded_type_2 = @DEFINE(roles=["{parts}", ["p1", "terminal"], ["p2", "terminal"]]) {};
 //   %expanded_members_symbol = @DEFINE-SYMBOL {};
 //   {#"R0" #"R0_2__dmy0" #"R0_3__dmy0" #"R0_4__dmy0"} @SET-SYMBOL %expanded_members_symbol;
-//   /* rnl upgrade: placing a set now places every member; preserve the old collective placement with explicit points or usages (11.1) */
 // {#"R0" #"R0_2__dmy0" #"R0_3__dmy0" #"R0_4__dmy0"} @PLACE(-102, 290);
 //   %expanded_0 = {#"R0" #"R0_2__dmy0" #"R0_3__dmy0" #"R0_4__dmy0"}(parts) #"R0":1(p1) #"R0_4__dmy0":2(p2) @AS %expanded_type_2;
 //   %symbol_18 = @DEFINE-SYMBOL(box=[-2, -6, 2, 0]) {
@@ -1649,7 +1648,7 @@ R0_4__dmy0  (R0_3__dmy0 net55 ) rupolym l=1u w=100n m=1 multi=(1)
 //   %p105 = (-102, 282);
 //   %wire_206 = &"net55" @WIRE(mode="straight") {%p104 %p105};
 //   %wire_207 = &"net55" @WIRE(mode="straight") {%p105 %p103};
-//   %wire_208 = &"net55" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_208 = &"net55" @WIRE(mode="straight") {
 // %p105 %expanded_0:p2};
 //   %wire_209 = &"net55" @WIRE(mode="straight") {#"M2":1 %p103};
 //   %wire_210 = &"net55" @WIRE(mode="straight") {%p104 #"I0":1};
@@ -2301,7 +2300,7 @@ R0_4__dmy0  (R0_3__dmy0 net55 ) rupolym l=1u w=100n m=1 multi=(1)
 //   %p324 = (-102, 294);
 //   %p325 = (-99, 294);
 //   %wire_602 = &"VDD" @WIRE(mode="straight") {%p324 %p325};
-//   %wire_603 = &"VDD" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_603 = &"VDD" @WIRE(mode="straight") {
 // %expanded_0:p1 %p324};
 //   %p326 = (373, 214);
 //   %wire_604 = &"VDD" @WIRE(mode="straight") {#"I161":3 %p326};
@@ -3450,26 +3449,21 @@ R0_4__dmy0  (R0_3__dmy0 net55 ) rupolym l=1u w=100n m=1 multi=(1)
 //   {#"I114" #"I94" #"I95" #"I96" #"I97" #"I98" #"I99" #"I100" #"I101" #"I102" #"I107" #"I103" #"I104" #"I105" #"I106" #"I108" #"I109"}(spi_repet_shift_reg) {#"I0" #"I11" #"I15" #"I19" #"I28" #"I30" #"I34" #"I45" #"I49" #"I51" #"I55" #"I65" #"I80" #"I82" #"I89" #"I91"}(ring_16_dffs) {%expanded_0 #"M2" #"M34" #"M3" #"M35" #"M7" #"M36" #"M9" #"M37" #"M10" #"M38" #"M13" #"M39" #"M14" #"M40" #"M17" #"M41" #"M19" #"M42" #"M20" #"M43" #"M23" #"M44" #"M24" #"M45" #"M27" #"M46" #"M28" #"M47" #"M31" #"M48" #"M32" #"M49"}(wired_nor_modulus_mux) {#"I9" #"I10" #"I13" #"I17" #"I21" #"I27" #"I26" #"I32" #"I36" #"I44" #"I43" #"I48" #"I47" #"I53" #"I56" #"I64" #"I63" #"I79" #"I78" #"I84" #"I83" #"I86"}(nonoverlap_pulse_decoders) {#"I171" #"I165" #"I168" #"I180" #"I172"}(global_clk_shapers) @AS(role="programmable_modulus_1to16_frame_ring_counter") $MODULUS_RING_COUNTER;
 //   {#"I0" #"I11" #"I15" #"I19" #"I28" #"I30" #"I34" #"I45" #"I49" #"I51" #"I55" #"I65" #"I80" #"I82" #"I89" #"I91"}(members) @AS $MATCHED;
 //   {#"I114" #"I94" #"I95" #"I96" #"I97" #"I98" #"I99" #"I100" #"I101" #"I102" #"I107" #"I103" #"I104" #"I105" #"I106" #"I108" #"I109"}(members) @AS $MATCHED;
-//   /* rnl upgrade: CHAIN was removed in 0.4; retain the intended ordering or series topology explicitly (16.3) */
 // {#"I91" {#"I89" #"I82" #"I80" #"I65" #"I55" #"I51" #"I49" #"I45" #"I34" #"I30" #"I28" #"I19" #"I15" #"I11"} #"I0"} @ORDER("left-to-right", priority="low");
 //   {#"I171" #"I165" #"I168"}(path) @AS $SIGNAL_FLOW; {#I171 #I165 #I168} @ORDER("left-to-right", priority="low");
 //   {#"I180" #"I172"}(path) @AS $SIGNAL_FLOW; {#I180 #I172} @ORDER("left-to-right", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M2" #"M34"} @ALIGN("x", priority="low");
 // {#"M3" #"M35"} @ALIGN("x", priority="low");
 // {#"M7" #"M36"} @ALIGN("x", priority="low");
 // {#"M9" #"M37"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M10" #"M38"} @ALIGN("x", priority="low");
 // {#"M13" #"M39"} @ALIGN("x", priority="low");
 // {#"M14" #"M40"} @ALIGN("x", priority="low");
 // {#"M17" #"M41"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M19" #"M42"} @ALIGN("x", priority="low");
 // {#"M20" #"M43"} @ALIGN("x", priority="low");
 // {#"M23" #"M44"} @ALIGN("x", priority="low");
 // {#"M24" #"M45"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M27" #"M46"} @ALIGN("x", priority="low");
 // {#"M28" #"M47"} @ALIGN("x", priority="low");
 // {#"M31" #"M48"} @ALIGN("x", priority="low");

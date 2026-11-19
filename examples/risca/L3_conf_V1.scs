@@ -397,7 +397,6 @@ subckt L3_conf_V1 GND OUT_21 OUT_20 OUT_19 OUT_18 OUT_17 OUT_16 OUT_15 \
 //   %bundle_1(caps) @AS(role="SPI_register_supply_decap", substrate_tap="10x_DCAP8_stdcell") $MOM_DECAP;
 //   {%bundle_0 %bundle_2}(path) @AS $SIGNAL_FLOW; {%bundle_0 %bundle_2} @ORDER("left-to-right", priority="low");
 //   {#"I129" #"I107" #"I1"}(path) @AS $SIGNAL_FLOW; {#I129 #I107 #I1} @ORDER("right-to-left", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I4" #"I1"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-106, 113.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;

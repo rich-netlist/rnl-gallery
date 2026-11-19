@@ -543,11 +543,8 @@ subckt L3_bridge_cap_V2 CDAC CLK CMP CS1 CS2 GND RS1 RS2 SRT VDD VRESG \
 //   {#"I10" #"I12" #"I6" #"I7" #"I23" #"I24" #"I25" #"I26"}(members) @AS $MATCHED;
 //   {#"I10" %bundle_1 #"I7"}(path) @AS $SIGNAL_FLOW; {#I10 %bundle_1 #I7} @ORDER("left-to-right", priority="low");
 //   {#"I23" %bundle_3 #"I26"}(path) @AS $SIGNAL_FLOW; {#I23 %bundle_3 #I26} @ORDER("left-to-right", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {%bundle_1 %bundle_2 %bundle_3} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I23" #"I25"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I24" #"I26"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-107, 145.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;

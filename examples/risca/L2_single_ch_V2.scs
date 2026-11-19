@@ -149,7 +149,6 @@ subckt L2_single_ch_V2 ADDR_2 ADDR_1 ADDR_0 BUSN_2 BUSN_1 BUSP_2 BUSP_1 \
     I138 (net10 CONN net13 VDDANA GNDANA) OR2D1BWP12T30P140
     I143 (net16 net9 VDDANA GNDANA) INVD1BWP12T30P140
 // @RNL(author="rnl-virtuoso") {
-//   /* rnl upgrade: later PIN bindings no longer remove displaced pins; remove displaced bindings while preserving any referenced input points (9.2.4) */
 // %block_symbol = @DEFINE-SYMBOL(box=[-28, -14, 72, 4]) {
 //     @LINE {(-10, 4) (-10, 0)};
 //     @LINE {(-8, 4) (-8, 0)};
@@ -1592,19 +1591,12 @@ subckt L2_single_ch_V2 ADDR_2 ADDR_1 ADDR_0 BUSN_2 BUSN_1 BUSP_2 BUSP_1 \
 //   {#"I60" #"I63" #"I64"}(path) @AS $SIGNAL_FLOW; {#I60 #I63 #I64} @ORDER("left-to-right", priority="low");
 //   /* Deterministic Static DC Bias Current into Residue Gm Cell */
 //   #"I63":13 @CURRENT("out");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M0" #"M8" #"M2"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I69" #"I72"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I3" #"I71"}(members) @AS $BRANCH;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I60" #"I110"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M5" #"M4"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M7" #"M6"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"I64" #"I82"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-167, 190.62) @TEXT("Comment by Gemini-4-Argon", size=4.2) => @SET-STYLE $risca_author_style;

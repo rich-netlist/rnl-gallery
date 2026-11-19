@@ -324,7 +324,7 @@ subckt L1_clk_buffer CKVDD CKVSS CLK CLKINN CLKINP
 //   %p22 = (144, -40);
 //   %wire_37 = &"CLK" @WIRE(mode="straight") {%p22 #"M10":1};
 //   %p23 = (151, -40);
-//   %wire_38 = &"CLK" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_38 = &"CLK" @WIRE(mode="straight") {
 // %p22 %port_4:p %p23};
 //   %wire_39 = &"CLK" @WIRE(mode="straight") {#"M9":1 %p22};
 //   %wire_40 = &"CKVSS" @WIRE(mode="straight") {#"M12":3 #"M12":4};
@@ -392,7 +392,7 @@ subckt L1_clk_buffer CKVDD CKVSS CLK CLKINN CLKINP
 //   %p44 = (102, -32);
 //   %wire_74 = &"CLKINN" @WIRE(mode="straight") {#"M4":2 %p44};
 //   %p45 = (102, -48);
-//   %wire_75 = &"CLKINN" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_75 = &"CLKINN" @WIRE(mode="straight") {
 // %p45 %port_0:p};
 //   %wire_76 = &"CLKINN" @WIRE(mode="straight") {#"M1":2 %p45};
 //   %wire_77 = &"CLKINN" @WIRE(mode="straight") {%p45 %p44};
@@ -429,7 +429,7 @@ subckt L1_clk_buffer CKVDD CKVSS CLK CLKINN CLKINP
 //   %p57 = (57, -48);
 //   %wire_97 = &"CLKINP" @WIRE(mode="straight") {%p57 #"M0":2};
 //   %p58 = (57, -40);
-//   %wire_98 = &"CLKINP" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_98 = &"CLKINP" @WIRE(mode="straight") {
 // %port_3:p %p58};
 //   %wire_99 = &"CLKINP" @WIRE(mode="straight") {%p57 %p58};
 //   %wire_100 = &"CLKINP" @WIRE(mode="straight") {%p58 %p56};
@@ -458,18 +458,14 @@ subckt L1_clk_buffer CKVDD CKVSS CLK CLKINN CLKINP
 //   /* L1_clk_buffer: Complementary Self-Biased Differential-to-Single-Ended Clock Receiver (Bazes Topology) + Tapered CMOS Buffer */
 //   {#"M0" #"M1" #"M2"}(nmos_diff_pair_and_tail) {#"M3" #"M4" #"M5"}(pmos_diff_pair_and_tail) {#"M6" #"M15"}(self_bias_diodes) {#"M11" #"M8" #"M10" #"M9"}(tapered_cmos_inverters) {#"M13" #"M12" #"M16" #"M7"}(mos_supply_decaps) @AS(role="complementary_self_biased_Bazes_clock_receiver") $BAZES_SELF_BIASED_CLK_AMP;
 //   {#"M13" #"M12" #"M16" #"M7" #"M6" #"M15"}(mos_caps) @AS(role="MOS_gate_oxide_decoupling_capacitor") $MOS_DECAP;
-//   /* rnl upgrade: DIFFERENTIAL_PAIR was split into DIFFERENTIAL_PAIR_N and DIFFERENTIAL_PAIR_P with left/right roles and a tail that must be filled; choose the matching polarity and side order explicitly, or PSEUDO_DIFFERENTIAL_PAIR for a pair with no tail (16.3) */
 // {#"M0" {#"M2"} #"M1"} @DISTRIBUTE("left-to-right", priority="low");
-//   /* rnl upgrade: DIFFERENTIAL_PAIR was split into DIFFERENTIAL_PAIR_N and DIFFERENTIAL_PAIR_P with left/right roles and a tail that must be filled; choose the matching polarity and side order explicitly, or PSEUDO_DIFFERENTIAL_PAIR for a pair with no tail (16.3) */
 // {#"M3" {#"M5"} #"M4"} @DISTRIBUTE("left-to-right", priority="low");
 //   {#"M0" #"M1"}(members) @AS $MATCHED;
 //   {#"M3" #"M4"}(members) @AS $MATCHED;
 //   %ax_clk = (80, -40);
 //   #"M3"(left) #"M4"(right) %ax_clk(axis) @AS $MIRRORED_LAYOUT;
 //   #"M0"(left) #"M1"(right) %ax_clk(axis) @AS $MIRRORED_LAYOUT;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M11" #"M8"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M10" #"M9"} @ALIGN("x", priority="low");
 //   {#"M1" #"M11" #"M10" %port_1}(path) @AS $SIGNAL_FLOW; {#M1 #M11 #M10 %port_1} @ORDER("left-to-right", priority="low");
 //   /* Deterministic Static DC Quiescent Currents in Self-Biased Bazes Input Stage */
@@ -479,17 +475,11 @@ subckt L1_clk_buffer CKVDD CKVSS CLK CLKINN CLKINP
 //   #"M0":1 @CURRENT("in"); #"M0":3 @CURRENT("out");
 //   #"M1":1 @CURRENT("in"); #"M1":3 @CURRENT("out");
 //   #"M2":1 @CURRENT("in"); #"M2":3 @CURRENT("out");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M3" #"M0"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M4" #"M1"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M5" #"M2"}(members) @AS $BRANCH;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M6" #"M15"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M7" #"M16"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M13" #"M12"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-2, 62.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;

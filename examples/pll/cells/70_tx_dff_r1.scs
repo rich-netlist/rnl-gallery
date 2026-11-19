@@ -12,7 +12,6 @@ XO (qb q vdd vss) pll_inv_pdk110_62
 //
 //   /* --- 1. Circuit Semantics --- */
 //   %dff = {#XF}(master_latch) {#XI #XO}(output_buffers) @AS(edge="rising", async_reset="active_high_preset_to_1") $MASTER_SLAVE_DFF;
-//   /* rnl upgrade: CHAIN was removed in 0.4; retain the intended ordering or series topology explicitly (16.3) */
 // {%pd #XI #XF #XO %pq} @ORDER("left-to-right", priority="low");
 //   {%pd #XI #XF #XO %pq} @AS $SIGNAL_FLOW; {%pd #XI #XF #XO %pq} @ORDER("left-to-right", priority="low");
 //

@@ -384,7 +384,7 @@ subckt LB_vcmbooster AVDD AVSS CLK SAM TUNE_3 TUNE_2 TUNE_1 TUNE_0 VBTSTP
 //   %wire_25 = &"net1" @WIRE(mode="straight") {%p7 #"M5":1};
 //   %wire_26 = &"net1" @WIRE(mode="straight") {%p6 %p8};
 //   %p11 = (-30, -7);
-//   %wire_27 = &"CLK" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_27 = &"CLK" @WIRE(mode="straight") {
 // %port_2:p %p11};
 //   %p12 = (-30, 3);
 //   %wire_28 = &"CLK" @WIRE(mode="straight") {%p11 %p12};
@@ -414,7 +414,7 @@ subckt LB_vcmbooster AVDD AVSS CLK SAM TUNE_3 TUNE_2 TUNE_1 TUNE_0 VBTSTP
 //   %wire_44 = &"net7" @WIRE(mode="straight") {#"M10":1 #"M14":1};
 //   %wire_45 = &"net7" @WIRE(mode="straight") {#"M21":1 %p19};
 //   %p21 = (67, 16);
-//   %wire_46 = &"VBTSTP" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_46 = &"VBTSTP" @WIRE(mode="straight") {
 // %p21 %port_4:p};
 //   %p22 = (67, 0);
 //   %wire_47 = &"VBTSTP" @WIRE(mode="straight") {%p22 %p21};
@@ -447,7 +447,7 @@ subckt LB_vcmbooster AVDD AVSS CLK SAM TUNE_3 TUNE_2 TUNE_1 TUNE_0 VBTSTP
 //   %wire_65 = &"net2" @WIRE(mode="straight") {#"M1":1 %p30};
 //   %wire_66 = &"net2" @WIRE(mode="straight") {%p30 %p31};
 //   %p32 = (-34, -15);
-//   %wire_67 = &"SAM" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+//   %wire_67 = &"SAM" @WIRE(mode="straight") {
 // %port_1:p %p32};
 //   %p33 = (-34, 8);
 //   %wire_68 = &"SAM" @WIRE(mode="straight") {%p32 %p33};
@@ -625,16 +625,11 @@ subckt LB_vcmbooster AVDD AVSS CLK SAM TUNE_3 TUNE_2 TUNE_1 TUNE_0 VBTSTP
 //   {#"M0" #"M1"}(driver_inverter) #"C0"(flying_cap) #"M7"(precharge_switch) #"M4"(boost_pass_switch) #"M11"(discharge_switch) @AS(role="capacitive_clock_voltage_doubler", boost_level="2x_AVDD_when_SAM_and_CLK_high") $CLK_VOLTAGE_DOUBLER;
 //   {#"I0" #"I1" #"I2" #"I3"}(members) @AS $MATCHED;
 //   {#"M9" #"M10" #"M14" #"M15" #"M16" #"M18" #"M17" #"M19" #"M20"}(members) @AS $MATCHED;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M8" #"M2" #"M3"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M0" #"M1"} @ALIGN("x", priority="low");
 //   {%port_2 #"M8" #"M0" #"C0" #"M4" %port_5}(path) @AS $SIGNAL_FLOW; {%port_2 #M8 #M0 #C0 #M4 %port_5} @ORDER("left-to-right", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M15" #"M16"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M18" #"M17" #"M19" #"M20"} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#"M4" #"M11"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-68, 177.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;

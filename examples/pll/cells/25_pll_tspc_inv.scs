@@ -18,11 +18,8 @@ MN2 (n2 a vss vss) nch w=1.6e-06 l=1.8e-07 ad=7.68e-13 as=7.68e-13 pd=4.16e-06 p
 //
 //   /* --- 1. Circuit Semantics --- */
 //   %tspc = {#MP0 #MPC0 #MN0}(stage1_input) {#MP1 #MN1 #MNC1}(stage2_precharge) {#MP2 #MNC2 #MN2}(stage3_output)  @AS(edge="rising", topology="9T_inverting_TSPC") $TSPC_STAGE;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#MP0 #MPC0 #MN0} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#MP1 #MN1 #MNC1} @ALIGN("x", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#MP2 #MNC2 #MN2} @ALIGN("x", priority="low");
 //   {%pd #MP0 #MP1 #MP2 %pqb} @AS $SIGNAL_FLOW; {%pd #MP0 #MP1 #MP2 %pqb} @ORDER("left-to-right", priority="low");
 //   /* Dynamic TSPC flip-flop has no static DC bias current; no static DC current annotated */

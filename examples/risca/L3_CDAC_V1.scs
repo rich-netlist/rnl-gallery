@@ -707,19 +707,17 @@ subckt L3_CDAC_V1 COM LSB_5 LSB_4 LSB_3 LSB_2 LSB_1 LSB_0 MSB_4 MSB_3 \
 //   {%bundle_9 %bundle_2 %bundle_6 %bundle_5 %bundle_10}(msb_binary_array) %bundle_4(interstage_redundancy) {%bundle_1 %bundle_7 %bundle_3 #"I10"}(lsb_sub_array) %bundle_8(intrastage_redundancy) %bundle_0(termination_caps) @AS(role="split_redundant_unit_capacitor_CDAC", total_unit_caps="520C_572fF", unit_c="1.1fF") $CDAC_WEIGHTED_ARRAY;
 //   {%bundle_9 %bundle_2 %bundle_6 %bundle_5 %bundle_10 %bundle_4 %bundle_1 %bundle_7 %bundle_8 %bundle_3 #"I10" %bundle_0}(members) @AS $MATCHED;
 //   {%bundle_9 %bundle_2 %bundle_6 %bundle_5 %bundle_10 %bundle_4 %bundle_1 %bundle_7 %bundle_8 %bundle_3 #"I10" %bundle_0}(path) @AS $SIGNAL_FLOW; {%bundle_9 %bundle_2 %bundle_6 %bundle_5 %bundle_10 %bundle_4 %bundle_1 %bundle_7 %bundle_8 %bundle_3 #I10 %bundle_0} @ORDER("left-to-right", priority="low");
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// %bundle_9(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// %bundle_2(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// %bundle_6(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// %bundle_5(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// %bundle_10(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// %bundle_9(members) @AS $BRANCH;
+// %bundle_2(members) @AS $BRANCH;
+// %bundle_6(members) @AS $BRANCH;
+// %bundle_5(members) @AS $BRANCH;
+// %bundle_10(members) @AS $BRANCH;
 // %bundle_4(members) @AS $BRANCH;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// %bundle_1(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// %bundle_7(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// %bundle_8(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// %bundle_3(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
-// #"I10"(members) @AS $BRANCH; /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// %bundle_1(members) @AS $BRANCH;
+// %bundle_7(members) @AS $BRANCH;
+// %bundle_8(members) @AS $BRANCH;
+// %bundle_3(members) @AS $BRANCH;
+// #"I10"(members) @AS $BRANCH;
 // %bundle_0(members) @AS $BRANCH;
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-46, 54.89) @TEXT("Comment by Gemini-4-Argon", size=2) => @SET-STYLE $risca_author_style;

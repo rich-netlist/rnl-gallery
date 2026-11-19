@@ -15,7 +15,6 @@ MN1 (out b vss vss) nch w=2e-06 l=1.8e-07 ad=9.599999999999999e-13 as=9.59999999
 //   %nor = {#MP0 #MP1}(pull_up_series) {#MN0 #MN1}(pull_down_parallel) @AS(role="static_cmos_nor2", skew="PMOS_4x_series_compensated") $CMOS_NOR2;
 //   {#MP0 #MP1} @AS $MATCHED;
 //   {#MN0 #MN1} @AS $MATCHED;
-//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
 // {#MP0 #MP1} @ALIGN("x", priority="low");
 //   {%pa #MP0 %py} @AS $SIGNAL_FLOW; {%pa #MP0 %py} @ORDER("left-to-right", priority="low");
 //   /* Static CMOS NOR2 has zero quiescent DC current; no static DC current annotated */
