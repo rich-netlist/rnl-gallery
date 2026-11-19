@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt tx_mux_pdk110_64 (a b s y vdd vss)
@@ -15,7 +15,7 @@ XB1 (zb y vdd vss) pll_inv_pdk110_48
 //   /* --- 1. Circuit Semantics --- */
 //   %mux = {#XT0 #XT1}(mux_cells) @AS(role="2to1_tg_mux_with_buffered_out") $MULTIPLEXER_BANK;
 //   {#XT0 #XT1} @AS $MATCHED;
-//   {#XT0 #XB0 #XB1 %py} @AS(direction="left-to-right") $FLOW;
+//   {#XT0 #XB0 #XB1 %py} @AS $SIGNAL_FLOW; {#XT0 #XB0 #XB1 %py} @ORDER("left-to-right", priority="low");
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
 //   %pa = $IO_PORT @ATTACH &a => @PLACE(2, 18)  => @ORIENT("R0");
@@ -30,18 +30,18 @@ XB1 (zb y vdd vss) pll_inv_pdk110_48
 //   #XB1 @PLACE(31, 13) => @ORIENT("R0");
 //
 //   /* --- 3. Primary Datapath Wiring & Flying-Wire Select Labels --- */
-//   &a @WIRE { %pa:p #XT0:a };
-//   &b @WIRE { %pb:p #XT1:a };
+//   &a @WIRE { %pa::pin #XT0:a };
+//   &b @WIRE { %pb::pin #XT1:a };
 //
 //   %jz = (18, 13);
-//   $JUNCTION @ATTACH %jz;
+//   $JUNCTION @ATTACH %jz => @PLACE(18, 13);
 //   &z @WIRE { #XT0:b (18, 18) %jz #XB0:a };
 //   &z @WIRE { #XT1:b (18, 8)  %jz };
 //
 //   &zb @WIRE { #XB0:y #XB1:a };
-//   &y  @WIRE { #XB1:y %py:p };
+//   &y  @WIRE { #XB1:y %py::pin };
 //
-//   &s  @WIRE { %ps:p #XI:a };
+//   &s  @WIRE { %ps::pin #XI:a };
 //   &sb @WIRE { #XI:y (15, 2) } => @TEXT("sb") => @SET-STYLE $fly_label_style;
 //
 //   #XT0:on  @TEXT("sb", dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;

@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/LB_RES50
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt LB_RES50 A B
 R14 (net6 net11 ) rmxw l=25.0u w=2u multi=(1)
 
@@ -65,23 +66,31 @@ R0 (A net2 ) rmxw l=25.0u w=2u multi=(1)
 //   %p0 = (16, -7);
 //   %wire_7 = &"B" @WIRE(mode="straight") {#"R12":2 %p0};
 //   %p1 = (18, -7);
-//   %wire_8 = &"B" @WIRE(mode="straight") {%p0 %port_1:p %p1};
-//   %wire_9 = &"A" @WIRE(mode="straight") {%port_0:p #"R0":1}
+//   %wire_8 = &"B" @WIRE(mode="straight") {
+// %p0 %port_1:p %p1};
+//   %wire_9 = &"A" @WIRE(mode="straight") {
+// %port_0:p #"R0":1}
 // }
 // @RNL(author="gemini-4-argon") {
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
 //   /* LB_RES50: 8-Segment Series Metal Resistor Forming On-Chip 50-Ohm Input Termination */
 //   {#"R0" #"R1" #"R2" #"R3" #"R4" #"R5" #"R14" #"R12"}(segments) @AS(role="on_chip_50ohm_input_termination", nominal_r="50_ohm_8x_rmxw") $SERIES_RES_STRING;
 //   {#"R0" #"R1" #"R2" #"R3" #"R4" #"R5" #"R14" #"R12"}(members) @AS $MATCHED;
-//   #"R0"(source) {#"R1" #"R2" #"R3" #"R4" #"R5" #"R14"}(chain) #"R12"(load) @AS $CHAIN;
-//   {%port_0 #"R0" #"R1" #"R2" #"R3" #"R4" #"R5" #"R14" #"R12" %port_1}(path) @AS(direction="left-to-right") $FLOW;
+// {#"R0" {#"R1" #"R2" #"R3" #"R4" #"R5" #"R14"} #"R12"} @ORDER("left-to-right", priority="low");
+//   {%port_0 #"R0" #"R1" #"R2" #"R3" #"R4" #"R5" #"R14" #"R12" %port_1}(path) @AS $SIGNAL_FLOW; {%port_0 #R0 #R1 #R2 #R3 #R4 #R5 #R14 #R12 %port_1} @ORDER("left-to-right", priority="low");
 //   %ax_res = (-2, -4);
-//   #"R0"(a) #"R12"(b) %ax_res(axis) @AS $MIRRORED;
-//   #"R1"(a) #"R14"(b) %ax_res(axis) @AS $MIRRORED;
-//   #"R2"(a) #"R5"(b) %ax_res(axis) @AS $MIRRORED;
-//   #"R3"(a) #"R4"(b) %ax_res(axis) @AS $MIRRORED;
-//   #"R0"(members) @AS $BRANCH; #"R1"(members) @AS $BRANCH; #"R2"(members) @AS $BRANCH; #"R3"(members) @AS $BRANCH;
-//   #"R4"(members) @AS $BRANCH; #"R5"(members) @AS $BRANCH; #"R14"(members) @AS $BRANCH; #"R12"(members) @AS $BRANCH;
+//   #"R0"(left) #"R12"(right) %ax_res(axis) @AS $MIRRORED_LAYOUT;
+//   #"R1"(left) #"R14"(right) %ax_res(axis) @AS $MIRRORED_LAYOUT;
+//   #"R2"(left) #"R5"(right) %ax_res(axis) @AS $MIRRORED_LAYOUT;
+//   #"R3"(left) #"R4"(right) %ax_res(axis) @AS $MIRRORED_LAYOUT;
+// #"R0"(members) @AS $BRANCH;
+// #"R1"(members) @AS $BRANCH;
+// #"R2"(members) @AS $BRANCH;
+// #"R3"(members) @AS $BRANCH;
+// #"R4"(members) @AS $BRANCH;
+// #"R5"(members) @AS $BRANCH;
+// #"R14"(members) @AS $BRANCH;
+// #"R12"(members) @AS $BRANCH;
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-32, 32.69) @TEXT("Comment by Gemini-4-Argon", size=2) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(-32, 19.02) (123.79, 30.69)} => @SET-STYLE $risca_note_box;

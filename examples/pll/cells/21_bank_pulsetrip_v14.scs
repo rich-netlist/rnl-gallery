@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt bank_pulsetrip_v14_pdk110_21 (clk reset s0 s1 s2 s3 s4 s5 q1 out fllclk vdd vss)
@@ -78,7 +78,7 @@ XO1 (ob out vdd vss) pll_inv_pdk110_27
 //   %pclk  = $IO_PORT @ATTACH &clk    => @PLACE(2, 51)   => @ORIENT("R0");
 //   %prst  = $IO_PORT @ATTACH &reset  => @PLACE(2, 23)   => @ORIENT("R0");
 //   %ps    = $IO_PORT @ATTACH &s0     => @PLACE(2, 12)   => @ORIENT("R0");
-//   %ps @TEXT("s<5:0>", key="name");
+//   %ps @TEXT("s<5:0>", key="netname");
 //   %pq1   = $IO_PORT @ATTACH &q1     => @PLACE(28, 56)  => @ORIENT("R270");
 //   %pfll  = $IO_PORT @ATTACH &fllclk => @PLACE(76, 56)  => @ORIENT("MY");
 //   %pout  = $IO_PORT @ATTACH &out    => @PLACE(182, 26) => @ORIENT("MY");
@@ -119,12 +119,12 @@ XO1 (ob out vdd vss) pll_inv_pdk110_27
 //   #XF5   @PLACE(106, 18) => @ORIENT("R0");
 //   #XF6   @PLACE(120, 18) => @ORIENT("R0");
 //
-//   %sv0 = $SUPPLY @ATTACH #XF0:init;
-//   %sv1 = $SUPPLY @ATTACH #XF1:init;
-//   %sv2 = $SUPPLY @ATTACH #XF2:init;
-//   %gv4 = $GROUND @ATTACH #XF4:init;
-//   %gv5 = $GROUND @ATTACH #XF5:init;
-//   %gv6 = $GROUND @ATTACH #XF6:init;
+//   %sv0 = $SUPPLY @ATTACH #XF0:init::net; {%sv0::position #XF0:init} @ALIGN("x"); {%sv0::position #XF0:init} @ALIGN("y");
+//   %sv1 = $SUPPLY @ATTACH #XF1:init::net; {%sv1::position #XF1:init} @ALIGN("x"); {%sv1::position #XF1:init} @ALIGN("y");
+//   %sv2 = $SUPPLY @ATTACH #XF2:init::net; {%sv2::position #XF2:init} @ALIGN("x"); {%sv2::position #XF2:init} @ALIGN("y");
+//   %gv4 = $GROUND @ATTACH #XF4:init::net; {%gv4::position #XF4:init} @ALIGN("x"); {%gv4::position #XF4:init} @ALIGN("y");
+//   %gv5 = $GROUND @ATTACH #XF5:init::net; {%gv5::position #XF5:init} @ALIGN("x"); {%gv5::position #XF5:init} @ALIGN("y");
+//   %gv6 = $GROUND @ATTACH #XF6:init::net; {%gv6::position #XF6:init} @ALIGN("x"); {%gv6::position #XF6:init} @ALIGN("y");
 //
 //   #XSI3  @PLACE(78, 4)   => @ORIENT("R0");
 //   #XT5   @PLACE(88, 4)   => @ORIENT("R0");
@@ -147,32 +147,32 @@ XO1 (ob out vdd vss) pll_inv_pdk110_27
 //   #XO1   @PLACE(174, 26) => @ORIENT("R0");
 //
 //   /* --- 3. Clean Local Signal Chains, Single-Line S<5:0> Bus & Flying-Wire Labels --- */
-//   {&s0 &s1 &s2 &s3 &s4 &s5} @WIRE { %ps:p (10, 12) } => @TEXT("S<5:0>") => @SET-STYLE $bus_label_style;
+//   {&s0 &s1 &s2 &s3 &s4 &s5} @WIRE { %ps::pin (10, 12) } => @TEXT("S<5:0>") => @SET-STYLE $bus_label_style;
 //
 //   /* Top Band: Prescaler Chain (/2 -> /4 -> /8 & /12) */
-//   &clk @WIRE { %pclk:p #XPRE:ck };
-//   %jq0 = (14, 52); $JUNCTION @ATTACH %jq0;
+//   &clk @WIRE { %pclk::pin #XPRE:ck };
+//   %jq0 = (14, 52); $JUNCTION @ATTACH %jq0 => @PLACE(14, 52);
 //   &q0  @WIRE { #XPRE:qb %jq0 #XPB0:a };
 //   &q0  @WIRE { %jq0 (14, 55) (6, 55) (6, 53) #XPRE:d };
 //   &qb0 @WIRE { #XPB0:y #XPB1:a };
-//   %jq1 = (28, 52); $JUNCTION @ATTACH %jq1;
+//   %jq1 = (28, 52); $JUNCTION @ATTACH %jq1 => @PLACE(28, 52);
 //   &q1  @WIRE { #XPB1:y %jq1 (30, 52) (30, 51) #XD4:ck };
-//   &q1  @WIRE { %jq1 %pq1:p };
+//   &q1  @WIRE { %jq1 %pq1::pin };
 //
-//   %jd4b = (38, 52); $JUNCTION @ATTACH %jd4b;
+//   %jd4b = (38, 52); $JUNCTION @ATTACH %jd4b => @PLACE(38, 52);
 //   &d4b @WIRE { #XD4:qb %jd4b #XB40:a };
 //   &d4b @WIRE { %jd4b (38, 55) (30, 55) (30, 53) #XD4:d };
 //   &b40 @WIRE { #XB40:y #XB41:a };
 //   &b41 @WIRE { #XB41:y #XB42:a };
 //
-//   %jd4 = (58, 52); $JUNCTION @ATTACH %jd4;
+//   %jd4 = (58, 52); $JUNCTION @ATTACH %jd4 => @PLACE(58, 52);
 //   &d4 @WIRE { #XB42:y %jd4 (58, 49) #XD8:ck };
 //   &d4 @WIRE { %jd4 (58, 56) #XFAC0:a };
 //   &d4 @WIRE { %jd4 (58, 42) #XD12:clk } => @TEXT("d4") => @SET-STYLE $fly_label_style;
 //   &fab    @WIRE { #XFAC0:y #XFAC1:a };
-//   &fllclk @WIRE { #XFAC1:y %pfll:p };
+//   &fllclk @WIRE { #XFAC1:y %pfll::pin };
 //
-//   %jd8b = (68, 50); $JUNCTION @ATTACH %jd8b;
+//   %jd8b = (68, 50); $JUNCTION @ATTACH %jd8b => @PLACE(68, 50);
 //   &d8b @WIRE { #XD8:qb %jd8b #XB8:a };
 //   &d8b @WIRE { %jd8b (68, 53) (60, 53) (60, 51) #XD8:d };
 //   &d8  @WIRE { #XB8:y (77, 50) } => @TEXT("d8") => @SET-STYLE $fly_label_style;
@@ -187,16 +187,16 @@ XO1 (ob out vdd vss) pll_inv_pdk110_27
 //   &d6  @WIRE { #XD6:out (70, 34) } => @TEXT("d6") => @SET-STYLE $fly_label_style;
 //
 //   /* Third Band: Reset/Load Latch & 7-Stage Synchronous Ring Counter */
-//   &reset @WIRE { %prst:p #XRL:d };
+//   &reset @WIRE { %prst::pin #XRL:d };
 //   #XRL:ck @TEXT("ck", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
-//   %jl1 = (16, 24); $JUNCTION @ATTACH %jl1;
+//   %jl1 = (16, 24); $JUNCTION @ATTACH %jl1 => @PLACE(16, 24);
 //   &loadb @WIRE { #XRL:qb %jl1 #XRLI:a };
 //   &loadb @WIRE { %jl1 (16, 28) #XRK:y };
-//   %jl2 = (24, 24); $JUNCTION @ATTACH %jl2;
+//   %jl2 = (24, 24); $JUNCTION @ATTACH %jl2 => @PLACE(24, 24);
 //   &load  @WIRE { #XRLI:y %jl2 (24, 28) #XRK:a } => @TEXT("load") => @SET-STYLE $fly_label_style;
 //
 //   &fb @WIRE { #XF0:d (26, 22) (26, 14) #RFB:1 } => @TEXT("fb") => @SET-STYLE $fly_label_style;
-//   &vss @WIRE { #RFB:2 %grfb:p };
+//   &vss @WIRE { #RFB:2 %grfb::pin };
 //   &r0 @WIRE { #XF0:q (44, 18) (44, 22) #XF1:d } => @TEXT("r0") => @SET-STYLE $fly_label_style;
 //   &r1 @WIRE { #XF1:q (58, 18) (58, 22) #XF2:d };
 //   &r2 @WIRE { #XF2:q (72, 18) (72, 22) #XF3:d };
@@ -257,18 +257,18 @@ XO1 (ob out vdd vss) pll_inv_pdk110_27
 //   &eb5 @WIRE { #XSEB5:y #XSE5:a } => @TEXT("eb5") => @SET-STYLE $fly_label_style; &es5 @WIRE { #XSE5:y (150, 14) (150, 12) #XMX5:on }; #XMX5:off @TEXT("eb5", dx=0, dy=0.5, halign="middle") => @SET-STYLE $fly_label_style; #XMX5:a @TEXT("r0", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
 //
 //   %jm1 = (160, 38); %jm2 = (160, 32); %jm3 = (160, 26); %jm4 = (160, 20); %jm5 = (160, 14);
-//   $JUNCTION @ATTACH %jm1; $JUNCTION @ATTACH %jm2; $JUNCTION @ATTACH %jm3; $JUNCTION @ATTACH %jm4; $JUNCTION @ATTACH %jm5;
+//   $JUNCTION @ATTACH %jm1 => @PLACE(160, 38); $JUNCTION @ATTACH %jm2 => @PLACE(160, 32); $JUNCTION @ATTACH %jm3 => @PLACE(160, 26); $JUNCTION @ATTACH %jm4 => @PLACE(160, 20); $JUNCTION @ATTACH %jm5 => @PLACE(160, 14);
 //   &mux @WIRE { #XMX0:b (160, 44) %jm1 %jm2 %jm3 %jm4 %jm5 (164, 14) #MMUTE:d };
 //   &mux @WIRE { %jm1 #XMX1:b }; &mux @WIRE { %jm2 #XMX2:b }; &mux @WIRE { %jm3 #XMX3:b };
 //   &mux @WIRE { %jm4 #XMX4:b }; &mux @WIRE { %jm5 #XMX5:b };
 //   &mux @WIRE { %jm3 #XO0:a };
 //   &mux @WIRE { (164, 14) (170, 14) #RKEEP:1 };
 //   #MMUTE:g @TEXT("reset", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
-//   %jgm = (167, 6); $JUNCTION @ATTACH %jgm;
+//   %jgm = (167, 6); $JUNCTION @ATTACH %jgm => @PLACE(167, 6);
 //   &vss @WIRE { #MMUTE:s (164, 6) %jgm (170, 6) #RKEEP:2 };
-//   &vss @WIRE { %jgm %gmux:p };
+//   &vss @WIRE { %jgm %gmux::pin };
 //   &ob  @WIRE { #XO0:y #XO1:a };
-//   &out @WIRE { #XO1:y %pout:p };
+//   &out @WIRE { #XO1:y %pout::pin };
 //
 //   /* --- 4. Annotations & Defect Callout --- */
 //   #RFB   @TEXT("10 M\Omega", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
@@ -278,5 +278,11 @@ XO1 (ob out vdd vss) pll_inv_pdk110_27
 //   (92, -4.3) @TEXT("Direct TSPC feedback risks race during clock-high transparency; compare XPRE (ff_fbdelay50_v14) which includes a 50-kOhm hold-time delay resistor", halign="middle") => @SET-STYLE $param_style;
 //   (92, 62) @TEXT("bank_pulsetrip_v14_pdk110_21: Programmable Multi-Modulus Divider Bank (/4, /6, /8, /10, /12, /14) + /4 FLL Clock", halign="middle") => @SET-STYLE $title_style;
 //   (92, 60.2) @TEXT("1-Hot Select Bus S<5:0> Chooses Prescaler Tap (d4, d6, d8, d12) or 5/7-Stage Synchronous Ring Counter (r0); fllclk Outputs VCO/4", halign="middle") => @SET-STYLE $subtitle_style
+// }
+// @RNL {
+//   #XPRE @SET-SYMBOL(terminals=[[1, "d"], [2, "ck"], [3, "q"]]) $D_FLIP_FLOP_Q_ONLY;
+//   #XD4 @SET-SYMBOL(terminals=[[1, "d"], [2, "ck"], [3, "q"]]) $D_FLIP_FLOP_Q_ONLY;
+//   #XD8 @SET-SYMBOL(terminals=[[1, "d"], [2, "ck"], [3, "q"]]) $D_FLIP_FLOP_Q_ONLY;
+//   #XRL @SET-SYMBOL(terminals=[[1, "d"], [2, "ck"], [3, "q"]]) $D_FLIP_FLOP_Q_ONLY
 // }
 ends bank_pulsetrip_v14_pdk110_21

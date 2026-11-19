@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/L2_Ib_mirror
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt L2_Ib_mirror GND IIN IOUT_5 IOUT_4 IOUT_3 IOUT_2 IOUT_1 IOUT_0 \
         VDCAP
     M13 (IOUT_0 IIN net8 GND) nch_mac l=100n w=2u multi=1 nf=2 sd=120.0n \
@@ -175,7 +176,7 @@ R0_6__dmy0  (R0_5__dmy0 VDCAP ) rupolym l=835.00n w=200n m=1 multi=(1)
 //   %expanded_type_2 = @DEFINE(roles=["{parts}", ["p1", "terminal"], ["p2", "terminal"]]) {};
 //   %expanded_members_symbol = @DEFINE-SYMBOL {};
 //   {#"R0" #"R0_2__dmy0" #"R0_3__dmy0" #"R0_4__dmy0" #"R0_5__dmy0" #"R0_6__dmy0"} @SET-SYMBOL %expanded_members_symbol;
-//   {#"R0" #"R0_2__dmy0" #"R0_3__dmy0" #"R0_4__dmy0" #"R0_5__dmy0" #"R0_6__dmy0"} @PLACE(28, 15);
+// {#"R0" #"R0_2__dmy0" #"R0_3__dmy0" #"R0_4__dmy0" #"R0_5__dmy0" #"R0_6__dmy0"} @PLACE(28, 15);
 //   %expanded_0 = {#"R0" #"R0_2__dmy0" #"R0_3__dmy0" #"R0_4__dmy0" #"R0_5__dmy0" #"R0_6__dmy0"}(parts) #"R0":1(p1) #"R0_6__dmy0":2(p2) @AS %expanded_type_2;
 //   %symbol_1 = @DEFINE-SYMBOL(box=[-2, -6, 2, 0]) {
 //     @LINE {(0, -6) (0, -4.8) (-1, -4.5) (1, -3.9) (-1, -3.3) (1, -2.7) (-1, -2.1) (1, -1.5) (0, -1.2) (0, 0)};
@@ -198,42 +199,45 @@ R0_6__dmy0  (R0_5__dmy0 VDCAP ) rupolym l=835.00n w=200n m=1 multi=(1)
 //   %port_1 = $IO_PORT @ATTACH &"GND" => @PLACE(2, 34) => @ORIENT("R0");
 //   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="right");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="right");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(-1, 1.6)
 //     };
 //   %port_2 = $IO_PORT @ATTACH &"IIN" => @PLACE(3, 30) => @ORIENT("R0");
 //   %port_2 @SET-SYMBOL %input_port_symbol;
-//   %port_2 @TEXT("IIN", key="name");
+//   %port_2 @TEXT("IIN", key="netname");
 //   %output_port_symbol = @DEFINE-SYMBOL(box=[0, -1, 2, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(0, -0.9) (0, 0.9) (1.1, 0.9) (2, 0) (1.1, -0.9) (0, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="left");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="left");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(1, 1.6)
 //     };
 //   %bus_port_type_3 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"], ["p3", "net"], ["p4", "net"], ["p5", "net"]]) {};
-//   %bus_port_type_3_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3, 4, 5, 6])};
+//   %bus_port_type_3_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1", "p2", "p3", "p4", "p5"])};
 //   {&"IOUT_5" &"IOUT_4" &"IOUT_3" &"IOUT_2" &"IOUT_1" &"IOUT_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_3 = %bus_port_type_3 @ATTACH &"IOUT_5" &"IOUT_4" &"IOUT_3" &"IOUT_2" &"IOUT_1" &"IOUT_0" => @PLACE(1, 26) => @ORIENT("R0");
 //   %port_3 @SET-SYMBOL %bus_port_type_3_symbol;
 //   %port_3_marker = $IO_PORT @ATTACH &"IOUT_5" => @PLACE(1, 26) => @ORIENT("R0");
 //   %port_3_marker @SET-SYMBOL %output_port_symbol;
-//   %port_3_marker @TEXT("IOUT<5:0>", key="name");
+//   %port_3_marker @TEXT("IOUT<5:0>", key="netname");
 //   %p0 = (38, -12);
 //   %wire_0 = &"VDCAP" @WIRE(mode="straight") {%p0 #"M0":2};
 //   %p1 = (38, -27);
-//   %wire_1 = &"VDCAP" @WIRE(mode="straight") {%p1 %port_0:p};
+//   %wire_1 = &"VDCAP" @WIRE(mode="straight") {
+// %p1 %port_0:p};
 //   %wire_2 = &"VDCAP" @WIRE(mode="straight") {#"M8":2 #"M11":2};
 //   %wire_3 = &"VDCAP" @WIRE(mode="straight") {#"M11":2 #"M12":2};
 //   %wire_4 = &"VDCAP" @WIRE(mode="straight") {#"M4":2 #"M7":2};
 //   %wire_5 = &"VDCAP" @WIRE(mode="straight") {#"M7":2 #"M8":2};
 //   %wire_6 = &"VDCAP" @WIRE(mode="straight") {#"M0":2 #"M4":2};
 //   %p2 = (28, 6);
-//   %wire_7 = &"VDCAP" @WIRE(mode="straight") {%p2 %expanded_0:p2};
+//   %wire_7 = &"VDCAP" @WIRE(mode="straight") {
+// %p2 %expanded_0:p2};
 //   %wire_8 = &"VDCAP" @WIRE(mode="straight") {#"M3":1 %p2};
 //   %p3 = (34, -12);
 //   %p4 = (34, 6);
 //   %wire_9 = &"VDCAP" @WIRE(mode="straight") {%p3 %p4};
 //   %wire_10 = &"VDCAP" @WIRE(mode="straight") {%p2 %p4};
-//   %wire_11 = &"VDCAP" @WIRE(mode="straight") {%port_0:p %p0};
+//   %wire_11 = &"VDCAP" @WIRE(mode="straight") {
+// %port_0:p %p0};
 //   %wire_12 = &"VDCAP" @WIRE(mode="straight") {#"M1":2 %p3};
 //   %wire_13 = &"VDCAP" @WIRE(mode="straight") {%p3 %p0};
 //   %p5 = (108, 12);
@@ -263,7 +267,8 @@ R0_6__dmy0  (R0_5__dmy0 VDCAP ) rupolym l=835.00n w=200n m=1 multi=(1)
 //   %wire_26 = &"IIN" @WIRE(mode="straight") {#"M9":2 #"M10":2};
 //   %wire_27 = &"IIN" @WIRE(mode="straight") {#"M10":2 #"M13":2};
 //   %p11 = (28, 18);
-//   %wire_28 = &"IIN" @WIRE(mode="straight") {%expanded_0:p1 %p11};
+//   %wire_28 = &"IIN" @WIRE(mode="straight") {
+// %expanded_0:p1 %p11};
 //   %p12 = (38, 18);
 //   %wire_29 = &"IIN" @WIRE(mode="straight") {%p11 %p12};
 //   %p13 = (38, -2);
@@ -354,30 +359,30 @@ R0_6__dmy0  (R0_5__dmy0 VDCAP ) rupolym l=835.00n w=200n m=1 multi=(1)
 //   %wire_84 = &"GND" @WIRE(mode="straight") {%p16 #"M0":3};
 //   %wire_85 = &"GND" @WIRE(mode="straight") {%p15 #"M1":3};
 //   %wire_38 @TEXT("GND", size=1, halign="middle", valign="baseline") => @PLACE(35, -17.3);
-//   $JUNCTION @ATTACH %p0;
-//   $JUNCTION @ATTACH %p2;
-//   $JUNCTION @ATTACH %p3;
-//   $JUNCTION @ATTACH %p11;
-//   $JUNCTION @ATTACH %p13;
-//   $JUNCTION @ATTACH %p15;
-//   $JUNCTION @ATTACH %p16;
-//   $JUNCTION @ATTACH %p17;
-//   $JUNCTION @ATTACH %p18;
-//   $JUNCTION @ATTACH %p19;
-//   $JUNCTION @ATTACH %p20;
-//   $JUNCTION @ATTACH %p22;
-//   $JUNCTION @ATTACH %p25;
-//   $JUNCTION @ATTACH %p26;
-//   $JUNCTION @ATTACH %p27;
-//   $JUNCTION @ATTACH %p28;
-//   $JUNCTION @ATTACH %p29;
-//   $JUNCTION @ATTACH %p30;
-//   $JUNCTION @ATTACH %p31;
-//   $JUNCTION @ATTACH %p32;
-//   $JUNCTION @ATTACH %p35;
-//   $JUNCTION @ATTACH %p36;
-//   $JUNCTION @ATTACH %p38;
-//   $JUNCTION @ATTACH %p40;
+//   $JUNCTION @ATTACH %p0 => @PLACE(38, -12);
+//   $JUNCTION @ATTACH %p2 => @PLACE(28, 6);
+//   $JUNCTION @ATTACH %p3 => @PLACE(34, -12);
+//   $JUNCTION @ATTACH %p11 => @PLACE(28, 18);
+//   $JUNCTION @ATTACH %p13 => @PLACE(38, -2);
+//   $JUNCTION @ATTACH %p15 => @PLACE(28, -18);
+//   $JUNCTION @ATTACH %p16 => @PLACE(48, -18);
+//   $JUNCTION @ATTACH %p17 => @PLACE(86, -18);
+//   $JUNCTION @ATTACH %p18 => @PLACE(96, -18);
+//   $JUNCTION @ATTACH %p19 => @PLACE(98, -18);
+//   $JUNCTION @ATTACH %p20 => @PLACE(108, -18);
+//   $JUNCTION @ATTACH %p22 => @PLACE(110, -13);
+//   $JUNCTION @ATTACH %p25 => @PLACE(98, -13);
+//   $JUNCTION @ATTACH %p26 => @PLACE(74, -18);
+//   $JUNCTION @ATTACH %p27 => @PLACE(84, -18);
+//   $JUNCTION @ATTACH %p28 => @PLACE(62, -18);
+//   $JUNCTION @ATTACH %p29 => @PLACE(72, -18);
+//   $JUNCTION @ATTACH %p30 => @PLACE(50, -18);
+//   $JUNCTION @ATTACH %p31 => @PLACE(60, -18);
+//   $JUNCTION @ATTACH %p32 => @PLACE(86, -13);
+//   $JUNCTION @ATTACH %p35 => @PLACE(74, -13);
+//   $JUNCTION @ATTACH %p36 => @PLACE(62, -13);
+//   $JUNCTION @ATTACH %p38 => @PLACE(50, -13);
+//   $JUNCTION @ATTACH %p40 => @PLACE(26, -13);
 //   (27, 31) @TEXT("630mV 15uA", size=3.2, halign="middle", valign="baseline");
 //   (74, 19) @TEXT("~560mV", size=3.2, halign="middle", valign="baseline");
 //   @LINE {(28, 29) (28, 25) (27, 26)};
@@ -387,16 +392,15 @@ R0_6__dmy0  (R0_5__dmy0 VDCAP ) rupolym l=835.00n w=200n m=1 multi=(1)
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
 //   /* L2_Ib_mirror: 6-Channel Series-Cascode NMOS Bias Current Mirror Bank with RC Low-Pass Filter */
 //   {#"M3" #"M1"}(reference_branch) {#"M13" #"M12" #"M10" #"M11" #"M9" #"M8" #"M6" #"M7" #"M5" #"M4" #"M2" #"M0"}(cascode_mirror_branches) %expanded_0(rc_noise_filter) @AS(role="high_swing_series_cascode_bias_mirror", channels=6) $CASCODE_CURRENT_MIRROR_BANK;
-//   {#"M3" #"M1"}(ref) {#"M13" #"M12" #"M10" #"M11" #"M9" #"M8" #"M6" #"M7" #"M5" #"M4" #"M2" #"M0"}(out) @AS $CURRENT_MIRROR;
 //   {#"M3" #"M13" #"M10" #"M9" #"M6" #"M5" #"M2"}(members) @AS $MATCHED;
 //   {#"M1" #"M12" #"M11" #"M8" #"M7" #"M4" #"M0"}(members) @AS $MATCHED;
-//   {#"M3" #"M1"}(members) @AS $BRANCH;
-//   {#"M13" #"M12"}(members) @AS $BRANCH;
-//   {#"M10" #"M11"}(members) @AS $BRANCH;
-//   {#"M9" #"M8"}(members) @AS $BRANCH;
-//   {#"M6" #"M7"}(members) @AS $BRANCH;
-//   {#"M5" #"M4"}(members) @AS $BRANCH;
-//   {#"M2" #"M0"}(members) @AS $BRANCH;
+// {#"M3" #"M1"} @ALIGN("x", priority="low");
+// {#"M13" #"M12"} @ALIGN("x", priority="low");
+// {#"M10" #"M11"} @ALIGN("x", priority="low");
+// {#"M9" #"M8"} @ALIGN("x", priority="low");
+// {#"M6" #"M7"} @ALIGN("x", priority="low");
+// {#"M5" #"M4"} @ALIGN("x", priority="low");
+// {#"M2" #"M0"} @ALIGN("x", priority="low");
 //   /* Deterministic Static DC Currents (15uA Reference & 6 x 15uA Channel Bias Sinks) */
 //   #"M3":1 @CURRENT("in"); #"M3":3 @CURRENT("out");
 //   #"M1":1 @CURRENT("in"); #"M1":3 @CURRENT("out");

@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/L3_logic_V2
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt L3_logic_V2 CMPCK CMPN CMPP CNT DCLK DLSBN_5 DLSBN_4 DLSBN_3 \
         DLSBN_2 DLSBN_1 DLSBN_0 DLSBP_5 DLSBP_4 DLSBP_3 DLSBP_2 DLSBP_1 \
         DLSBP_0 DMSBN_4 DMSBN_3 DMSBN_2 DMSBN_1 DMSBN_0 DMSBP_4 DMSBP_3 \
@@ -627,87 +628,87 @@ subckt L3_logic_V2 CMPCK CMPN CMPP CNT DCLK DLSBN_5 DLSBN_4 DLSBN_3 \
 //   %port_1 = $IO_PORT @ATTACH &"GND" => @PLACE(83, 10) => @ORIENT("R0");
 //   %output_port_symbol = @DEFINE-SYMBOL(box=[0, -1, 2, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(0, -0.9) (0, 0.9) (1.1, 0.9) (2, 0) (1.1, -0.9) (0, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="left");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="left");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(1, 1.6)
 //     };
 //   %port_2 = $IO_PORT @ATTACH &"CMPCK" => @PLACE(82, -22) => @ORIENT("R0");
 //   %port_2 @SET-SYMBOL %output_port_symbol;
-//   %port_2 @TEXT("CMPCK", key="name");
+//   %port_2 @TEXT("CMPCK", key="netname");
 //   %port_3 = $IO_PORT @ATTACH &"DCLK" => @PLACE(82, -42) => @ORIENT("R0");
 //   %port_3 @SET-SYMBOL %output_port_symbol;
-//   %port_3 @TEXT("DCLK", key="name");
+//   %port_3 @TEXT("DCLK", key="netname");
 //   %port_4 = $IO_PORT @ATTACH &"DOUT" => @PLACE(82, -46) => @ORIENT("R0");
 //   %port_4 @SET-SYMBOL %output_port_symbol;
-//   %port_4 @TEXT("DOUT", key="name");
+//   %port_4 @TEXT("DOUT", key="netname");
 //   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="right");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="right");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(-1, 1.6)
 //     };
 //   %port_5 = $IO_PORT @ATTACH &"RST" => @PLACE(84, 6) => @ORIENT("R0");
 //   %port_5 @SET-SYMBOL %input_port_symbol;
-//   %port_5 @TEXT("RST", key="name");
+//   %port_5 @TEXT("RST", key="netname");
 //   %port_6 = $IO_PORT @ATTACH &"CNT" => @PLACE(84, 2) => @ORIENT("R0");
 //   %port_6 @SET-SYMBOL %input_port_symbol;
-//   %port_6 @TEXT("CNT", key="name");
+//   %port_6 @TEXT("CNT", key="netname");
 //   %port_7 = $IO_PORT @ATTACH &"CMPP" => @PLACE(84, -14) => @ORIENT("R0");
 //   %port_7 @SET-SYMBOL %input_port_symbol;
-//   %port_7 @TEXT("CMPP", key="name");
+//   %port_7 @TEXT("CMPP", key="netname");
 //   %port_8 = $IO_PORT @ATTACH &"CMPN" => @PLACE(84, -18) => @ORIENT("R0");
 //   %port_8 @SET-SYMBOL %input_port_symbol;
-//   %port_8 @TEXT("CMPN", key="name");
+//   %port_8 @TEXT("CMPN", key="netname");
 //   %port_9 = $IO_PORT @ATTACH &"STMSB" => @PLACE(84, -6) => @ORIENT("R0");
 //   %port_9 @SET-SYMBOL %input_port_symbol;
-//   %port_9 @TEXT("STMSB", key="name");
+//   %port_9 @TEXT("STMSB", key="netname");
 //   %bus_port_type_10 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"], ["p3", "net"]]) {};
-//   %bus_port_type_10_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3, 4])};
+//   %bus_port_type_10_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1", "p2", "p3"])};
 //   {&"STUNE_3" &"STUNE_2" &"STUNE_1" &"STUNE_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_10 = %bus_port_type_10 @ATTACH &"STUNE_3" &"STUNE_2" &"STUNE_1" &"STUNE_0" => @PLACE(84, -2) => @ORIENT("R0");
 //   %port_10 @SET-SYMBOL %bus_port_type_10_symbol;
 //   %port_10_marker = $IO_PORT @ATTACH &"STUNE_3" => @PLACE(84, -2) => @ORIENT("R0");
 //   %port_10_marker @SET-SYMBOL %input_port_symbol;
-//   %port_10_marker @TEXT("STUNE<3:0>", key="name");
+//   %port_10_marker @TEXT("STUNE<3:0>", key="netname");
 //   %port_11 = $IO_PORT @ATTACH &"STLSB" => @PLACE(84, -10) => @ORIENT("R0");
 //   %port_11 @SET-SYMBOL %input_port_symbol;
-//   %port_11 @TEXT("STLSB", key="name");
+//   %port_11 @TEXT("STLSB", key="netname");
 //   %bus_port_type_12 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"], ["p3", "net"], ["p4", "net"]]) {};
-//   %bus_port_type_12_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3, 4, 5])};
+//   %bus_port_type_12_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1", "p2", "p3", "p4"])};
 //   {&"DMSBP_4" &"DMSBP_3" &"DMSBP_2" &"DMSBP_1" &"DMSBP_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_12 = %bus_port_type_12 @ATTACH &"DMSBP_4" &"DMSBP_3" &"DMSBP_2" &"DMSBP_1" &"DMSBP_0" => @PLACE(82, -26) => @ORIENT("R0");
 //   %port_12 @SET-SYMBOL %bus_port_type_12_symbol;
 //   %port_12_marker = $IO_PORT @ATTACH &"DMSBP_4" => @PLACE(82, -26) => @ORIENT("R0");
 //   %port_12_marker @SET-SYMBOL %output_port_symbol;
-//   %port_12_marker @TEXT("DMSBP<4:0>", key="name");
+//   %port_12_marker @TEXT("DMSBP<4:0>", key="netname");
 //   %bus_port_type_13 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"], ["p3", "net"], ["p4", "net"]]) {};
-//   %bus_port_type_13_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3, 4, 5])};
+//   %bus_port_type_13_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1", "p2", "p3", "p4"])};
 //   {&"DMSBN_4" &"DMSBN_3" &"DMSBN_2" &"DMSBN_1" &"DMSBN_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_13 = %bus_port_type_13 @ATTACH &"DMSBN_4" &"DMSBN_3" &"DMSBN_2" &"DMSBN_1" &"DMSBN_0" => @PLACE(82, -30) => @ORIENT("R0");
 //   %port_13 @SET-SYMBOL %bus_port_type_13_symbol;
 //   %port_13_marker = $IO_PORT @ATTACH &"DMSBN_4" => @PLACE(82, -30) => @ORIENT("R0");
 //   %port_13_marker @SET-SYMBOL %output_port_symbol;
-//   %port_13_marker @TEXT("DMSBN<4:0>", key="name");
+//   %port_13_marker @TEXT("DMSBN<4:0>", key="netname");
 //   %bus_port_type_14 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"], ["p3", "net"], ["p4", "net"], ["p5", "net"]]) {};
-//   %bus_port_type_14_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3, 4, 5, 6])};
+//   %bus_port_type_14_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1", "p2", "p3", "p4", "p5"])};
 //   {&"DLSBN_5" &"DLSBN_4" &"DLSBN_3" &"DLSBN_2" &"DLSBN_1" &"DLSBN_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_14 = %bus_port_type_14 @ATTACH &"DLSBN_5" &"DLSBN_4" &"DLSBN_3" &"DLSBN_2" &"DLSBN_1" &"DLSBN_0" => @PLACE(82, -38) => @ORIENT("R0");
 //   %port_14 @SET-SYMBOL %bus_port_type_14_symbol;
 //   %port_14_marker = $IO_PORT @ATTACH &"DLSBN_5" => @PLACE(82, -38) => @ORIENT("R0");
 //   %port_14_marker @SET-SYMBOL %output_port_symbol;
-//   %port_14_marker @TEXT("DLSBN<5:0>", key="name");
+//   %port_14_marker @TEXT("DLSBN<5:0>", key="netname");
 //   %bus_port_type_15 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"], ["p3", "net"], ["p4", "net"], ["p5", "net"]]) {};
-//   %bus_port_type_15_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3, 4, 5, 6])};
+//   %bus_port_type_15_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1", "p2", "p3", "p4", "p5"])};
 //   {&"DLSBP_5" &"DLSBP_4" &"DLSBP_3" &"DLSBP_2" &"DLSBP_1" &"DLSBP_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_15 = %bus_port_type_15 @ATTACH &"DLSBP_5" &"DLSBP_4" &"DLSBP_3" &"DLSBP_2" &"DLSBP_1" &"DLSBP_0" => @PLACE(82, -34) => @ORIENT("R0");
 //   %port_15 @SET-SYMBOL %bus_port_type_15_symbol;
 //   %port_15_marker = $IO_PORT @ATTACH &"DLSBP_5" => @PLACE(82, -34) => @ORIENT("R0");
 //   %port_15_marker @SET-SYMBOL %output_port_symbol;
-//   %port_15_marker @TEXT("DLSBP<5:0>", key="name");
+//   %port_15_marker @TEXT("DLSBP<5:0>", key="netname");
 //   %port_16 = $IO_PORT @ATTACH &"RDYM" => @PLACE(82, -50) => @ORIENT("R0");
 //   %port_16 @SET-SYMBOL %output_port_symbol;
-//   %port_16 @TEXT("RDYM", key="name");
+//   %port_16 @TEXT("RDYM", key="netname");
 //   %port_17 = $IO_PORT @ATTACH &"RDYL" => @PLACE(82, -54) => @ORIENT("R0");
 //   %port_17 @SET-SYMBOL %output_port_symbol;
-//   %port_17 @TEXT("RDYL", key="name");
+//   %port_17 @TEXT("RDYL", key="netname");
 //   %p0 = (652, -174);
 //   %wire_0 = &"net1" @WIRE(mode="straight") {%p0 #"I169":2};
 //   %wire_1 = &"net1" @WIRE(mode="straight") {#"I172":2 %p0};
@@ -1273,20 +1274,20 @@ subckt L3_logic_V2 CMPCK CMPN CMPP CNT DCLK DLSBN_5 DLSBN_4 DLSBN_3 \
 //   %wire_247 @TEXT("GND", size=1, halign="middle", valign="top") => @PLACE(613, -84.7);
 //   %wire_244 @TEXT("GND", size=1, halign="middle", valign="top") => @PLACE(340, -81.7);
 //   %wire_242 @TEXT("GND", size=1, halign="middle", valign="top") => @PLACE(665, -127.7);
-//   $JUNCTION @ATTACH %p5;
-//   $JUNCTION @ATTACH %p17;
-//   $JUNCTION @ATTACH %p18;
-//   $JUNCTION @ATTACH %p22;
-//   $JUNCTION @ATTACH %p25;
-//   $JUNCTION @ATTACH %p39;
-//   $JUNCTION @ATTACH %p42;
-//   $JUNCTION @ATTACH %p46;
-//   $JUNCTION @ATTACH %p78;
-//   $JUNCTION @ATTACH %p79;
-//   $JUNCTION @ATTACH %p81;
-//   $JUNCTION @ATTACH %p93;
-//   $JUNCTION @ATTACH %p94;
-//   $JUNCTION @ATTACH %p100;
+//   $JUNCTION @ATTACH %p5 => @PLACE(595, -186);
+//   $JUNCTION @ATTACH %p17 => @PLACE(582, -107);
+//   $JUNCTION @ATTACH %p18 => @PLACE(637, -107);
+//   $JUNCTION @ATTACH %p22 => @PLACE(586, -81);
+//   $JUNCTION @ATTACH %p25 => @PLACE(598, -184);
+//   $JUNCTION @ATTACH %p39 => @PLACE(585, -233);
+//   $JUNCTION @ATTACH %p42 => @PLACE(582, -221);
+//   $JUNCTION @ATTACH %p46 => @PLACE(620, -157);
+//   $JUNCTION @ATTACH %p78 => @PLACE(615, -70);
+//   $JUNCTION @ATTACH %p79 => @PLACE(626, -70);
+//   $JUNCTION @ATTACH %p81 => @PLACE(602, -70);
+//   $JUNCTION @ATTACH %p93 => @PLACE(611, -66);
+//   $JUNCTION @ATTACH %p94 => @PLACE(623, -66);
+//   $JUNCTION @ATTACH %p100 => @PLACE(604, -66);
 //   (450, -18) @TEXT("MSB", size=3.2, halign="middle", valign="baseline");
 //   (250, -17) @TEXT("LSB", size=3.2, halign="middle", valign="baseline");
 //   (669, -161) @TEXT("OSC LOOP", size=3.2, halign="middle", valign="baseline");
@@ -1316,12 +1317,12 @@ subckt L3_logic_V2 CMPCK CMPN CMPP CNT DCLK DLSBN_5 DLSBN_4 DLSBN_3 \
 //   {#"I147" #"I146"}(members) @AS $MATCHED;
 //   {#"I149" #"I150" #"I151" #"I152" #"I153" #"I154" #"I155" #"I156" #"I157"}(members) @AS $MATCHED;
 //   {#"I212" #"I209"}(members) @AS $MATCHED;
-//   #"I147"(source) {#"I146" #"I149" #"I150" #"I151" #"I221" #"I152" #"I153" #"I154" #"I155" #"I156"}(chain) #"I157"(load) @AS $CHAIN;
-//   {#"I157" #"I156" #"I155" #"I154" #"I153" #"I152" #"I221" #"I151" #"I150" #"I149" #"I146" #"I147"}(path) @AS(direction="right-to-left") $FLOW;
-//   {#"I166" #"I226" #"I203" #"I169" #"I177"}(path) @AS(direction="left-to-right") $FLOW;
-//   {#"I209" #"I212"}(members) @AS $BRANCH;
-//   {#"I203" #"I204"}(members) @AS $BRANCH;
-//   {#"I219" #"I220"}(members) @AS $BRANCH;
+// {#"I147" {#"I146" #"I149" #"I150" #"I151" #"I221" #"I152" #"I153" #"I154" #"I155" #"I156"} #"I157"} @ORDER("left-to-right", priority="low");
+//   {#"I157" #"I156" #"I155" #"I154" #"I153" #"I152" #"I221" #"I151" #"I150" #"I149" #"I146" #"I147"}(path) @AS $SIGNAL_FLOW; {#I157 #I156 #I155 #I154 #I153 #I152 #I221 #I151 #I150 #I149 #I146 #I147} @ORDER("right-to-left", priority="low");
+//   {#"I166" #"I226" #"I203" #"I169" #"I177"}(path) @AS $SIGNAL_FLOW; {#I166 #I226 #I203 #I169 #I177} @ORDER("left-to-right", priority="low");
+// {#"I209" #"I212"} @ALIGN("x", priority="low");
+// {#"I203" #"I204"} @ALIGN("x", priority="low");
+// {#"I219" #"I220"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (0, 123.12) @TEXT("Comment by Gemini-4-Argon", size=4.2) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(0, 80.05) (485.96, 118.86)} => @SET-STYLE $risca_note_box;

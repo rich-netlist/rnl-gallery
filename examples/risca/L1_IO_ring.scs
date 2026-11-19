@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/L1_IO_ring
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt L1_IO_ring CLKN CLKP D0 D0_CORE D1 D1_CORE D2 D2_CORE D3 D3_CORE D4 \
         D4_CORE D5 D5_CORE D6 D6_CORE D7 D7_CORE D8 D8_CORE D9 D9_CORE D10 \
         D10_CORE D11 D11_CORE D12 D12_CORE D13 D13_CORE D14 D14_CORE D15 \
@@ -97,7 +98,7 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
     I153 (POC VIOL VIOH GIOL GIOH) PVSS1DGZ_H_G
     I55 (POC VIOL VIOH GIOL GIOH) PVSS1DGZ_H_G
 // @RNL(author="rnl-virtuoso") {
-//   %block_symbol = @DEFINE-SYMBOL(box=[-34, 31, -18, 47]) {
+// %block_symbol = @DEFINE-SYMBOL(box=[-34, 31, -18, 47]) {
 //     @LINE {(-6, -164) (-6, -168)};
 //     @LINE {(191, -41) (195, -41)};
 //     @LINE {(-6, -164) (-6, -168)};
@@ -2263,12 +2264,12 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   $FIGURE @ATTACH %marker_78 => @SET-SYMBOL $NO_CONNECT_SYMBOL => @ORIENT("R0");
 //   %output_port_symbol = @DEFINE-SYMBOL(box=[0, -1, 2, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(0, -0.9) (0, 0.9) (1.1, 0.9) (2, 0) (1.1, -0.9) (0, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="left");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="left");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(1, 1.6)
 //     };
 //   %port_0 = $IO_PORT @ATTACH &"D6" => @PLACE(512, -362) => @ORIENT("R0");
 //   %port_0 @SET-SYMBOL %output_port_symbol;
-//   %port_0 @TEXT("D6", key="name");
+//   %port_0 @TEXT("D6", key="netname");
 //   %port_1 = $IO_PORT @ATTACH &"IN2N" => @PLACE(-150, -89) => @ORIENT("R180");
 //   %port_2 = $IO_PORT @ATTACH &"IN2N" => @PLACE(-197, -89) => @ORIENT("R0");
 //   %port_3 = $IO_PORT @ATTACH &"IN2P" => @PLACE(-150, -117) => @ORIENT("R180");
@@ -2285,88 +2286,88 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %port_14 = $IO_PORT @ATTACH &"VBS" => @PLACE(140, 124) => @ORIENT("R270");
 //   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="right");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="right");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(-1, 1.6)
 //     };
 //   %port_15 = $IO_PORT @ATTACH &"SCK" => @PLACE(113, -448) => @ORIENT("R270");
 //   %port_15 @SET-SYMBOL %input_port_symbol;
-//   %port_15 @TEXT("SCK", key="name");
+//   %port_15 @TEXT("SCK", key="netname");
 //   %port_16 = $IO_PORT @ATTACH &"INCM" => @PLACE(-149, -31) => @ORIENT("R180");
 //   %port_17 = $IO_PORT @ATTACH &"INCM" => @PLACE(-196, -22) => @ORIENT("R0");
 //   %port_18 = $IO_PORT @ATTACH &"SDO_CORE" => @PLACE(164, -394) => @ORIENT("R270");
 //   %port_18 @SET-SYMBOL %input_port_symbol;
-//   %port_18 @TEXT("SDO\_CORE", key="name");
+//   %port_18 @TEXT("SDO\_CORE", key="netname");
 //   %port_19 = $IO_PORT @ATTACH &"SCK_CORE" => @PLACE(120, -394) => @ORIENT("R90");
 //   %port_19 @SET-SYMBOL %output_port_symbol;
-//   %port_19 @TEXT("SCK\_CORE", key="name");
+//   %port_19 @TEXT("SCK\_CORE", key="netname");
 //   %port_20 = $IO_PORT @ATTACH &"SDI" => @PLACE(77, -448) => @ORIENT("R270");
 //   %port_20 @SET-SYMBOL %input_port_symbol;
-//   %port_20 @TEXT("SDI", key="name");
+//   %port_20 @TEXT("SDI", key="netname");
 //   %port_21 = $IO_PORT @ATTACH &"SDO" => @PLACE(149, -446) => @ORIENT("R270");
 //   %port_21 @SET-SYMBOL %output_port_symbol;
-//   %port_21 @TEXT("SDO", key="name");
+//   %port_21 @TEXT("SDO", key="netname");
 //   %port_22 = $IO_PORT @ATTACH &"VIOL" => @PLACE(422, 73) => @ORIENT("R270");
 //   %port_23 = $IO_PORT @ATTACH &"VIOL" => @PLACE(432, 124) => @ORIENT("R270");
 //   %port_24 = $IO_PORT @ATTACH &"D15_CORE" => @PLACE(458, -7) => @ORIENT("R0");
 //   %port_24 @SET-SYMBOL %input_port_symbol;
-//   %port_24 @TEXT("D15\_CORE", key="name");
+//   %port_24 @TEXT("D15\_CORE", key="netname");
 //   %port_25 = $IO_PORT @ATTACH &"D9" => @PLACE(512, -249) => @ORIENT("R0");
 //   %port_25 @SET-SYMBOL %output_port_symbol;
-//   %port_25 @TEXT("D9", key="name");
+//   %port_25 @TEXT("D9", key="netname");
 //   %port_26 = $IO_PORT @ATTACH &"D8" => @PLACE(512, -287) => @ORIENT("R0");
 //   %port_26 @SET-SYMBOL %output_port_symbol;
-//   %port_26 @TEXT("D8", key="name");
+//   %port_26 @TEXT("D8", key="netname");
 //   %port_27 = $IO_PORT @ATTACH &"D10" => @PLACE(512, -211) => @ORIENT("R0");
 //   %port_27 @SET-SYMBOL %output_port_symbol;
-//   %port_27 @TEXT("D10", key="name");
+//   %port_27 @TEXT("D10", key="netname");
 //   %port_28 = $IO_PORT @ATTACH &"D11" => @PLACE(512, -173) => @ORIENT("R0");
 //   %port_28 @SET-SYMBOL %output_port_symbol;
-//   %port_28 @TEXT("D11", key="name");
+//   %port_28 @TEXT("D11", key="netname");
 //   %port_29 = $IO_PORT @ATTACH &"D12" => @PLACE(512, -136) => @ORIENT("R0");
 //   %port_29 @SET-SYMBOL %output_port_symbol;
-//   %port_29 @TEXT("D12", key="name");
+//   %port_29 @TEXT("D12", key="netname");
 //   %port_30 = $IO_PORT @ATTACH &"D1" => @PLACE(260, -446) => @ORIENT("R270");
 //   %port_30 @SET-SYMBOL %output_port_symbol;
-//   %port_30 @TEXT("D1", key="name");
+//   %port_30 @TEXT("D1", key="netname");
 //   %port_31 = $IO_PORT @ATTACH &"D0" => @PLACE(223, -446) => @ORIENT("R270");
 //   %port_31 @SET-SYMBOL %output_port_symbol;
-//   %port_31 @TEXT("D0", key="name");
+//   %port_31 @TEXT("D0", key="netname");
 //   %port_32 = $IO_PORT @ATTACH &"GIOH" => @PLACE(512, 75) => @ORIENT("R180");
 //   %port_33 = $IO_PORT @ATTACH &"GIOH" => @PLACE(512, -394) => @ORIENT("R180");
 //   %port_34 = $IO_PORT @ATTACH &"GIOH" => @PLACE(445, -446) => @ORIENT("R90");
 //   %port_35 = $IO_PORT @ATTACH &"GIOH" => @PLACE(8, -446) => @ORIENT("R90");
 //   %port_36 = $IO_PORT @ATTACH &"RST" => @PLACE(186, -448) => @ORIENT("R270");
 //   %port_36 @SET-SYMBOL %input_port_symbol;
-//   %port_36 @TEXT("RST", key="name");
+//   %port_36 @TEXT("RST", key="netname");
 //   %port_37 = $IO_PORT @ATTACH &"D2" => @PLACE(297, -446) => @ORIENT("R270");
 //   %port_37 @SET-SYMBOL %output_port_symbol;
-//   %port_37 @TEXT("D2", key="name");
+//   %port_37 @TEXT("D2", key="netname");
 //   %port_38 = $IO_PORT @ATTACH &"D3" => @PLACE(334, -446) => @ORIENT("R270");
 //   %port_38 @SET-SYMBOL %output_port_symbol;
-//   %port_38 @TEXT("D3", key="name");
+//   %port_38 @TEXT("D3", key="netname");
 //   %port_39 = $IO_PORT @ATTACH &"D13" => @PLACE(512, -98) => @ORIENT("R0");
 //   %port_39 @SET-SYMBOL %output_port_symbol;
-//   %port_39 @TEXT("D13", key="name");
+//   %port_39 @TEXT("D13", key="netname");
 //   %port_40 = $IO_PORT @ATTACH &"D14" => @PLACE(512, -60) => @ORIENT("R0");
 //   %port_40 @SET-SYMBOL %output_port_symbol;
-//   %port_40 @TEXT("D14", key="name");
+//   %port_40 @TEXT("D14", key="netname");
 //   %port_41 = $IO_PORT @ATTACH &"D15" => @PLACE(512, -22) => @ORIENT("R0");
 //   %port_41 @SET-SYMBOL %output_port_symbol;
-//   %port_41 @TEXT("D15", key="name");
+//   %port_41 @TEXT("D15", key="netname");
 //   %port_42 = $IO_PORT @ATTACH &"DCLK_CORE" => @PLACE(458, 31) => @ORIENT("R0");
 //   %port_42 @SET-SYMBOL %input_port_symbol;
-//   %port_42 @TEXT("DCLK\_CORE", key="name");
+//   %port_42 @TEXT("DCLK\_CORE", key="netname");
 //   %port_43 = $IO_PORT @ATTACH &"D14_CORE" => @PLACE(458, -45) => @ORIENT("R0");
 //   %port_43 @SET-SYMBOL %input_port_symbol;
-//   %port_43 @TEXT("D14\_CORE", key="name");
+//   %port_43 @TEXT("D14\_CORE", key="netname");
 //   %port_44 = $IO_PORT @ATTACH &"VREF" => @PLACE(-99, 77) => @ORIENT("R90");
 //   %port_45 = $IO_PORT @ATTACH &"VREF" => @PLACE(-90, 124) => @ORIENT("R270");
 //   %port_46 = $IO_PORT @ATTACH &"RST_CORE" => @PLACE(193, -394) => @ORIENT("R90");
 //   %port_46 @SET-SYMBOL %output_port_symbol;
-//   %port_46 @TEXT("RST\_CORE", key="name");
+//   %port_46 @TEXT("RST\_CORE", key="netname");
 //   %port_47 = $IO_PORT @ATTACH &"D7" => @PLACE(512, -324) => @ORIENT("R0");
 //   %port_47 @SET-SYMBOL %output_port_symbol;
-//   %port_47 @TEXT("D7", key="name");
+//   %port_47 @TEXT("D7", key="netname");
 //   %port_48 = $IO_PORT @ATTACH &"GDIG" => @PLACE(-35, 76) => @ORIENT("R270");
 //   %port_49 = $IO_PORT @ATTACH &"GDIG" => @PLACE(-26, 124) => @ORIENT("R270");
 //   %port_50 = $IO_PORT @ATTACH &"VANA" => @PLACE(73, 124) => @ORIENT("MYR90");
@@ -2379,7 +2380,7 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %port_57 = $IO_PORT @ATTACH &"VIOH" => @PLACE(512, 48) => @ORIENT("R180");
 //   %port_58 = $IO_PORT @ATTACH &"DCLK" => @PLACE(512, 16) => @ORIENT("R0");
 //   %port_58 @SET-SYMBOL %output_port_symbol;
-//   %port_58 @TEXT("DCLK", key="name");
+//   %port_58 @TEXT("DCLK", key="netname");
 //   %port_59 = $IO_PORT @ATTACH &"GNDA" => @PLACE(-196, -270) => @ORIENT("R0");
 //   %port_60 = $IO_PORT @ATTACH &"GNDA" => @PLACE(39, 124) => @ORIENT("R270");
 //   %port_61 = $IO_PORT @ATTACH &"GNDA" => @PLACE(-196, -148) => @ORIENT("R0");
@@ -2407,58 +2408,58 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %port_83 = $IO_PORT @ATTACH &"CLKN" => @PLACE(-196, -377) => @ORIENT("R0");
 //   %port_84 = $IO_PORT @ATTACH &"SDI_CORE" => @PLACE(84, -394) => @ORIENT("R90");
 //   %port_84 @SET-SYMBOL %output_port_symbol;
-//   %port_84 @TEXT("SDI\_CORE", key="name");
+//   %port_84 @TEXT("SDI\_CORE", key="netname");
 //   %port_85 = $IO_PORT @ATTACH &"SLP_CORE" => @PLACE(47, -394) => @ORIENT("R90");
 //   %port_85 @SET-SYMBOL %output_port_symbol;
-//   %port_85 @TEXT("SLP\_CORE", key="name");
+//   %port_85 @TEXT("SLP\_CORE", key="netname");
 //   %port_86 = $IO_PORT @ATTACH &"D1_CORE" => @PLACE(275, -394) => @ORIENT("R270");
 //   %port_86 @SET-SYMBOL %input_port_symbol;
-//   %port_86 @TEXT("D1\_CORE", key="name");
+//   %port_86 @TEXT("D1\_CORE", key="netname");
 //   %port_87 = $IO_PORT @ATTACH &"D5" => @PLACE(409, -446) => @ORIENT("R270");
 //   %port_87 @SET-SYMBOL %output_port_symbol;
-//   %port_87 @TEXT("D5", key="name");
+//   %port_87 @TEXT("D5", key="netname");
 //   %port_88 = $IO_PORT @ATTACH &"D0_CORE" => @PLACE(238, -394) => @ORIENT("R270");
 //   %port_88 @SET-SYMBOL %input_port_symbol;
-//   %port_88 @TEXT("D0\_CORE", key="name");
+//   %port_88 @TEXT("D0\_CORE", key="netname");
 //   %port_89 = $IO_PORT @ATTACH &"D4" => @PLACE(371, -446) => @ORIENT("R270");
 //   %port_89 @SET-SYMBOL %output_port_symbol;
-//   %port_89 @TEXT("D4", key="name");
+//   %port_89 @TEXT("D4", key="netname");
 //   %port_90 = $IO_PORT @ATTACH &"D2_CORE" => @PLACE(312, -394) => @ORIENT("R270");
 //   %port_90 @SET-SYMBOL %input_port_symbol;
-//   %port_90 @TEXT("D2\_CORE", key="name");
+//   %port_90 @TEXT("D2\_CORE", key="netname");
 //   %port_91 = $IO_PORT @ATTACH &"D3_CORE" => @PLACE(349, -394) => @ORIENT("R270");
 //   %port_91 @SET-SYMBOL %input_port_symbol;
-//   %port_91 @TEXT("D3\_CORE", key="name");
+//   %port_91 @TEXT("D3\_CORE", key="netname");
 //   %port_92 = $IO_PORT @ATTACH &"D5_CORE" => @PLACE(424, -394) => @ORIENT("R270");
 //   %port_92 @SET-SYMBOL %input_port_symbol;
-//   %port_92 @TEXT("D5\_CORE", key="name");
+//   %port_92 @TEXT("D5\_CORE", key="netname");
 //   %port_93 = $IO_PORT @ATTACH &"D4_CORE" => @PLACE(386, -394) => @ORIENT("R270");
 //   %port_93 @SET-SYMBOL %input_port_symbol;
-//   %port_93 @TEXT("D4\_CORE", key="name");
+//   %port_93 @TEXT("D4\_CORE", key="netname");
 //   %port_94 = $IO_PORT @ATTACH &"D13_CORE" => @PLACE(458, -83) => @ORIENT("R0");
 //   %port_94 @SET-SYMBOL %input_port_symbol;
-//   %port_94 @TEXT("D13\_CORE", key="name");
+//   %port_94 @TEXT("D13\_CORE", key="netname");
 //   %port_95 = $IO_PORT @ATTACH &"D12_CORE" => @PLACE(458, -121) => @ORIENT("R0");
 //   %port_95 @SET-SYMBOL %input_port_symbol;
-//   %port_95 @TEXT("D12\_CORE", key="name");
+//   %port_95 @TEXT("D12\_CORE", key="netname");
 //   %port_96 = $IO_PORT @ATTACH &"D11_CORE" => @PLACE(458, -158) => @ORIENT("R0");
 //   %port_96 @SET-SYMBOL %input_port_symbol;
-//   %port_96 @TEXT("D11\_CORE", key="name");
+//   %port_96 @TEXT("D11\_CORE", key="netname");
 //   %port_97 = $IO_PORT @ATTACH &"D10_CORE" => @PLACE(458, -196) => @ORIENT("R0");
 //   %port_97 @SET-SYMBOL %input_port_symbol;
-//   %port_97 @TEXT("D10\_CORE", key="name");
+//   %port_97 @TEXT("D10\_CORE", key="netname");
 //   %port_98 = $IO_PORT @ATTACH &"D9_CORE" => @PLACE(458, -234) => @ORIENT("R0");
 //   %port_98 @SET-SYMBOL %input_port_symbol;
-//   %port_98 @TEXT("D9\_CORE", key="name");
+//   %port_98 @TEXT("D9\_CORE", key="netname");
 //   %port_99 = $IO_PORT @ATTACH &"D8_CORE" => @PLACE(458, -272) => @ORIENT("R0");
 //   %port_99 @SET-SYMBOL %input_port_symbol;
-//   %port_99 @TEXT("D8\_CORE", key="name");
+//   %port_99 @TEXT("D8\_CORE", key="netname");
 //   %port_100 = $IO_PORT @ATTACH &"D7_CORE" => @PLACE(458, -309) => @ORIENT("R0");
 //   %port_100 @SET-SYMBOL %input_port_symbol;
-//   %port_100 @TEXT("D7\_CORE", key="name");
+//   %port_100 @TEXT("D7\_CORE", key="netname");
 //   %port_101 = $IO_PORT @ATTACH &"D6_CORE" => @PLACE(458, -347) => @ORIENT("R0");
 //   %port_101 @SET-SYMBOL %input_port_symbol;
-//   %port_101 @TEXT("D6\_CORE", key="name");
+//   %port_101 @TEXT("D6\_CORE", key="netname");
 //   %port_102 = $IO_PORT @ATTACH &"GREF" => @PLACE(-127, 76) => @ORIENT("R270");
 //   %port_103 = $IO_PORT @ATTACH &"GREF" => @PLACE(-118, 124) => @ORIENT("R270");
 //   %port_104 = $IO_PORT @ATTACH &"VCM" => @PLACE(96, 77) => @ORIENT("R90");
@@ -2477,89 +2478,117 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %port_117 = $IO_PORT @ATTACH &"VCKB" => @PLACE(-98, -446) => @ORIENT("R90");
 //   %port_118 = $IO_PORT @ATTACH &"SLP" => @PLACE(40, -448) => @ORIENT("R270");
 //   %port_118 @SET-SYMBOL %input_port_symbol;
-//   %port_118 @TEXT("SLP", key="name");
+//   %port_118 @TEXT("SLP", key="netname");
 //   %p0 = (513, -362);
-//   %wire_0 = &"D6" @WIRE(mode="straight") {#"I111":4 %port_0:p %p0};
-//   %wire_1 = &"SLP" @WIRE(mode="straight") {%port_118:p #"I86":4};
+//   %wire_0 = &"D6" @WIRE(mode="straight") {
+// #"I111":4 %port_0:p %p0};
+//   %wire_1 = &"SLP" @WIRE(mode="straight") {
+// %port_118:p #"I86":4};
 //   %p1 = (131, 75);
 //   %p2 = (131, 116);
-//   %wire_2 = &"VBS" @WIRE(mode="straight") {%p1 %port_13:p %p2};
+//   %wire_2 = &"VBS" @WIRE(mode="straight") {
+// %p1 %port_13:p %p2};
 //   %p3 = (140, 116);
 //   %wire_3 = &"VBS" @WIRE(mode="straight") {#"I141":1 %p3};
 //   %wire_4 = &"VBS" @WIRE(mode="straight") {%p2 %p3};
 //   %p4 = (140, 125);
-//   %wire_5 = &"VBS" @WIRE(mode="straight") {%p3 %port_14:p %p4};
+//   %wire_5 = &"VBS" @WIRE(mode="straight") {
+// %p3 %port_14:p %p4};
 //   %p5 = (513, -324);
-//   %wire_6 = &"D7" @WIRE(mode="straight") {#"I114":4 %port_47:p %p5};
+//   %wire_6 = &"D7" @WIRE(mode="straight") {
+// #"I114":4 %port_47:p %p5};
 //   %p6 = (513, -287);
-//   %wire_7 = &"D8" @WIRE(mode="straight") {#"I118":4 %port_26:p %p6};
+//   %wire_7 = &"D8" @WIRE(mode="straight") {
+// #"I118":4 %port_26:p %p6};
 //   %p7 = (513, -249);
-//   %wire_8 = &"D9" @WIRE(mode="straight") {#"I117":4 %port_25:p %p7};
+//   %wire_8 = &"D9" @WIRE(mode="straight") {
+// #"I117":4 %port_25:p %p7};
 //   %p8 = (-59, 116);
 //   %p9 = (-59, 125);
-//   %wire_9 = &"VSAM" @WIRE(mode="straight") {%p8 %port_6:p %p9};
+//   %wire_9 = &"VSAM" @WIRE(mode="straight") {
+// %p8 %port_6:p %p9};
 //   %wire_10 = &"VSAM" @WIRE(mode="straight") {#"I135":1 %p8};
 //   %p10 = (-68, 116);
 //   %wire_11 = &"VSAM" @WIRE(mode="straight") {%p10 %p8};
 //   %p11 = (-68, 75);
-//   %wire_12 = &"VSAM" @WIRE(mode="straight") {%p11 %port_5:p %p10};
+//   %wire_12 = &"VSAM" @WIRE(mode="straight") {
+// %p11 %port_5:p %p10};
 //   %p12 = (513, -211);
-//   %wire_13 = &"D10" @WIRE(mode="straight") {#"I123":4 %port_27:p %p12};
+//   %wire_13 = &"D10" @WIRE(mode="straight") {
+// #"I123":4 %port_27:p %p12};
 //   %p13 = (238, 75);
 //   %p14 = (238, 116);
-//   %wire_14 = &"VREC" @WIRE(mode="straight") {%p13 %port_106:p %p14};
+//   %wire_14 = &"VREC" @WIRE(mode="straight") {
+// %p13 %port_106:p %p14};
 //   %p15 = (247, 116);
 //   %wire_15 = &"VREC" @WIRE(mode="straight") {%p14 %p15};
 //   %p16 = (247, 125);
-//   %wire_16 = &"VREC" @WIRE(mode="straight") {%p15 %port_107:p %p16};
+//   %wire_16 = &"VREC" @WIRE(mode="straight") {
+// %p15 %port_107:p %p16};
 //   %wire_17 = &"VREC" @WIRE(mode="straight") {#"I144":1 %p15};
 //   %p17 = (513, -173);
-//   %wire_18 = &"D11" @WIRE(mode="straight") {#"I121":4 %port_28:p %p17};
+//   %wire_18 = &"D11" @WIRE(mode="straight") {
+// #"I121":4 %port_28:p %p17};
 //   %p18 = (513, -136);
-//   %wire_19 = &"D12" @WIRE(mode="straight") {#"I126":4 %port_29:p %p18};
+//   %wire_19 = &"D12" @WIRE(mode="straight") {
+// #"I126":4 %port_29:p %p18};
 //   %p19 = (281, 116);
 //   %wire_20 = &"GREC" @WIRE(mode="straight") {#"I145":1 %p19};
 //   %p20 = (281, 125);
-//   %wire_21 = &"GREC" @WIRE(mode="straight") {%p19 %port_109:p %p20};
+//   %wire_21 = &"GREC" @WIRE(mode="straight") {
+// %p19 %port_109:p %p20};
 //   %p21 = (272, 116);
 //   %wire_22 = &"GREC" @WIRE(mode="straight") {%p21 %p19};
 //   %p22 = (272, 78);
 //   %wire_23 = &"GREC" @WIRE(mode="straight") {%p22 %p21};
 //   %p23 = (513, -98);
-//   %wire_24 = &"D13" @WIRE(mode="straight") {#"I125":4 %port_39:p %p23};
+//   %wire_24 = &"D13" @WIRE(mode="straight") {
+// #"I125":4 %port_39:p %p23};
 //   %p24 = (513, -60);
-//   %wire_25 = &"D14" @WIRE(mode="straight") {#"I130":4 %port_40:p %p24};
+//   %wire_25 = &"D14" @WIRE(mode="straight") {
+// #"I130":4 %port_40:p %p24};
 //   %p25 = (513, -22);
-//   %wire_26 = &"D15" @WIRE(mode="straight") {#"I129":4 %port_41:p %p25};
+//   %wire_26 = &"D15" @WIRE(mode="straight") {
+// #"I129":4 %port_41:p %p25};
 //   %p26 = (176, 116);
 //   %wire_27 = &"GAMP" @WIRE(mode="straight") {#"I142":1 %p26};
 //   %p27 = (167, 116);
 //   %wire_28 = &"GAMP" @WIRE(mode="straight") {%p27 %p26};
 //   %p28 = (176, 125);
-//   %wire_29 = &"GAMP" @WIRE(mode="straight") {%p26 %port_12:p %p28};
+//   %wire_29 = &"GAMP" @WIRE(mode="straight") {
+// %p26 %port_12:p %p28};
 //   %p29 = (167, 78);
 //   %wire_30 = &"GAMP" @WIRE(mode="straight") {%p29 %p27};
 //   %p30 = (66, 75);
-//   %wire_31 = &"VANA_CORE" @WIRE(mode="straight") {#"I66":1 %port_116:p %p30};
+//   %wire_31 = &"VANA_CORE" @WIRE(mode="straight") {
+// #"I66":1 %port_116:p %p30};
 //   %wire_32 = &"net4" @WIRE(mode="straight") {#"I102":1 %marker_69};
 //   %p31 = (204, 75);
 //   %p32 = (204, 116);
-//   %wire_33 = &"VAMP" @WIRE(mode="straight") {%p31 %port_9:p %p32};
+//   %wire_33 = &"VAMP" @WIRE(mode="straight") {
+// %p31 %port_9:p %p32};
 //   %p33 = (213, 116);
 //   %p34 = (213, 125);
-//   %wire_34 = &"VAMP" @WIRE(mode="straight") {%p33 %port_10:p %p34};
+//   %wire_34 = &"VAMP" @WIRE(mode="straight") {
+// %p33 %port_10:p %p34};
 //   %wire_35 = &"VAMP" @WIRE(mode="straight") {#"I143":1 %p33};
 //   %wire_36 = &"VAMP" @WIRE(mode="straight") {%p32 %p33};
 //   %p35 = (457, -121);
-//   %wire_37 = &"D12_CORE" @WIRE(mode="straight") {%p35 %port_95:p #"I126":2};
+//   %wire_37 = &"D12_CORE" @WIRE(mode="straight") {
+// %p35 %port_95:p #"I126":2};
 //   %p36 = (457, -83);
-//   %wire_38 = &"D13_CORE" @WIRE(mode="straight") {%p36 %port_94:p #"I125":2};
+//   %wire_38 = &"D13_CORE" @WIRE(mode="straight") {
+// %p36 %port_94:p #"I125":2};
 //   %p37 = (457, 31);
-//   %wire_39 = &"DCLK_CORE" @WIRE(mode="straight") {%p37 %port_42:p #"I132":2};
-//   %wire_40 = &"SLP_CORE" @WIRE(mode="straight") {%port_85:p #"I86":1};
+//   %wire_39 = &"DCLK_CORE" @WIRE(mode="straight") {
+// %p37 %port_42:p #"I132":2};
+//   %wire_40 = &"SLP_CORE" @WIRE(mode="straight") {
+// %port_85:p #"I86":1};
 //   %p38 = (457, -234);
-//   %wire_41 = &"D9_CORE" @WIRE(mode="straight") {%p38 %port_98:p #"I117":2};
-//   %wire_42 = &"SDI" @WIRE(mode="straight") {#"I87":4 %port_20:p};
+//   %wire_41 = &"D9_CORE" @WIRE(mode="straight") {
+// %p38 %port_98:p #"I117":2};
+//   %wire_42 = &"SDI" @WIRE(mode="straight") {
+// #"I87":4 %port_20:p};
 //   %p39 = (-188, -377);
 //   %p40 = (-188, -386);
 //   %wire_43 = &"CLKN" @WIRE(mode="straight") {%p39 %p40};
@@ -2567,56 +2596,73 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %p41 = (-150, -386);
 //   %wire_45 = &"CLKN" @WIRE(mode="straight") {%p40 %p41};
 //   %p42 = (-197, -377);
-//   %wire_46 = &"CLKN" @WIRE(mode="straight") {%p42 %port_83:p %p39};
+//   %wire_46 = &"CLKN" @WIRE(mode="straight") {
+// %p42 %port_83:p %p39};
 //   %p43 = (-197, -348);
 //   %p44 = (-188, -348);
-//   %wire_47 = &"CLKP" @WIRE(mode="straight") {%p43 %port_81:p %p44};
+//   %wire_47 = &"CLKP" @WIRE(mode="straight") {
+// %p43 %port_81:p %p44};
 //   %p45 = (-188, -357);
 //   %wire_48 = &"CLKP" @WIRE(mode="straight") {%p44 %p45};
 //   %wire_49 = &"CLKP" @WIRE(mode="straight") {%p44 #"I80":1};
 //   %p46 = (-150, -357);
 //   %wire_50 = &"CLKP" @WIRE(mode="straight") {%p45 %p46};
-//   %wire_51 = &"SDO_CORE" @WIRE(mode="straight") {%port_18:p #"I89":2};
-//   %wire_52 = &"RST_CORE" @WIRE(mode="straight") {%port_46:p #"I91":1};
-//   %wire_53 = &"SCK" @WIRE(mode="straight") {#"I88":4 %port_15:p};
-//   %wire_54 = &"D0_CORE" @WIRE(mode="straight") {#"I99":2 %port_88:p};
+//   %wire_51 = &"SDO_CORE" @WIRE(mode="straight") {
+// %port_18:p #"I89":2};
+//   %wire_52 = &"RST_CORE" @WIRE(mode="straight") {
+// %port_46:p #"I91":1};
+//   %wire_53 = &"SCK" @WIRE(mode="straight") {
+// #"I88":4 %port_15:p};
+//   %wire_54 = &"D0_CORE" @WIRE(mode="straight") {
+// #"I99":2 %port_88:p};
 //   %p47 = (457, -347);
-//   %wire_55 = &"D6_CORE" @WIRE(mode="straight") {%p47 %port_101:p #"I111":2};
-//   %wire_56 = &"SDI_CORE" @WIRE(mode="straight") {%port_84:p #"I87":1};
+//   %wire_55 = &"D6_CORE" @WIRE(mode="straight") {
+// %p47 %port_101:p #"I111":2};
+//   %wire_56 = &"SDI_CORE" @WIRE(mode="straight") {
+// %port_84:p #"I87":1};
 //   %p48 = (371, -447);
-//   %wire_57 = &"D4" @WIRE(mode="straight") {#"I107":4 %port_89:p %p48};
+//   %wire_57 = &"D4" @WIRE(mode="straight") {
+// #"I107":4 %port_89:p %p48};
 //   %p49 = (305, 116);
 //   %p50 = (314, 116);
 //   %wire_58 = &"GCLK" @WIRE(mode="straight") {%p49 %p50};
 //   %p51 = (314, 125);
-//   %wire_59 = &"GCLK" @WIRE(mode="straight") {%p50 %port_113:p %p51};
+//   %wire_59 = &"GCLK" @WIRE(mode="straight") {
+// %p50 %port_113:p %p51};
 //   %wire_60 = &"GCLK" @WIRE(mode="straight") {#"I147":1 %p50};
 //   %p52 = (305, 78);
 //   %wire_61 = &"GCLK" @WIRE(mode="straight") {%p52 %p49};
 //   %p53 = (457, -309);
-//   %wire_62 = &"D7_CORE" @WIRE(mode="straight") {%p53 %port_100:p #"I114":2};
+//   %wire_62 = &"D7_CORE" @WIRE(mode="straight") {
+// %p53 %port_100:p #"I114":2};
 //   %wire_63 = &"net3" @WIRE(mode="straight") {#"I89":1 %marker_65};
 //   %p54 = (457, -272);
-//   %wire_64 = &"D8_CORE" @WIRE(mode="straight") {%p54 %port_99:p #"I118":2};
+//   %wire_64 = &"D8_CORE" @WIRE(mode="straight") {
+// %p54 %port_99:p #"I118":2};
 //   %wire_65 = &"net6" @WIRE(mode="straight") {#"I103":1 %marker_67};
 //   %p55 = (409, -447);
-//   %wire_66 = &"D5" @WIRE(mode="straight") {#"I109":4 %port_87:p %p55};
+//   %wire_66 = &"D5" @WIRE(mode="straight") {
+// #"I109":4 %port_87:p %p55};
 //   %p56 = (-151, -89);
 //   %wire_67 = &"IN2N" @WIRE(mode="straight") {%marker_31 %p56};
 //   %p57 = (-198, -89);
-//   %wire_68 = &"IN2N" @WIRE(mode="straight") {%p57 %port_2:p %marker_31};
+//   %wire_68 = &"IN2N" @WIRE(mode="straight") {
+// %p57 %port_2:p %marker_31};
 //   %p58 = (-151, -117);
 //   %wire_69 = &"IN2P" @WIRE(mode="straight") {%marker_78 %p58};
 //   %p59 = (-198, -117);
-//   %wire_70 = &"IN2P" @WIRE(mode="straight") {%p59 %port_4:p %marker_78};
+//   %wire_70 = &"IN2P" @WIRE(mode="straight") {
+// %p59 %port_4:p %marker_78};
 //   %p60 = (346, 116);
 //   %wire_71 = &"VCLK" @WIRE(mode="straight") {#"I146":1 %p60};
 //   %p61 = (346, 125);
-//   %wire_72 = &"VCLK" @WIRE(mode="straight") {%p60 %port_111:p %p61};
+//   %wire_72 = &"VCLK" @WIRE(mode="straight") {
+// %p60 %port_111:p %p61};
 //   %p62 = (337, 116);
 //   %wire_73 = &"VCLK" @WIRE(mode="straight") {%p62 %p60};
 //   %p63 = (337, 75);
-//   %wire_74 = &"VCLK" @WIRE(mode="straight") {%p63 %port_110:p %p62};
+//   %wire_74 = &"VCLK" @WIRE(mode="straight") {
+// %p63 %port_110:p %p62};
 //   %p64 = (-130, -412);
 //   %p65 = (-108, -412);
 //   %wire_75 = &"VCKB" @WIRE(mode="straight") {%p64 %p65};
@@ -2637,16 +2683,21 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_84 = &"VCKB" @WIRE(mode="straight") {%p71 %p70};
 //   %wire_85 = &"VCKB" @WIRE(mode="straight") {%p69 %p66};
 //   %p72 = (-98, -447);
-//   %wire_86 = &"VCKB" @WIRE(mode="straight") {%p72 %port_117:p %p71};
+//   %wire_86 = &"VCKB" @WIRE(mode="straight") {
+// %p72 %port_117:p %p71};
 //   %wire_87 = &"VCKB" @WIRE(mode="straight") {%p71 #"I157":2};
 //   %p73 = (334, -447);
-//   %wire_88 = &"D3" @WIRE(mode="straight") {#"I106":4 %port_38:p %p73};
+//   %wire_88 = &"D3" @WIRE(mode="straight") {
+// #"I106":4 %port_38:p %p73};
 //   %p74 = (223, -447);
-//   %wire_89 = &"D0" @WIRE(mode="straight") {#"I99":4 %port_31:p %p74};
+//   %wire_89 = &"D0" @WIRE(mode="straight") {
+// #"I99":4 %port_31:p %p74};
 //   %p75 = (457, -196);
-//   %wire_90 = &"D10_CORE" @WIRE(mode="straight") {%p75 %port_97:p #"I123":2};
+//   %wire_90 = &"D10_CORE" @WIRE(mode="straight") {
+// %p75 %port_97:p #"I123":2};
 //   %p76 = (297, -447);
-//   %wire_91 = &"D2" @WIRE(mode="straight") {#"I103":4 %port_37:p %p76};
+//   %wire_91 = &"D2" @WIRE(mode="straight") {
+// #"I103":4 %port_37:p %p76};
 //   %p77 = (395, 93);
 //   %p78 = (404, 93);
 //   %wire_92 = &"GIOL" @WIRE(mode="straight") {%p77 %p78};
@@ -2730,7 +2781,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_132 = &"GIOL" @WIRE(mode="straight") {%p115 %p116};
 //   %p117 = (-20, -447);
 //   %p118 = (-20, -438);
-//   %wire_133 = &"GIOL" @WIRE(mode="straight") {%p117 %port_56:p %p118};
+//   %wire_133 = &"GIOL" @WIRE(mode="straight") {
+// %p117 %port_56:p %p118};
 //   %p119 = (-165, -353);
 //   %wire_134 = &"GIOL" @WIRE(mode="straight") {#"I80":4 %p119};
 //   %p120 = (-165, -382);
@@ -2810,7 +2862,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_183 = &"GIOL" @WIRE(mode="straight") {%p99 #"I56":4};
 //   %p146 = (-49, -447);
 //   %p147 = (-49, -438);
-//   %wire_184 = &"GIOL" @WIRE(mode="straight") {%p146 %port_51:p %p147};
+//   %wire_184 = &"GIOL" @WIRE(mode="straight") {
+// %p146 %port_51:p %p147};
 //   %wire_185 = &"GIOL" @WIRE(mode="straight") {%p84 %p77};
 //   %wire_186 = &"GIOL" @WIRE(mode="straight") {%p118 #"I84":4};
 //   %wire_187 = &"GIOL" @WIRE(mode="straight") {#"I139":4 %p143};
@@ -2821,7 +2874,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_191 = &"GIOL" @WIRE(mode="straight") {%p96 #"I118":9};
 //   %p149 = (392, 125);
 //   %p150 = (392, 116);
-//   %wire_192 = &"GIOL" @WIRE(mode="straight") {%p149 %port_54:p %p150};
+//   %wire_192 = &"GIOL" @WIRE(mode="straight") {
+// %p149 %port_54:p %p150};
 //   %p151 = (404, 116);
 //   %wire_193 = &"GIOL" @WIRE(mode="straight") {%p150 %p151};
 //   %wire_194 = &"GIOL" @WIRE(mode="straight") {%p150 #"I55":4};
@@ -2862,23 +2916,30 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_226 = &"GIOL" @WIRE(mode="straight") {#"I159":4 %p125};
 //   %wire_227 = &"GIOL" @WIRE(mode="straight") {%p143 %p148};
 //   %wire_228 = &"GIOL" @WIRE(mode="straight") {%p154 %p134};
-//   %wire_229 = &"SCK_CORE" @WIRE(mode="straight") {%port_19:p #"I88":1};
-//   %wire_230 = &"D2_CORE" @WIRE(mode="straight") {#"I103":2 %port_90:p};
-//   %wire_231 = &"D5_CORE" @WIRE(mode="straight") {#"I109":2 %port_92:p};
+//   %wire_229 = &"SCK_CORE" @WIRE(mode="straight") {
+// %port_19:p #"I88":1};
+//   %wire_230 = &"D2_CORE" @WIRE(mode="straight") {
+// #"I103":2 %port_90:p};
+//   %wire_231 = &"D5_CORE" @WIRE(mode="straight") {
+// #"I109":2 %port_92:p};
 //   %p155 = (-150, -179);
 //   %wire_232 = &"IN1N" @WIRE(mode="straight") {%marker_66 %p155};
 //   %p156 = (-197, -179);
-//   %wire_233 = &"IN1N" @WIRE(mode="straight") {%p156 %port_79:p %marker_66};
+//   %wire_233 = &"IN1N" @WIRE(mode="straight") {
+// %p156 %port_79:p %marker_66};
 //   %p157 = (-150, -207);
 //   %wire_234 = &"IN1P" @WIRE(mode="straight") {%marker_43 %p157};
 //   %p158 = (-197, -207);
-//   %wire_235 = &"IN1P" @WIRE(mode="straight") {%p158 %port_77:p %marker_43};
+//   %wire_235 = &"IN1P" @WIRE(mode="straight") {
+// %p158 %port_77:p %marker_43};
 //   %p159 = (260, -447);
-//   %wire_236 = &"D1" @WIRE(mode="straight") {#"I102":4 %port_30:p %p159};
+//   %wire_236 = &"D1" @WIRE(mode="straight") {
+// #"I102":4 %port_30:p %p159};
 //   %p160 = (-26, 116);
 //   %wire_237 = &"GDIG" @WIRE(mode="straight") {#"I138":1 %p160};
 //   %p161 = (-26, 125);
-//   %wire_238 = &"GDIG" @WIRE(mode="straight") {%p160 %port_49:p %p161};
+//   %wire_238 = &"GDIG" @WIRE(mode="straight") {
+// %p160 %port_49:p %p161};
 //   %p162 = (-35, 116);
 //   %wire_239 = &"GDIG" @WIRE(mode="straight") {%p162 %p160};
 //   %p163 = (-35, 78);
@@ -2944,7 +3005,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_274 = &"VANA" @WIRE(mode="straight") {%p166 %p179};
 //   %wire_275 = &"VANA" @WIRE(mode="straight") {%p178 %p169};
 //   %p189 = (73, 125);
-//   %wire_276 = &"VANA" @WIRE(mode="straight") {%p189 %port_50:p %p187};
+//   %wire_276 = &"VANA" @WIRE(mode="straight") {
+// %p189 %port_50:p %p187};
 //   %wire_277 = &"VANA" @WIRE(mode="straight") {%p185 #"I63":2};
 //   %wire_278 = &"VANA" @WIRE(mode="straight") {%p188 #"I73":2};
 //   %wire_279 = &"VANA" @WIRE(mode="straight") {%p188 %p177};
@@ -3026,22 +3088,28 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_331 = &"net2" @WIRE(mode="straight") {#"I87":2 %p211};
 //   %wire_332 = &"net2" @WIRE(mode="straight") {%p196 #"I117":3};
 //   %wire_333 = &"net2" @WIRE(mode="straight") {%p190 #"I129":3};
-//   %wire_334 = &"D4_CORE" @WIRE(mode="straight") {#"I107":2 %port_93:p};
-//   %wire_335 = &"RST" @WIRE(mode="straight") {#"I91":4 %port_36:p};
+//   %wire_334 = &"D4_CORE" @WIRE(mode="straight") {
+// #"I107":2 %port_93:p};
+//   %wire_335 = &"RST" @WIRE(mode="straight") {
+// #"I91":4 %port_36:p};
 //   %p214 = (149, -447);
-//   %wire_336 = &"SDO" @WIRE(mode="straight") {#"I89":4 %port_21:p %p214};
+//   %wire_336 = &"SDO" @WIRE(mode="straight") {
+// #"I89":4 %port_21:p %p214};
 //   %p215 = (-105, -397);
-//   %wire_337 = &"VCKB_CORE" @WIRE(mode="straight") {#"I157":1 %port_73:p %p215};
+//   %wire_337 = &"VCKB_CORE" @WIRE(mode="straight") {
+// #"I157":1 %port_73:p %p215};
 //   %p216 = (-90, 125);
 //   %p217 = (-90, 116);
-//   %wire_338 = &"VREF" @WIRE(mode="straight") {%p216 %port_45:p %p217};
+//   %wire_338 = &"VREF" @WIRE(mode="straight") {
+// %p216 %port_45:p %p217};
 //   %wire_339 = &"VREF" @WIRE(mode="straight") {%p217 #"I160":1};
 //   %p218 = (-99, 116);
 //   %wire_340 = &"VREF" @WIRE(mode="straight") {%p217 %p218};
 //   %p219 = (-99, 78);
 //   %wire_341 = &"VREF" @WIRE(mode="straight") {%p218 %p219};
 //   %p220 = (457, -158);
-//   %wire_342 = &"D11_CORE" @WIRE(mode="straight") {%p220 %port_96:p #"I121":2};
+//   %wire_342 = &"D11_CORE" @WIRE(mode="straight") {
+// %p220 %port_96:p #"I121":2};
 //   %p221 = (-188, 3);
 //   %p222 = (-150, 3);
 //   %wire_343 = &"IB" @WIRE(mode="straight") {%p221 %p222};
@@ -3049,7 +3117,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_344 = &"IB" @WIRE(mode="straight") {%p223 #"I74":1};
 //   %wire_345 = &"IB" @WIRE(mode="straight") {%p223 %p221};
 //   %p224 = (-197, 12);
-//   %wire_346 = &"IB" @WIRE(mode="straight") {%p224 %port_8:p %p223};
+//   %wire_346 = &"IB" @WIRE(mode="straight") {
+// %p224 %port_8:p %p223};
 //   %p225 = (478, 12);
 //   %p226 = (478, 36);
 //   %wire_347 = &"VIOH" @WIRE(mode="straight") {%p225 %p226};
@@ -3106,7 +3175,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %p250 = (504, 48);
 //   %wire_375 = &"VIOH" @WIRE(mode="straight") {%p250 %p249};
 //   %p251 = (513, 48);
-//   %wire_376 = &"VIOH" @WIRE(mode="straight") {%p250 %port_57:p %p251};
+//   %wire_376 = &"VIOH" @WIRE(mode="straight") {
+// %p250 %port_57:p %p251};
 //   %p252 = (478, -412);
 //   %wire_377 = &"VIOH" @WIRE(mode="straight") {%p237 %p252};
 //   %wire_378 = &"VIOH" @WIRE(mode="straight") {#"I60":3 %p250};
@@ -3164,7 +3234,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_416 = &"GCKB" @WIRE(mode="straight") {%p265 %p266};
 //   %p267 = (-129, -447);
 //   %p268 = (-129, -438);
-//   %wire_417 = &"GCKB" @WIRE(mode="straight") {%p267 %port_74:p %p268};
+//   %wire_417 = &"GCKB" @WIRE(mode="straight") {
+// %p267 %port_74:p %p268};
 //   %wire_418 = &"GCKB" @WIRE(mode="straight") {%p261 %p268};
 //   %wire_419 = &"GCKB" @WIRE(mode="straight") {%p268 #"I156":3};
 //   %p269 = (-159, -409);
@@ -3172,7 +3243,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %p270 = (-99, -409);
 //   %wire_421 = &"GCKB" @WIRE(mode="straight") {#"I157":3 %p270};
 //   %p271 = (-197, -318);
-//   %wire_422 = &"GCKB" @WIRE(mode="straight") {%p271 %port_75:p %p264};
+//   %wire_422 = &"GCKB" @WIRE(mode="straight") {
+// %p271 %port_75:p %p264};
 //   %wire_423 = &"GCKB" @WIRE(mode="straight") {%p263 %p265};
 //   %wire_424 = &"GCKB" @WIRE(mode="straight") {%p269 %p260};
 //   %wire_425 = &"GCKB" @WIRE(mode="straight") {%p266 %p264};
@@ -3275,7 +3347,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_489 = &"POC" @WIRE(mode="straight") {%p274 #"I130":5};
 //   %wire_466 @TEXT("POC", size=1, halign="middle", valign="top", rotate=90) => @PLACE(483.7, 47);
 //   %wire_490 = &"net8" @WIRE(mode="straight") {%marker_8 #"I114":1};
-//   %wire_491 = &"D3_CORE" @WIRE(mode="straight") {#"I106":2 %port_91:p};
+//   %wire_491 = &"D3_CORE" @WIRE(mode="straight") {
+// #"I106":2 %port_91:p};
 //   %p305 = (-150, -52);
 //   %wire_492 = &"GNDA_CORE" @WIRE(mode="straight") {#"I76":1 %p305};
 //   %p306 = (-150, -141);
@@ -3316,7 +3389,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %p323 = (-188, -148);
 //   %wire_511 = &"GNDA" @WIRE(mode="straight") {%p323 #"I77":3};
 //   %p324 = (-197, -148);
-//   %wire_512 = &"GNDA" @WIRE(mode="straight") {%p324 %port_61:p %p323};
+//   %wire_512 = &"GNDA" @WIRE(mode="straight") {
+// %p324 %port_61:p %p323};
 //   %p325 = (-159, -157);
 //   %p326 = (-188, -157);
 //   %wire_513 = &"GNDA" @WIRE(mode="straight") {%p325 %p326};
@@ -3326,13 +3400,16 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %p329 = (-188, -270);
 //   %wire_515 = &"GNDA" @WIRE(mode="straight") {%p328 %p329};
 //   %p330 = (-197, -270);
-//   %wire_516 = &"GNDA" @WIRE(mode="straight") {%p330 %port_59:p %p329};
+//   %wire_516 = &"GNDA" @WIRE(mode="straight") {
+// %p330 %port_59:p %p329};
 //   %p331 = (39, 125);
 //   %p332 = (39, 116);
-//   %wire_517 = &"GNDA" @WIRE(mode="straight") {%p331 %port_60:p %p332};
+//   %wire_517 = &"GNDA" @WIRE(mode="straight") {
+// %p331 %port_60:p %p332};
 //   %p333 = (-197, -59);
 //   %p334 = (-188, -59);
-//   %wire_518 = &"GNDA" @WIRE(mode="straight") {%p333 %port_62:p %p334};
+//   %wire_518 = &"GNDA" @WIRE(mode="straight") {
+// %p333 %port_62:p %p334};
 //   %p335 = (-159, -245);
 //   %p336 = (-188, -245);
 //   %wire_519 = &"GNDA" @WIRE(mode="straight") {%p335 %p336};
@@ -3370,7 +3447,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_539 = &"GNDA" @WIRE(mode="straight") {%p343 %p348};
 //   %wire_540 = &"GNDA" @WIRE(mode="straight") {%p326 %p323};
 //   %p349 = (-197, -236);
-//   %wire_541 = &"GNDA" @WIRE(mode="straight") {%p349 %port_64:p %p337};
+//   %wire_541 = &"GNDA" @WIRE(mode="straight") {
+// %p349 %port_64:p %p337};
 //   %wire_542 = &"GNDA" @WIRE(mode="straight") {#"I66":3 %p340};
 //   %p350 = (-159, 39);
 //   %wire_543 = &"GNDA" @WIRE(mode="straight") {%p350 %p319};
@@ -3382,7 +3460,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_549 = &"GNDA" @WIRE(mode="straight") {%p343 %p327};
 //   %wire_550 = &"GNDA" @WIRE(mode="straight") {%p329 #"I152":3};
 //   %p351 = (-197, 48);
-//   %wire_551 = &"GNDA" @WIRE(mode="straight") {%p351 %port_63:p %p321};
+//   %wire_551 = &"GNDA" @WIRE(mode="straight") {
+// %p351 %port_63:p %p321};
 //   %wire_552 = &"GNDA" @WIRE(mode="straight") {%p336 %p337};
 //   %wire_553 = &"GNDA" @WIRE(mode="straight") {%p350 %p322};
 //   %wire_554 = &"GNDA" @WIRE(mode="straight") {%p344 %p350};
@@ -3394,17 +3473,20 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %p352 = (-188, -22);
 //   %wire_560 = &"INCM" @WIRE(mode="straight") {%p352 #"I75":1};
 //   %p353 = (-197, -22);
-//   %wire_561 = &"INCM" @WIRE(mode="straight") {%p353 %port_17:p %p352};
+//   %wire_561 = &"INCM" @WIRE(mode="straight") {
+// %p353 %port_17:p %p352};
 //   %p354 = (-188, -31);
 //   %wire_562 = &"INCM" @WIRE(mode="straight") {%p352 %p354};
 //   %p355 = (-150, -31);
 //   %wire_563 = &"INCM" @WIRE(mode="straight") {%p354 %p355};
 //   %p356 = (513, 16);
-//   %wire_564 = &"DCLK" @WIRE(mode="straight") {#"I132":4 %port_58:p %p356};
+//   %wire_564 = &"DCLK" @WIRE(mode="straight") {
+// #"I132":4 %port_58:p %p356};
 //   %p357 = (-118, 116);
 //   %wire_565 = &"GREF" @WIRE(mode="straight") {%p357 #"I159":1};
 //   %p358 = (-118, 125);
-//   %wire_566 = &"GREF" @WIRE(mode="straight") {%p358 %port_103:p %p357};
+//   %wire_566 = &"GREF" @WIRE(mode="straight") {
+// %p358 %port_103:p %p357};
 //   %p359 = (-127, 116);
 //   %p360 = (-127, 78);
 //   %wire_567 = &"GREF" @WIRE(mode="straight") {%p359 %p360};
@@ -3492,7 +3574,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_621 = &"net9" @WIRE(mode="straight") {#"I87":6 %p376};
 //   %wire_622 = &"net9" @WIRE(mode="straight") {#"I107":6 %p380};
 //   %wire_623 = &"net10" @WIRE(mode="straight") {%marker_36 #"I118":1};
-//   %wire_624 = &"D1_CORE" @WIRE(mode="straight") {#"I102":2 %port_86:p};
+//   %wire_624 = &"D1_CORE" @WIRE(mode="straight") {
+// #"I102":2 %port_86:p};
 //   %p389 = (96, 116);
 //   %p390 = (96, 78);
 //   %wire_625 = &"VCM" @WIRE(mode="straight") {%p389 %p390};
@@ -3500,7 +3583,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_626 = &"VCM" @WIRE(mode="straight") {%p391 #"I137":1};
 //   %wire_627 = &"VCM" @WIRE(mode="straight") {%p391 %p389};
 //   %p392 = (105, 125);
-//   %wire_628 = &"VCM" @WIRE(mode="straight") {%p392 %port_105:p %p391};
+//   %wire_628 = &"VCM" @WIRE(mode="straight") {
+// %p392 %port_105:p %p391};
 //   %p393 = (472, -32);
 //   %p394 = (472, 6);
 //   %wire_629 = &"GIOH" @WIRE(mode="straight") {%p393 %p394};
@@ -3528,7 +3612,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %p406 = (445, -438);
 //   %wire_640 = &"GIOH" @WIRE(mode="straight") {%p406 #"I98":5};
 //   %p407 = (445, -447);
-//   %wire_641 = &"GIOH" @WIRE(mode="straight") {%p407 %port_34:p %p406};
+//   %wire_641 = &"GIOH" @WIRE(mode="straight") {
+// %p407 %port_34:p %p406};
 //   %p408 = (433, -438);
 //   %wire_642 = &"GIOH" @WIRE(mode="straight") {%p406 %p408};
 //   %wire_643 = &"GIOH" @WIRE(mode="straight") {%p404 %p408};
@@ -3565,7 +3650,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %p422 = (-4, -438);
 //   %wire_661 = &"GIOH" @WIRE(mode="straight") {%p421 %p422};
 //   %p423 = (8, -447);
-//   %wire_662 = &"GIOH" @WIRE(mode="straight") {%p423 %port_35:p %p421};
+//   %wire_662 = &"GIOH" @WIRE(mode="straight") {
+// %p423 %port_35:p %p421};
 //   %wire_663 = &"GIOH" @WIRE(mode="straight") {%p393 #"I129":10};
 //   %wire_664 = &"GIOH" @WIRE(mode="straight") {%p409 #"I107":10};
 //   %p424 = (67, -406);
@@ -3578,7 +3664,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_668 = &"GIOH" @WIRE(mode="straight") {%p427 %p426};
 //   %wire_669 = &"GIOH" @WIRE(mode="straight") {%p427 #"I58":5};
 //   %p428 = (513, 75);
-//   %wire_670 = &"GIOH" @WIRE(mode="straight") {%p428 %port_32:p %p427};
+//   %wire_670 = &"GIOH" @WIRE(mode="straight") {
+// %p428 %port_32:p %p427};
 //   %p429 = (-4, -406);
 //   %wire_671 = &"GIOH" @WIRE(mode="straight") {%p429 %p422};
 //   %p430 = (504, -406);
@@ -3603,7 +3690,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_689 = &"GIOH" @WIRE(mode="straight") {%p418 %p429};
 //   %p432 = (513, -394);
 //   %p433 = (504, -394);
-//   %wire_690 = &"GIOH" @WIRE(mode="straight") {%p432 %port_33:p %p433};
+//   %wire_690 = &"GIOH" @WIRE(mode="straight") {
+// %p432 %port_33:p %p433};
 //   %wire_691 = &"GIOH" @WIRE(mode="straight") {%p433 %p430};
 //   %wire_692 = &"GIOH" @WIRE(mode="straight") {%p433 #"I56":5};
 //   %p434 = (397, 84);
@@ -3621,16 +3709,19 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_702 = &"GIOH" @WIRE(mode="straight") {%p434 %p436};
 //   %wire_703 = &"net11" @WIRE(mode="straight") {%marker_74 #"I111":1};
 //   %p437 = (457, -7);
-//   %wire_704 = &"D15_CORE" @WIRE(mode="straight") {%p437 %port_24:p #"I129":2};
+//   %wire_704 = &"D15_CORE" @WIRE(mode="straight") {
+// %p437 %port_24:p #"I129":2};
 //   %wire_705 = &"net12" @WIRE(mode="straight") {#"I106":1 %marker_1};
 //   %p438 = (7, 116);
 //   %wire_706 = &"VDIG" @WIRE(mode="straight") {#"I139":1 %p438};
 //   %p439 = (-2, 75);
 //   %p440 = (-2, 116);
-//   %wire_707 = &"VDIG" @WIRE(mode="straight") {%p439 %port_71:p %p440};
+//   %wire_707 = &"VDIG" @WIRE(mode="straight") {
+// %p439 %port_71:p %p440};
 //   %wire_708 = &"VDIG" @WIRE(mode="straight") {%p440 %p438};
 //   %p441 = (7, 125);
-//   %wire_709 = &"VDIG" @WIRE(mode="straight") {%p438 %port_72:p %p441};
+//   %wire_709 = &"VDIG" @WIRE(mode="straight") {
+// %p438 %port_72:p %p441};
 //   %wire_710 = &"net13" @WIRE(mode="straight") {#"I107":1 %marker_28};
 //   %p442 = (475, -20);
 //   %p443 = (475, 18);
@@ -3711,7 +3802,8 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_755 = &"VIOL" @WIRE(mode="straight") {%p453 %p473};
 //   %p474 = (432, 125);
 //   %p475 = (432, 116);
-//   %wire_756 = &"VIOL" @WIRE(mode="straight") {%p474 %port_23:p %p475};
+//   %wire_756 = &"VIOL" @WIRE(mode="straight") {
+// %p474 %port_23:p %p475};
 //   %p476 = (422, 75);
 //   %p477 = (422, 79);
 //   %wire_757 = &"VIOL" @WIRE(mode="straight") {%p476 %p477};
@@ -3759,315 +3851,316 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   %wire_793 = &"net22" @WIRE(mode="straight") {#"I99":1 %marker_50};
 //   %wire_794 = &"net23" @WIRE(mode="straight") {#"I109":1 %marker_44};
 //   %p484 = (457, -45);
-//   %wire_795 = &"D14_CORE" @WIRE(mode="straight") {%p484 %port_43:p #"I130":2};
-//   $JUNCTION @ATTACH %p3;
-//   $JUNCTION @ATTACH %p8;
-//   $JUNCTION @ATTACH %p15;
-//   $JUNCTION @ATTACH %p19;
-//   $JUNCTION @ATTACH %p26;
-//   $JUNCTION @ATTACH %p33;
-//   $JUNCTION @ATTACH %p39;
-//   $JUNCTION @ATTACH %p44;
-//   $JUNCTION @ATTACH %p50;
-//   $JUNCTION @ATTACH %p60;
-//   $JUNCTION @ATTACH %p64;
-//   $JUNCTION @ATTACH %p66;
-//   $JUNCTION @ATTACH %p67;
-//   $JUNCTION @ATTACH %p71;
-//   $JUNCTION @ATTACH %p77;
-//   $JUNCTION @ATTACH %p78;
-//   $JUNCTION @ATTACH %p79;
-//   $JUNCTION @ATTACH %p80;
-//   $JUNCTION @ATTACH %p81;
-//   $JUNCTION @ATTACH %p82;
-//   $JUNCTION @ATTACH %p83;
-//   $JUNCTION @ATTACH %p84;
-//   $JUNCTION @ATTACH %p85;
-//   $JUNCTION @ATTACH %p86;
-//   $JUNCTION @ATTACH %p87;
-//   $JUNCTION @ATTACH %p88;
-//   $JUNCTION @ATTACH %p89;
-//   $JUNCTION @ATTACH %p90;
-//   $JUNCTION @ATTACH %p91;
-//   $JUNCTION @ATTACH %p92;
-//   $JUNCTION @ATTACH %p93;
-//   $JUNCTION @ATTACH %p94;
-//   $JUNCTION @ATTACH %p95;
-//   $JUNCTION @ATTACH %p96;
-//   $JUNCTION @ATTACH %p97;
-//   $JUNCTION @ATTACH %p98;
-//   $JUNCTION @ATTACH %p99;
-//   $JUNCTION @ATTACH %p100;
-//   $JUNCTION @ATTACH %p101;
-//   $JUNCTION @ATTACH %p103;
-//   $JUNCTION @ATTACH %p104;
-//   $JUNCTION @ATTACH %p105;
-//   $JUNCTION @ATTACH %p106;
-//   $JUNCTION @ATTACH %p107;
-//   $JUNCTION @ATTACH %p108;
-//   $JUNCTION @ATTACH %p109;
-//   $JUNCTION @ATTACH %p110;
-//   $JUNCTION @ATTACH %p111;
-//   $JUNCTION @ATTACH %p112;
-//   $JUNCTION @ATTACH %p113;
-//   $JUNCTION @ATTACH %p114;
-//   $JUNCTION @ATTACH %p115;
-//   $JUNCTION @ATTACH %p118;
-//   $JUNCTION @ATTACH %p119;
-//   $JUNCTION @ATTACH %p120;
-//   $JUNCTION @ATTACH %p121;
-//   $JUNCTION @ATTACH %p122;
-//   $JUNCTION @ATTACH %p123;
-//   $JUNCTION @ATTACH %p125;
-//   $JUNCTION @ATTACH %p127;
-//   $JUNCTION @ATTACH %p128;
-//   $JUNCTION @ATTACH %p129;
-//   $JUNCTION @ATTACH %p130;
-//   $JUNCTION @ATTACH %p131;
-//   $JUNCTION @ATTACH %p132;
-//   $JUNCTION @ATTACH %p133;
-//   $JUNCTION @ATTACH %p134;
-//   $JUNCTION @ATTACH %p135;
-//   $JUNCTION @ATTACH %p138;
-//   $JUNCTION @ATTACH %p139;
-//   $JUNCTION @ATTACH %p141;
-//   $JUNCTION @ATTACH %p142;
-//   $JUNCTION @ATTACH %p143;
-//   $JUNCTION @ATTACH %p144;
-//   $JUNCTION @ATTACH %p145;
-//   $JUNCTION @ATTACH %p147;
-//   $JUNCTION @ATTACH %p148;
-//   $JUNCTION @ATTACH %p150;
-//   $JUNCTION @ATTACH %p154;
-//   $JUNCTION @ATTACH %p160;
-//   $JUNCTION @ATTACH %p164;
-//   $JUNCTION @ATTACH %p165;
-//   $JUNCTION @ATTACH %p166;
-//   $JUNCTION @ATTACH %p168;
-//   $JUNCTION @ATTACH %p169;
-//   $JUNCTION @ATTACH %p170;
-//   $JUNCTION @ATTACH %p172;
-//   $JUNCTION @ATTACH %p173;
-//   $JUNCTION @ATTACH %p174;
-//   $JUNCTION @ATTACH %p175;
-//   $JUNCTION @ATTACH %p176;
-//   $JUNCTION @ATTACH %p178;
-//   $JUNCTION @ATTACH %p179;
-//   $JUNCTION @ATTACH %p180;
-//   $JUNCTION @ATTACH %p181;
-//   $JUNCTION @ATTACH %p182;
-//   $JUNCTION @ATTACH %p183;
-//   $JUNCTION @ATTACH %p185;
-//   $JUNCTION @ATTACH %p186;
-//   $JUNCTION @ATTACH %p187;
-//   $JUNCTION @ATTACH %p188;
-//   $JUNCTION @ATTACH %p190;
-//   $JUNCTION @ATTACH %p191;
-//   $JUNCTION @ATTACH %p192;
-//   $JUNCTION @ATTACH %p193;
-//   $JUNCTION @ATTACH %p194;
-//   $JUNCTION @ATTACH %p195;
-//   $JUNCTION @ATTACH %p196;
-//   $JUNCTION @ATTACH %p197;
-//   $JUNCTION @ATTACH %p198;
-//   $JUNCTION @ATTACH %p199;
-//   $JUNCTION @ATTACH %p200;
-//   $JUNCTION @ATTACH %p201;
-//   $JUNCTION @ATTACH %p203;
-//   $JUNCTION @ATTACH %p204;
-//   $JUNCTION @ATTACH %p205;
-//   $JUNCTION @ATTACH %p206;
-//   $JUNCTION @ATTACH %p207;
-//   $JUNCTION @ATTACH %p208;
-//   $JUNCTION @ATTACH %p209;
-//   $JUNCTION @ATTACH %p210;
-//   $JUNCTION @ATTACH %p211;
-//   $JUNCTION @ATTACH %p217;
-//   $JUNCTION @ATTACH %p223;
-//   $JUNCTION @ATTACH %p225;
-//   $JUNCTION @ATTACH %p226;
-//   $JUNCTION @ATTACH %p227;
-//   $JUNCTION @ATTACH %p228;
-//   $JUNCTION @ATTACH %p229;
-//   $JUNCTION @ATTACH %p230;
-//   $JUNCTION @ATTACH %p231;
-//   $JUNCTION @ATTACH %p232;
-//   $JUNCTION @ATTACH %p233;
-//   $JUNCTION @ATTACH %p234;
-//   $JUNCTION @ATTACH %p235;
-//   $JUNCTION @ATTACH %p236;
-//   $JUNCTION @ATTACH %p237;
-//   $JUNCTION @ATTACH %p238;
-//   $JUNCTION @ATTACH %p239;
-//   $JUNCTION @ATTACH %p240;
-//   $JUNCTION @ATTACH %p241;
-//   $JUNCTION @ATTACH %p242;
-//   $JUNCTION @ATTACH %p243;
-//   $JUNCTION @ATTACH %p244;
-//   $JUNCTION @ATTACH %p245;
-//   $JUNCTION @ATTACH %p246;
-//   $JUNCTION @ATTACH %p247;
-//   $JUNCTION @ATTACH %p248;
-//   $JUNCTION @ATTACH %p250;
-//   $JUNCTION @ATTACH %p253;
-//   $JUNCTION @ATTACH %p254;
-//   $JUNCTION @ATTACH %p255;
-//   $JUNCTION @ATTACH %p257;
-//   $JUNCTION @ATTACH %p260;
-//   $JUNCTION @ATTACH %p262;
-//   $JUNCTION @ATTACH %p263;
-//   $JUNCTION @ATTACH %p264;
-//   $JUNCTION @ATTACH %p268;
-//   $JUNCTION @ATTACH %p272;
-//   $JUNCTION @ATTACH %p273;
-//   $JUNCTION @ATTACH %p274;
-//   $JUNCTION @ATTACH %p275;
-//   $JUNCTION @ATTACH %p276;
-//   $JUNCTION @ATTACH %p277;
-//   $JUNCTION @ATTACH %p278;
-//   $JUNCTION @ATTACH %p279;
-//   $JUNCTION @ATTACH %p280;
-//   $JUNCTION @ATTACH %p281;
-//   $JUNCTION @ATTACH %p282;
-//   $JUNCTION @ATTACH %p283;
-//   $JUNCTION @ATTACH %p284;
-//   $JUNCTION @ATTACH %p285;
-//   $JUNCTION @ATTACH %p286;
-//   $JUNCTION @ATTACH %p287;
-//   $JUNCTION @ATTACH %p288;
-//   $JUNCTION @ATTACH %p289;
-//   $JUNCTION @ATTACH %p290;
-//   $JUNCTION @ATTACH %p291;
-//   $JUNCTION @ATTACH %p292;
-//   $JUNCTION @ATTACH %p293;
-//   $JUNCTION @ATTACH %p295;
-//   $JUNCTION @ATTACH %p296;
-//   $JUNCTION @ATTACH %p297;
-//   $JUNCTION @ATTACH %p298;
-//   $JUNCTION @ATTACH %p299;
-//   $JUNCTION @ATTACH %p301;
-//   $JUNCTION @ATTACH %p302;
-//   $JUNCTION @ATTACH %p311;
-//   $JUNCTION @ATTACH %p312;
-//   $JUNCTION @ATTACH %p313;
-//   $JUNCTION @ATTACH %p315;
-//   $JUNCTION @ATTACH %p316;
-//   $JUNCTION @ATTACH %p317;
-//   $JUNCTION @ATTACH %p318;
-//   $JUNCTION @ATTACH %p320;
-//   $JUNCTION @ATTACH %p321;
-//   $JUNCTION @ATTACH %p323;
-//   $JUNCTION @ATTACH %p325;
-//   $JUNCTION @ATTACH %p327;
-//   $JUNCTION @ATTACH %p329;
-//   $JUNCTION @ATTACH %p332;
-//   $JUNCTION @ATTACH %p334;
-//   $JUNCTION @ATTACH %p335;
-//   $JUNCTION @ATTACH %p337;
-//   $JUNCTION @ATTACH %p339;
-//   $JUNCTION @ATTACH %p340;
-//   $JUNCTION @ATTACH %p341;
-//   $JUNCTION @ATTACH %p342;
-//   $JUNCTION @ATTACH %p343;
-//   $JUNCTION @ATTACH %p344;
-//   $JUNCTION @ATTACH %p345;
-//   $JUNCTION @ATTACH %p347;
-//   $JUNCTION @ATTACH %p350;
-//   $JUNCTION @ATTACH %p352;
-//   $JUNCTION @ATTACH %p357;
-//   $JUNCTION @ATTACH %p361;
-//   $JUNCTION @ATTACH %p362;
-//   $JUNCTION @ATTACH %p363;
-//   $JUNCTION @ATTACH %p364;
-//   $JUNCTION @ATTACH %p365;
-//   $JUNCTION @ATTACH %p367;
-//   $JUNCTION @ATTACH %p368;
-//   $JUNCTION @ATTACH %p369;
-//   $JUNCTION @ATTACH %p370;
-//   $JUNCTION @ATTACH %p371;
-//   $JUNCTION @ATTACH %p372;
-//   $JUNCTION @ATTACH %p373;
-//   $JUNCTION @ATTACH %p374;
-//   $JUNCTION @ATTACH %p375;
-//   $JUNCTION @ATTACH %p376;
-//   $JUNCTION @ATTACH %p377;
-//   $JUNCTION @ATTACH %p378;
-//   $JUNCTION @ATTACH %p379;
-//   $JUNCTION @ATTACH %p380;
-//   $JUNCTION @ATTACH %p381;
-//   $JUNCTION @ATTACH %p382;
-//   $JUNCTION @ATTACH %p383;
-//   $JUNCTION @ATTACH %p385;
-//   $JUNCTION @ATTACH %p386;
-//   $JUNCTION @ATTACH %p387;
-//   $JUNCTION @ATTACH %p391;
-//   $JUNCTION @ATTACH %p393;
-//   $JUNCTION @ATTACH %p394;
-//   $JUNCTION @ATTACH %p395;
-//   $JUNCTION @ATTACH %p396;
-//   $JUNCTION @ATTACH %p397;
-//   $JUNCTION @ATTACH %p398;
-//   $JUNCTION @ATTACH %p399;
-//   $JUNCTION @ATTACH %p400;
-//   $JUNCTION @ATTACH %p401;
-//   $JUNCTION @ATTACH %p402;
-//   $JUNCTION @ATTACH %p403;
-//   $JUNCTION @ATTACH %p404;
-//   $JUNCTION @ATTACH %p405;
-//   $JUNCTION @ATTACH %p406;
-//   $JUNCTION @ATTACH %p409;
-//   $JUNCTION @ATTACH %p410;
-//   $JUNCTION @ATTACH %p411;
-//   $JUNCTION @ATTACH %p412;
-//   $JUNCTION @ATTACH %p413;
-//   $JUNCTION @ATTACH %p414;
-//   $JUNCTION @ATTACH %p415;
-//   $JUNCTION @ATTACH %p416;
-//   $JUNCTION @ATTACH %p417;
-//   $JUNCTION @ATTACH %p418;
-//   $JUNCTION @ATTACH %p419;
-//   $JUNCTION @ATTACH %p420;
-//   $JUNCTION @ATTACH %p421;
-//   $JUNCTION @ATTACH %p424;
-//   $JUNCTION @ATTACH %p425;
-//   $JUNCTION @ATTACH %p427;
-//   $JUNCTION @ATTACH %p429;
-//   $JUNCTION @ATTACH %p433;
-//   $JUNCTION @ATTACH %p436;
-//   $JUNCTION @ATTACH %p438;
-//   $JUNCTION @ATTACH %p442;
-//   $JUNCTION @ATTACH %p443;
-//   $JUNCTION @ATTACH %p444;
-//   $JUNCTION @ATTACH %p445;
-//   $JUNCTION @ATTACH %p446;
-//   $JUNCTION @ATTACH %p447;
-//   $JUNCTION @ATTACH %p448;
-//   $JUNCTION @ATTACH %p449;
-//   $JUNCTION @ATTACH %p450;
-//   $JUNCTION @ATTACH %p451;
-//   $JUNCTION @ATTACH %p452;
-//   $JUNCTION @ATTACH %p453;
-//   $JUNCTION @ATTACH %p454;
-//   $JUNCTION @ATTACH %p455;
-//   $JUNCTION @ATTACH %p456;
-//   $JUNCTION @ATTACH %p457;
-//   $JUNCTION @ATTACH %p458;
-//   $JUNCTION @ATTACH %p459;
-//   $JUNCTION @ATTACH %p460;
-//   $JUNCTION @ATTACH %p461;
-//   $JUNCTION @ATTACH %p462;
-//   $JUNCTION @ATTACH %p463;
-//   $JUNCTION @ATTACH %p464;
-//   $JUNCTION @ATTACH %p465;
-//   $JUNCTION @ATTACH %p466;
-//   $JUNCTION @ATTACH %p467;
-//   $JUNCTION @ATTACH %p468;
-//   $JUNCTION @ATTACH %p469;
-//   $JUNCTION @ATTACH %p470;
-//   $JUNCTION @ATTACH %p471;
-//   $JUNCTION @ATTACH %p475;
-//   $JUNCTION @ATTACH %p477;
-//   $JUNCTION @ATTACH %p480;
+//   %wire_795 = &"D14_CORE" @WIRE(mode="straight") {
+// %p484 %port_43:p #"I130":2};
+//   $JUNCTION @ATTACH %p3 => @PLACE(140, 116);
+//   $JUNCTION @ATTACH %p8 => @PLACE(-59, 116);
+//   $JUNCTION @ATTACH %p15 => @PLACE(247, 116);
+//   $JUNCTION @ATTACH %p19 => @PLACE(281, 116);
+//   $JUNCTION @ATTACH %p26 => @PLACE(176, 116);
+//   $JUNCTION @ATTACH %p33 => @PLACE(213, 116);
+//   $JUNCTION @ATTACH %p39 => @PLACE(-188, -377);
+//   $JUNCTION @ATTACH %p44 => @PLACE(-188, -348);
+//   $JUNCTION @ATTACH %p50 => @PLACE(314, 116);
+//   $JUNCTION @ATTACH %p60 => @PLACE(346, 116);
+//   $JUNCTION @ATTACH %p64 => @PLACE(-130, -412);
+//   $JUNCTION @ATTACH %p66 => @PLACE(-162, -370);
+//   $JUNCTION @ATTACH %p67 => @PLACE(-162, -341);
+//   $JUNCTION @ATTACH %p71 => @PLACE(-98, -438);
+//   $JUNCTION @ATTACH %p77 => @PLACE(395, 93);
+//   $JUNCTION @ATTACH %p78 => @PLACE(404, 93);
+//   $JUNCTION @ATTACH %p79 => @PLACE(-165, -323);
+//   $JUNCTION @ATTACH %p80 => @PLACE(-165, -275);
+//   $JUNCTION @ATTACH %p81 => @PLACE(309, 93);
+//   $JUNCTION @ATTACH %p82 => @PLACE(78, 93);
+//   $JUNCTION @ATTACH %p83 => @PLACE(100, 93);
+//   $JUNCTION @ATTACH %p84 => @PLACE(341, 93);
+//   $JUNCTION @ATTACH %p85 => @PLACE(276, 93);
+//   $JUNCTION @ATTACH %p86 => @PLACE(242, 93);
+//   $JUNCTION @ATTACH %p87 => @PLACE(481, 15);
+//   $JUNCTION @ATTACH %p88 => @PLACE(481, 52);
+//   $JUNCTION @ATTACH %p89 => @PLACE(481, -23);
+//   $JUNCTION @ATTACH %p90 => @PLACE(481, -61);
+//   $JUNCTION @ATTACH %p91 => @PLACE(481, -99);
+//   $JUNCTION @ATTACH %p92 => @PLACE(481, -137);
+//   $JUNCTION @ATTACH %p93 => @PLACE(481, -174);
+//   $JUNCTION @ATTACH %p94 => @PLACE(481, -212);
+//   $JUNCTION @ATTACH %p95 => @PLACE(481, -250);
+//   $JUNCTION @ATTACH %p96 => @PLACE(481, -288);
+//   $JUNCTION @ATTACH %p97 => @PLACE(481, -325);
+//   $JUNCTION @ATTACH %p98 => @PLACE(481, -363);
+//   $JUNCTION @ATTACH %p99 => @PLACE(481, -390);
+//   $JUNCTION @ATTACH %p100 => @PLACE(395, 81);
+//   $JUNCTION @ATTACH %p101 => @PLACE(436, 93);
+//   $JUNCTION @ATTACH %p103 => @PLACE(449, -415);
+//   $JUNCTION @ATTACH %p104 => @PLACE(370, -415);
+//   $JUNCTION @ATTACH %p105 => @PLACE(408, -415);
+//   $JUNCTION @ATTACH %p106 => @PLACE(-93, -415);
+//   $JUNCTION @ATTACH %p107 => @PLACE(-61, -415);
+//   $JUNCTION @ATTACH %p108 => @PLACE(296, -415);
+//   $JUNCTION @ATTACH %p109 => @PLACE(333, -415);
+//   $JUNCTION @ATTACH %p110 => @PLACE(222, -415);
+//   $JUNCTION @ATTACH %p111 => @PLACE(259, -415);
+//   $JUNCTION @ATTACH %p112 => @PLACE(185, -415);
+//   $JUNCTION @ATTACH %p113 => @PLACE(148, -415);
+//   $JUNCTION @ATTACH %p114 => @PLACE(112, -415);
+//   $JUNCTION @ATTACH %p115 => @PLACE(-32, -415);
+//   $JUNCTION @ATTACH %p118 => @PLACE(-20, -438);
+//   $JUNCTION @ATTACH %p119 => @PLACE(-165, -353);
+//   $JUNCTION @ATTACH %p120 => @PLACE(-165, -382);
+//   $JUNCTION @ATTACH %p121 => @PLACE(-165, -241);
+//   $JUNCTION @ATTACH %p122 => @PLACE(-165, -64);
+//   $JUNCTION @ATTACH %p123 => @PLACE(-165, -27);
+//   $JUNCTION @ATTACH %p125 => @PLACE(-123, 93);
+//   $JUNCTION @ATTACH %p127 => @PLACE(-29, -415);
+//   $JUNCTION @ATTACH %p128 => @PLACE(12, -415);
+//   $JUNCTION @ATTACH %p129 => @PLACE(-165, -153);
+//   $JUNCTION @ATTACH %p130 => @PLACE(481, 79);
+//   $JUNCTION @ATTACH %p131 => @PLACE(-165, 7);
+//   $JUNCTION @ATTACH %p132 => @PLACE(-165, 43);
+//   $JUNCTION @ATTACH %p133 => @PLACE(135, 93);
+//   $JUNCTION @ATTACH %p134 => @PLACE(208, 93);
+//   $JUNCTION @ATTACH %p135 => @PLACE(-58, -415);
+//   $JUNCTION @ATTACH %p138 => @PLACE(-64, 93);
+//   $JUNCTION @ATTACH %p139 => @PLACE(39, -415);
+//   $JUNCTION @ATTACH %p141 => @PLACE(-124, -415);
+//   $JUNCTION @ATTACH %p142 => @PLACE(-31, 93);
+//   $JUNCTION @ATTACH %p143 => @PLACE(2, 93);
+//   $JUNCTION @ATTACH %p144 => @PLACE(76, -415);
+//   $JUNCTION @ATTACH %p145 => @PLACE(-95, 93);
+//   $JUNCTION @ATTACH %p147 => @PLACE(-49, -438);
+//   $JUNCTION @ATTACH %p148 => @PLACE(34, 93);
+//   $JUNCTION @ATTACH %p150 => @PLACE(392, 116);
+//   $JUNCTION @ATTACH %p154 => @PLACE(171, 93);
+//   $JUNCTION @ATTACH %p160 => @PLACE(-26, 116);
+//   $JUNCTION @ATTACH %p164 => @PLACE(321, 90);
+//   $JUNCTION @ATTACH %p165 => @PLACE(63, 90);
+//   $JUNCTION @ATTACH %p166 => @PLACE(112, 90);
+//   $JUNCTION @ATTACH %p168 => @PLACE(288, 90);
+//   $JUNCTION @ATTACH %p169 => @PLACE(-83, 90);
+//   $JUNCTION @ATTACH %p170 => @PLACE(254, 90);
+//   $JUNCTION @ATTACH %p172 => @PLACE(40, 90);
+//   $JUNCTION @ATTACH %p173 => @PLACE(14, 90);
+//   $JUNCTION @ATTACH %p174 => @PLACE(-162, -58);
+//   $JUNCTION @ATTACH %p175 => @PLACE(-162, -15);
+//   $JUNCTION @ATTACH %p176 => @PLACE(-162, 19);
+//   $JUNCTION @ATTACH %p178 => @PLACE(-111, 90);
+//   $JUNCTION @ATTACH %p179 => @PLACE(147, 90);
+//   $JUNCTION @ATTACH %p180 => @PLACE(183, 90);
+//   $JUNCTION @ATTACH %p181 => @PLACE(-52, 90);
+//   $JUNCTION @ATTACH %p182 => @PLACE(-19, 90);
+//   $JUNCTION @ATTACH %p183 => @PLACE(220, 90);
+//   $JUNCTION @ATTACH %p185 => @PLACE(-162, -235);
+//   $JUNCTION @ATTACH %p186 => @PLACE(-162, -147);
+//   $JUNCTION @ATTACH %p187 => @PLACE(73, 116);
+//   $JUNCTION @ATTACH %p188 => @PLACE(-162, 49);
+//   $JUNCTION @ATTACH %p190 => @PLACE(470, -9);
+//   $JUNCTION @ATTACH %p191 => @PLACE(470, 29);
+//   $JUNCTION @ATTACH %p192 => @PLACE(470, -85);
+//   $JUNCTION @ATTACH %p193 => @PLACE(470, -47);
+//   $JUNCTION @ATTACH %p194 => @PLACE(470, -160);
+//   $JUNCTION @ATTACH %p195 => @PLACE(470, -123);
+//   $JUNCTION @ATTACH %p196 => @PLACE(470, -236);
+//   $JUNCTION @ATTACH %p197 => @PLACE(470, -198);
+//   $JUNCTION @ATTACH %p198 => @PLACE(470, -311);
+//   $JUNCTION @ATTACH %p199 => @PLACE(470, -274);
+//   $JUNCTION @ATTACH %p200 => @PLACE(384, -404);
+//   $JUNCTION @ATTACH %p201 => @PLACE(422, -404);
+//   $JUNCTION @ATTACH %p203 => @PLACE(470, -349);
+//   $JUNCTION @ATTACH %p204 => @PLACE(236, -404);
+//   $JUNCTION @ATTACH %p205 => @PLACE(310, -404);
+//   $JUNCTION @ATTACH %p206 => @PLACE(347, -404);
+//   $JUNCTION @ATTACH %p207 => @PLACE(273, -404);
+//   $JUNCTION @ATTACH %p208 => @PLACE(201, -404);
+//   $JUNCTION @ATTACH %p209 => @PLACE(128, -404);
+//   $JUNCTION @ATTACH %p210 => @PLACE(162, -404);
+//   $JUNCTION @ATTACH %p211 => @PLACE(92, -404);
+//   $JUNCTION @ATTACH %p217 => @PLACE(-90, 116);
+//   $JUNCTION @ATTACH %p223 => @PLACE(-188, 12);
+//   $JUNCTION @ATTACH %p225 => @PLACE(478, 12);
+//   $JUNCTION @ATTACH %p226 => @PLACE(478, 36);
+//   $JUNCTION @ATTACH %p227 => @PLACE(478, -26);
+//   $JUNCTION @ATTACH %p228 => @PLACE(478, -64);
+//   $JUNCTION @ATTACH %p229 => @PLACE(478, -102);
+//   $JUNCTION @ATTACH %p230 => @PLACE(478, -140);
+//   $JUNCTION @ATTACH %p231 => @PLACE(478, -177);
+//   $JUNCTION @ATTACH %p232 => @PLACE(478, -215);
+//   $JUNCTION @ATTACH %p233 => @PLACE(478, -253);
+//   $JUNCTION @ATTACH %p234 => @PLACE(478, -291);
+//   $JUNCTION @ATTACH %p235 => @PLACE(478, -328);
+//   $JUNCTION @ATTACH %p236 => @PLACE(478, -366);
+//   $JUNCTION @ATTACH %p237 => @PLACE(478, -393);
+//   $JUNCTION @ATTACH %p238 => @PLACE(446, -412);
+//   $JUNCTION @ATTACH %p239 => @PLACE(367, -412);
+//   $JUNCTION @ATTACH %p240 => @PLACE(405, -412);
+//   $JUNCTION @ATTACH %p241 => @PLACE(256, -412);
+//   $JUNCTION @ATTACH %p242 => @PLACE(293, -412);
+//   $JUNCTION @ATTACH %p243 => @PLACE(330, -412);
+//   $JUNCTION @ATTACH %p244 => @PLACE(182, -412);
+//   $JUNCTION @ATTACH %p245 => @PLACE(219, -412);
+//   $JUNCTION @ATTACH %p246 => @PLACE(145, -412);
+//   $JUNCTION @ATTACH %p247 => @PLACE(109, -412);
+//   $JUNCTION @ATTACH %p248 => @PLACE(478, 76);
+//   $JUNCTION @ATTACH %p250 => @PLACE(504, 48);
+//   $JUNCTION @ATTACH %p253 => @PLACE(73, -412);
+//   $JUNCTION @ATTACH %p254 => @PLACE(9, -412);
+//   $JUNCTION @ATTACH %p255 => @PLACE(36, -412);
+//   $JUNCTION @ATTACH %p257 => @PLACE(-19, -412);
+//   $JUNCTION @ATTACH %p260 => @PLACE(-120, -409);
+//   $JUNCTION @ATTACH %p262 => @PLACE(-159, -376);
+//   $JUNCTION @ATTACH %p263 => @PLACE(-159, -347);
+//   $JUNCTION @ATTACH %p264 => @PLACE(-188, -318);
+//   $JUNCTION @ATTACH %p268 => @PLACE(-129, -438);
+//   $JUNCTION @ATTACH %p272 => @PLACE(483, -17);
+//   $JUNCTION @ATTACH %p273 => @PLACE(483, 21);
+//   $JUNCTION @ATTACH %p274 => @PLACE(483, -55);
+//   $JUNCTION @ATTACH %p275 => @PLACE(483, -93);
+//   $JUNCTION @ATTACH %p276 => @PLACE(483, -131);
+//   $JUNCTION @ATTACH %p277 => @PLACE(483, -168);
+//   $JUNCTION @ATTACH %p278 => @PLACE(483, -206);
+//   $JUNCTION @ATTACH %p279 => @PLACE(483, -244);
+//   $JUNCTION @ATTACH %p280 => @PLACE(483, -282);
+//   $JUNCTION @ATTACH %p281 => @PLACE(483, -319);
+//   $JUNCTION @ATTACH %p282 => @PLACE(483, -357);
+//   $JUNCTION @ATTACH %p283 => @PLACE(483, -384);
+//   $JUNCTION @ATTACH %p284 => @PLACE(455, -417);
+//   $JUNCTION @ATTACH %p285 => @PLACE(376, -417);
+//   $JUNCTION @ATTACH %p286 => @PLACE(414, -417);
+//   $JUNCTION @ATTACH %p287 => @PLACE(228, -417);
+//   $JUNCTION @ATTACH %p288 => @PLACE(302, -417);
+//   $JUNCTION @ATTACH %p289 => @PLACE(339, -417);
+//   $JUNCTION @ATTACH %p290 => @PLACE(265, -417);
+//   $JUNCTION @ATTACH %p291 => @PLACE(191, -417);
+//   $JUNCTION @ATTACH %p292 => @PLACE(154, -417);
+//   $JUNCTION @ATTACH %p293 => @PLACE(442, 95);
+//   $JUNCTION @ATTACH %p295 => @PLACE(483, 85);
+//   $JUNCTION @ATTACH %p296 => @PLACE(82, -417);
+//   $JUNCTION @ATTACH %p297 => @PLACE(118, -417);
+//   $JUNCTION @ATTACH %p298 => @PLACE(45, -417);
+//   $JUNCTION @ATTACH %p299 => @PLACE(-10, -417);
+//   $JUNCTION @ATTACH %p301 => @PLACE(483, 58);
+//   $JUNCTION @ATTACH %p302 => @PLACE(18, -417);
+//   $JUNCTION @ATTACH %p311 => @PLACE(315, 87);
+//   $JUNCTION @ATTACH %p312 => @PLACE(141, 87);
+//   $JUNCTION @ATTACH %p313 => @PLACE(177, 87);
+//   $JUNCTION @ATTACH %p315 => @PLACE(214, 87);
+//   $JUNCTION @ATTACH %p316 => @PLACE(282, 87);
+//   $JUNCTION @ATTACH %p317 => @PLACE(248, 87);
+//   $JUNCTION @ATTACH %p318 => @PLACE(-89, 87);
+//   $JUNCTION @ATTACH %p320 => @PLACE(-117, 87);
+//   $JUNCTION @ATTACH %p321 => @PLACE(-188, 48);
+//   $JUNCTION @ATTACH %p323 => @PLACE(-188, -148);
+//   $JUNCTION @ATTACH %p325 => @PLACE(-159, -157);
+//   $JUNCTION @ATTACH %p327 => @PLACE(-159, -21);
+//   $JUNCTION @ATTACH %p329 => @PLACE(-188, -270);
+//   $JUNCTION @ATTACH %p332 => @PLACE(39, 116);
+//   $JUNCTION @ATTACH %p334 => @PLACE(-188, -59);
+//   $JUNCTION @ATTACH %p335 => @PLACE(-159, -245);
+//   $JUNCTION @ATTACH %p337 => @PLACE(-188, -236);
+//   $JUNCTION @ATTACH %p339 => @PLACE(106, 87);
+//   $JUNCTION @ATTACH %p340 => @PLACE(72, 87);
+//   $JUNCTION @ATTACH %p341 => @PLACE(-58, 87);
+//   $JUNCTION @ATTACH %p342 => @PLACE(8, 87);
+//   $JUNCTION @ATTACH %p343 => @PLACE(-159, -68);
+//   $JUNCTION @ATTACH %p344 => @PLACE(-159, 13);
+//   $JUNCTION @ATTACH %p345 => @PLACE(-25, 87);
+//   $JUNCTION @ATTACH %p347 => @PLACE(30, 87);
+//   $JUNCTION @ATTACH %p350 => @PLACE(-159, 39);
+//   $JUNCTION @ATTACH %p352 => @PLACE(-188, -22);
+//   $JUNCTION @ATTACH %p357 => @PLACE(-118, 116);
+//   $JUNCTION @ATTACH %p361 => @PLACE(468, -240);
+//   $JUNCTION @ATTACH %p362 => @PLACE(468, -13);
+//   $JUNCTION @ATTACH %p363 => @PLACE(468, -353);
+//   $JUNCTION @ATTACH %p364 => @PLACE(468, -315);
+//   $JUNCTION @ATTACH %p365 => @PLACE(418, -402);
+//   $JUNCTION @ATTACH %p367 => @PLACE(269, -402);
+//   $JUNCTION @ATTACH %p368 => @PLACE(199, -402);
+//   $JUNCTION @ATTACH %p369 => @PLACE(232, -402);
+//   $JUNCTION @ATTACH %p370 => @PLACE(195, -402);
+//   $JUNCTION @ATTACH %p371 => @PLACE(126, -402);
+//   $JUNCTION @ATTACH %p372 => @PLACE(158, -402);
+//   $JUNCTION @ATTACH %p373 => @PLACE(90, -402);
+//   $JUNCTION @ATTACH %p374 => @PLACE(122, -402);
+//   $JUNCTION @ATTACH %p375 => @PLACE(53, -402);
+//   $JUNCTION @ATTACH %p376 => @PLACE(86, -402);
+//   $JUNCTION @ATTACH %p377 => @PLACE(343, -402);
+//   $JUNCTION @ATTACH %p378 => @PLACE(306, -402);
+//   $JUNCTION @ATTACH %p379 => @PLACE(468, -278);
+//   $JUNCTION @ATTACH %p380 => @PLACE(380, -402);
+//   $JUNCTION @ATTACH %p381 => @PLACE(468, -89);
+//   $JUNCTION @ATTACH %p382 => @PLACE(468, 25);
+//   $JUNCTION @ATTACH %p383 => @PLACE(468, -51);
+//   $JUNCTION @ATTACH %p385 => @PLACE(468, -202);
+//   $JUNCTION @ATTACH %p386 => @PLACE(468, -164);
+//   $JUNCTION @ATTACH %p387 => @PLACE(468, -127);
+//   $JUNCTION @ATTACH %p391 => @PLACE(105, 116);
+//   $JUNCTION @ATTACH %p393 => @PLACE(472, -32);
+//   $JUNCTION @ATTACH %p394 => @PLACE(472, 6);
+//   $JUNCTION @ATTACH %p395 => @PLACE(472, -70);
+//   $JUNCTION @ATTACH %p396 => @PLACE(472, -108);
+//   $JUNCTION @ATTACH %p397 => @PLACE(472, -146);
+//   $JUNCTION @ATTACH %p398 => @PLACE(472, -183);
+//   $JUNCTION @ATTACH %p399 => @PLACE(472, -221);
+//   $JUNCTION @ATTACH %p400 => @PLACE(472, -259);
+//   $JUNCTION @ATTACH %p401 => @PLACE(472, -297);
+//   $JUNCTION @ATTACH %p402 => @PLACE(472, -334);
+//   $JUNCTION @ATTACH %p403 => @PLACE(472, -372);
+//   $JUNCTION @ATTACH %p404 => @PLACE(433, -406);
+//   $JUNCTION @ATTACH %p405 => @PLACE(472, -406);
+//   $JUNCTION @ATTACH %p406 => @PLACE(445, -438);
+//   $JUNCTION @ATTACH %p409 => @PLACE(361, -406);
+//   $JUNCTION @ATTACH %p410 => @PLACE(399, -406);
+//   $JUNCTION @ATTACH %p411 => @PLACE(287, -406);
+//   $JUNCTION @ATTACH %p412 => @PLACE(250, -406);
+//   $JUNCTION @ATTACH %p413 => @PLACE(176, -406);
+//   $JUNCTION @ATTACH %p414 => @PLACE(213, -406);
+//   $JUNCTION @ATTACH %p415 => @PLACE(324, -406);
+//   $JUNCTION @ATTACH %p416 => @PLACE(139, -406);
+//   $JUNCTION @ATTACH %p417 => @PLACE(103, -406);
+//   $JUNCTION @ATTACH %p418 => @PLACE(-25, -406);
+//   $JUNCTION @ATTACH %p419 => @PLACE(472, 43);
+//   $JUNCTION @ATTACH %p420 => @PLACE(30, -406);
+//   $JUNCTION @ATTACH %p421 => @PLACE(8, -438);
+//   $JUNCTION @ATTACH %p424 => @PLACE(67, -406);
+//   $JUNCTION @ATTACH %p425 => @PLACE(472, 63);
+//   $JUNCTION @ATTACH %p427 => @PLACE(504, 75);
+//   $JUNCTION @ATTACH %p429 => @PLACE(-4, -406);
+//   $JUNCTION @ATTACH %p433 => @PLACE(504, -394);
+//   $JUNCTION @ATTACH %p436 => @PLACE(427, 84);
+//   $JUNCTION @ATTACH %p438 => @PLACE(7, 116);
+//   $JUNCTION @ATTACH %p442 => @PLACE(475, -20);
+//   $JUNCTION @ATTACH %p443 => @PLACE(475, 18);
+//   $JUNCTION @ATTACH %p444 => @PLACE(475, -58);
+//   $JUNCTION @ATTACH %p445 => @PLACE(475, -96);
+//   $JUNCTION @ATTACH %p446 => @PLACE(475, -134);
+//   $JUNCTION @ATTACH %p447 => @PLACE(475, -171);
+//   $JUNCTION @ATTACH %p448 => @PLACE(475, -209);
+//   $JUNCTION @ATTACH %p449 => @PLACE(475, -247);
+//   $JUNCTION @ATTACH %p450 => @PLACE(475, -285);
+//   $JUNCTION @ATTACH %p451 => @PLACE(475, -322);
+//   $JUNCTION @ATTACH %p452 => @PLACE(475, -360);
+//   $JUNCTION @ATTACH %p453 => @PLACE(475, -387);
+//   $JUNCTION @ATTACH %p454 => @PLACE(452, -409);
+//   $JUNCTION @ATTACH %p455 => @PLACE(373, -409);
+//   $JUNCTION @ATTACH %p456 => @PLACE(411, -409);
+//   $JUNCTION @ATTACH %p457 => @PLACE(225, -409);
+//   $JUNCTION @ATTACH %p458 => @PLACE(262, -409);
+//   $JUNCTION @ATTACH %p459 => @PLACE(299, -409);
+//   $JUNCTION @ATTACH %p460 => @PLACE(188, -409);
+//   $JUNCTION @ATTACH %p461 => @PLACE(336, -409);
+//   $JUNCTION @ATTACH %p462 => @PLACE(151, -409);
+//   $JUNCTION @ATTACH %p463 => @PLACE(-13, -409);
+//   $JUNCTION @ATTACH %p464 => @PLACE(475, 55);
+//   $JUNCTION @ATTACH %p465 => @PLACE(475, 82);
+//   $JUNCTION @ATTACH %p466 => @PLACE(422, 87);
+//   $JUNCTION @ATTACH %p467 => @PLACE(433, 87);
+//   $JUNCTION @ATTACH %p468 => @PLACE(42, -409);
+//   $JUNCTION @ATTACH %p469 => @PLACE(115, -409);
+//   $JUNCTION @ATTACH %p470 => @PLACE(15, -409);
+//   $JUNCTION @ATTACH %p471 => @PLACE(445, 87);
+//   $JUNCTION @ATTACH %p475 => @PLACE(432, 116);
+//   $JUNCTION @ATTACH %p477 => @PLACE(422, 79);
+//   $JUNCTION @ATTACH %p480 => @PLACE(79, -409);
 //   (561, 154) @TEXT("DIGITAL", size=16, halign="middle", valign="baseline");
 //   (-242, 171) @TEXT("ANALOG", size=16, halign="middle", valign="top");
 //   (145, -155) @TEXT("GATE", size=8, halign="middle", valign="baseline");
@@ -4086,7 +4179,7 @@ R0 (VIOL net9 ) rupolym l=1u w=1u m=1 multi=(1)
 //   {#"I129" #"I130" #"I125" #"I126" #"I121" #"I123" #"I117" #"I118" #"I114" #"I111" #"I109" #"I107" #"I106" #"I103" #"I102" #"I99" #"I132" #"I89"}(digital_output_pads) {#"I91" #"I88" #"I87" #"I86"}(digital_input_pads) {#"I80" #"I81" #"I75" #"I74" #"I137" #"I160" #"I159"}(analog_signal_pads) {#"I66" #"I157" #"I98" #"I85" #"I156" #"I133" #"I146" #"I144" #"I143" #"I135" #"I141" #"I139" #"I147" #"I145" #"I142" #"I138" #"I155" #"I77" #"I76" #"I63" #"I152" #"I73" #"I58" #"I56" #"I24" #"I84" #"I153" #"I55"}(power_and_ground_pads) {#"I60" #"R0" #"R1"}(poc_and_tie_resistors) @AS(role="multi_domain_mixed_signal_IO_and_ESD_pad_ring") $PAD_RING_DOMAIN_GROUP;
 //   {#"I129" #"I130" #"I125" #"I126" #"I121" #"I123" #"I117" #"I118" #"I114" #"I111" #"I109" #"I107" #"I106" #"I103" #"I102" #"I99" #"I132" #"I89"}(members) @AS $MATCHED;
 //   {#"I80" #"I81" #"I75" #"I74" #"I137" #"I160" #"I159"}(members) @AS $MATCHED;
-//   {#"R0" #"R1"}(members) @AS $BRANCH;
+// {#"R0" #"R1"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-248, 235.62) @TEXT("Comment by Gemini-4-Argon", size=4.2) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(-248, 200.05) (295.2, 231.36)} => @SET-STYLE $risca_note_box;

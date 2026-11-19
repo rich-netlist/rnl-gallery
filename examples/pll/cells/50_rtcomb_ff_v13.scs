@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt rtcomb_ff_v13_pdk110_50 (d ck qb vdd vss)
@@ -14,16 +14,14 @@ MP2 (qb a vdd vdd) pch w=1.44e-05 l=1.8e-07 ad=6.912e-12 as=6.912e-12 pd=2.976e-
 MNC2 (qb ck n2 vss) nch w=7.679999999999999e-06 l=1.8e-07 ad=3.6864e-12 as=3.6864e-12 pd=1.632e-05 ps=1.632e-05 nrd=0.0351562 nrs=0.0351562 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
 MN2 (n2 a vss vss) nch w=7.679999999999999e-06 l=1.8e-07 ad=3.6864e-12 as=3.6864e-12 pd=1.632e-05 ps=1.632e-05 nrd=0.0351562 nrs=0.0351562 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
 // @RNL(author="gemini-4-argon") {
-//   # @SET-SYMBOL $D_FLIP_FLOP_Q_ONLY;
+//   # @SET-SYMBOL(terminals=[[1, "d"], [2, "ck"], [3, "q"]]) $D_FLIP_FLOP_Q_ONLY;
 //
 //   /* --- 1. Circuit Semantics --- */
 //   %tspc = {#MP0 #MPC0 #MN0}(stage1_input) {#MP1 #MN1 #MNC1}(stage2_precharge) {#MP2 #MNC2 #MN2}(stage3_output)  @AS(edge="rising", topology="9T_inverting_TSPC") $TSPC_STAGE;
-//   {#MP0 #MPC0 #MN0} @AS $BRANCH;
-//   {#MP1 #MN1 #MNC1} @AS $BRANCH;
-//   {#MP2 #MNC2 #MN2} @AS $BRANCH;
-//   {#MP0:s #MP1:s #MP2:s} @AS $SUPPLY_HIGH;
-//   {#MN0:s #MNC1:s #MN2:s} @AS $SUPPLY_LOW;
-//   {%pd #MP0 #MP1 #MP2 %pqb} @AS(direction="left-to-right") $FLOW;
+// {#MP0 #MPC0 #MN0} @ALIGN("x", priority="low");
+// {#MP1 #MN1 #MNC1} @ALIGN("x", priority="low");
+// {#MP2 #MNC2 #MN2} @ALIGN("x", priority="low");
+//   {%pd #MP0 #MP1 #MP2 %pqb} @AS $SIGNAL_FLOW; {%pd #MP0 #MP1 #MP2 %pqb} @ORDER("left-to-right", priority="low");
 //   /* Dynamic TSPC flip-flop has no static DC bias current; no static DC current annotated */
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
@@ -51,14 +49,14 @@ MN2 (n2 a vss vss) nch w=7.679999999999999e-06 l=1.8e-07 ad=3.6864e-12 as=3.6864
 //
 //   /* --- 3. Explicit Manhattan Wiring --- */
 //   %jvdd = (24, 26);
-//   $JUNCTION @ATTACH %jvdd;
-//   &vdd @WIRE { %sup:p %jvdd #MP1:s };
+//   $JUNCTION @ATTACH %jvdd => @PLACE(24, 26);
+//   &vdd @WIRE { %sup::pin %jvdd #MP1:s };
 //   &vdd @WIRE { %jvdd (12, 26) #MP0:s };
 //   &vdd @WIRE { %jvdd (36, 26) #MP2:s };
 //
 //   %jgnd = (24, 2);
-//   $JUNCTION @ATTACH %jgnd;
-//   &vss @WIRE { #MNC1:s %jgnd %gnd:p };
+//   $JUNCTION @ATTACH %jgnd => @PLACE(24, 2);
+//   &vss @WIRE { #MNC1:s %jgnd %gnd::pin };
 //   &vss @WIRE { #MN0:s (12, 2) %jgnd };
 //   &vss @WIRE { #MN2:s (36, 2) %jgnd };
 //
@@ -68,37 +66,37 @@ MN2 (n2 a vss vss) nch w=7.679999999999999e-06 l=1.8e-07 ad=3.6864e-12 as=3.6864
 //   &n2 @WIRE { #MNC2:s #MN2:d };
 //
 //   %jb = (12, 12);
-//   $JUNCTION @ATTACH %jb;
+//   $JUNCTION @ATTACH %jb => @PLACE(12, 12);
 //   &b @WIRE { #MPC0:d %jb #MN0:d };
 //   &b @WIRE { %jb #MN1:g };
 //
 //   %ja  = (24, 17);
 //   %ja2 = (31, 17);
-//   $JUNCTION @ATTACH %ja;
-//   $JUNCTION @ATTACH %ja2;
+//   $JUNCTION @ATTACH %ja => @PLACE(24, 17);
+//   $JUNCTION @ATTACH %ja2 => @PLACE(31, 17);
 //   &a @WIRE { #MP1:d %ja #MN1:d };
 //   &a @WIRE { %ja %ja2 };
 //   &a @WIRE { %ja2 (31, 22) #MP2:g };
 //   &a @WIRE { %ja2 (31, 6)  #MN2:g };
 //
 //   %jqb = (36, 17);
-//   $JUNCTION @ATTACH %jqb;
+//   $JUNCTION @ATTACH %jqb => @PLACE(36, 17);
 //   &qb @WIRE { #MP2:d %jqb #MNC2:d };
-//   &qb @WIRE { %jqb %pqb:p };
+//   &qb @WIRE { %jqb %pqb::pin };
 //
 //   /* Input D and Clock Distribution */
 //   %jd = (1, 14);
-//   $JUNCTION @ATTACH %jd;
-//   &d  @WIRE { %pd:p %jd (1, 22) #MP0:g };
+//   $JUNCTION @ATTACH %jd => @PLACE(1, 14);
+//   &d  @WIRE { %pd::pin %jd (1, 22) #MP0:g };
 //   &d  @WIRE { %jd (1, 6) #MN0:g };
 //
 //   %jck1 = (8, 0);
 //   %jck2 = (19, 0);
 //   %jck3 = (19, 6);
-//   $JUNCTION @ATTACH %jck1;
-//   $JUNCTION @ATTACH %jck2;
-//   $JUNCTION @ATTACH %jck3;
-//   &ck @WIRE { %pck:p %jck1 (8, 16) #MPC0:g };
+//   $JUNCTION @ATTACH %jck1 => @PLACE(8, 0);
+//   $JUNCTION @ATTACH %jck2 => @PLACE(19, 0);
+//   $JUNCTION @ATTACH %jck3 => @PLACE(19, 6);
+//   &ck @WIRE { %pck::pin %jck1 (8, 16) #MPC0:g };
 //   &ck @WIRE { %jck1 %jck2 (32, 0) (32, 12) #MNC2:g };
 //   &ck @WIRE { %jck2 %jck3 #MNC1:g };
 //   &ck @WIRE { %jck3 (19, 22) #MP1:g };

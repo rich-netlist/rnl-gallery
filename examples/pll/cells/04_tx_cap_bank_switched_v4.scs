@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt tx_cap_bank_switched_v4_pdk110_4 (tank b0 b1 b2 b3 b4 b5 b6 b7 vdd vss)
@@ -53,7 +53,7 @@ MP7 (x7 b7 vdd vdd) pch w=3e-07 l=1.8e-07 ad=2.064e-13 as=2.064e-13 pd=1.88e-06 
 //   {&b1 &b2 &b3 &b4 &b5 &b6 &b7} @REMOVE-FROM $PORT_FILL_SET;
 //   %ptank = $IO_PORT @ATTACH &tank => @PLACE(2, 22) => @ORIENT("R0");
 //   %pb    = $IO_PORT @ATTACH &b0   => @PLACE(2, 10) => @ORIENT("R0");
-//   %pb @TEXT("b<7:0>", key="name");
+//   %pb @TEXT("b<7:0>", key="netname");
 //   %gnd   = $GROUND  @ATTACH &vss  => @PLACE(61, 0);
 //   %sup0 = $SUPPLY  @ATTACH &vdd => @PLACE(17, 17);
 //   #C0   @PLACE(12, 18)   => @ORIENT("R0");
@@ -89,78 +89,78 @@ MP7 (x7 b7 vdd vdd) pch w=3e-07 l=1.8e-07 ad=2.064e-13 as=2.064e-13 pd=1.88e-06 
 //   #MP7  @PLACE(115, 13) => @ORIENT("R0");
 //
 //   /* --- 3. Explicit Manhattan & Bus / Flying-Wire Wiring --- */
-//   {&b0 &b1 &b2 &b3 &b4 &b5 &b6 &b7} @WIRE { %pb:p (7, 10) } => @TEXT("B<7:0>") => @SET-STYLE $bus_label_style;
+//   {&b0 &b1 &b2 &b3 &b4 &b5 &b6 &b7} @WIRE { %pb::pin (7, 10) } => @TEXT("B<7:0>") => @SET-STYLE $bus_label_style;
 //   %jt0 = (12, 22); %jt1 = (26, 22); %jt2 = (40, 22); %jt3 = (54, 22);
 //   %jt4 = (68, 22); %jt5 = (82, 22); %jt6 = (96, 22);
-//   $JUNCTION @ATTACH %jt0; $JUNCTION @ATTACH %jt1; $JUNCTION @ATTACH %jt2; $JUNCTION @ATTACH %jt3;
-//   $JUNCTION @ATTACH %jt4; $JUNCTION @ATTACH %jt5; $JUNCTION @ATTACH %jt6;
-//   &tank @WIRE { %ptank:p %jt0 %jt1 %jt2 %jt3 %jt4 %jt5 %jt6 (110, 22) #C7:1 };
+//   $JUNCTION @ATTACH %jt0 => @PLACE(12, 22); $JUNCTION @ATTACH %jt1 => @PLACE(26, 22); $JUNCTION @ATTACH %jt2 => @PLACE(40, 22); $JUNCTION @ATTACH %jt3 => @PLACE(54, 22);
+//   $JUNCTION @ATTACH %jt4 => @PLACE(68, 22); $JUNCTION @ATTACH %jt5 => @PLACE(82, 22); $JUNCTION @ATTACH %jt6 => @PLACE(96, 22);
+//   &tank @WIRE { %ptank::pin %jt0 %jt1 %jt2 %jt3 %jt4 %jt5 %jt6 (110, 22) #C7:1 };
 //   &tank @WIRE { %jt0 #C0:1 }; &tank @WIRE { %jt1 #C1:1 }; &tank @WIRE { %jt2 #C2:1 };
 //   &tank @WIRE { %jt3 #C3:1 }; &tank @WIRE { %jt4 #C4:1 }; &tank @WIRE { %jt5 #C5:1 };
 //   &tank @WIRE { %jt6 #C6:1 };
 //
 //   %jg0 = (12, 2); %jg1 = (26, 2); %jg2 = (40, 2); %jg3 = (54, 2);
 //   %jg_s = (61, 2); %jg4 = (68, 2); %jg5 = (82, 2); %jg6 = (96, 2);
-//   $JUNCTION @ATTACH %jg0; $JUNCTION @ATTACH %jg1; $JUNCTION @ATTACH %jg2; $JUNCTION @ATTACH %jg3;
-//   $JUNCTION @ATTACH %jg_s; $JUNCTION @ATTACH %jg4; $JUNCTION @ATTACH %jg5; $JUNCTION @ATTACH %jg6;
+//   $JUNCTION @ATTACH %jg0 => @PLACE(12, 2); $JUNCTION @ATTACH %jg1 => @PLACE(26, 2); $JUNCTION @ATTACH %jg2 => @PLACE(40, 2); $JUNCTION @ATTACH %jg3 => @PLACE(54, 2);
+//   $JUNCTION @ATTACH %jg_s => @PLACE(61, 2); $JUNCTION @ATTACH %jg4 => @PLACE(68, 2); $JUNCTION @ATTACH %jg5 => @PLACE(82, 2); $JUNCTION @ATTACH %jg6 => @PLACE(96, 2);
 //   &vss @WIRE { #M0:s %jg0 %jg1 %jg2 %jg3 %jg_s %jg4 %jg5 %jg6 (110, 2) #M7:s };
-//   &vss @WIRE { %jg_s %gnd:p };
+//   &vss @WIRE { %jg_s %gnd::pin };
 //   &vss @WIRE { %jg1 #M1:s }; &vss @WIRE { %jg2 #M2:s }; &vss @WIRE { %jg3 #M3:s };
 //   &vss @WIRE { %jg4 #M4:s }; &vss @WIRE { %jg5 #M5:s }; &vss @WIRE { %jg6 #M6:s };
 //   %jx0 = (12, 10);
-//   $JUNCTION @ATTACH %jx0;
+//   $JUNCTION @ATTACH %jx0 => @PLACE(12, 10);
 //   &x0   @WIRE { #C0:2 %jx0 #M0:d };
 //   &x0   @WIRE { %jx0 (17, 10) #MP0:d };
-//   &vdd  @WIRE { %sup0:p #MP0:s };
+//   &vdd  @WIRE { %sup0::pin #MP0:s };
 //   &b0   @WIRE { #M0:g (9, 13) #MP0:g } => @TEXT("b0") => @SET-STYLE $fly_label_style;
 //   #C0   @TEXT("4.8 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
 //   %jx1 = (26, 10);
-//   $JUNCTION @ATTACH %jx1;
+//   $JUNCTION @ATTACH %jx1 => @PLACE(26, 10);
 //   &x1   @WIRE { #C1:2 %jx1 #M1:d };
 //   &x1   @WIRE { %jx1 (31, 10) #MP1:d };
-//   &vdd  @WIRE { %sup1:p #MP1:s };
+//   &vdd  @WIRE { %sup1::pin #MP1:s };
 //   &b1   @WIRE { #M1:g (23, 13) #MP1:g } => @TEXT("b1") => @SET-STYLE $fly_label_style;
 //   #C1   @TEXT("9.6 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
 //   %jx2 = (40, 10);
-//   $JUNCTION @ATTACH %jx2;
+//   $JUNCTION @ATTACH %jx2 => @PLACE(40, 10);
 //   &x2   @WIRE { #C2:2 %jx2 #M2:d };
 //   &x2   @WIRE { %jx2 (45, 10) #MP2:d };
-//   &vdd  @WIRE { %sup2:p #MP2:s };
+//   &vdd  @WIRE { %sup2::pin #MP2:s };
 //   &b2   @WIRE { #M2:g (37, 13) #MP2:g } => @TEXT("b2") => @SET-STYLE $fly_label_style;
 //   #C2   @TEXT("19.2 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
 //   %jx3 = (54, 10);
-//   $JUNCTION @ATTACH %jx3;
+//   $JUNCTION @ATTACH %jx3 => @PLACE(54, 10);
 //   &x3   @WIRE { #C3:2 %jx3 #M3:d };
 //   &x3   @WIRE { %jx3 (59, 10) #MP3:d };
-//   &vdd  @WIRE { %sup3:p #MP3:s };
+//   &vdd  @WIRE { %sup3::pin #MP3:s };
 //   &b3   @WIRE { #M3:g (51, 13) #MP3:g } => @TEXT("b3") => @SET-STYLE $fly_label_style;
 //   #C3   @TEXT("38.4 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
 //   %jx4 = (68, 10);
-//   $JUNCTION @ATTACH %jx4;
+//   $JUNCTION @ATTACH %jx4 => @PLACE(68, 10);
 //   &x4   @WIRE { #C4:2 %jx4 #M4:d };
 //   &x4   @WIRE { %jx4 (73, 10) #MP4:d };
-//   &vdd  @WIRE { %sup4:p #MP4:s };
+//   &vdd  @WIRE { %sup4::pin #MP4:s };
 //   &b4   @WIRE { #M4:g (65, 13) #MP4:g } => @TEXT("b4") => @SET-STYLE $fly_label_style;
 //   #C4   @TEXT("76.8 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
 //   %jx5 = (82, 10);
-//   $JUNCTION @ATTACH %jx5;
+//   $JUNCTION @ATTACH %jx5 => @PLACE(82, 10);
 //   &x5   @WIRE { #C5:2 %jx5 #M5:d };
 //   &x5   @WIRE { %jx5 (87, 10) #MP5:d };
-//   &vdd  @WIRE { %sup5:p #MP5:s };
+//   &vdd  @WIRE { %sup5::pin #MP5:s };
 //   &b5   @WIRE { #M5:g (79, 13) #MP5:g } => @TEXT("b5") => @SET-STYLE $fly_label_style;
 //   #C5   @TEXT("153.6 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
 //   %jx6 = (96, 10);
-//   $JUNCTION @ATTACH %jx6;
+//   $JUNCTION @ATTACH %jx6 => @PLACE(96, 10);
 //   &x6   @WIRE { #C6:2 %jx6 #M6:d };
 //   &x6   @WIRE { %jx6 (101, 10) #MP6:d };
-//   &vdd  @WIRE { %sup6:p #MP6:s };
+//   &vdd  @WIRE { %sup6::pin #MP6:s };
 //   &b6   @WIRE { #M6:g (93, 13) #MP6:g } => @TEXT("b6") => @SET-STYLE $fly_label_style;
 //   #C6   @TEXT("307.2 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
 //   %jx7 = (110, 10);
-//   $JUNCTION @ATTACH %jx7;
+//   $JUNCTION @ATTACH %jx7 => @PLACE(110, 10);
 //   &x7   @WIRE { #C7:2 %jx7 #M7:d };
 //   &x7   @WIRE { %jx7 (115, 10) #MP7:d };
-//   &vdd  @WIRE { %sup7:p #MP7:s };
+//   &vdd  @WIRE { %sup7::pin #MP7:s };
 //   &b7   @WIRE { #M7:g (107, 13) #MP7:g } => @TEXT("b7") => @SET-STYLE $fly_label_style;
 //   #C7   @TEXT("614.4 fF", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
 //

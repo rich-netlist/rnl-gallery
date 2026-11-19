@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/L3_comparator_V1
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt L3_comparator_V1 CLK DCMPN DCMPP GND VDD VINN VINP VOSN VOSP
     M19 (VN2 VP1 GND GND) nch_ulvt_mac l=30n w=500n multi=1 nf=1 sd=100n \
         ad=5e-14 as=5e-14 pd=1.2u ps=1.2u nrd=0.572742 nrs=0.572742 \
@@ -298,41 +299,42 @@ subckt L3_comparator_V1 CLK DCMPN DCMPP GND VDD VINN VINP VOSN VOSP
 //   #"M27" @PLACE(160, -34) => @ORIENT("MY");
 //   %output_port_symbol = @DEFINE-SYMBOL(box=[0, -1, 2, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(0, -0.9) (0, 0.9) (1.1, 0.9) (2, 0) (1.1, -0.9) (0, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="left");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="left");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(1, 1.6)
 //     };
 //   %port_0 = $IO_PORT @ATTACH &"DCMPP" => @PLACE(-37, -49) => @ORIENT("R0");
 //   %port_0 @SET-SYMBOL %output_port_symbol;
-//   %port_0 @TEXT("DCMPP", key="name");
+//   %port_0 @TEXT("DCMPP", key="netname");
 //   %port_1 = $IO_PORT @ATTACH &"DCMPN" => @PLACE(-37, -52) => @ORIENT("R0");
 //   %port_1 @SET-SYMBOL %output_port_symbol;
-//   %port_1 @TEXT("DCMPN", key="name");
+//   %port_1 @TEXT("DCMPN", key="netname");
 //   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="right");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="right");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(-1, 1.6)
 //     };
 //   %port_2 = $IO_PORT @ATTACH &"VOSN" => @PLACE(-35, -58) => @ORIENT("R0");
 //   %port_2 @SET-SYMBOL %input_port_symbol;
-//   %port_2 @TEXT("VOSN", key="name");
+//   %port_2 @TEXT("VOSN", key="netname");
 //   %port_3 = $IO_PORT @ATTACH &"VINP" => @PLACE(-35, -40) => @ORIENT("R0");
 //   %port_3 @SET-SYMBOL %input_port_symbol;
-//   %port_3 @TEXT("VINP", key="name");
+//   %port_3 @TEXT("VINP", key="netname");
 //   %port_4 = $IO_PORT @ATTACH &"VDD" => @PLACE(-36, -34) => @ORIENT("R0");
 //   %port_5 = $IO_PORT @ATTACH &"VINN" => @PLACE(-35, -43) => @ORIENT("R0");
 //   %port_5 @SET-SYMBOL %input_port_symbol;
-//   %port_5 @TEXT("VINN", key="name");
+//   %port_5 @TEXT("VINN", key="netname");
 //   %port_6 = $IO_PORT @ATTACH &"GND" => @PLACE(-36, -37) => @ORIENT("R0");
 //   %port_7 = $IO_PORT @ATTACH &"VOSP" => @PLACE(-35, -55) => @ORIENT("R0");
 //   %port_7 @SET-SYMBOL %input_port_symbol;
-//   %port_7 @TEXT("VOSP", key="name");
+//   %port_7 @TEXT("VOSP", key="netname");
 //   %port_8 = $IO_PORT @ATTACH &"VOSP" => @PLACE(-35, -55) => @ORIENT("R0");
 //   %port_8 @SET-SYMBOL %input_port_symbol;
-//   %port_8 @TEXT("VOSP", key="name");
+//   %port_8 @TEXT("VOSP", key="netname");
 //   %port_9 = $IO_PORT @ATTACH &"CLK" => @PLACE(-35, -46) => @ORIENT("R0");
 //   %port_9 @SET-SYMBOL %input_port_symbol;
-//   %port_9 @TEXT("CLK", key="name");
-//   %wire_0 = &"VOSP" @WIRE(mode="straight") {%port_8:p %port_7:p};
+//   %port_9 @TEXT("CLK", key="netname");
+//   %wire_0 = &"VOSP" @WIRE(mode="straight") {
+// %port_8:p %port_7:p};
 //   %p0 = (156, -52);
 //   %wire_1 = &"net2" @WIRE(mode="straight") {%p0 #"M27":1};
 //   %p1 = (152, -52);
@@ -610,39 +612,37 @@ subckt L3_comparator_V1 CLK DCMPN DCMPP GND VDD VINN VINP VOSN VOSP
 //   %wire_130 = &"CLK" @WIRE(mode="straight") {#"M9":2 #"M8":2};
 //   %wire_130 @TEXT("CLK", size=1, halign="middle", valign="baseline") => @PLACE(17, -32.3);
 //   %wire_129 @TEXT("CLK", size=1, halign="middle", valign="baseline") => @PLACE(10, -55.3);
-//   $JUNCTION @ATTACH %p1;
-//   $JUNCTION @ATTACH %p2;
-//   $JUNCTION @ATTACH %p8;
-//   $JUNCTION @ATTACH %p13;
-//   $JUNCTION @ATTACH %p16;
-//   $JUNCTION @ATTACH %p17;
-//   $JUNCTION @ATTACH %p18;
-//   $JUNCTION @ATTACH %p19;
-//   $JUNCTION @ATTACH %p20;
-//   $JUNCTION @ATTACH %p25;
-//   $JUNCTION @ATTACH %p26;
-//   $JUNCTION @ATTACH %p27;
-//   $JUNCTION @ATTACH %p28;
-//   $JUNCTION @ATTACH %p29;
-//   $JUNCTION @ATTACH %p53;
-//   $JUNCTION @ATTACH %p55;
-//   $JUNCTION @ATTACH %p56;
-//   $JUNCTION @ATTACH %p64;
-//   $JUNCTION @ATTACH %p66;
-//   $JUNCTION @ATTACH %p68;
-//   $JUNCTION @ATTACH %p70;
-//   $JUNCTION @ATTACH %p84;
-//   $JUNCTION @ATTACH %p86
+//   $JUNCTION @ATTACH %p1 => @PLACE(152, -52);
+//   $JUNCTION @ATTACH %p2 => @PLACE(138, -52);
+//   $JUNCTION @ATTACH %p8 => @PLACE(24, -40);
+//   $JUNCTION @ATTACH %p13 => @PLACE(10, -40);
+//   $JUNCTION @ATTACH %p16 => @PLACE(147, -41);
+//   $JUNCTION @ATTACH %p17 => @PLACE(138, -41);
+//   $JUNCTION @ATTACH %p18 => @PLACE(138, -43);
+//   $JUNCTION @ATTACH %p19 => @PLACE(125, -43);
+//   $JUNCTION @ATTACH %p20 => @PLACE(122, -43);
+//   $JUNCTION @ATTACH %p25 => @PLACE(168, -42);
+//   $JUNCTION @ATTACH %p26 => @PLACE(165, -42);
+//   $JUNCTION @ATTACH %p27 => @PLACE(152, -42);
+//   $JUNCTION @ATTACH %p28 => @PLACE(152, -43);
+//   $JUNCTION @ATTACH %p29 => @PLACE(143, -43);
+//   $JUNCTION @ATTACH %p53 => @PLACE(24, -52);
+//   $JUNCTION @ATTACH %p55 => @PLACE(10, -52);
+//   $JUNCTION @ATTACH %p56 => @PLACE(17, -52);
+//   $JUNCTION @ATTACH %p64 => @PLACE(156, -30);
+//   $JUNCTION @ATTACH %p66 => @PLACE(152, -30);
+//   $JUNCTION @ATTACH %p68 => @PLACE(138, -30);
+//   $JUNCTION @ATTACH %p70 => @PLACE(134, -30);
+//   $JUNCTION @ATTACH %p84 => @PLACE(117, -41);
+//   $JUNCTION @ATTACH %p86 => @PLACE(173, -41)
 // }
 // @RNL(author="gemini-4-argon") {
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
 //   /* L3_comparator_V1: Two-Stage Dynamic Miyahara Comparator with Auxiliary Offset-Calibration Differential Pair */
 //   #"M29"(tail_switch) {#"M0" #"M1"}(main_diff_pair) {#"M35" #"M36"}(offset_trim_pair) {#"M9" #"M8"}(precharge_loads) @AS(role="dynamic_integrating_preamplifier_with_VOS_trim") $MIYAHARA_DYNAMIC_PREAMP;
 //   {#"M15" #"M19" #"M18" #"M23"}(interstage_buffers) {#"M20" #"M24"}(eval_input_pair) {#"M6" #"M3" #"M5" #"M4"}(cross_coupled_latch) {#"M25" #"M26" #"M27" #"M28"}(precharge_switches) {#"M12" #"M11" #"M14" #"M13"}(output_buffers) @AS(role="regenerative_second_stage_latch") $DYNAMIC_REGEN_LATCH;
-//   #"M0"(in_p) #"M1"(in_n) #"M29"(tail) @AS $DIFFERENTIAL_PAIR;
-//   #"M35"(in_p) #"M36"(in_n) #"M29"(tail) @AS $DIFFERENTIAL_PAIR;
-//   #"M20"(in_p) #"M24"(in_n) @AS $DIFFERENTIAL_PAIR;
-//   {#"M0" #"M1" #"M35" #"M36" #"M9" #"M8"}(first) {#"M15" #"M19" #"M18" #"M23" #"M20" #"M24" #"M6" #"M3" #"M5" #"M4"}(second) @AS $CASCADE;
+// {#"M0" {#"M29"} #"M1"} @DISTRIBUTE("left-to-right", priority="low");
+// {#"M35" {#"M29"} #"M36"} @DISTRIBUTE("left-to-right", priority="low");
 //   /* Differential Matching & Symmetry Across Vertical Center Axes */
 //   {#"M0" #"M1"}(members) @AS $MATCHED;
 //   {#"M35" #"M36"}(members) @AS $MATCHED;
@@ -657,27 +657,27 @@ subckt L3_comparator_V1 CLK DCMPN DCMPP GND VDD VINN VINP VOSN VOSP
 //   {#"M12" #"M14"}(members) @AS $MATCHED;
 //   {#"M11" #"M13"}(members) @AS $MATCHED;
 //   %ax_stg1 = (9.5, -43);
-//   #"M35"(a) #"M36"(b) %ax_stg1(axis) @AS $MIRRORED;
-//   #"M0"(a) #"M1"(b) %ax_stg1(axis) @AS $MIRRORED;
-//   #"M9"(a) #"M8"(b) %ax_stg1(axis) @AS $MIRRORED;
+//   #"M35"(left) #"M36"(right) %ax_stg1(axis) @AS $MIRRORED_LAYOUT;
+//   #"M0"(left) #"M1"(right) %ax_stg1(axis) @AS $MIRRORED_LAYOUT;
+//   #"M9"(left) #"M8"(right) %ax_stg1(axis) @AS $MIRRORED_LAYOUT;
 //   %ax_stg2 = (94, -42);
-//   #"M12"(a) #"M14"(b) %ax_stg2(axis) @AS $MIRRORED;
-//   #"M11"(a) #"M13"(b) %ax_stg2(axis) @AS $MIRRORED;
-//   #"M25"(a) #"M28"(b) %ax_stg2(axis) @AS $MIRRORED;
-//   #"M26"(a) #"M27"(b) %ax_stg2(axis) @AS $MIRRORED;
-//   #"M6"(a) #"M5"(b) %ax_stg2(axis) @AS $MIRRORED;
-//   #"M3"(a) #"M4"(b) %ax_stg2(axis) @AS $MIRRORED;
-//   #"M20"(a) #"M24"(b) %ax_stg2(axis) @AS $MIRRORED;
-//   {#"M0" #"M18" #"M24" #"M4" #"M14"}(path) @AS(direction="left-to-right") $FLOW;
+//   #"M12"(left) #"M14"(right) %ax_stg2(axis) @AS $MIRRORED_LAYOUT;
+//   #"M11"(left) #"M13"(right) %ax_stg2(axis) @AS $MIRRORED_LAYOUT;
+//   #"M25"(left) #"M28"(right) %ax_stg2(axis) @AS $MIRRORED_LAYOUT;
+//   #"M26"(left) #"M27"(right) %ax_stg2(axis) @AS $MIRRORED_LAYOUT;
+//   #"M6"(left) #"M5"(right) %ax_stg2(axis) @AS $MIRRORED_LAYOUT;
+//   #"M3"(left) #"M4"(right) %ax_stg2(axis) @AS $MIRRORED_LAYOUT;
+//   #"M20"(left) #"M24"(right) %ax_stg2(axis) @AS $MIRRORED_LAYOUT;
+//   {#"M0" #"M18" #"M24" #"M4" #"M14"}(path) @AS $SIGNAL_FLOW; {#M0 #M18 #M24 #M4 #M14} @ORDER("left-to-right", priority="low");
 //   {%port_7 %port_8}(affected_objects) @AS(severity="schematic_annotation_quirk", category="duplicate_overlapping_port", description="Two overlapping IO_PORT symbols (%port_7 and %port_8) are placed on net VOSP at (-35, -55)") $CIRCUIT_ANOMALY_NOTE;
-//   {#"M9" #"M0" #"M35" #"M29"}(members) @AS $BRANCH;
-//   {#"M8" #"M1" #"M36" #"M29"}(members) @AS $BRANCH;
-//   {#"M15" #"M19"}(members) @AS $BRANCH;
-//   {#"M18" #"M23"}(members) @AS $BRANCH;
-//   {#"M12" #"M11"}(members) @AS $BRANCH;
-//   {#"M6" #"M3" #"M20"}(members) @AS $BRANCH;
-//   {#"M5" #"M4" #"M24"}(members) @AS $BRANCH;
-//   {#"M14" #"M13"}(members) @AS $BRANCH;
+// {#"M9" #"M0" #"M35" #"M29"} @ALIGN("x", priority="low");
+// {#"M8" #"M1" #"M36" #"M29"} @ALIGN("x", priority="low");
+// {#"M15" #"M19"} @ALIGN("x", priority="low");
+// {#"M18" #"M23"} @ALIGN("x", priority="low");
+// {#"M12" #"M11"} @ALIGN("x", priority="low");
+// {#"M6" #"M3" #"M20"} @ALIGN("x", priority="low");
+// {#"M5" #"M4" #"M24"} @ALIGN("x", priority="low");
+// {#"M14" #"M13"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-57, 36.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(-57, 7.03) (214.61, 33.23)} => @SET-STYLE $risca_note_box;

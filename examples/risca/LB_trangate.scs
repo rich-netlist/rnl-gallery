@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/LB_trangate
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt LB_trangate A B GND N P VDD
     M0 (A P B VDD) pch_mac l=30n w=5u multi=1 nf=10 sd=100n ad=2.5e-13 \
         as=2.75e-13 pd=6u ps=7.1u nrd=0.046570 nrs=0.046570 sa=349.754n \
@@ -77,15 +78,15 @@ subckt LB_trangate A B GND N P VDD
 //   %port_1 = $IO_PORT @ATTACH &"GND" => @PLACE(-23, 12) => @ORIENT("R0");
 //   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="right");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="right");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(-1, 1.6)
 //     };
 //   %port_2 = $IO_PORT @ATTACH &"P" => @PLACE(-6, -7) => @ORIENT("R0");
 //   %port_2 @SET-SYMBOL %input_port_symbol;
-//   %port_2 @TEXT("P", key="name");
+//   %port_2 @TEXT("P", key="netname");
 //   %port_3 = $IO_PORT @ATTACH &"N" => @PLACE(-6, 14) => @ORIENT("R0");
 //   %port_3 @SET-SYMBOL %input_port_symbol;
-//   %port_3 @TEXT("N", key="name");
+//   %port_3 @TEXT("N", key="netname");
 //   %port_4 = $IO_PORT @ATTACH &"A" => @PLACE(-11, 4) => @ORIENT("R0");
 //   %port_5 = $IO_PORT @ATTACH &"B" => @PLACE(5, 4) => @ORIENT("R0");
 //   %p0 = (-1, 4);
@@ -94,16 +95,19 @@ subckt LB_trangate A B GND N P VDD
 //   %wire_1 = &"B" @WIRE(mode="straight") {#"M0":3 %p0};
 //   %wire_2 = &"B" @WIRE(mode="straight") {%p0 #"M1":1};
 //   %p2 = (-7, 4);
-//   %wire_3 = &"A" @WIRE(mode="straight") {%port_4:p %p2};
+//   %wire_3 = &"A" @WIRE(mode="straight") {
+// %port_4:p %p2};
 //   %wire_4 = &"A" @WIRE(mode="straight") {%p2 #"M1":3};
 //   %wire_5 = &"A" @WIRE(mode="straight") {#"M0":1 %p2};
 //   %p3 = (-7, 14);
 //   %p4 = (-4, 14);
-//   %wire_6 = &"N" @WIRE(mode="straight") {%p3 %port_3:p %p4};
+//   %wire_6 = &"N" @WIRE(mode="straight") {
+// %p3 %port_3:p %p4};
 //   %wire_7 = &"N" @WIRE(mode="straight") {#"M1":2 %p4};
 //   %p5 = (-7, -7);
 //   %p6 = (-4, -7);
-//   %wire_8 = &"P" @WIRE(mode="straight") {%p5 %port_2:p %p6};
+//   %wire_8 = &"P" @WIRE(mode="straight") {
+// %p5 %port_2:p %p6};
 //   %wire_9 = &"P" @WIRE(mode="straight") {%p6 #"M0":2};
 //   %p7 = (-5, 3);
 //   %wire_10 = &"GND" @WIRE(mode="straight") {%p7 #"M1":4};
@@ -111,19 +115,17 @@ subckt LB_trangate A B GND N P VDD
 //   %p8 = (-3, 5);
 //   %wire_11 = &"VDD" @WIRE(mode="straight") {#"M0":4 %p8};
 //   %wire_11 @TEXT("VDD", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-3.7, 3);
-//   $JUNCTION @ATTACH %p0;
-//   $JUNCTION @ATTACH %p2
+//   $JUNCTION @ATTACH %p0 => @PLACE(-1, 4);
+//   $JUNCTION @ATTACH %p2 => @PLACE(-7, 4)
 // }
 // @RNL(author="gemini-4-argon") {
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
 //   /* LB_trangate: Complementary CMOS Analog Transmission Gate (w=5u, l=30n, nf=10) */
 //   #"M0"(pmos_pass) #"M1"(nmos_pass) @AS(role="bidirectional_analog_switch", width="5um_nf10") $CMOS_TRANGATE;
 //   {#"M0" #"M1"}(members) @AS $MATCHED;
-//   {%port_4 #"M0" %port_5}(path) @AS(direction="left-to-right") $FLOW;
-//   {%port_4 #"M1" %port_5}(path) @AS(direction="left-to-right") $FLOW;
-//   #"M0":4(pin) @AS $SUPPLY_HIGH;
-//   #"M1":4(pin) @AS $SUPPLY_LOW;
-//   {#"M1" #"M0"}(members) @AS $BRANCH;
+//   {%port_4 #"M0" %port_5}(path) @AS $SIGNAL_FLOW; {%port_4 #M0 %port_5} @ORDER("left-to-right", priority="low");
+//   {%port_4 #"M1" %port_5}(path) @AS $SIGNAL_FLOW; {%port_4 #M1 %port_5} @ORDER("left-to-right", priority="low");
+// {#"M1" #"M0"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-33, 40.96) @TEXT("Comment by Gemini-4-Argon", size=1.5) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(-33, 31.01) (66.17, 39.51)} => @SET-STYLE $risca_note_box;

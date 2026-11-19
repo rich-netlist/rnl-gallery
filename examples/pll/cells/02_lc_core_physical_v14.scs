@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt lc_core_physical_v14_pdk110_2 (vp vn b3 b4 b5 b6 b7 vdd vss)
@@ -30,17 +30,16 @@ ME7 (s7 b7 vss vss) nch w=0.00032 l=1.8e-07 ad=1.536e-10 as=1.536e-10 pd=0.00064
 //
 //   /* --- 1. Circuit Semantics & Static DC Currents --- */
 //   %cc = #MN0(m_pos) #MN1(m_neg) {#MT #MA3 #MA4 #MA5 #MA6 #MA7}(tail_sink) @AS(topology="NMOS_negative_gm") $CROSS_COUPLED_PAIR;
-//   %dp = #MN0(in_p) #MN1(in_n) {#MT}(tail) @AS $DIFFERENTIAL_PAIR;
-//   %cm = {#MR}(ref) {#MT #MA3 #MA4 #MA5 #MA6 #MA7}(out) @AS $CURRENT_MIRROR;
+// {#MN0 {#MT} #MN1} @DISTRIBUTE("left-to-right", priority="low");
 //   %tbank = #MT(startup_source) {#MA3 #MA4 #MA5 #MA6 #MA7}(switched_sources) {#ME3 #ME4 #ME5 #ME6 #ME7}(enable_switches) @AS(control_bits=5) $TAIL_CURRENT_BANK;
 //   %rcf = {#RREF #RF}(resistors) {#CF}(capacitors) @AS(cutoff_role="16Hz_tail_bias_noise_filter") $RC_NOISE_FILTER;
 //   {#XP #XN}   @AS $MATCHED;
 //   {#CP #CN}   @AS $MATCHED;
 //   {#MN0 #MN1} @AS $MATCHED;
 //   %ax = (32, _);
-//   #XP(a)  #XN(b)  %ax(axis) @AS $MIRRORED;
-//   #CP(a)  #CN(b)  %ax(axis) @AS $MIRRORED;
-//   #MN0(a) #MN1(b) %ax(axis) @AS $MIRRORED;
+//   #XP(left)  #XN(right)  %ax(axis) @AS $MIRRORED_LAYOUT;
+//   #CP(left)  #CN(right)  %ax(axis) @AS $MIRRORED_LAYOUT;
+//   #MN0(left) #MN1(right) %ax(axis) @AS $MIRRORED_LAYOUT;
 //
 //   /* Static DC Bias Currents */
 //   #RREF:1 @CURRENT("in"); #RREF:2 @CURRENT("out");
@@ -61,7 +60,7 @@ ME7 (s7 b7 vss vss) nch w=0.00032 l=1.8e-07 ad=1.536e-10 as=1.536e-10 pd=0.00064
 //   %pvp = $IO_PORT @ATTACH &vp => @PLACE(12, 25) => @ORIENT("R0");
 //   %pvn = $IO_PORT @ATTACH &vn => @PLACE(52, 25) => @ORIENT("MY");
 //   %pb  = $IO_PORT @ATTACH &b3 => @PLACE(6, -3)  => @ORIENT("R0");
-//   %pb @TEXT("b<7:3>", key="name");
+//   %pb @TEXT("b<7:3>", key="netname");
 //
 //   %sup_bias = $SUPPLY @ATTACH &vdd => @PLACE(6, 22);
 //   %sup_tank = $SUPPLY @ATTACH &vdd => @PLACE(32, 36);
@@ -98,39 +97,39 @@ ME7 (s7 b7 vss vss) nch w=0.00032 l=1.8e-07 ad=1.536e-10 as=1.536e-10 pd=0.00064
 //
 //   /* --- 3. Explicit Manhattan Wiring & Bus / Flying-Wire Labels --- */
 //   %jvdd_t = (32, 34);
-//   $JUNCTION @ATTACH %jvdd_t;
-//   &vdd @WIRE { %sup_tank:p %jvdd_t };
+//   $JUNCTION @ATTACH %jvdd_t => @PLACE(32, 34);
+//   &vdd @WIRE { %sup_tank::pin %jvdd_t };
 //   &vdd @WIRE { %jvdd_t (26, 34) #XP:p };
 //   &vdd @WIRE { %jvdd_t (38, 34) #XN:p };
-//   &vdd @WIRE { %sup_bias:p #RREF:1 };
+//   &vdd @WIRE { %sup_bias::pin #RREF:1 };
 //
 //   /* Differential Tank Nodes VP and VN */
 //   %jvp1 = (18, 25);
 //   %jvp2 = (26, 25);
-//   $JUNCTION @ATTACH %jvp1;
-//   $JUNCTION @ATTACH %jvp2;
-//   &vp @WIRE { %pvp:p %jvp1 %jvp2 #XP:n };
+//   $JUNCTION @ATTACH %jvp1 => @PLACE(18, 25);
+//   $JUNCTION @ATTACH %jvp2 => @PLACE(26, 25);
+//   &vp @WIRE { %pvp::pin %jvp1 %jvp2 #XP:n };
 //   &vp @WIRE { %jvp1 (18, 30) #CP:1 };
 //   &vp @WIRE { %jvp2 #MN0:d };
 //   &vp @WIRE { %jvp2 (30, 25) (30, 23) (34, 23) (34, 20) #MN1:g };
 //
 //   %jvn1 = (38, 25);
 //   %jvn2 = (46, 25);
-//   $JUNCTION @ATTACH %jvn1;
-//   $JUNCTION @ATTACH %jvn2;
-//   &vn @WIRE { #XN:n %jvn1 %jvn2 %pvn:p };
+//   $JUNCTION @ATTACH %jvn1 => @PLACE(38, 25);
+//   $JUNCTION @ATTACH %jvn2 => @PLACE(46, 25);
+//   &vn @WIRE { #XN:n %jvn1 %jvn2 %pvn::pin };
 //   &vn @WIRE { %jvn2 (46, 30) #CN:1 };
 //   &vn @WIRE { %jvn1 #MN1:d };
 //   &vn @WIRE { %jvn1 (34, 25) (34, 24) (30, 24) (30, 20) #MN0:g };
 //
-//   &vss @WIRE { #CP:2 %gnd_cp:p };
-//   &vss @WIRE { #CN:2 %gnd_cn:p };
+//   &vss @WIRE { #CP:2 %gnd_cp::pin };
+//   &vss @WIRE { #CN:2 %gnd_cn::pin };
 //
 //   /* Bias & Filter Wiring */
 //   %jnb1 = (6, 11);
 //   %jnb2 = (9, 11);
-//   $JUNCTION @ATTACH %jnb1;
-//   $JUNCTION @ATTACH %jnb2;
+//   $JUNCTION @ATTACH %jnb1 => @PLACE(6, 11);
+//   $JUNCTION @ATTACH %jnb2 => @PLACE(9, 11);
 //   &nb @WIRE { #RREF:2 %jnb1 #MR:d };
 //   &nb @WIRE { %jnb1 %jnb2 #RF:1 };
 //   &nb @WIRE { %jnb2 (9, 6) #MR:g };
@@ -141,12 +140,12 @@ ME7 (s7 b7 vss vss) nch w=0.00032 l=1.8e-07 ad=1.536e-10 as=1.536e-10 pd=0.00064
 //   %jnf4 = (48, 11);
 //   %jnf5 = (58, 11);
 //   %jnf6 = (68, 11);
-//   $JUNCTION @ATTACH %jnf0;
-//   $JUNCTION @ATTACH %jnf1;
-//   $JUNCTION @ATTACH %jnf3;
-//   $JUNCTION @ATTACH %jnf4;
-//   $JUNCTION @ATTACH %jnf5;
-//   $JUNCTION @ATTACH %jnf6;
+//   $JUNCTION @ATTACH %jnf0 => @PLACE(18, 11);
+//   $JUNCTION @ATTACH %jnf1 => @PLACE(28, 11);
+//   $JUNCTION @ATTACH %jnf3 => @PLACE(38, 11);
+//   $JUNCTION @ATTACH %jnf4 => @PLACE(48, 11);
+//   $JUNCTION @ATTACH %jnf5 => @PLACE(58, 11);
+//   $JUNCTION @ATTACH %jnf6 => @PLACE(68, 11);
 //   &nfilt @WIRE { #RF:2 %jnf0 #CF:1 };
 //   &nfilt @WIRE { %jnf0 %jnf1 (28, 6) #MT:g };
 //   &nfilt @WIRE { %jnf1 %jnf3 %jnf4 %jnf5 %jnf6 (78, 11) (78, 10) #MA7:g };
@@ -161,11 +160,11 @@ ME7 (s7 b7 vss vss) nch w=0.00032 l=1.8e-07 ad=1.536e-10 as=1.536e-10 pd=0.00064
 //   %jtail4 = (52, 15);
 //   %jtail5 = (62, 15);
 //   %jtail6 = (72, 15);
-//   $JUNCTION @ATTACH %jtail0;
-//   $JUNCTION @ATTACH %jtail3;
-//   $JUNCTION @ATTACH %jtail4;
-//   $JUNCTION @ATTACH %jtail5;
-//   $JUNCTION @ATTACH %jtail6;
+//   $JUNCTION @ATTACH %jtail0 => @PLACE(32, 15);
+//   $JUNCTION @ATTACH %jtail3 => @PLACE(42, 15);
+//   $JUNCTION @ATTACH %jtail4 => @PLACE(52, 15);
+//   $JUNCTION @ATTACH %jtail5 => @PLACE(62, 15);
+//   $JUNCTION @ATTACH %jtail6 => @PLACE(72, 15);
 //   &tail @WIRE { #MN0:s (26, 15) %jtail0 (38, 15) #MN1:s };
 //   &tail @WIRE { %jtail0 #MT:d };
 //   &tail @WIRE { (38, 15) %jtail3 %jtail4 %jtail5 %jtail6 (82, 15) #MA7:d };
@@ -175,7 +174,7 @@ ME7 (s7 b7 vss vss) nch w=0.00032 l=1.8e-07 ad=1.536e-10 as=1.536e-10 pd=0.00064
 //   &tail @WIRE { %jtail6 #MA6:d };
 //
 //   /* Single-Line Bus Trunk B<7:3> & Flying-Wire Enable Gate Labels */
-//   {&b3 &b4 &b5 &b6 &b7} @WIRE { %pb:p (18, -3) } => @TEXT("B<7:3>") => @SET-STYLE $bus_label_style;
+//   {&b3 &b4 &b5 &b6 &b7} @WIRE { %pb::pin (18, -3) } => @TEXT("B<7:3>") => @SET-STYLE $bus_label_style;
 //   &s3 @WIRE { #MA3:s #ME3:d }; #ME3:g @TEXT("b3", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
 //   &s4 @WIRE { #MA4:s #ME4:d }; #ME4:g @TEXT("b4", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
 //   &s5 @WIRE { #MA5:s #ME5:d }; #ME5:g @TEXT("b5", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
@@ -189,16 +188,16 @@ ME7 (s7 b7 vss vss) nch w=0.00032 l=1.8e-07 ad=1.536e-10 as=1.536e-10 pd=0.00064
 //   %jg4 = (52, 0);
 //   %jg5 = (62, 0);
 //   %jg6 = (72, 0);
-//   $JUNCTION @ATTACH %jg0;
-//   $JUNCTION @ATTACH %jg1;
-//   $JUNCTION @ATTACH %jg3;
-//   $JUNCTION @ATTACH %jg4;
-//   $JUNCTION @ATTACH %jg5;
-//   $JUNCTION @ATTACH %jg6;
+//   $JUNCTION @ATTACH %jg0 => @PLACE(18, 0);
+//   $JUNCTION @ATTACH %jg1 => @PLACE(32, 0);
+//   $JUNCTION @ATTACH %jg3 => @PLACE(42, 0);
+//   $JUNCTION @ATTACH %jg4 => @PLACE(52, 0);
+//   $JUNCTION @ATTACH %jg5 => @PLACE(62, 0);
+//   $JUNCTION @ATTACH %jg6 => @PLACE(72, 0);
 //   &vss @WIRE { #MR:s (6, 0) %jg0 %jg1 %jg3 %jg4 %jg5 %jg6 (82, 0) #ME7:s };
 //   &vss @WIRE { %jg0 #CF:2 };
 //   &vss @WIRE { %jg1 #MT:s };
-//   &vss @WIRE { %jg1 %gnd_main:p };
+//   &vss @WIRE { %jg1 %gnd_main::pin };
 //   &vss @WIRE { %jg3 #ME3:s };
 //   &vss @WIRE { %jg4 #ME4:s };
 //   &vss @WIRE { %jg5 #ME5:s };

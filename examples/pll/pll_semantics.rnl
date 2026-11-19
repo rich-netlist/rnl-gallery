@@ -1,8 +1,8 @@
 // Unified PLL Circuit Semantics, Symbols, and Visual Styles Package
 @RNL(type="header") {
-  @VERSION("0.3");
+  @VERSION("0.4");
   @PACKAGE(name="pll-semantics", version="0.3");
-  @USE-PACKAGE(name="rnl-std-full", version="0.3");
+  @USE-PACKAGE(name="rnl-std-all", version="0.4");
   @DEVICE(name="*", model="nch", terminals=["d", "g", "s", "b"]);
   @DEVICE(name="*", model="pch", terminals=["d", "g", "s", "b"]);
   @DEVICE(name="*", model="nmoscap", terminals=["p", "n"]);
@@ -93,10 +93,10 @@
   /* =========================================================================
    * 1. GLOBAL SUPPLY & GROUND NET SETS
    * ========================================================================= */
-  # @SELECT-NET(name="vdd") => @ADD-TO $SUPPLY_NET_SET;
-  # @SELECT-NET(name="vd")  => @ADD-TO $SUPPLY_NET_SET;
-  # @SELECT-NET(name="vss") => @ADD-TO $GROUND_NET_SET;
-  # @SELECT-NET(name="sub") => @ADD-TO $GROUND_NET_SET;
+  # @SELECT-NET(name="vdd", recursive=true) => @ADD-TO $SUPPLY_NET_SET;
+  # @SELECT-NET(name="vd", recursive=true)  => @ADD-TO $SUPPLY_NET_SET;
+  # @SELECT-NET(name="vss", recursive=true) => @ADD-TO $GROUND_NET_SET;
+  # @SELECT-NET(name="sub", recursive=true) => @ADD-TO $GROUND_NET_SET;
 
   /* =========================================================================
    * 2. VISUAL STYLES
@@ -1130,59 +1130,59 @@
   /* =========================================================================
    * 5. GLOBAL INSTANCE-TO-SYMBOL MAPPING RULES
    * ========================================================================= */
-  # @SELECT-INSTANCE(model="nch") => @SET-SYMBOL $NMOS;
-  # @SELECT-INSTANCE(model="pch") => @SET-SYMBOL $PMOS;
-  # @SELECT-INSTANCE(model="nmoscap") => @SET-SYMBOL $VARIABLE_CAPACITOR;
+  # @SELECT-INSTANCE(model="nch", recursive=true) => @SET-SYMBOL $NMOS;
+  # @SELECT-INSTANCE(model="pch", recursive=true) => @SET-SYMBOL $PMOS;
+  # @SELECT-INSTANCE(model="nmoscap", recursive=true) => @SET-SYMBOL $VARIABLE_CAPACITOR;
 
-  # @SELECT-INSTANCE(model="pll_inv_pdk110_*") => @SET-SYMBOL $INVERTER;
-  # @SELECT-INSTANCE(model="pll_tg_pdk110_*") => @SET-SYMBOL $TG_SYM;
-  # @SELECT-INSTANCE(model="tx_reference_buffer_pdk110_6") => @SET-SYMBOL $BUFFER;
-  # @SELECT-INSTANCE(model="pll_nand2_pdk110_15") => @SET-SYMBOL $NAND_2INPUT;
-  # @SELECT-INSTANCE(model="nor_fast_v14_pdk110_32") => @SET-SYMBOL $NOR_2INPUT;
-  # @SELECT-INSTANCE(model="pll_nor2_pdk110_68") => @SET-SYMBOL $NOR_2INPUT;
-  # @SELECT-INSTANCE(model="tx_and_pdk110_47") => @SET-SYMBOL $AND_2INPUT;
-  # @SELECT-INSTANCE(model="tx_or_pdk110_67") => @SET-SYMBOL $OR_2INPUT;
-  # @SELECT-INSTANCE(model="tx_xor_pdk110_66") => @SET-SYMBOL $XOR_2INPUT;
-  # @SELECT-INSTANCE(model="tx_mux_pdk110_64") => @SET-SYMBOL $MUX2_SYM;
-  # @SELECT-INSTANCE(model="cmp_physical_v14_pdk110_54") => @SET-SYMBOL $COMPARATOR;
+  # @SELECT-INSTANCE(model="pll_inv_pdk110_*", recursive=true) => @SET-SYMBOL $INVERTER;
+  # @SELECT-INSTANCE(model="pll_tg_pdk110_*", recursive=true) => @SET-SYMBOL $TG_SYM;
+  # @SELECT-INSTANCE(model="tx_reference_buffer_pdk110_6", recursive=true) => @SET-SYMBOL $BUFFER;
+  # @SELECT-INSTANCE(model="pll_nand2_pdk110_15", recursive=true) => @SET-SYMBOL $NAND_2INPUT;
+  # @SELECT-INSTANCE(model="nor_fast_v14_pdk110_32", recursive=true) => @SET-SYMBOL $NOR_2INPUT;
+  # @SELECT-INSTANCE(model="pll_nor2_pdk110_68", recursive=true) => @SET-SYMBOL $NOR_2INPUT;
+  # @SELECT-INSTANCE(model="tx_and_pdk110_47", recursive=true) => @SET-SYMBOL $AND_2INPUT;
+  # @SELECT-INSTANCE(model="tx_or_pdk110_67", recursive=true) => @SET-SYMBOL $OR_2INPUT;
+  # @SELECT-INSTANCE(model="tx_xor_pdk110_66", recursive=true) => @SET-SYMBOL $XOR_2INPUT;
+  # @SELECT-INSTANCE(model="tx_mux_pdk110_64", recursive=true) => @SET-SYMBOL $MUX2_SYM;
+  # @SELECT-INSTANCE(model="cmp_physical_v14_pdk110_54", recursive=true) => @SET-SYMBOL $COMPARATOR;
 
-  # @SELECT-INSTANCE(model="ff_fbdelay50_v14_pdk110_22") => @SET-SYMBOL $D_FLIP_FLOP_Q_ONLY;
-  # @SELECT-INSTANCE(model="pll_tspc_inv_pdk110_25") => @SET-SYMBOL $D_FLIP_FLOP_Q_ONLY;
-  # @SELECT-INSTANCE(model="rtcomb_ff_v13_pdk110_50") => @SET-SYMBOL $D_FLIP_FLOP_Q_ONLY;
-  # @SELECT-INSTANCE(model="tx_dff_r0_pdk110_58") => @SET-SYMBOL $DFF_R_SYM;
-  # @SELECT-INSTANCE(model="tx_dff_r1_pdk110_70") => @SET-SYMBOL $DFF_R_SYM;
-  # @SELECT-INSTANCE(model="tx_tff_pdk110_73") => @SET-SYMBOL $TFF_SYM;
-  # @SELECT-INSTANCE(model="pll_latch_pdk110_72") => @SET-SYMBOL $LATCH_SYM;
-  # @SELECT-INSTANCE(model="tx_latch_r_pdk110_60") => @SET-SYMBOL $LATCH_R_SYM;
+  # @SELECT-INSTANCE(model="ff_fbdelay50_v14_pdk110_22", recursive=true) => @SET-SYMBOL $D_FLIP_FLOP_Q_ONLY;
+  # @SELECT-INSTANCE(model="pll_tspc_inv_pdk110_25", recursive=true) => @SET-SYMBOL $D_FLIP_FLOP_Q_ONLY;
+  # @SELECT-INSTANCE(model="rtcomb_ff_v13_pdk110_50", recursive=true) => @SET-SYMBOL $D_FLIP_FLOP_Q_ONLY;
+  # @SELECT-INSTANCE(model="tx_dff_r0_pdk110_58", recursive=true) => @SET-SYMBOL $DFF_R_SYM;
+  # @SELECT-INSTANCE(model="tx_dff_r1_pdk110_70", recursive=true) => @SET-SYMBOL $DFF_R_SYM;
+  # @SELECT-INSTANCE(model="tx_tff_pdk110_73", recursive=true) => @SET-SYMBOL $TFF_SYM;
+  # @SELECT-INSTANCE(model="pll_latch_pdk110_72", recursive=true) => @SET-SYMBOL $LATCH_SYM;
+  # @SELECT-INSTANCE(model="tx_latch_r_pdk110_60", recursive=true) => @SET-SYMBOL $LATCH_R_SYM;
 
-  # @SELECT-INSTANCE(model="ff_static_fast_v14_pdk110_33") => @SET-SYMBOL $FF_2CLK_SYM;
-  # @SELECT-INSTANCE(model="ring_inv_latch_v14_pdk110_34") => @SET-SYMBOL $FF_2CLK_SYM;
-  # @SELECT-INSTANCE(model="ff_singlephase_v14_pdk110_44") => @SET-SYMBOL $FF_2CLK_SYM;
-  # @SELECT-INSTANCE(model="div3_fast_v14_pdk110_30") => @SET-SYMBOL $DIV3_SYM;
-  # @SELECT-INSTANCE(model="ring_sync_singlephase_v14_pdk110_42") => @SET-SYMBOL $RING_SYNC_SYM;
-  # @SELECT-INSTANCE(model="ring_tail_singlephase_v14_pdk110_46") => @SET-SYMBOL $RING_TAIL_SYM;
+  # @SELECT-INSTANCE(model="ff_static_fast_v14_pdk110_33", recursive=true) => @SET-SYMBOL $FF_2CLK_SYM;
+  # @SELECT-INSTANCE(model="ring_inv_latch_v14_pdk110_34", recursive=true) => @SET-SYMBOL $FF_2CLK_SYM;
+  # @SELECT-INSTANCE(model="ff_singlephase_v14_pdk110_44", recursive=true) => @SET-SYMBOL $FF_2CLK_SYM;
+  # @SELECT-INSTANCE(model="div3_fast_v14_pdk110_30", recursive=true) => @SET-SYMBOL $DIV3_SYM;
+  # @SELECT-INSTANCE(model="ring_sync_singlephase_v14_pdk110_42", recursive=true) => @SET-SYMBOL $RING_SYNC_SYM;
+  # @SELECT-INSTANCE(model="ring_tail_singlephase_v14_pdk110_46", recursive=true) => @SET-SYMBOL $RING_TAIL_SYM;
 
-  # @SELECT-INSTANCE(model="tx_inductor_pi_pdk110_3") => @SET-SYMBOL $IND_PI_SYM;
-  # @SELECT-INSTANCE(model="tx_cap_bank_switched_v4_pdk110_4") => @SET-SYMBOL $CAP_BANK_SYM;
-  # @SELECT-INSTANCE(model="lc_core_physical_v14_pdk110_2") => @SET-SYMBOL $LC_CORE_SYM;
-  # @SELECT-INSTANCE(model="lc_vco_physical_v14_pdk110_1") => @SET-SYMBOL $LC_VCO_SYM;
-  # @SELECT-INSTANCE(model="tx_bias_mid_v5_pdk110_5") => @SET-SYMBOL $BIAS_MID_SYM;
-  # @SELECT-INSTANCE(model="tx_sampler_pdk110_11") => @SET-SYMBOL $SAMPLER_SYM;
-  # @SELECT-INSTANCE(model="cp_physical_v14_pdk110_14") => @SET-SYMBOL $CP_SYM;
-  # @SELECT-INSTANCE(model="tx_loop_filter_v5_pdk110_17") => @SET-SYMBOL $LOOP_FILTER_SYM;
-  # @SELECT-INSTANCE(model="rf_light24s12_v14_pdk110_19") => @SET-SYMBOL $RF_BUF_SYM;
-  # @SELECT-INSTANCE(model="bank_pulsetrip_v14_pdk110_21") => @SET-SYMBOL $DIV_BANK_SYM;
-  # @SELECT-INSTANCE(model="rt_noise_scale4_v14_pdk110_49") => @SET-SYMBOL $RETIMER_SYM;
-  # @SELECT-INSTANCE(model="validity_physical_v14_pdk110_53") => @SET-SYMBOL $VALIDITY_SYM;
+  # @SELECT-INSTANCE(model="tx_inductor_pi_pdk110_3", recursive=true) => @SET-SYMBOL $IND_PI_SYM;
+  # @SELECT-INSTANCE(model="tx_cap_bank_switched_v4_pdk110_4", recursive=true) => @SET-SYMBOL $CAP_BANK_SYM;
+  # @SELECT-INSTANCE(model="lc_core_physical_v14_pdk110_2", recursive=true) => @SET-SYMBOL $LC_CORE_SYM;
+  # @SELECT-INSTANCE(model="lc_vco_physical_v14_pdk110_1", recursive=true) => @SET-SYMBOL $LC_VCO_SYM;
+  # @SELECT-INSTANCE(model="tx_bias_mid_v5_pdk110_5", recursive=true) => @SET-SYMBOL $BIAS_MID_SYM;
+  # @SELECT-INSTANCE(model="tx_sampler_pdk110_11", recursive=true) => @SET-SYMBOL $SAMPLER_SYM;
+  # @SELECT-INSTANCE(model="cp_physical_v14_pdk110_14", recursive=true) => @SET-SYMBOL $CP_SYM;
+  # @SELECT-INSTANCE(model="tx_loop_filter_v5_pdk110_17", recursive=true) => @SET-SYMBOL $LOOP_FILTER_SYM;
+  # @SELECT-INSTANCE(model="rf_light24s12_v14_pdk110_19", recursive=true) => @SET-SYMBOL $RF_BUF_SYM;
+  # @SELECT-INSTANCE(model="bank_pulsetrip_v14_pdk110_21", recursive=true) => @SET-SYMBOL $DIV_BANK_SYM;
+  # @SELECT-INSTANCE(model="rt_noise_scale4_v14_pdk110_49", recursive=true) => @SET-SYMBOL $RETIMER_SYM;
+  # @SELECT-INSTANCE(model="validity_physical_v14_pdk110_53", recursive=true) => @SET-SYMBOL $VALIDITY_SYM;
 
-  # @SELECT-INSTANCE(model="tx_pll_config_pdk110_57") => @SET-SYMBOL $PLL_CFG_SYM;
-  # @SELECT-INSTANCE(model="tx_fll_recenter109_v14_pdk110_69") => @SET-SYMBOL $FLL_CORE_SYM;
-  # @SELECT-INSTANCE(model="tx_fll_counter_pdk110_71") => @SET-SYMBOL $FLL_CNT_SYM;
-  # @SELECT-INSTANCE(model="tx_fll_snapshot_pdk110_74") => @SET-SYMBOL $FLL_SNAP_SYM;
-  # @SELECT-INSTANCE(model="tx_fll_dac_pdk110_75") => @SET-SYMBOL $FLL_DAC_SYM;
-  # @SELECT-INSTANCE(model="tx_pll_supervisor_capture_v14_pdk110_77") => @SET-SYMBOL $PLL_SUP_SYM;
-  # @SELECT-INSTANCE(model="tx_cp_timing_pdk110_78") => @SET-SYMBOL $CP_TIMING_SYM;
-  # @SELECT-INSTANCE(model="tx_frequency_watchdog_pdk110_80") => @SET-SYMBOL $WATCHDOG_SYM;
-  # @SELECT-INSTANCE(model="pll_control_recenter109_v14_pdk110_56") => @SET-SYMBOL $PLL_CTRL_SYM;
-  # @SELECT-INSTANCE(model="pll_capture_rt4_r48_recenter109_v14_pdk110_0") => @SET-SYMBOL $PLL_TOP_SYM
+  # @SELECT-INSTANCE(model="tx_pll_config_pdk110_57", recursive=true) => @SET-SYMBOL $PLL_CFG_SYM;
+  # @SELECT-INSTANCE(model="tx_fll_recenter109_v14_pdk110_69", recursive=true) => @SET-SYMBOL $FLL_CORE_SYM;
+  # @SELECT-INSTANCE(model="tx_fll_counter_pdk110_71", recursive=true) => @SET-SYMBOL $FLL_CNT_SYM;
+  # @SELECT-INSTANCE(model="tx_fll_snapshot_pdk110_74", recursive=true) => @SET-SYMBOL $FLL_SNAP_SYM;
+  # @SELECT-INSTANCE(model="tx_fll_dac_pdk110_75", recursive=true) => @SET-SYMBOL $FLL_DAC_SYM;
+  # @SELECT-INSTANCE(model="tx_pll_supervisor_capture_v14_pdk110_77", recursive=true) => @SET-SYMBOL $PLL_SUP_SYM;
+  # @SELECT-INSTANCE(model="tx_cp_timing_pdk110_78", recursive=true) => @SET-SYMBOL $CP_TIMING_SYM;
+  # @SELECT-INSTANCE(model="tx_frequency_watchdog_pdk110_80", recursive=true) => @SET-SYMBOL $WATCHDOG_SYM;
+  # @SELECT-INSTANCE(model="pll_control_recenter109_v14_pdk110_56", recursive=true) => @SET-SYMBOL $PLL_CTRL_SYM;
+  # @SELECT-INSTANCE(model="pll_capture_rt4_r48_recenter109_v14_pdk110_0", recursive=true) => @SET-SYMBOL $PLL_TOP_SYM
 }

@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt ring_inv_latch_v14_pdk110_34 (d ck ckb qb vdd vss)
@@ -14,7 +14,7 @@ XFB (fb x ckb ck vdd vss) pll_tg_pdk110_35
 //   /* --- 1. Circuit Semantics --- */
 //   %lat = #XT(input_pass) #XFB(feedback_pass) {#XO #XFI}(loop_inverters) @AS(transparent_level="high", reset_type="none") $STATIC_LATCH;
 //   #XO(forward_inv) #XFI(keeper_inv) @AS(keeper_length="180nm") $CROSS_COUPLED_KEEPER;
-//   {%pd #XT #XO %pqb} @AS(direction="left-to-right") $FLOW;
+//   {%pd #XT #XO %pqb} @AS $SIGNAL_FLOW; {%pd #XT #XO %pqb} @ORDER("left-to-right", priority="low");
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
 //   %pd   = $IO_PORT @ATTACH &d   => @PLACE(2, 16)  => @ORIENT("R0");
@@ -28,16 +28,16 @@ XFB (fb x ckb ck vdd vss) pll_tg_pdk110_35
 //   #XFB @PLACE(16, 8)  => @ORIENT("MY");
 //
 //   /* --- 3. Primary Loop Wiring & Flying-Wire Clock Labels --- */
-//   &d @WIRE { %pd:p #XT:a };
+//   &d @WIRE { %pd::pin #XT:a };
 //
 //   %jx = (13, 16);
-//   $JUNCTION @ATTACH %jx;
+//   $JUNCTION @ATTACH %jx => @PLACE(13, 16);
 //   &x @WIRE { #XT:b %jx #XO:a };
 //   &x @WIRE { %jx (13, 8) #XFB:b };
 //
 //   %jqb = (29, 16);
-//   $JUNCTION @ATTACH %jqb;
-//   &qb @WIRE { #XO:y %jqb %pqb:p };
+//   $JUNCTION @ATTACH %jqb => @PLACE(29, 16);
+//   &qb @WIRE { #XO:y %jqb %pqb::pin };
 //   &qb @WIRE { %jqb (29, 8) #XFI:a };
 //
 //   &fb @WIRE { #XFI:y #XFB:a };

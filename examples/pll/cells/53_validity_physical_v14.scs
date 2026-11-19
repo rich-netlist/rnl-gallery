@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt validity_physical_v14_pdk110_53 (rf hp hn amp_good phase_good vdd vss)
@@ -83,70 +83,70 @@ XG (window_ok amp_good phase_good vdd vss) tx_and_pdk110_47
 //
 //   /* --- 3. Explicit Manhattan Wiring & Flying-Wire Cross-Section Labels --- */
 //   %jrf = (10, 49);
-//   $JUNCTION @ATTACH %jrf;
-//   &rf @WIRE { %prf:p (6, 46) (6, 49) %jrf #MD:d };
+//   $JUNCTION @ATTACH %jrf => @PLACE(10, 49);
+//   &rf @WIRE { %prf::pin (6, 46) (6, 49) %jrf #MD:d };
 //   &rf @WIRE { %jrf (13, 49) (13, 46) #MD:g };
 //
 //   %jenv1 = (10, 43);
 //   %jenv2 = (18, 43);
-//   $JUNCTION @ATTACH %jenv1;
-//   $JUNCTION @ATTACH %jenv2;
+//   $JUNCTION @ATTACH %jenv1 => @PLACE(10, 43);
+//   $JUNCTION @ATTACH %jenv2 => @PLACE(18, 43);
 //   &env @WIRE { #MD:s %jenv1 #RE:1 };
 //   &env @WIRE { %jenv1 %jenv2 (28, 43) (28, 37) #XA:vp };
 //   &env @WIRE { %jenv2 #CE:1 };
 //
 //   %jg_env = (14, 36);
-//   $JUNCTION @ATTACH %jg_env;
+//   $JUNCTION @ATTACH %jg_env => @PLACE(14, 36);
 //   &vss @WIRE { #RE:2 (10, 36) %jg_env (18, 36) #CE:2 };
-//   &vss @WIRE { %jg_env %gnd_re:p };
+//   &vss @WIRE { %jg_env %gnd_re::pin };
 //
 //   %jv_mr = (10, 29);
-//   $JUNCTION @ATTACH %jv_mr;
-//   &vdd @WIRE { %sup_mr:p %jv_mr #MR:d };
+//   $JUNCTION @ATTACH %jv_mr => @PLACE(10, 29);
+//   &vdd @WIRE { %sup_mr::pin %jv_mr #MR:d };
 //   &vdd @WIRE { %jv_mr (13, 29) (13, 26) #MR:g };
 //
 //   %jer = (10, 23);
-//   $JUNCTION @ATTACH %jer;
+//   $JUNCTION @ATTACH %jer => @PLACE(10, 23);
 //   &envref @WIRE { #MR:s %jer #RR:1 };
 //   &envref @WIRE { %jer #RT0:1 };
-//   &vss    @WIRE { #RR:2 %gnd_rr:p };
+//   &vss    @WIRE { #RR:2 %gnd_rr::pin };
 //
 //   %jthr = (24, 23);
-//   $JUNCTION @ATTACH %jthr;
+//   $JUNCTION @ATTACH %jthr => @PLACE(24, 23);
 //   &threshold @WIRE { #RT0:2 %jthr #RT1:1 };
 //   &threshold @WIRE { %jthr (28, 23) (28, 35) #XA:vn };
-//   &vdd       @WIRE { %sup_rt1:p #RT1:2 };
+//   &vdd       @WIRE { %sup_rt1::pin #RT1:2 };
 //
-//   &amp_good @WIRE { #XA:out %pamp:p };
+//   &amp_good @WIRE { #XA:out %pamp::pin };
 //   #XG:b @TEXT("amp_good", dx=-0.5, dy=-0.3, halign="end") => @SET-STYLE $fly_label_style;
 //
 //   /* Window Comparator Wiring */
 //   %jhn = (6, 2);
-//   $JUNCTION @ATTACH %jhn;
-//   &hn @WIRE { %phn:p %jhn (6, 12) #RH0:1 };
+//   $JUNCTION @ATTACH %jhn => @PLACE(6, 2);
+//   &hn @WIRE { %phn::pin %jhn (6, 12) #RH0:1 };
 //   &hn @WIRE { %jhn (6, 1)  #RL0:1 };
 //
 //   %jwh = (20, 12);
-//   $JUNCTION @ATTACH %jwh;
+//   $JUNCTION @ATTACH %jwh => @PLACE(20, 12);
 //   &wh  @WIRE { #RH0:2 %jwh #RH1:1 };
 //   &wh  @WIRE { %jwh #XH:vp };
-//   &vdd @WIRE { %sup_rh1:p #RH1:2 };
+//   &vdd @WIRE { %sup_rh1::pin #RH1:2 };
 //
 //   %jwl = (20, 1);
-//   $JUNCTION @ATTACH %jwl;
+//   $JUNCTION @ATTACH %jwl => @PLACE(20, 1);
 //   &wl  @WIRE { #RL0:2 %jwl #RL1:1 };
 //   &wl  @WIRE { %jwl #XL:vn };
-//   &vss @WIRE { #RL1:2 %gnd_rl1:p };
+//   &vss @WIRE { #RL1:2 %gnd_rl1::pin };
 //
 //   %jhp = (26, 9);
-//   $JUNCTION @ATTACH %jhp;
-//   &hp @WIRE { %php:p %jhp (26, 10) #XH:vn };
+//   $JUNCTION @ATTACH %jhp => @PLACE(26, 9);
+//   &hp @WIRE { %php::pin %jhp (26, 10) #XH:vn };
 //   &hp @WIRE { %jhp (26, 3)  #XL:vp };
 //
 //   &upper_ok   @WIRE { #XH:out (40, 11) (40, 8) #XW:a };
 //   &lower_ok   @WIRE { #XL:out (40, 2)  (40, 6) #XW:b };
 //   &window_ok  @WIRE { #XW:y   (48, 7)  (48, 8) #XG:a };
-//   &phase_good @WIRE { #XG:y %pph:p };
+//   &phase_good @WIRE { #XG:y %pph::pin };
 //
 //   /* --- 4. Annotations & Defect Callout --- */
 //   #RE  @TEXT("1 M\Omega",  key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;
@@ -164,5 +164,10 @@ XG (window_ok amp_good phase_good vdd vss) tx_and_pdk110_47
 //   (30, -12.7) @TEXT("Requires only ~45 mVpk RF swing above DC VDD on vp to assert amp_good", halign="middle") => @SET-STYLE $param_style;
 //   (30, 54) @TEXT("validity_physical_v14_pdk110_53: RF Amplitude Envelope Monitor & Phase-Lock Window Detector", halign="middle") => @SET-STYLE $title_style;
 //   (30, 52.2) @TEXT("Rectifies RF Peak (MD, RE, CE) for amp_good (XA) + Checks |hp - hn| < 0.1*VDD Window (XH, XL, XW) for phase_good (XG)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+// @RNL {
+//   #XA @SET-SYMBOL(terminals=[[1, "inp"], [2, "inn"], [3, "out"]]) $COMPARATOR;
+//   #XH @SET-SYMBOL(terminals=[[1, "inp"], [2, "inn"], [3, "out"]]) $COMPARATOR;
+//   #XL @SET-SYMBOL(terminals=[[1, "inp"], [2, "inn"], [3, "out"]]) $COMPARATOR
 // }
 ends validity_physical_v14_pdk110_53

@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/L3_CDAC_V1
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt L3_CDAC_V1 COM LSB_5 LSB_4 LSB_3 LSB_2 LSB_1 LSB_0 MSB_4 MSB_3 \
         MSB_2 MSB_1 MSB_0 VREFN
     I11_7 (VREFN COM) LB_DAC_cunit
@@ -600,20 +601,20 @@ subckt L3_CDAC_V1 COM LSB_5 LSB_4 LSB_3 LSB_2 LSB_1 LSB_0 MSB_4 MSB_3 \
 //   %bundle_10 @TEXT("I4<16:1>", key="name");
 //   %port_0 = $IO_PORT @ATTACH &"COM" => @PLACE(-29, 7) => @ORIENT("R0");
 //   %bus_port_type_1 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"], ["p3", "net"], ["p4", "net"], ["p5", "net"]]) {};
-//   %bus_port_type_1_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3, 4, 5, 6])};
+//   %bus_port_type_1_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1", "p2", "p3", "p4", "p5"])};
 //   {&"LSB_5" &"LSB_4" &"LSB_3" &"LSB_2" &"LSB_1" &"LSB_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_1 = %bus_port_type_1 @ATTACH &"LSB_5" &"LSB_4" &"LSB_3" &"LSB_2" &"LSB_1" &"LSB_0" => @PLACE(-29, -3) => @ORIENT("R0");
 //   %port_1 @SET-SYMBOL %bus_port_type_1_symbol;
 //   %port_1_marker = $IO_PORT @ATTACH &"LSB_5" => @PLACE(-29, -3) => @ORIENT("R0");
-//   %port_1_marker @TEXT("LSB<5:0>", key="name");
+//   %port_1_marker @TEXT("LSB<5:0>", key="netname");
 //   %port_2 = $IO_PORT @ATTACH &"VREFN" => @PLACE(-29, -6) => @ORIENT("R0");
 //   %bus_port_type_3 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"], ["p3", "net"], ["p4", "net"]]) {};
-//   %bus_port_type_3_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3, 4, 5])};
+//   %bus_port_type_3_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1", "p2", "p3", "p4"])};
 //   {&"MSB_4" &"MSB_3" &"MSB_2" &"MSB_1" &"MSB_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_3 = %bus_port_type_3 @ATTACH &"MSB_4" &"MSB_3" &"MSB_2" &"MSB_1" &"MSB_0" => @PLACE(-29, 0) => @ORIENT("R0");
 //   %port_3 @SET-SYMBOL %bus_port_type_3_symbol;
 //   %port_3_marker = $IO_PORT @ATTACH &"MSB_4" => @PLACE(-29, 0) => @ORIENT("R0");
-//   %port_3_marker @TEXT("MSB<4:0>", key="name");
+//   %port_3_marker @TEXT("MSB<4:0>", key="netname");
 //   %p0 = (76, -9);
 //   %wire_0 = &"VREFN" @WIRE(mode="straight") {%p0 %bundle_0:1};
 //   %wire_0 @TEXT("VREFN", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(75.3, -6);
@@ -687,17 +688,17 @@ subckt L3_CDAC_V1 COM LSB_5 LSB_4 LSB_3 LSB_2 LSB_1 LSB_0 MSB_4 MSB_3 \
 //   %wire_33 = &"COM" @WIRE(mode="straight") {%bundle_4:2 %p20};
 //   %wire_34 = &"COM" @WIRE(mode="straight") {%p24 %p12};
 //   %wire_35 = &"COM" @WIRE(mode="straight") {%bundle_3:2 %p24};
-//   $JUNCTION @ATTACH %p12;
-//   $JUNCTION @ATTACH %p14;
-//   $JUNCTION @ATTACH %p15;
-//   $JUNCTION @ATTACH %p17;
-//   $JUNCTION @ATTACH %p18;
-//   $JUNCTION @ATTACH %p19;
-//   $JUNCTION @ATTACH %p20;
-//   $JUNCTION @ATTACH %p21;
-//   $JUNCTION @ATTACH %p22;
-//   $JUNCTION @ATTACH %p23;
-//   $JUNCTION @ATTACH %p24;
+//   $JUNCTION @ATTACH %p12 => @PLACE(68, 7);
+//   $JUNCTION @ATTACH %p14 => @PLACE(-21, 7);
+//   $JUNCTION @ATTACH %p15 => @PLACE(-10, 7);
+//   $JUNCTION @ATTACH %p17 => @PLACE(0, 7);
+//   $JUNCTION @ATTACH %p18 => @PLACE(43, 7);
+//   $JUNCTION @ATTACH %p19 => @PLACE(35, 7);
+//   $JUNCTION @ATTACH %p20 => @PLACE(27, 7);
+//   $JUNCTION @ATTACH %p21 => @PLACE(9, 7);
+//   $JUNCTION @ATTACH %p22 => @PLACE(18, 7);
+//   $JUNCTION @ATTACH %p23 => @PLACE(51, 7);
+//   $JUNCTION @ATTACH %p24 => @PLACE(59, 7);
 //   (0, 11) @TEXT("256, 128, 64, 32, 16; 16, 8, 4, 4, 2, 1", size=1, halign="middle", valign="baseline")
 // }
 // @RNL(author="gemini-4-argon") {
@@ -705,9 +706,19 @@ subckt L3_CDAC_V1 COM LSB_5 LSB_4 LSB_3 LSB_2 LSB_1 LSB_0 MSB_4 MSB_3 \
 //   /* L3_CDAC_V1: 11-Bit-Control (9-Bit Effective, 520C = 572fF) Dual-Redundant Binary Unit-Capacitor Array */
 //   {%bundle_9 %bundle_2 %bundle_6 %bundle_5 %bundle_10}(msb_binary_array) %bundle_4(interstage_redundancy) {%bundle_1 %bundle_7 %bundle_3 #"I10"}(lsb_sub_array) %bundle_8(intrastage_redundancy) %bundle_0(termination_caps) @AS(role="split_redundant_unit_capacitor_CDAC", total_unit_caps="520C_572fF", unit_c="1.1fF") $CDAC_WEIGHTED_ARRAY;
 //   {%bundle_9 %bundle_2 %bundle_6 %bundle_5 %bundle_10 %bundle_4 %bundle_1 %bundle_7 %bundle_8 %bundle_3 #"I10" %bundle_0}(members) @AS $MATCHED;
-//   {%bundle_9 %bundle_2 %bundle_6 %bundle_5 %bundle_10 %bundle_4 %bundle_1 %bundle_7 %bundle_8 %bundle_3 #"I10" %bundle_0}(path) @AS(direction="left-to-right") $FLOW;
-//   %bundle_9(members) @AS $BRANCH; %bundle_2(members) @AS $BRANCH; %bundle_6(members) @AS $BRANCH; %bundle_5(members) @AS $BRANCH; %bundle_10(members) @AS $BRANCH; %bundle_4(members) @AS $BRANCH;
-//   %bundle_1(members) @AS $BRANCH; %bundle_7(members) @AS $BRANCH; %bundle_8(members) @AS $BRANCH; %bundle_3(members) @AS $BRANCH; #"I10"(members) @AS $BRANCH; %bundle_0(members) @AS $BRANCH;
+//   {%bundle_9 %bundle_2 %bundle_6 %bundle_5 %bundle_10 %bundle_4 %bundle_1 %bundle_7 %bundle_8 %bundle_3 #"I10" %bundle_0}(path) @AS $SIGNAL_FLOW; {%bundle_9 %bundle_2 %bundle_6 %bundle_5 %bundle_10 %bundle_4 %bundle_1 %bundle_7 %bundle_8 %bundle_3 #I10 %bundle_0} @ORDER("left-to-right", priority="low");
+// %bundle_9(members) @AS $BRANCH;
+// %bundle_2(members) @AS $BRANCH;
+// %bundle_6(members) @AS $BRANCH;
+// %bundle_5(members) @AS $BRANCH;
+// %bundle_10(members) @AS $BRANCH;
+// %bundle_4(members) @AS $BRANCH;
+// %bundle_1(members) @AS $BRANCH;
+// %bundle_7(members) @AS $BRANCH;
+// %bundle_8(members) @AS $BRANCH;
+// %bundle_3(members) @AS $BRANCH;
+// #"I10"(members) @AS $BRANCH;
+// %bundle_0(members) @AS $BRANCH;
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-46, 54.89) @TEXT("Comment by Gemini-4-Argon", size=2) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(-46, 34.02) (117.26, 52.89)} => @SET-STYLE $risca_note_box;

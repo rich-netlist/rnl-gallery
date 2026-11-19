@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/LB_inv_trim
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt LB_inv_trim A GND SN_1 SN_0 SP_1 SP_0 VDD Y
     M6 (net2 GND net4 VDD) pch_mac l=30n w=520.0n multi=1 nf=1 sd=100n \
         ad=3.9e-14 as=3.9e-14 pd=1.19u ps=1.19u nrd=0.386982 nrs=0.386982 \
@@ -154,36 +155,36 @@ subckt LB_inv_trim A GND SN_1 SN_0 SP_1 SP_0 VDD Y
 //   %port_1 = $IO_PORT @ATTACH &"VDD" => @PLACE(-51, 18) => @ORIENT("R0");
 //   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="right");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="right");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(-1, 1.6)
 //     };
 //   %port_2 = $IO_PORT @ATTACH &"A" => @PLACE(-50, 13) => @ORIENT("R0");
 //   %port_2 @SET-SYMBOL %input_port_symbol;
-//   %port_2 @TEXT("A", key="name");
+//   %port_2 @TEXT("A", key="netname");
 //   %output_port_symbol = @DEFINE-SYMBOL(box=[0, -1, 2, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(0, -0.9) (0, 0.9) (1.1, 0.9) (2, 0) (1.1, -0.9) (0, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="left");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="left");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(1, 1.6)
 //     };
 //   %port_3 = $IO_PORT @ATTACH &"Y" => @PLACE(-52, 8) => @ORIENT("R0");
 //   %port_3 @SET-SYMBOL %output_port_symbol;
-//   %port_3 @TEXT("Y", key="name");
+//   %port_3 @TEXT("Y", key="netname");
 //   %bus_port_type_4 = @DEFINE(roles=[["p", "net"], ["p1", "net"]]) {};
-//   %bus_port_type_4_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2])};
+//   %bus_port_type_4_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1"])};
 //   {&"SN_1" &"SN_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_4 = %bus_port_type_4 @ATTACH &"SN_1" &"SN_0" => @PLACE(-50, 3) => @ORIENT("R0");
 //   %port_4 @SET-SYMBOL %bus_port_type_4_symbol;
 //   %port_4_marker = $IO_PORT @ATTACH &"SN_1" => @PLACE(-50, 3) => @ORIENT("R0");
 //   %port_4_marker @SET-SYMBOL %input_port_symbol;
-//   %port_4_marker @TEXT("SN<1:0>", key="name");
+//   %port_4_marker @TEXT("SN<1:0>", key="netname");
 //   %bus_port_type_5 = @DEFINE(roles=[["p", "net"], ["p1", "net"]]) {};
-//   %bus_port_type_5_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2])};
+//   %bus_port_type_5_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1"])};
 //   {&"SP_1" &"SP_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_5 = %bus_port_type_5 @ATTACH &"SP_1" &"SP_0" => @PLACE(-50, -2) => @ORIENT("R0");
 //   %port_5 @SET-SYMBOL %bus_port_type_5_symbol;
 //   %port_5_marker = $IO_PORT @ATTACH &"SP_1" => @PLACE(-50, -2) => @ORIENT("R0");
 //   %port_5_marker @SET-SYMBOL %input_port_symbol;
-//   %port_5_marker @TEXT("SP<1:0>", key="name");
+//   %port_5_marker @TEXT("SP<1:0>", key="netname");
 //   %wire_0 = &"net6" @WIRE(mode="straight") {#"M2":1 #"M7":3};
 //   %p0 = (-21, 30);
 //   %wire_1 = &"SP_1" @WIRE(mode="straight") {#"M5":2 %p0};
@@ -284,18 +285,18 @@ subckt LB_inv_trim A GND SN_1 SN_0 SP_1 SP_0 VDD Y
 //   %wire_51 @TEXT("GND", size=1, halign="middle", valign="baseline") => @PLACE(6, -27.3);
 //   %wire_54 @TEXT("GND", size=1, halign="middle", valign="top") => @PLACE(0, 21.3);
 //   %wire_49 @TEXT("GND", size=1, halign="middle", valign="top") => @PLACE(0, 13.3);
-//   $JUNCTION @ATTACH %p5;
-//   $JUNCTION @ATTACH %p6;
-//   $JUNCTION @ATTACH %p9;
-//   $JUNCTION @ATTACH %p11;
-//   $JUNCTION @ATTACH %p13;
-//   $JUNCTION @ATTACH %p14;
-//   $JUNCTION @ATTACH %p15;
-//   $JUNCTION @ATTACH %p18;
-//   $JUNCTION @ATTACH %p22;
-//   $JUNCTION @ATTACH %p24;
-//   $JUNCTION @ATTACH %p26;
-//   $JUNCTION @ATTACH %p29
+//   $JUNCTION @ATTACH %p5 => @PLACE(1, -1);
+//   $JUNCTION @ATTACH %p6 => @PLACE(5, -1);
+//   $JUNCTION @ATTACH %p9 => @PLACE(5, -10);
+//   $JUNCTION @ATTACH %p11 => @PLACE(5, 8);
+//   $JUNCTION @ATTACH %p13 => @PLACE(7, 13);
+//   $JUNCTION @ATTACH %p14 => @PLACE(-4, 23);
+//   $JUNCTION @ATTACH %p15 => @PLACE(7, 21);
+//   $JUNCTION @ATTACH %p18 => @PLACE(-15, 23);
+//   $JUNCTION @ATTACH %p22 => @PLACE(-4, -26);
+//   $JUNCTION @ATTACH %p24 => @PLACE(-16, -26);
+//   $JUNCTION @ATTACH %p26 => @PLACE(7, -15);
+//   $JUNCTION @ATTACH %p29 => @PLACE(7, -24)
 // }
 // @RNL(author="gemini-4-argon") {
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
@@ -303,17 +304,11 @@ subckt LB_inv_trim A GND SN_1 SN_0 SP_1 SP_0 VDD Y
 //   {#"M1" #"M0"}(core_inverter) {#"M3" #"M6" #"M4" #"M5"}(pmos_header_bank) {#"M7" #"M2" #"M8" #"M9"}(nmos_footer_bank) @AS(role="current_starved_delay_trimmed_inverter", tuning_bits="2b_SP_plus_2b_SN") $STARVED_DELAY_INV;
 //   {#"M3" #"M6" #"M4" #"M5"}(members) @AS $MATCHED;
 //   {#"M7" #"M2" #"M8" #"M9"}(members) @AS $MATCHED;
-//   {#"M3" #"M6" #"M1" #"M0" #"M7" #"M2"}(members) @AS $BRANCH;
-//   {%p4 #"M1" %p7}(path) @AS(direction="left-to-right") $FLOW;
-//   {%p4 #"M0" %p7}(path) @AS(direction="left-to-right") $FLOW;
-//   #"M3":3(pin) @AS $SUPPLY_HIGH;
-//   #"M4":3(pin) @AS $SUPPLY_HIGH;
-//   #"M5":3(pin) @AS $SUPPLY_HIGH;
-//   #"M2":3(pin) @AS $SUPPLY_LOW;
-//   #"M8":3(pin) @AS $SUPPLY_LOW;
-//   #"M9":3(pin) @AS $SUPPLY_LOW;
-//   {#"M4" #"M8"}(members) @AS $BRANCH;
-//   {#"M5" #"M9"}(members) @AS $BRANCH;
+// {#"M3" #"M6" #"M1" #"M0" #"M7" #"M2"} @ALIGN("x", priority="low");
+//   {%p4 #M1 %p7} @ORDER("left-to-right", priority="low");
+//   {%p4 #M0 %p7} @ORDER("left-to-right", priority="low");
+// {#"M4" #"M8"} @ALIGN("x", priority="low");
+// {#"M5" #"M9"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-63, 66.29) @TEXT("Comment by Gemini-4-Argon", size=2) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(-63, 49.02) (74.23, 64.29)} => @SET-STYLE $risca_note_box;

@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/LB_DAC_cunit
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt LB_DAC_cunit BOT TOP
     C0 (TOP BOT) capacitor c=1.1f
 // @RNL(author="rnl-virtuoso") {
@@ -23,17 +24,19 @@ subckt LB_DAC_cunit BOT TOP
 //   %port_1 = $IO_PORT @ATTACH &"BOT" => @PLACE(-12, 4) => @ORIENT("R0");
 //   %p0 = (-13, 4);
 //   %p1 = (-2, 4);
-//   %wire_0 = &"BOT" @WIRE(mode="straight") {%p0 %port_1:p %p1};
+//   %wire_0 = &"BOT" @WIRE(mode="straight") {
+// %p0 %port_1:p %p1};
 //   %wire_1 = &"BOT" @WIRE(mode="straight") {%p1 #"C0":2};
 //   %p2 = (-2, 16);
 //   %wire_2 = &"TOP" @WIRE(mode="straight") {#"C0":1 %p2};
-//   %wire_3 = &"TOP" @WIRE(mode="straight") {%port_0:p %p2}
+//   %wire_3 = &"TOP" @WIRE(mode="straight") {
+// %port_0:p %p2}
 // }
 // @RNL(author="gemini-4-argon") {
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
 //   /* LB_DAC_cunit: 1.1fF Unit Capacitor Cell for Binary-Weighted SAR CDAC Array */
 //   #"C0"(cap) @AS(role="SAR_CDAC_unit_capacitor", capacitance="1.1fF") $UNIT_CAP_CELL;
-//   #"C0"(members) @AS $BRANCH;
+// #"C0"(members) @AS $BRANCH;
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-22, 41.96) @TEXT("Comment by Gemini-4-Argon", size=1.5) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(-22, 32.01) (82.05, 40.51)} => @SET-STYLE $risca_note_box;

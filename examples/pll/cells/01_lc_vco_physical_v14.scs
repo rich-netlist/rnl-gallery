@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt lc_vco_physical_v14_pdk110_1 (vp vn ctrl b0 b1 b2 b3 b4 b5 b6 b7 vdd vss)
@@ -17,8 +17,8 @@ CVN (vn ctrl) nmoscap lr=2e-06 wr=4.5e-06 mr=1
 //   {#CVP #CVN} @AS $MATCHED;
 //   {#XBP #XBN} @AS $MATCHED;
 //   %ax = (32, _);
-//   #XBP(a) #XBN(b) %ax(axis) @AS $MIRRORED;
-//   #CVP(a) #CVN(b) %ax(axis) @AS $MIRRORED;
+//   #XBP(left) #XBN(right) %ax(axis) @AS $MIRRORED_LAYOUT;
+//   #CVP(left) #CVN(right) %ax(axis) @AS $MIRRORED_LAYOUT;
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
 //   {&b1 &b2 &b3 &b4 &b5 &b6 &b7} @REMOVE-FROM $PORT_FILL_SET;
@@ -26,7 +26,7 @@ CVN (vn ctrl) nmoscap lr=2e-06 wr=4.5e-06 mr=1
 //   %pvn   = $IO_PORT @ATTACH &vn   => @PLACE(60, 28) => @ORIENT("MY");
 //   %pctrl = $IO_PORT @ATTACH &ctrl => @PLACE(4, 18)  => @ORIENT("R0");
 //   %pb    = $IO_PORT @ATTACH &b0   => @PLACE(4, 6)   => @ORIENT("R0");
-//   %pb @TEXT("b<7:0>", key="name");
+//   %pb @TEXT("b<7:0>", key="netname");
 //
 //   #XBP @PLACE(14, 14) => @ORIENT("R0");
 //   #CVP @PLACE(23, 22) => @ORIENT("R0");
@@ -37,31 +37,31 @@ CVN (vn ctrl) nmoscap lr=2e-06 wr=4.5e-06 mr=1
 //   /* --- 3. Explicit Manhattan & Single-Line Bus Wiring --- */
 //   %jvp1 = (14, 28);
 //   %jvp2 = (23, 28);
-//   $JUNCTION @ATTACH %jvp1;
-//   $JUNCTION @ATTACH %jvp2;
-//   &vp @WIRE { %pvp:p %jvp1 %jvp2 (28, 28) #XL:vp };
+//   $JUNCTION @ATTACH %jvp1 => @PLACE(14, 28);
+//   $JUNCTION @ATTACH %jvp2 => @PLACE(23, 28);
+//   &vp @WIRE { %pvp::pin %jvp1 %jvp2 (28, 28) #XL:vp };
 //   &vp @WIRE { %jvp1 #XBP:tank };
 //   &vp @WIRE { %jvp2 #CVP:p };
 //
 //   %jvn1 = (41, 28);
 //   %jvn2 = (50, 28);
-//   $JUNCTION @ATTACH %jvn1;
-//   $JUNCTION @ATTACH %jvn2;
-//   &vn @WIRE { #XL:vn (36, 28) %jvn1 %jvn2 %pvn:p };
+//   $JUNCTION @ATTACH %jvn1 => @PLACE(41, 28);
+//   $JUNCTION @ATTACH %jvn2 => @PLACE(50, 28);
+//   &vn @WIRE { #XL:vn (36, 28) %jvn1 %jvn2 %pvn::pin };
 //   &vn @WIRE { %jvn1 #CVN:p };
 //   &vn @WIRE { %jvn2 #XBN:tank };
 //
 //   %jctrl = (23, 18);
-//   $JUNCTION @ATTACH %jctrl;
-//   &ctrl @WIRE { %pctrl:p %jctrl #CVP:n };
+//   $JUNCTION @ATTACH %jctrl => @PLACE(23, 18);
+//   &ctrl @WIRE { %pctrl::pin %jctrl #CVP:n };
 //   &ctrl @WIRE { %jctrl (41, 18) #CVN:n };
 //
 //   /* Single-Line Coarse Tuning Bus B<7:0> and Tail Bank Sub-Bus B<7:3> */
 //   %jb_bp = (14, 6);
 //   %jb_xl = (32, 6);
-//   $JUNCTION @ATTACH %jb_bp;
-//   $JUNCTION @ATTACH %jb_xl;
-//   {&b0 &b1 &b2 &b3 &b4 &b5 &b6 &b7} @WIRE { %pb:p %jb_bp #XBP:b0 } => @TEXT("B<7:0>") => @SET-STYLE $bus_label_style;
+//   $JUNCTION @ATTACH %jb_bp => @PLACE(14, 6);
+//   $JUNCTION @ATTACH %jb_xl => @PLACE(32, 6);
+//   {&b0 &b1 &b2 &b3 &b4 &b5 &b6 &b7} @WIRE { %pb::pin %jb_bp #XBP:b0 } => @TEXT("B<7:0>") => @SET-STYLE $bus_label_style;
 //   {&b0 &b1 &b2 &b3 &b4 &b5 &b6 &b7} @WIRE { %jb_bp %jb_xl (50, 6) #XBN:b0 } => @TEXT("B<7:0>") => @SET-STYLE $bus_label_style;
 //   {&b3 &b4 &b5 &b6 &b7} @WIRE { %jb_xl #XL:b3 } => @TEXT("B<7:3>") => @SET-STYLE $bus_label_style;
 //

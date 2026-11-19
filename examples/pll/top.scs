@@ -1,8 +1,9 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="./pll_semantics.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 include "cells/00_pll_capture_rt4_r48_recenter109_v14.scs"
 include "cells/01_lc_vco_physical_v14.scs"
 include "cells/02_lc_core_physical_v14.scs"
@@ -88,23 +89,23 @@ XPLL (ref reset apply k0 k1 k2 k3 k4 k5 out qualified range_error cfg_ready freq
 // @RNL(author="gemini-4-argon") {
 //   /* --- 1. Circuit Semantics --- */
 //   {#XPLL} @AS(purpose="top_level_PLL_chip_macro") $TAPERED_BUFFER_CHAIN;
-//   {%pref #XPLL %pout} @AS(direction="left-to-right") $FLOW;
+//   {%pref #XPLL %pout} @AS $SIGNAL_FLOW; {%pref #XPLL %pout} @ORDER("left-to-right", priority="low");
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
 //   {&k1 &k2 &k3 &k4 &k5} @REMOVE-FROM $PORT_FILL_SET;
-//   %pref   = $IO_PORT @ATTACH &ref            => @PLACE(4, 28) => @ORIENT("R0");
-//   %prst   = $IO_PORT @ATTACH &reset          => @PLACE(4, 25) => @ORIENT("R0");
-//   %papply = $IO_PORT @ATTACH &apply          => @PLACE(4, 22) => @ORIENT("R0");
-//   %pk     = $IO_PORT @ATTACH &k0             => @PLACE(4, 16) => @ORIENT("R0");
-//   %pk @TEXT("k<5:0>", key="name");
+//   %pref   = $NET_LABEL @ATTACH &ref            => @PLACE(4, 28) => @ORIENT("R0");
+//   %prst   = $NET_LABEL @ATTACH &reset          => @PLACE(4, 25) => @ORIENT("R0");
+//   %papply = $NET_LABEL @ATTACH &apply          => @PLACE(4, 22) => @ORIENT("R0");
+//   %pk     = $NET_LABEL @ATTACH &k0             => @PLACE(4, 16) => @ORIENT("R0");
+//   %pk @TEXT("k<5:0>", key="netname");
 //
-//   %pout   = $IO_PORT @ATTACH &out            => @PLACE(44, 28) => @ORIENT("MY");
-//   %pqual  = $IO_PORT @ATTACH &qualified      => @PLACE(44, 24) => @ORIENT("MY");
-//   %prng   = $IO_PORT @ATTACH &range_error    => @PLACE(44, 21) => @ORIENT("MY");
-//   %prdy   = $IO_PORT @ATTACH &cfg_ready      => @PLACE(44, 18) => @ORIENT("MY");
-//   %pfrq   = $IO_PORT @ATTACH &frequency_good => @PLACE(44, 15) => @ORIENT("MY");
-//   %pph    = $IO_PORT @ATTACH &phase_good     => @PLACE(44, 12) => @ORIENT("MY");
-//   %pamp   = $IO_PORT @ATTACH &amp_good       => @PLACE(44, 9)  => @ORIENT("MY");
+//   %pout   = $NET_LABEL @ATTACH &out            => @PLACE(44, 28) => @ORIENT("MY");
+//   %pqual  = $NET_LABEL @ATTACH &qualified      => @PLACE(44, 24) => @ORIENT("MY");
+//   %prng   = $NET_LABEL @ATTACH &range_error    => @PLACE(44, 21) => @ORIENT("MY");
+//   %prdy   = $NET_LABEL @ATTACH &cfg_ready      => @PLACE(44, 18) => @ORIENT("MY");
+//   %pfrq   = $NET_LABEL @ATTACH &frequency_good => @PLACE(44, 15) => @ORIENT("MY");
+//   %pph    = $NET_LABEL @ATTACH &phase_good     => @PLACE(44, 12) => @ORIENT("MY");
+//   %pamp   = $NET_LABEL @ATTACH &amp_good       => @PLACE(44, 9)  => @ORIENT("MY");
 //
 //   %sup = $SUPPLY @ATTACH &vdd => @PLACE(24, 36);
 //   %gnd = $GROUND @ATTACH &vss => @PLACE(24, 2);
@@ -112,21 +113,21 @@ XPLL (ref reset apply k0 k1 k2 k3 k4 k5 out qualified range_error cfg_ready freq
 //   #XPLL @PLACE(24, 20) => @ORIENT("R0");
 //
 //   /* --- 3. Explicit Manhattan & Single-Line Bus Wiring --- */
-//   &ref   @WIRE { %pref:p   #XPLL:ref };
-//   &reset @WIRE { %prst:p   #XPLL:reset };
-//   &apply @WIRE { %papply:p #XPLL:apply };
-//   {&k0 &k1 &k2 &k3 &k4 &k5} @WIRE { %pk:p #XPLL:k0 } => @TEXT("K<5:0>") => @SET-STYLE $bus_label_style;
+//   &ref   @WIRE { %pref::pin   #XPLL:ref };
+//   &reset @WIRE { %prst::pin   #XPLL:reset };
+//   &apply @WIRE { %papply::pin #XPLL:apply };
+//   {&k0 &k1 &k2 &k3 &k4 &k5} @WIRE { %pk::pin #XPLL:k0 } => @TEXT("K<5:0>") => @SET-STYLE $bus_label_style;
 //
-//   &out            @WIRE { #XPLL:out            %pout:p };
-//   &qualified      @WIRE { #XPLL:qualified      %pqual:p };
-//   &range_error    @WIRE { #XPLL:range_error    %prng:p };
-//   &cfg_ready      @WIRE { #XPLL:cfg_ready      %prdy:p };
-//   &frequency_good @WIRE { #XPLL:frequency_good %pfrq:p };
-//   &phase_good     @WIRE { #XPLL:phase_good     %pph:p };
-//   &amp_good       @WIRE { #XPLL:amp_good       %pamp:p };
+//   &out            @WIRE { #XPLL:out            %pout::pin };
+//   &qualified      @WIRE { #XPLL:qualified      %pqual::pin };
+//   &range_error    @WIRE { #XPLL:range_error    %prng::pin };
+//   &cfg_ready      @WIRE { #XPLL:cfg_ready      %prdy::pin };
+//   &frequency_good @WIRE { #XPLL:frequency_good %pfrq::pin };
+//   &phase_good     @WIRE { #XPLL:phase_good     %pph::pin };
+//   &amp_good       @WIRE { #XPLL:amp_good       %pamp::pin };
 //
-//   &vdd @WIRE { %sup:p #XPLL:vdd };
-//   &vss @WIRE { #XPLL:vss %gnd:p };
+//   &vdd @WIRE { %sup::pin #XPLL:vdd };
+//   &vss @WIRE { #XPLL:vss %gnd::pin };
 //
 //   /* --- 4. Annotations --- */
 //   (24, 44) @TEXT("top.scs: Top-Level Hierarchical Netlist Instantiating XPLL (pll_capture_rt4_r48_recenter109_v14_pdk110_0)", halign="middle") => @SET-STYLE $title_style;

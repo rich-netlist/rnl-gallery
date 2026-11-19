@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt ring_tail_singlephase_v14_pdk110_46 (d clk clkb load loadb init selected q vdd vss)
@@ -15,7 +15,7 @@ XF (din clk clkb q vdd vss) ff_singlephase_v14_pdk110_44
 //
 //   /* --- 1. Circuit Semantics --- */
 //   %mux = {#XDATA #XINIT}(mux_cells) @AS(role="gated_modulus_tail_mux") $MULTIPLEXER_BANK;
-//   {#XEN #XI #XDATA #XF %pq} @AS(direction="left-to-right") $FLOW;
+//   {#XEN #XI #XDATA #XF %pq} @AS $SIGNAL_FLOW; {#XEN #XI #XDATA #XF %pq} @ORDER("left-to-right", priority="low");
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
 //   %pd     = $IO_PORT @ATTACH &d        => @PLACE(2, 16)  => @ORIENT("R0");
@@ -36,13 +36,13 @@ XF (din clk clkb q vdd vss) ff_singlephase_v14_pdk110_44
 //   #XF    @PLACE(38, 12) => @ORIENT("R0");
 //
 //   /* --- 3. Primary Signal Flow & Flying-Wire Control Labels --- */
-//   &loadb    @WIRE { %ploadb:p #XEN:a };
-//   &selected @WIRE { %psel:p   #XEN:b };
+//   &loadb    @WIRE { %ploadb::pin #XEN:a };
+//   &selected @WIRE { %psel::pin   #XEN:b };
 //   &dopen    @WIRE { #XEN:y    #XI:a } => @TEXT("dopen") => @SET-STYLE $fly_label_style;
 //   &dclose   @WIRE { #XI:y (24, 23) } => @TEXT("dclose") => @SET-STYLE $fly_label_style;
 //
-//   &d    @WIRE { %pd:p    #XDATA:a };
-//   &init @WIRE { %pinit:p #XINIT:a };
+//   &d    @WIRE { %pd::pin    #XDATA:a };
+//   &init @WIRE { %pinit::pin #XINIT:a };
 //
 //   #XDATA:on  @TEXT("dopen",  dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;
 //   #XDATA:off @TEXT("dclose", dx=0, dy=0.5,  halign="middle") => @SET-STYLE $fly_label_style;
@@ -51,16 +51,16 @@ XF (din clk clkb q vdd vss) ff_singlephase_v14_pdk110_44
 //
 //   %jdin1 = (27, 14);
 //   %jdin2 = (27, 6);
-//   $JUNCTION @ATTACH %jdin1;
-//   $JUNCTION @ATTACH %jdin2;
+//   $JUNCTION @ATTACH %jdin1 => @PLACE(27, 14);
+//   $JUNCTION @ATTACH %jdin2 => @PLACE(27, 6);
 //   &din @WIRE { #XDATA:b (27, 16) %jdin1 #XF:d };
 //   &din @WIRE { %jdin1 %jdin2 #RKEEP:1 };
 //   &din @WIRE { #XINIT:b %jdin2 };
 //
-//   &vss  @WIRE { #RKEEP:2 %gnd:p };
-//   &clk  @WIRE { %pclk:p  #XF:clk };
-//   &clkb @WIRE { %pclkb:p #XF:clkb };
-//   &q    @WIRE { #XF:q    %pq:p };
+//   &vss  @WIRE { #RKEEP:2 %gnd::pin };
+//   &clk  @WIRE { %pclk::pin  #XF:clk };
+//   &clkb @WIRE { %pclkb::pin #XF:clkb };
+//   &q    @WIRE { #XF:q    %pq::pin };
 //
 //   /* --- 4. Annotations --- */
 //   #RKEEP @TEXT("10 M\Omega", key="value", dx=1.5, dy=-1, halign="start") => @SET-STYLE $param_style;

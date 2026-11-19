@@ -1,9 +1,10 @@
 // RNL cell decap/V1_decap
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="../eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="../eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="../eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="../eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt V1_decap GND VDD
     C0 (VDD GND) cfmom_2t nr=28 lr=1.67u w=70n s=70n stm=2 spm=7 multi=2
 // @RNL(author="rnl-virtuoso") {
@@ -51,9 +52,7 @@ subckt V1_decap GND VDD
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="../risca_semantics.rnl");
 //   /* V1_decap: MOM Supply Decoupling Capacitor Cell with Substrate Tap (stm=2, spm=7, multi=2) */
 //   #"C0"(caps) @AS(role="MOM_supply_decoupling_capacitor", substrate_tap="with_substrate_tap_stm2") $MOM_DECAP;
-//   #"C0":1(pin) @AS $SUPPLY_HIGH;
-//   #"C0":2(pin) @AS $SUPPLY_LOW;
-//   #"C0"(members) @AS $BRANCH;
+// #"C0"(members) @AS $BRANCH;
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-40, 42.96) @TEXT("Comment by Gemini-4-Argon", size=1.5) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(-40, 33.01) (94.24, 41.51)} => @SET-STYLE $risca_note_box;

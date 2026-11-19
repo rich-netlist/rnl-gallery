@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/L3_input_MUX_V1
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt L3_input_MUX_V1 FLIP GND ON_2 ON_1 ON_0 VCM VDD VINN_2 VINN_1 \
         VINP_2 VINP_1 VOUTN VOUTP
     I23 (FLIP net5 VDD GND) INVD1BWP12T30P140
@@ -239,50 +240,50 @@ subckt L3_input_MUX_V1 FLIP GND ON_2 ON_1 ON_0 VCM VDD VINN_2 VINN_1 \
 //   %port_1 = $IO_PORT @ATTACH &"GND" => @PLACE(-204, 45) => @ORIENT("R0");
 //   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="right");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="right");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(-1, 1.6)
 //     };
 //   %bus_port_type_2 = @DEFINE(roles=[["p", "net"], ["p1", "net"]]) {};
-//   %bus_port_type_2_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2])};
+//   %bus_port_type_2_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1"])};
 //   {&"VINN_2" &"VINN_1"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_2 = %bus_port_type_2 @ATTACH &"VINN_2" &"VINN_1" => @PLACE(-203, 39) => @ORIENT("R0");
 //   %port_2 @SET-SYMBOL %bus_port_type_2_symbol;
 //   %port_2_marker = $IO_PORT @ATTACH &"VINN_2" => @PLACE(-203, 39) => @ORIENT("R0");
 //   %port_2_marker @SET-SYMBOL %input_port_symbol;
-//   %port_2_marker @TEXT("VINN<2:1>", key="name");
+//   %port_2_marker @TEXT("VINN<2:1>", key="netname");
 //   %output_port_symbol = @DEFINE-SYMBOL(box=[0, -1, 2, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(0, -0.9) (0, 0.9) (1.1, 0.9) (2, 0) (1.1, -0.9) (0, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="left");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="left");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(1, 1.6)
 //     };
 //   %port_3 = $IO_PORT @ATTACH &"VOUTP" => @PLACE(-205, 33) => @ORIENT("R0");
 //   %port_3 @SET-SYMBOL %output_port_symbol;
-//   %port_3 @TEXT("VOUTP", key="name");
+//   %port_3 @TEXT("VOUTP", key="netname");
 //   %port_4 = $IO_PORT @ATTACH &"VOUTN" => @PLACE(-205, 30) => @ORIENT("R0");
 //   %port_4 @SET-SYMBOL %output_port_symbol;
-//   %port_4 @TEXT("VOUTN", key="name");
+//   %port_4 @TEXT("VOUTN", key="netname");
 //   %bus_port_type_5 = @DEFINE(roles=[["p", "net"], ["p1", "net"]]) {};
-//   %bus_port_type_5_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2])};
+//   %bus_port_type_5_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1"])};
 //   {&"VINP_2" &"VINP_1"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_5 = %bus_port_type_5 @ATTACH &"VINP_2" &"VINP_1" => @PLACE(-203, 42) => @ORIENT("R0");
 //   %port_5 @SET-SYMBOL %bus_port_type_5_symbol;
 //   %port_5_marker = $IO_PORT @ATTACH &"VINP_2" => @PLACE(-203, 42) => @ORIENT("R0");
 //   %port_5_marker @SET-SYMBOL %input_port_symbol;
-//   %port_5_marker @TEXT("VINP<2:1>", key="name");
+//   %port_5_marker @TEXT("VINP<2:1>", key="netname");
 //   %port_6 = $IO_PORT @ATTACH &"FLIP" => @PLACE(-203, 24) => @ORIENT("R0");
 //   %port_6 @SET-SYMBOL %input_port_symbol;
-//   %port_6 @TEXT("FLIP", key="name");
+//   %port_6 @TEXT("FLIP", key="netname");
 //   %port_7 = $IO_PORT @ATTACH &"VCM" => @PLACE(-203, 36) => @ORIENT("R0");
 //   %port_7 @SET-SYMBOL %input_port_symbol;
-//   %port_7 @TEXT("VCM", key="name");
+//   %port_7 @TEXT("VCM", key="netname");
 //   %bus_port_type_8 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"]]) {};
-//   %bus_port_type_8_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3])};
+//   %bus_port_type_8_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1", "p2"])};
 //   {&"ON_2" &"ON_1" &"ON_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_8 = %bus_port_type_8 @ATTACH &"ON_2" &"ON_1" &"ON_0" => @PLACE(-203, 27) => @ORIENT("R0");
 //   %port_8 @SET-SYMBOL %bus_port_type_8_symbol;
 //   %port_8_marker = $IO_PORT @ATTACH &"ON_2" => @PLACE(-203, 27) => @ORIENT("R0");
 //   %port_8_marker @SET-SYMBOL %input_port_symbol;
-//   %port_8_marker @TEXT("ON<2:0>", key="name");
+//   %port_8_marker @TEXT("ON<2:0>", key="netname");
 //   %p0 = (-142, 13);
 //   %wire_0 = &"ONN2" @WIRE(mode="straight") {#"I20":3 %p0};
 //   %p1 = (-12, -4);
@@ -611,32 +612,32 @@ subckt L3_input_MUX_V1 FLIP GND ON_2 ON_1 ON_0 VCM VDD VINN_2 VINN_1 \
 //   %wire_147 = &"VINN_1" @WIRE(mode="straight") {%p107 #"M9":1};
 //   %wire_143 @TEXT("VINN\_1", size=1, halign="middle", valign="baseline") => @PLACE(-114, 30.7);
 //   %wire_146 @TEXT("VINN\_1", size=1, halign="middle", valign="baseline") => @PLACE(-3, 52.7);
-//   $JUNCTION @ATTACH %p13;
-//   $JUNCTION @ATTACH %p14;
-//   $JUNCTION @ATTACH %p17;
-//   $JUNCTION @ATTACH %p21;
-//   $JUNCTION @ATTACH %p23;
-//   $JUNCTION @ATTACH %p28;
-//   $JUNCTION @ATTACH %p30;
-//   $JUNCTION @ATTACH %p33;
-//   $JUNCTION @ATTACH %p57;
-//   $JUNCTION @ATTACH %p59;
-//   $JUNCTION @ATTACH %p60;
-//   $JUNCTION @ATTACH %p61;
-//   $JUNCTION @ATTACH %p62;
-//   $JUNCTION @ATTACH %p63;
-//   $JUNCTION @ATTACH %p64;
-//   $JUNCTION @ATTACH %p65;
-//   $JUNCTION @ATTACH %p66;
-//   $JUNCTION @ATTACH %p67;
-//   $JUNCTION @ATTACH %p95;
-//   $JUNCTION @ATTACH %p98;
-//   $JUNCTION @ATTACH %p100;
-//   $JUNCTION @ATTACH %p101;
-//   $JUNCTION @ATTACH %p103;
-//   $JUNCTION @ATTACH %p105;
-//   $JUNCTION @ATTACH %p107;
-//   $JUNCTION @ATTACH %p109
+//   $JUNCTION @ATTACH %p13 => @PLACE(-79, -33);
+//   $JUNCTION @ATTACH %p14 => @PLACE(-59, -33);
+//   $JUNCTION @ATTACH %p17 => @PLACE(-174, 63);
+//   $JUNCTION @ATTACH %p21 => @PLACE(-164, 48);
+//   $JUNCTION @ATTACH %p23 => @PLACE(-93, -44);
+//   $JUNCTION @ATTACH %p28 => @PLACE(-161, 36);
+//   $JUNCTION @ATTACH %p30 => @PLACE(-167, 50);
+//   $JUNCTION @ATTACH %p33 => @PLACE(-167, 26);
+//   $JUNCTION @ATTACH %p57 => @PLACE(-68, 52);
+//   $JUNCTION @ATTACH %p59 => @PLACE(-68, -44);
+//   $JUNCTION @ATTACH %p60 => @PLACE(-68, -15);
+//   $JUNCTION @ATTACH %p61 => @PLACE(-68, 30);
+//   $JUNCTION @ATTACH %p62 => @PLACE(-68, 7);
+//   $JUNCTION @ATTACH %p63 => @PLACE(-50, -44);
+//   $JUNCTION @ATTACH %p64 => @PLACE(-50, 7);
+//   $JUNCTION @ATTACH %p65 => @PLACE(-50, 30);
+//   $JUNCTION @ATTACH %p66 => @PLACE(-50, -15);
+//   $JUNCTION @ATTACH %p67 => @PLACE(-50, 52);
+//   $JUNCTION @ATTACH %p95 => @PLACE(-25, -15);
+//   $JUNCTION @ATTACH %p98 => @PLACE(-93, 7);
+//   $JUNCTION @ATTACH %p100 => @PLACE(-25, 30);
+//   $JUNCTION @ATTACH %p101 => @PLACE(-93, 52);
+//   $JUNCTION @ATTACH %p103 => @PLACE(-25, 7);
+//   $JUNCTION @ATTACH %p105 => @PLACE(-93, -15);
+//   $JUNCTION @ATTACH %p107 => @PLACE(-25, 52);
+//   $JUNCTION @ATTACH %p109 => @PLACE(-93, 30)
 // }
 // @RNL(author="gemini-4-argon") {
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
@@ -647,13 +648,13 @@ subckt L3_input_MUX_V1 FLIP GND ON_2 ON_1 ON_0 VCM VDD VINN_2 VINN_1 \
 //   {#"M10" #"M9" #"M3" #"M7" #"M4" #"M2" #"M11" #"M12"}(members) @AS $MATCHED;
 //   {#"M14" #"M13" #"M15"}(members) @AS $MATCHED;
 //   {#"I5" #"I13" #"I6" #"I16" #"I7" #"I15" #"I8" #"I14" #"I11"}(members) @AS $MATCHED;
-//   {#"I18" #"I5" #"M10"}(path) @AS(direction="left-to-right") $FLOW;
-//   {#"I19" #"I6" #"M3"}(path) @AS(direction="left-to-right") $FLOW;
-//   {#"I21" #"I7" #"M4"}(path) @AS(direction="left-to-right") $FLOW;
-//   {#"I20" #"I8" #"M11"}(path) @AS(direction="left-to-right") $FLOW;
-//   {#"M10" #"M3" #"M4" #"M11" #"M14"}(members) @AS $BRANCH;
-//   {#"M9" #"M7" #"M2" #"M12" #"M13"}(members) @AS $BRANCH;
-//   {#"I5" #"I6" #"I7" #"I8" #"I11"}(members) @AS $BRANCH;
+//   {#"I18" #"I5" #"M10"}(path) @AS $SIGNAL_FLOW; {#I18 #I5 #M10} @ORDER("left-to-right", priority="low");
+//   {#"I19" #"I6" #"M3"}(path) @AS $SIGNAL_FLOW; {#I19 #I6 #M3} @ORDER("left-to-right", priority="low");
+//   {#"I21" #"I7" #"M4"}(path) @AS $SIGNAL_FLOW; {#I21 #I7 #M4} @ORDER("left-to-right", priority="low");
+//   {#"I20" #"I8" #"M11"}(path) @AS $SIGNAL_FLOW; {#I20 #I8 #M11} @ORDER("left-to-right", priority="low");
+// {#"M10" #"M3" #"M4" #"M11" #"M14"} @ALIGN("x", priority="low");
+// {#"M9" #"M7" #"M2" #"M12" #"M13"} @ALIGN("x", priority="low");
+// {#"I5" #"I6" #"I7" #"I8" #"I11"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-229, 137.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(-229, 108.03) (27.55, 134.23)} => @SET-STYLE $risca_note_box;

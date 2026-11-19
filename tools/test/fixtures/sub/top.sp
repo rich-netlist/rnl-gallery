@@ -1,5 +1,6 @@
 * A subcircuit with a block symbol, and its use
-* @RNL(type="header") { @VERSION("0.3") }
+* @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @VERSION("0.4") }
+* @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 .subckt amp in out vdd vss
 R1 in out 1k
 R2 out vss 1k

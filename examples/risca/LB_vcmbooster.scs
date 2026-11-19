@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/LB_vcmbooster
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt LB_vcmbooster AVDD AVSS CLK SAM TUNE_3 TUNE_2 TUNE_1 TUNE_0 VBTSTP
     C0 (net3 net2) cfmom_2t nr=96 lr=3u w=50n s=50n stm=2 spm=7 multi=1
     M20 (net7 net9 net12 AVDD) pch_mac l=30n w=250.0n multi=1 nf=1 sd=100n \
@@ -316,32 +317,32 @@ subckt LB_vcmbooster AVDD AVSS CLK SAM TUNE_3 TUNE_2 TUNE_1 TUNE_0 VBTSTP
 //   %port_0 = $IO_PORT @ATTACH &"AVDD" => @PLACE(-38, 60) => @ORIENT("R0");
 //   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="right");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="right");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(-1, 1.6)
 //     };
 //   %port_1 = $IO_PORT @ATTACH &"SAM" => @PLACE(-38, -15) => @ORIENT("R0");
 //   %port_1 @SET-SYMBOL %input_port_symbol;
-//   %port_1 @TEXT("SAM", key="name");
+//   %port_1 @TEXT("SAM", key="netname");
 //   %port_2 = $IO_PORT @ATTACH &"CLK" => @PLACE(-38, -7) => @ORIENT("R0");
 //   %port_2 @SET-SYMBOL %input_port_symbol;
-//   %port_2 @TEXT("CLK", key="name");
+//   %port_2 @TEXT("CLK", key="netname");
 //   %port_3 = $IO_PORT @ATTACH &"AVSS" => @PLACE(-38, 56) => @ORIENT("R0");
 //   %output_port_symbol = @DEFINE-SYMBOL(box=[0, -1, 2, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(0, -0.9) (0, 0.9) (1.1, 0.9) (2, 0) (1.1, -0.9) (0, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="left");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="left");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(1, 1.6)
 //     };
 //   %port_4 = $IO_PORT @ATTACH &"VBTSTP" => @PLACE(75, 16) => @ORIENT("R0");
 //   %port_4 @SET-SYMBOL %output_port_symbol;
-//   %port_4 @TEXT("VBTSTP", key="name");
+//   %port_4 @TEXT("VBTSTP", key="netname");
 //   %bus_port_type_5 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"], ["p3", "net"]]) {};
-//   %bus_port_type_5_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3, 4])};
+//   %bus_port_type_5_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1", "p2", "p3"])};
 //   {&"TUNE_3" &"TUNE_2" &"TUNE_1" &"TUNE_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_5 = %bus_port_type_5 @ATTACH &"TUNE_3" &"TUNE_2" &"TUNE_1" &"TUNE_0" => @PLACE(-38, 52) => @ORIENT("R0");
 //   %port_5 @SET-SYMBOL %bus_port_type_5_symbol;
 //   %port_5_marker = $IO_PORT @ATTACH &"TUNE_3" => @PLACE(-38, 52) => @ORIENT("R0");
 //   %port_5_marker @SET-SYMBOL %input_port_symbol;
-//   %port_5_marker @TEXT("TUNE<3:0>", key="name");
+//   %port_5_marker @TEXT("TUNE<3:0>", key="netname");
 //   %wire_0 = &"net12" @WIRE(mode="straight") {#"M20":3 #"M19":1};
 //   %wire_1 = &"net11" @WIRE(mode="straight") {#"M17":3 #"M18":1};
 //   %wire_2 = &"net5" @WIRE(mode="straight") {#"M16":3 #"M15":1};
@@ -383,7 +384,8 @@ subckt LB_vcmbooster AVDD AVSS CLK SAM TUNE_3 TUNE_2 TUNE_1 TUNE_0 VBTSTP
 //   %wire_25 = &"net1" @WIRE(mode="straight") {%p7 #"M5":1};
 //   %wire_26 = &"net1" @WIRE(mode="straight") {%p6 %p8};
 //   %p11 = (-30, -7);
-//   %wire_27 = &"CLK" @WIRE(mode="straight") {%port_2:p %p11};
+//   %wire_27 = &"CLK" @WIRE(mode="straight") {
+// %port_2:p %p11};
 //   %p12 = (-30, 3);
 //   %wire_28 = &"CLK" @WIRE(mode="straight") {%p11 %p12};
 //   %p13 = (-16, 3);
@@ -412,7 +414,8 @@ subckt LB_vcmbooster AVDD AVSS CLK SAM TUNE_3 TUNE_2 TUNE_1 TUNE_0 VBTSTP
 //   %wire_44 = &"net7" @WIRE(mode="straight") {#"M10":1 #"M14":1};
 //   %wire_45 = &"net7" @WIRE(mode="straight") {#"M21":1 %p19};
 //   %p21 = (67, 16);
-//   %wire_46 = &"VBTSTP" @WIRE(mode="straight") {%p21 %port_4:p};
+//   %wire_46 = &"VBTSTP" @WIRE(mode="straight") {
+// %p21 %port_4:p};
 //   %p22 = (67, 0);
 //   %wire_47 = &"VBTSTP" @WIRE(mode="straight") {%p22 %p21};
 //   %p23 = (67, 32);
@@ -444,7 +447,8 @@ subckt LB_vcmbooster AVDD AVSS CLK SAM TUNE_3 TUNE_2 TUNE_1 TUNE_0 VBTSTP
 //   %wire_65 = &"net2" @WIRE(mode="straight") {#"M1":1 %p30};
 //   %wire_66 = &"net2" @WIRE(mode="straight") {%p30 %p31};
 //   %p32 = (-34, -15);
-//   %wire_67 = &"SAM" @WIRE(mode="straight") {%port_1:p %p32};
+//   %wire_67 = &"SAM" @WIRE(mode="straight") {
+// %port_1:p %p32};
 //   %p33 = (-34, 8);
 //   %wire_68 = &"SAM" @WIRE(mode="straight") {%p32 %p33};
 //   %wire_69 = &"SAM" @WIRE(mode="straight") {%p33 #"M5":2};
@@ -589,30 +593,30 @@ subckt LB_vcmbooster AVDD AVSS CLK SAM TUNE_3 TUNE_2 TUNE_1 TUNE_0 VBTSTP
 //   %wire_101 @TEXT("AVDD", size=1, halign="middle", valign="baseline") => @PLACE(-22, 76.7);
 //   %wire_100 @TEXT("AVDD", size=1, halign="middle", valign="baseline") => @PLACE(-22, 86.7);
 //   %wire_99 @TEXT("AVDD", size=1, halign="middle", valign="baseline") => @PLACE(-22, 96.7);
-//   $JUNCTION @ATTACH %p5;
-//   $JUNCTION @ATTACH %p6;
-//   $JUNCTION @ATTACH %p8;
-//   $JUNCTION @ATTACH %p11;
-//   $JUNCTION @ATTACH %p17;
-//   $JUNCTION @ATTACH %p18;
-//   $JUNCTION @ATTACH %p19;
-//   $JUNCTION @ATTACH %p21;
-//   $JUNCTION @ATTACH %p23;
-//   $JUNCTION @ATTACH %p29;
-//   $JUNCTION @ATTACH %p30;
-//   $JUNCTION @ATTACH %p31;
-//   $JUNCTION @ATTACH %p32;
-//   $JUNCTION @ATTACH %p42;
-//   $JUNCTION @ATTACH %p49;
-//   $JUNCTION @ATTACH %p50;
-//   $JUNCTION @ATTACH %p52;
-//   $JUNCTION @ATTACH %p53;
-//   $JUNCTION @ATTACH %p59;
-//   $JUNCTION @ATTACH %p61;
-//   $JUNCTION @ATTACH %p63;
-//   $JUNCTION @ATTACH %p65;
-//   $JUNCTION @ATTACH %p70;
-//   $JUNCTION @ATTACH %p71
+//   $JUNCTION @ATTACH %p5 => @PLACE(-18, 0);
+//   $JUNCTION @ATTACH %p6 => @PLACE(-12, 0);
+//   $JUNCTION @ATTACH %p8 => @PLACE(-6, 0);
+//   $JUNCTION @ATTACH %p11 => @PLACE(-30, -7);
+//   $JUNCTION @ATTACH %p17 => @PLACE(12, 35);
+//   $JUNCTION @ATTACH %p18 => @PLACE(-12, 47);
+//   $JUNCTION @ATTACH %p19 => @PLACE(4, 35);
+//   $JUNCTION @ATTACH %p21 => @PLACE(67, 16);
+//   $JUNCTION @ATTACH %p23 => @PLACE(67, 32);
+//   $JUNCTION @ATTACH %p29 => @PLACE(43, 32);
+//   $JUNCTION @ATTACH %p30 => @PLACE(0, 0);
+//   $JUNCTION @ATTACH %p31 => @PLACE(43, 0);
+//   $JUNCTION @ATTACH %p32 => @PLACE(-34, -15);
+//   $JUNCTION @ATTACH %p42 => @PLACE(-16, -16);
+//   $JUNCTION @ATTACH %p49 => @PLACE(24, 33);
+//   $JUNCTION @ATTACH %p50 => @PLACE(24, 42);
+//   $JUNCTION @ATTACH %p52 => @PLACE(14, 53);
+//   $JUNCTION @ATTACH %p53 => @PLACE(24, 51);
+//   $JUNCTION @ATTACH %p59 => @PLACE(4, 53);
+//   $JUNCTION @ATTACH %p61 => @PLACE(14, 51);
+//   $JUNCTION @ATTACH %p63 => @PLACE(-6, 53);
+//   $JUNCTION @ATTACH %p65 => @PLACE(-16, 53);
+//   $JUNCTION @ATTACH %p70 => @PLACE(0, 22);
+//   $JUNCTION @ATTACH %p71 => @PLACE(4, 22)
 // }
 // @RNL(author="gemini-4-argon") {
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
@@ -621,12 +625,12 @@ subckt LB_vcmbooster AVDD AVSS CLK SAM TUNE_3 TUNE_2 TUNE_1 TUNE_0 VBTSTP
 //   {#"M0" #"M1"}(driver_inverter) #"C0"(flying_cap) #"M7"(precharge_switch) #"M4"(boost_pass_switch) #"M11"(discharge_switch) @AS(role="capacitive_clock_voltage_doubler", boost_level="2x_AVDD_when_SAM_and_CLK_high") $CLK_VOLTAGE_DOUBLER;
 //   {#"I0" #"I1" #"I2" #"I3"}(members) @AS $MATCHED;
 //   {#"M9" #"M10" #"M14" #"M15" #"M16" #"M18" #"M17" #"M19" #"M20"}(members) @AS $MATCHED;
-//   {#"M8" #"M2" #"M3"}(members) @AS $BRANCH;
-//   {#"M0" #"M1"}(members) @AS $BRANCH;
-//   {%port_2 #"M8" #"M0" #"C0" #"M4" %port_5}(path) @AS(direction="left-to-right") $FLOW;
-//   {#"M15" #"M16"}(members) @AS $BRANCH;
-//   {#"M18" #"M17" #"M19" #"M20"}(members) @AS $BRANCH;
-//   {#"M4" #"M11"}(members) @AS $BRANCH;
+// {#"M8" #"M2" #"M3"} @ALIGN("x", priority="low");
+// {#"M0" #"M1"} @ALIGN("x", priority="low");
+//   {%port_2 #"M8" #"M0" #"C0" #"M4" %port_5}(path) @AS $SIGNAL_FLOW; {%port_2 #M8 #M0 #C0 #M4 %port_5} @ORDER("left-to-right", priority="low");
+// {#"M15" #"M16"} @ALIGN("x", priority="low");
+// {#"M18" #"M17" #"M19" #"M20"} @ALIGN("x", priority="low");
+// {#"M4" #"M11"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-68, 177.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(-68, 143.03) (140.34, 174.23)} => @SET-STYLE $risca_note_box;

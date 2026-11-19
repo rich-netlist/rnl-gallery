@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt tx_reference_buffer_pdk110_6 (inp out vdd vss)
@@ -9,12 +9,12 @@ X1 (a b vdd vss) pll_inv_pdk110_8
 X2 (b c vdd vss) pll_inv_pdk110_9
 X3 (c out vdd vss) pll_inv_pdk110_10
 // @RNL(author="gemini-4-argon") {
-//   # @SET-SYMBOL $BUFFER;
+//   # @SET-SYMBOL(terminals=[[1, "a"], [2, "y"]]) $BUFFER;
 //
 //   /* --- 1. Circuit Semantics --- */
 //   %buf = {#X0 #X1 #X2 #X3}(stages) @AS(purpose="4_stage_2x_tapered_refclk_buffer") $TAPERED_BUFFER_CHAIN;
-//   %p_in(source) {#X0 #X1 #X2 #X3}(chain) %p_out(load) @AS $CHAIN;
-//   {%p_in #X0 #X1 #X2 #X3 %p_out} @AS(direction="left-to-right") $FLOW;
+// {%p_in #X0 #X1 #X2 #X3 %p_out} @ORDER("left-to-right", priority="low");
+//   {%p_in #X0 #X1 #X2 #X3 %p_out} @AS $SIGNAL_FLOW; {%p_in #X0 #X1 #X2 #X3 %p_out} @ORDER("left-to-right", priority="low");
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
 //   %p_in  = $IO_PORT @ATTACH &inp => @PLACE(2, 10)  => @ORIENT("R0");
@@ -25,11 +25,11 @@ X3 (c out vdd vss) pll_inv_pdk110_10
 //   #X3 @PLACE(36, 10) => @ORIENT("R0");
 //
 //   /* --- 3. Explicit Manhattan Wiring --- */
-//   &inp @WIRE { %p_in:p #X0:a };
+//   &inp @WIRE { %p_in::pin #X0:a };
 //   &a   @WIRE { #X0:y #X1:a };
 //   &b   @WIRE { #X1:y #X2:a };
 //   &c   @WIRE { #X2:y #X3:a };
-//   &out @WIRE { #X3:y %p_out:p };
+//   &out @WIRE { #X3:y %p_out::pin };
 //
 //   /* --- 4. Annotations --- */
 //   #X0 @TEXT("1x (2.5u/1u)", key="sz", dy=-2.5, halign="middle") => @SET-STYLE $param_style;

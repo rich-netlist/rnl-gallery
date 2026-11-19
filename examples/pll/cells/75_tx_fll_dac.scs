@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt tx_fll_dac_pdk110_75 (d0 d1 d2 d3 d4 d5 enable out vdd vss)
@@ -40,7 +40,7 @@ RT (r0 vss) resistor r=10000
 //   /* --- 2. Schematic Placement & Orientation --- */
 //   {&d1 &d2 &d3 &d4 &d5} @REMOVE-FROM $PORT_FILL_SET;
 //   %pd   = $IO_PORT @ATTACH &d0     => @PLACE(12, 30) => @ORIENT("R0");
-//   %pd @TEXT("d<5:0>", key="name");
+//   %pd @TEXT("d<5:0>", key="netname");
 //   %pen  = $IO_PORT @ATTACH &enable => @PLACE(2, 22)  => @ORIENT("R0");
 //   %pout = $IO_PORT @ATTACH &out    => @PLACE(84, 2)  => @ORIENT("MY");
 //   %sup  = $SUPPLY  @ATTACH &vdd    => @PLACE(6, 26);
@@ -74,22 +74,22 @@ RT (r0 vss) resistor r=10000
 //   #RS5 @PLACE(70, 2) => @ORIENT("R90");
 //
 //   /* --- 3. Explicit Manhattan & Single-Line Bus Wiring --- */
-//   {&d0 &d1 &d2 &d3 &d4 &d5} @WIRE { %pd:p (76, 30) } => @TEXT("D<5:0>") => @SET-STYLE $bus_label_style;
-//   &enable @WIRE { %pen:p #MP:g };
-//   &vdd    @WIRE { %sup:p #MP:s };
-//   &vd     @WIRE { #MP:d  %svd:p };
-//   &vss    @WIRE { #RT:2 (6, 2) %gnd:p };
+//   {&d0 &d1 &d2 &d3 &d4 &d5} @WIRE { %pd::pin (76, 30) } => @TEXT("D<5:0>") => @SET-STYLE $bus_label_style;
+//   &enable @WIRE { %pen::pin #MP:g };
+//   &vdd    @WIRE { %sup::pin #MP:s };
+//   &vd     @WIRE { #MP:d  %svd::pin };
+//   &vss    @WIRE { #RT:2 (6, 2) %gnd::pin };
 //
 //   %jr0 = (16, 2); %jr1 = (28, 2); %jr2 = (40, 2);
 //   %jr3 = (52, 2); %jr4 = (64, 2); %jout = (76, 2);
-//   $JUNCTION @ATTACH %jr0; $JUNCTION @ATTACH %jr1; $JUNCTION @ATTACH %jr2;
-//   $JUNCTION @ATTACH %jr3; $JUNCTION @ATTACH %jr4; $JUNCTION @ATTACH %jout;
+//   $JUNCTION @ATTACH %jr0 => @PLACE(16, 2); $JUNCTION @ATTACH %jr1 => @PLACE(28, 2); $JUNCTION @ATTACH %jr2 => @PLACE(40, 2);
+//   $JUNCTION @ATTACH %jr3 => @PLACE(52, 2); $JUNCTION @ATTACH %jr4 => @PLACE(64, 2); $JUNCTION @ATTACH %jout => @PLACE(76, 2);
 //   &r0  @WIRE { #RT:1 %jr0 #RB0:2 }; &r0  @WIRE { %jr0 #RS1:1 };
 //   &r1  @WIRE { #RS1:2 %jr1 #RB1:2 }; &r1 @WIRE { %jr1 #RS2:1 };
 //   &r2  @WIRE { #RS2:2 %jr2 #RB2:2 }; &r2 @WIRE { %jr2 #RS3:1 };
 //   &r3  @WIRE { #RS3:2 %jr3 #RB3:2 }; &r3 @WIRE { %jr3 #RS4:1 };
 //   &r4  @WIRE { #RS4:2 %jr4 #RB4:2 }; &r4 @WIRE { %jr4 #RS5:1 };
-//   &out @WIRE { #RS5:2 %jout #RB5:2 }; &out @WIRE { %jout %pout:p };
+//   &out @WIRE { #RS5:2 %jout #RB5:2 }; &out @WIRE { %jout %pout::pin };
 //   #RT  @TEXT("10 k\Omega", key="value", dy=-2.2, halign="middle") => @SET-STYLE $param_style;
 //   &d0 @WIRE { (16, 30) #XI0:a } => @TEXT("d0") => @SET-STYLE $fly_label_style;
 //   &b0 @WIRE { #XI0:y #XO0:a };

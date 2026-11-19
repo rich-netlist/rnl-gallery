@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt tx_dff_r1_pdk110_70 (d clk reset q vdd vss)
@@ -12,8 +12,8 @@ XO (qb q vdd vss) pll_inv_pdk110_62
 //
 //   /* --- 1. Circuit Semantics --- */
 //   %dff = {#XF}(master_latch) {#XI #XO}(output_buffers) @AS(edge="rising", async_reset="active_high_preset_to_1") $MASTER_SLAVE_DFF;
-//   %pd(source) {#XI #XF #XO}(chain) %pq(load) @AS $CHAIN;
-//   {%pd #XI #XF #XO %pq} @AS(direction="left-to-right") $FLOW;
+// {%pd #XI #XF #XO %pq} @ORDER("left-to-right", priority="low");
+//   {%pd #XI #XF #XO %pq} @AS $SIGNAL_FLOW; {%pd #XI #XF #XO %pq} @ORDER("left-to-right", priority="low");
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
 //   %pd   = $IO_PORT @ATTACH &d     => @PLACE(2, 13)  => @ORIENT("R0");
@@ -26,12 +26,12 @@ XO (qb q vdd vss) pll_inv_pdk110_62
 //   #XO @PLACE(30, 12) => @ORIENT("R0");
 //
 //   /* --- 3. Explicit Manhattan Wiring --- */
-//   &d     @WIRE { %pd:p #XI:a };
+//   &d     @WIRE { %pd::pin #XI:a };
 //   &db    @WIRE { #XI:y #XF:d };
-//   &clk   @WIRE { %pclk:p #XF:clk };
-//   &reset @WIRE { %prst:p (20, 6) #XF:reset };
+//   &clk   @WIRE { %pclk::pin #XF:clk };
+//   &reset @WIRE { %prst::pin (20, 6) #XF:reset };
 //   &qb    @WIRE { #XF:q #XO:a };
-//   &q     @WIRE { #XO:y %pq:p };
+//   &q     @WIRE { #XO:y %pq::pin };
 //
 //   /* --- 4. Annotations --- */
 //   (19, 19) @TEXT("tx_dff_r1_pdk110_70: Rising-Edge D Flip-Flop with Asynchronous Preset to 1 (reset=1 -> q=1)", halign="middle") => @SET-STYLE $title_style;
