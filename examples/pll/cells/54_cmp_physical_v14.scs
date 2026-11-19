@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt cmp_physical_v14_pdk110_54 (vp vn out vdd vss)
@@ -14,20 +14,22 @@ PR (sense left vdd vdd) pch w=2e-06 l=1e-06 ad=9.599999999999999e-13 as=9.599999
 XI0 (sense inv vdd vss) pll_inv_pdk110_55
 XI1 (inv out vdd vss) pll_inv_pdk110_7
 // @RNL(author="gemini-4-argon") {
-//   # @SET-SYMBOL $COMPARATOR;
+//   # @SET-SYMBOL(terminals=[[1, "inp"], [2, "inn"], [3, "out"]]) $COMPARATOR;
 //
 //   /* --- 1. Circuit Semantics & Static DC Currents --- */
 //   %ota = #MP(in_p) #MN(in_n) #PL(load_ref) #PR(load_out) #MT(tail) {#XI0 #XI1}(output_stage) @AS(topology="5T_OTA_plus_push_pull_inverter") $OTA_COMPARATOR;
-//   %dp  = #MP(in_p) #MN(in_n) {#MT}(tail) @AS $DIFFERENTIAL_PAIR;
-//   %cm1 = {#PL}(ref) {#PR}(out) @AS $CURRENT_MIRROR;
-//   %cm2 = {#MB}(ref) {#MT}(out) @AS $CURRENT_MIRROR;
+//   /* rnl upgrade: CURRENT_MIRROR was split into CURRENT_MIRROR_N and CURRENT_MIRROR_P, which add low-priority ALIGN y, orientation relations, the orientation of the source or emitter pins and model/topology assertions; choose the matching polarity or retain only the intended facts (16.3) */
+// {#MP {#MT} #MN} @DISTRIBUTE("left-to-right", priority="low");
+// %cm1 = {#PL}(ref) {#PR}(out) @AS $CURRENT_MIRROR_P;
+//   /* rnl upgrade: CURRENT_MIRROR was split into CURRENT_MIRROR_N and CURRENT_MIRROR_P, which add low-priority ALIGN y, orientation relations, the orientation of the source or emitter pins and model/topology assertions; choose the matching polarity or retain only the intended facts (16.3) */
+// %cm2 = {#MB}(ref) {#MT}(out) @AS $CURRENT_MIRROR_N;
 //   {#MP #MN} @AS $MATCHED;
 //   {#PL #PR} @AS $MATCHED;
 //   {#MB #MT} @AS $MATCHED;
 //   %ax = (22, _);
-//   #MP(a) #MN(b) %ax(axis) @AS $MIRRORED;
-//   #PL(a) #PR(b) %ax(axis) @AS $MIRRORED;
-//   {%pvp #MP #PR #XI0 #XI1 %pout} @AS(direction="left-to-right") $FLOW;
+//   #MP(left) #MN(right) %ax(axis) @AS $MIRRORED_LAYOUT;
+//   #PL(left) #PR(right) %ax(axis) @AS $MIRRORED_LAYOUT;
+//   {%pvp #MP #PR #XI0 #XI1 %pout} @AS $SIGNAL_FLOW; {%pvp #MP #PR #XI0 #XI1 %pout} @ORDER("left-to-right", priority="low");
 //
 //   /* Continuous Static DC Bias Currents */
 //   #RB:1 @CURRENT("in"); #RB:2 @CURRENT("out");
@@ -58,49 +60,49 @@ XI1 (inv out vdd vss) pll_inv_pdk110_7
 //   #XI1 @PLACE(44, 18) => @ORIENT("R0");
 //
 //   /* --- 3. Explicit Manhattan Wiring --- */
-//   &vdd @WIRE { %sup1:p #RB:1 };
+//   &vdd @WIRE { %sup1::pin #RB:1 };
 //   %jvdd = (22, 26);
-//   $JUNCTION @ATTACH %jvdd;
-//   &vdd @WIRE { %sup2:p %jvdd };
+//   $JUNCTION @ATTACH %jvdd => @PLACE(22, 26);
+//   &vdd @WIRE { %sup2::pin %jvdd };
 //   &vdd @WIRE { %jvdd (16, 26) #PL:s };
 //   &vdd @WIRE { %jvdd (28, 26) #PR:s };
 //
 //   %jnb1 = (6, 10);
 //   %jnb2 = (9, 6);
-//   $JUNCTION @ATTACH %jnb1;
-//   $JUNCTION @ATTACH %jnb2;
+//   $JUNCTION @ATTACH %jnb1 => @PLACE(6, 10);
+//   $JUNCTION @ATTACH %jnb2 => @PLACE(9, 6);
 //   &nb @WIRE { #RB:2 %jnb1 #MB:d };
 //   &nb @WIRE { %jnb1 (9, 10) %jnb2 #MB:g };
 //   &nb @WIRE { %jnb2 #MT:g };
 //
-//   &vp @WIRE { %pvp:p #MP:g };
-//   &vn @WIRE { %pvn:p #MN:g };
+//   &vp @WIRE { %pvp::pin #MP:g };
+//   &vn @WIRE { %pvn::pin #MN:g };
 //
 //   %jtail = (22, 10);
-//   $JUNCTION @ATTACH %jtail;
+//   $JUNCTION @ATTACH %jtail => @PLACE(22, 10);
 //   &tail @WIRE { #MP:s (16, 10) %jtail (28, 10) #MN:s };
 //   &tail @WIRE { %jtail #MT:d };
 //
 //   %jleft1 = (16, 18);
 //   %jleft2 = (19, 18);
-//   $JUNCTION @ATTACH %jleft1;
-//   $JUNCTION @ATTACH %jleft2;
+//   $JUNCTION @ATTACH %jleft1 => @PLACE(16, 18);
+//   $JUNCTION @ATTACH %jleft2 => @PLACE(19, 18);
 //   &left @WIRE { #PL:d %jleft1 #MP:d };
 //   &left @WIRE { %jleft1 %jleft2 (19, 22) #PL:g };
 //   &left @WIRE { %jleft2 (24, 18) (24, 22) #PR:g };
 //
 //   %jsense = (28, 18);
-//   $JUNCTION @ATTACH %jsense;
+//   $JUNCTION @ATTACH %jsense => @PLACE(28, 18);
 //   &sense @WIRE { #PR:d %jsense #MN:d };
 //   &sense @WIRE { %jsense #XI0:a };
 //
 //   &inv @WIRE { #XI0:y #XI1:a };
-//   &out @WIRE { #XI1:y %pout:p };
+//   &out @WIRE { #XI1:y %pout::pin };
 //
 //   %jg = (22, 2);
-//   $JUNCTION @ATTACH %jg;
+//   $JUNCTION @ATTACH %jg => @PLACE(22, 2);
 //   &vss @WIRE { #MB:s (6, 2) %jg #MT:s };
-//   &vss @WIRE { %jg %gnd:p };
+//   &vss @WIRE { %jg %gnd::pin };
 //
 //   /* --- 4. Annotations --- */
 //   #RB @TEXT("100 k\Omega", key="value", dx=-1.8, dy=0, halign="end") => @SET-STYLE $param_style;

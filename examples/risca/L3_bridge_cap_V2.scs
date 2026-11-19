@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/L3_bridge_cap_V2
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt L3_bridge_cap_V2 CDAC CLK CMP CS1 CS2 GND RS1 RS2 SRT VDD VRESG \
         VRESP
     I31_16 (CDAC CMP) LB_sandwitch_cap
@@ -240,33 +241,33 @@ subckt L3_bridge_cap_V2 CDAC CLK CMP CS1 CS2 GND RS1 RS2 SRT VDD VRESG \
 //   %port_4 = $IO_PORT @ATTACH &"CMP" => @PLACE(-81, 38) => @ORIENT("R0");
 //   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="right");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="right");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(-1, 1.6)
 //     };
 //   %port_5 = $IO_PORT @ATTACH &"CLK" => @PLACE(-80, 15) => @ORIENT("R0");
 //   %port_5 @SET-SYMBOL %input_port_symbol;
-//   %port_5 @TEXT("CLK", key="name");
+//   %port_5 @TEXT("CLK", key="netname");
 //   %port_6 = $IO_PORT @ATTACH &"CS2" => @PLACE(-80, 24) => @ORIENT("R0");
 //   %port_6 @SET-SYMBOL %input_port_symbol;
-//   %port_6 @TEXT("CS2", key="name");
+//   %port_6 @TEXT("CS2", key="netname");
 //   %port_7 = $IO_PORT @ATTACH &"SRT" => @PLACE(-80, 30) => @ORIENT("R0");
 //   %port_7 @SET-SYMBOL %input_port_symbol;
-//   %port_7 @TEXT("SRT", key="name");
+//   %port_7 @TEXT("SRT", key="netname");
 //   %port_8 = $IO_PORT @ATTACH &"VRESG" => @PLACE(-80, 10) => @ORIENT("R0");
 //   %port_8 @SET-SYMBOL %input_port_symbol;
-//   %port_8 @TEXT("VRESG", key="name");
+//   %port_8 @TEXT("VRESG", key="netname");
 //   %port_9 = $IO_PORT @ATTACH &"VRESP" => @PLACE(-80, 7) => @ORIENT("R0");
 //   %port_9 @SET-SYMBOL %input_port_symbol;
-//   %port_9 @TEXT("VRESP", key="name");
+//   %port_9 @TEXT("VRESP", key="netname");
 //   %port_10 = $IO_PORT @ATTACH &"CS1" => @PLACE(-80, 27) => @ORIENT("R0");
 //   %port_10 @SET-SYMBOL %input_port_symbol;
-//   %port_10 @TEXT("CS1", key="name");
+//   %port_10 @TEXT("CS1", key="netname");
 //   %port_11 = $IO_PORT @ATTACH &"RS1" => @PLACE(-80, 21) => @ORIENT("R0");
 //   %port_11 @SET-SYMBOL %input_port_symbol;
-//   %port_11 @TEXT("RS1", key="name");
+//   %port_11 @TEXT("RS1", key="netname");
 //   %port_12 = $IO_PORT @ATTACH &"RS2" => @PLACE(-80, 18) => @ORIENT("R0");
 //   %port_12 @SET-SYMBOL %input_port_symbol;
-//   %port_12 @TEXT("RS2", key="name");
+//   %port_12 @TEXT("RS2", key="netname");
 //   %wire_0 = &"net4" @WIRE(mode="straight") {#"I35":3 #"I14":1};
 //   %wire_1 = &"net3" @WIRE(mode="straight") {#"I36":3 #"I8":1};
 //   %p0 = (-59, 9);
@@ -519,18 +520,18 @@ subckt L3_bridge_cap_V2 CDAC CLK CMP CS1 CS2 GND RS1 RS2 SRT VDD VRESG \
 //   %wire_98 @TEXT("GND", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(32.3, 21);
 //   %wire_92 @TEXT("GND", size=1, halign="middle", valign="baseline") => @PLACE(-50, 20.7);
 //   %wire_91 @TEXT("GND", size=1, halign="middle", valign="baseline") => @PLACE(-50, 2.7);
-//   $JUNCTION @ATTACH %p4;
-//   $JUNCTION @ATTACH %p20;
-//   $JUNCTION @ATTACH %p22;
-//   $JUNCTION @ATTACH %p23;
-//   $JUNCTION @ATTACH %p26;
-//   $JUNCTION @ATTACH %p29;
-//   $JUNCTION @ATTACH %p31;
-//   $JUNCTION @ATTACH %p32;
-//   $JUNCTION @ATTACH %p33;
-//   $JUNCTION @ATTACH %p37;
-//   $JUNCTION @ATTACH %p38;
-//   $JUNCTION @ATTACH %p39
+//   $JUNCTION @ATTACH %p4 => @PLACE(31, 46);
+//   $JUNCTION @ATTACH %p20 => @PLACE(53, 38);
+//   $JUNCTION @ATTACH %p22 => @PLACE(39, 38);
+//   $JUNCTION @ATTACH %p23 => @PLACE(61, 46);
+//   $JUNCTION @ATTACH %p26 => @PLACE(61, 70);
+//   $JUNCTION @ATTACH %p29 => @PLACE(22, 70);
+//   $JUNCTION @ATTACH %p31 => @PLACE(61, 15);
+//   $JUNCTION @ATTACH %p32 => @PLACE(53, 15);
+//   $JUNCTION @ATTACH %p33 => @PLACE(55, 15);
+//   $JUNCTION @ATTACH %p37 => @PLACE(31, 15);
+//   $JUNCTION @ATTACH %p38 => @PLACE(37, 15);
+//   $JUNCTION @ATTACH %p39 => @PLACE(39, 15)
 // }
 // @RNL(author="gemini-4-argon") {
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
@@ -540,11 +541,14 @@ subckt L3_bridge_cap_V2 CDAC CLK CMP CS1 CS2 GND RS1 RS2 SRT VDD VRESG \
 //   %bundle_3(branch_cap_bank) {#"I23" #"I24"}(residue_sample_switches) {#"I25" #"I26"}(cdac_couple_switches) {#"I35" #"I14" #"I13" #"I27" #"I28"}(control_logic) @AS(role="Branch2_2x_switched_residue_injector", weight="10C_90fF") $SWITCHED_RESIDUE_BRANCH;
 //   {%bundle_2 %bundle_1 %bundle_3}(members) @AS $MATCHED;
 //   {#"I10" #"I12" #"I6" #"I7" #"I23" #"I24" #"I25" #"I26"}(members) @AS $MATCHED;
-//   {#"I10" %bundle_1 #"I7"}(path) @AS(direction="left-to-right") $FLOW;
-//   {#"I23" %bundle_3 #"I26"}(path) @AS(direction="left-to-right") $FLOW;
-//   {%bundle_1 %bundle_2 %bundle_3}(members) @AS $BRANCH;
-//   {#"I23" #"I25"}(members) @AS $BRANCH;
-//   {#"I24" #"I26"}(members) @AS $BRANCH;
+//   {#"I10" %bundle_1 #"I7"}(path) @AS $SIGNAL_FLOW; {#I10 %bundle_1 #I7} @ORDER("left-to-right", priority="low");
+//   {#"I23" %bundle_3 #"I26"}(path) @AS $SIGNAL_FLOW; {#I23 %bundle_3 #I26} @ORDER("left-to-right", priority="low");
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {%bundle_1 %bundle_2 %bundle_3} @ALIGN("x", priority="low");
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"I23" #"I25"} @ALIGN("x", priority="low");
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"I24" #"I26"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-107, 145.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(-107, 116.03) (184.19, 142.23)} => @SET-STYLE $risca_note_box;

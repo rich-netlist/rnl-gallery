@@ -1,9 +1,11 @@
 simulator lang=spectre
 // The entry file of the gallery: the files the exporter wrote, one subcircuit each, in one netlist.
 // @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="rnl-std-all", version="0.4");
+//   @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl")
 // }
 include "decap/V1_decap.scs"

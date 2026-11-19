@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt pll_capture_rt4_r48_recenter109_v14_pdk110_0 (ref reset apply k0 k1 k2 k3 k4 k5 out qualified range_error cfg_ready frequency_good phase_good amp_good vdd vss)
@@ -52,7 +52,7 @@ XC (refb reset apply k0 k1 k2 k3 k4 k5 out acqclk phase_good frequency_good b0 b
 //   %prst   = $IO_PORT @ATTACH &reset          => @PLACE(2, 16)   => @ORIENT("R0");
 //   %papply = $IO_PORT @ATTACH &apply          => @PLACE(2, 14)   => @ORIENT("R0");
 //   %pk     = $IO_PORT @ATTACH &k0             => @PLACE(2, 11)   => @ORIENT("R0");
-//   %pk @TEXT("k<5:0>", key="name");
+//   %pk @TEXT("k<5:0>", key="netname");
 //
 //   %pout   = $IO_PORT @ATTACH &out            => @PLACE(124, 34) => @ORIENT("MY");
 //   %pamp   = $IO_PORT @ATTACH &amp_good       => @PLACE(124, 49) => @ORIENT("MY");
@@ -97,37 +97,37 @@ XC (refb reset apply k0 k1 k2 k3 k4 k5 out acqclk phase_good frequency_good b0 b
 //   #XC   @PLACE(44, 12)  => @ORIENT("R0");
 //
 //   /* --- 3. Primary Analog Loop, Single-Line Buses (K<5:0>, B<7:0>, S<5:0>) & Flying-Wire Control --- */
-//   &vdd     @WIRE { %svco:p #VVCO:n };
+//   &vdd     @WIRE { %svco::pin #VVCO:n };
 //   &vco_vdd @WIRE { #VVCO:p #XV:vdd };
-//   &vdd     @WIRE { %srx:p  #VRX:n };
+//   &vdd     @WIRE { %srx::pin  #VRX:n };
 //   &rx_vdd  @WIRE { #VRX:p  #XRX:vdd };
-//   &vdd     @WIRE { %srt:p  #VRT:n };
+//   &vdd     @WIRE { %srt::pin  #VRT:n };
 //   &rt_vdd  @WIRE { #VRT:p  #XR:vdd };
-//   &vss     @WIRE { #CR:2   %gcr:p };
+//   &vss     @WIRE { #CR:2   %gcr::pin };
 //
 //   /* Single-Line Multi-Bit Buses */
-//   {&k0 &k1 &k2 &k3 &k4 &k5} @WIRE { %pk:p #XC:k0 } => @TEXT("K<5:0>") => @SET-STYLE $bus_label_style;
+//   {&k0 &k1 &k2 &k3 &k4 &k5} @WIRE { %pk::pin #XC:k0 } => @TEXT("K<5:0>") => @SET-STYLE $bus_label_style;
 //   {&b0 &b1 &b2 &b3 &b4 &b5 &b6 &b7} @WIRE { #XC:b0 (37, 27) (48, 27) (48, 40) #XV:b0 } => @TEXT("B<7:0>") => @SET-STYLE $bus_label_style;
 //   {&s0 &s1 &s2 &s3 &s4 &s5} @WIRE { #XC:s0 (41, 24.5) (80, 24.5) (80, 22) #XD:s0 } => @TEXT("S<5:0>") => @SET-STYLE $bus_label_style;
 //
 //   /* Primary Analog & RF Signal Loop */
-//   &ref   @WIRE { %pref:p #XREF:inp };
-//   &reset @WIRE { %prst:p #XC:reset };
-//   &apply @WIRE { %papply:p #XC:apply };
+//   &ref   @WIRE { %pref::pin #XREF:inp };
+//   &reset @WIRE { %prst::pin #XC:reset };
+//   &apply @WIRE { %papply::pin #XC:apply };
 //
-//   %jrefb = (16, 42); $JUNCTION @ATTACH %jrefb;
+//   %jrefb = (16, 42); $JUNCTION @ATTACH %jrefb => @PLACE(16, 42);
 //   &refb @WIRE { #XREF:out %jrefb #XS:ref } => @TEXT("refb") => @SET-STYLE $fly_label_style;
 //   &refb @WIRE { %jrefb #CR:1 };
 //
 //   &hp @WIRE { #XS:hp #XCP:hp } => @TEXT("hp") => @SET-STYLE $fly_label_style;
 //   &hn @WIRE { #XS:hn #XCP:hn } => @TEXT("hn") => @SET-STYLE $fly_label_style;
 //
-//   %jctrl = (54, 42); $JUNCTION @ATTACH %jctrl;
+//   %jctrl = (54, 42); $JUNCTION @ATTACH %jctrl => @PLACE(54, 42);
 //   &ctrl @WIRE { #XCP:out %jctrl (54, 44) #XV:ctrl };
 //   &ctrl @WIRE { %jctrl #XLF:ctrl };
 //
 //   %jvp1 = (72, 44);
-//   $JUNCTION @ATTACH %jvp1;
+//   $JUNCTION @ATTACH %jvp1 => @PLACE(72, 44);
 //   &vp @WIRE { #XV:vp %jvp1 #CCP:1 };
 //   &sp @WIRE { #CCP:2 (80, 44) (80, 50) #RBP:1 } => @TEXT("sp") => @SET-STYLE $fly_label_style;
 //   &vp @WIRE { %jvp1 (72, 36) #XRX:rf };
@@ -135,22 +135,22 @@ XC (refb reset apply k0 k1 k2 k3 k4 k5 out acqclk phase_good frequency_good b0 b
 //   &vn @WIRE { #XV:vn #CCN:1 };
 //   &sn @WIRE { #CCN:2 (86, 40) (86, 50) #RBN:1 } => @TEXT("sn") => @SET-STYLE $fly_label_style;
 //
-//   %jvm = (80, 54); $JUNCTION @ATTACH %jvm;
+//   %jvm = (80, 54); $JUNCTION @ATTACH %jvm => @PLACE(80, 54);
 //   &vmid @WIRE { #XBM:vmid %jvm #RBP:2 };
 //   &vmid @WIRE { %jvm (86, 54) #RBN:2 };
 //
-//   %jclk = (96, 36); $JUNCTION @ATTACH %jclk;
+//   %jclk = (96, 36); $JUNCTION @ATTACH %jclk => @PLACE(96, 36);
 //   &clk @WIRE { #XRX:clk %jclk (96, 33) #XR:clk };
 //   &clk @WIRE { %jclk (96, 30) (82, 30) (82, 26) #XD:clk };
 //   &data @WIRE { #XD:out (100, 26) (100, 35) #XR:data };
-//   &out  @WIRE { #XR:out %pout:p } => @TEXT("out") => @SET-STYLE $fly_label_style;
+//   &out  @WIRE { #XR:out %pout::pin } => @TEXT("out") => @SET-STYLE $fly_label_style;
 //
-//   &amp_good   @WIRE { #XDET:amp_good   %pamp:p };
-//   &phase_good @WIRE { #XDET:phase_good %pph:p } => @TEXT("phase_good") => @SET-STYLE $fly_label_style;
-//   &qualified      @WIRE { #XC:qualified      %pqual:p };
-//   &range_error    @WIRE { #XC:range_error    %prng:p };
-//   &cfg_ready      @WIRE { #XC:config_ready   %prdy:p };
-//   &frequency_good @WIRE { #XC:frequency_good %pfrq:p };
+//   &amp_good   @WIRE { #XDET:amp_good   %pamp::pin };
+//   &phase_good @WIRE { #XDET:phase_good %pph::pin } => @TEXT("phase_good") => @SET-STYLE $fly_label_style;
+//   &qualified      @WIRE { #XC:qualified      %pqual::pin };
+//   &range_error    @WIRE { #XC:range_error    %prng::pin };
+//   &cfg_ready      @WIRE { #XC:config_ready   %prdy::pin };
+//   &frequency_good @WIRE { #XC:frequency_good %pfrq::pin };
 //
 //   /* Flying-Wire Terminal Labels for Secondary Control/Feedback Signals */
 //   #XS:vp       @TEXT("sp",            dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;
@@ -184,5 +184,8 @@ XC (refb reset apply k0 k1 k2 k3 k4 k5 out acqclk phase_good frequency_good b0 b
 //   (64, -5.8) @TEXT("Unbalanced single-ended load (~50 fF effective Cg/parasitic on vp only) skews differential LC tank symmetry; add dummy load on vn", halign="middle") => @SET-STYLE $param_style;
 //   (64, 62) @TEXT("pll_capture_rt4_r48_recenter109_v14_pdk110_0: 2.4-GHz Hybrid FLL-Assisted Sub-Sampling LC-PLL System", halign="middle") => @SET-STYLE $title_style;
 //   (64, 60.2) @TEXT("Combines Track-and-Hold Sub-Sampling Loop (XS, XCP, XLF, XV) with Single-Line Buses (K<5:0>, B<7:0>, S<5:0>) and 4x Retimed Divider Path (XD, XR)", halign="middle") => @SET-STYLE $subtitle_style
+// }
+// @RNL {
+//   #XREF @SET-SYMBOL(terminals=[[1, "a"], [2, "y"]]) $BUFFER
 // }
 ends pll_capture_rt4_r48_recenter109_v14_pdk110_0

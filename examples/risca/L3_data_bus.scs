@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/L3_data_bus
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt L3_data_bus BUSIN_15 BUSIN_14 BUSIN_13 BUSIN_12 BUSIN_11 BUSIN_10 \
         BUSIN_9 BUSIN_8 BUSIN_7 BUSIN_6 BUSIN_5 BUSIN_4 BUSIN_3 BUSIN_2 \
         BUSIN_1 BUSIN_0 BUSOUT_15 BUSOUT_14 BUSOUT_13 BUSOUT_12 BUSOUT_11 \
@@ -412,61 +413,61 @@ subckt L3_data_bus BUSIN_15 BUSIN_14 BUSIN_13 BUSIN_12 BUSIN_11 BUSIN_10 \
 //   %port_1 = $IO_PORT @ATTACH &"GND" => @PLACE(-81, 17) => @ORIENT("R0");
 //   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="right");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="right");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(-1, 1.6)
 //     };
 //   %port_2 = $IO_PORT @ATTACH &"DIN" => @PLACE(-80, 13) => @ORIENT("R0");
 //   %port_2 @SET-SYMBOL %input_port_symbol;
-//   %port_2 @TEXT("DIN", key="name");
+//   %port_2 @TEXT("DIN", key="netname");
 //   %port_3 = $IO_PORT @ATTACH &"CLK" => @PLACE(-80, 9) => @ORIENT("R0");
 //   %port_3 @SET-SYMBOL %input_port_symbol;
-//   %port_3 @TEXT("CLK", key="name");
+//   %port_3 @TEXT("CLK", key="netname");
 //   %bus_port_type_4 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"], ["p3", "net"], ["p4", "net"], ["p5", "net"], ["p6", "net"], ["p7", "net"], ["p8", "net"], ["p9", "net"], ["p10", "net"], ["p11", "net"], ["p12", "net"], ["p13", "net"], ["p14", "net"], ["p15", "net"]]) {};
-//   %bus_port_type_4_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])};
+//   %bus_port_type_4_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9", "p10", "p11", "p12", "p13", "p14", "p15"])};
 //   {&"BUSIN_15" &"BUSIN_14" &"BUSIN_13" &"BUSIN_12" &"BUSIN_11" &"BUSIN_10" &"BUSIN_9" &"BUSIN_8" &"BUSIN_7" &"BUSIN_6" &"BUSIN_5" &"BUSIN_4" &"BUSIN_3" &"BUSIN_2" &"BUSIN_1" &"BUSIN_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_4 = %bus_port_type_4 @ATTACH &"BUSIN_15" &"BUSIN_14" &"BUSIN_13" &"BUSIN_12" &"BUSIN_11" &"BUSIN_10" &"BUSIN_9" &"BUSIN_8" &"BUSIN_7" &"BUSIN_6" &"BUSIN_5" &"BUSIN_4" &"BUSIN_3" &"BUSIN_2" &"BUSIN_1" &"BUSIN_0" => @PLACE(-80, 1) => @ORIENT("R0");
 //   %port_4 @SET-SYMBOL %bus_port_type_4_symbol;
 //   %port_4_marker = $IO_PORT @ATTACH &"BUSIN_15" => @PLACE(-80, 1) => @ORIENT("R0");
 //   %port_4_marker @SET-SYMBOL %input_port_symbol;
-//   %port_4_marker @TEXT("BUSIN<15:0>", key="name");
+//   %port_4_marker @TEXT("BUSIN<15:0>", key="netname");
 //   %port_5 = $IO_PORT @ATTACH &"UPDATE" => @PLACE(-80, 5) => @ORIENT("R0");
 //   %port_5 @SET-SYMBOL %input_port_symbol;
-//   %port_5 @TEXT("UPDATE", key="name");
+//   %port_5 @TEXT("UPDATE", key="netname");
 //   %output_port_symbol = @DEFINE-SYMBOL(box=[0, -1, 2, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(0, -0.9) (0, 0.9) (1.1, 0.9) (2, 0) (1.1, -0.9) (0, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="left");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="left");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(1, 1.6)
 //     };
 //   %bus_port_type_6 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"], ["p3", "net"], ["p4", "net"], ["p5", "net"], ["p6", "net"], ["p7", "net"], ["p8", "net"], ["p9", "net"], ["p10", "net"], ["p11", "net"], ["p12", "net"], ["p13", "net"], ["p14", "net"], ["p15", "net"]]) {};
-//   %bus_port_type_6_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])};
+//   %bus_port_type_6_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9", "p10", "p11", "p12", "p13", "p14", "p15"])};
 //   {&"BUSOUT_15" &"BUSOUT_14" &"BUSOUT_13" &"BUSOUT_12" &"BUSOUT_11" &"BUSOUT_10" &"BUSOUT_9" &"BUSOUT_8" &"BUSOUT_7" &"BUSOUT_6" &"BUSOUT_5" &"BUSOUT_4" &"BUSOUT_3" &"BUSOUT_2" &"BUSOUT_1" &"BUSOUT_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_6 = %bus_port_type_6 @ATTACH &"BUSOUT_15" &"BUSOUT_14" &"BUSOUT_13" &"BUSOUT_12" &"BUSOUT_11" &"BUSOUT_10" &"BUSOUT_9" &"BUSOUT_8" &"BUSOUT_7" &"BUSOUT_6" &"BUSOUT_5" &"BUSOUT_4" &"BUSOUT_3" &"BUSOUT_2" &"BUSOUT_1" &"BUSOUT_0" => @PLACE(-82, -3) => @ORIENT("R0");
 //   %port_6 @SET-SYMBOL %bus_port_type_6_symbol;
 //   %port_6_marker = $IO_PORT @ATTACH &"BUSOUT_15" => @PLACE(-82, -3) => @ORIENT("R0");
 //   %port_6_marker @SET-SYMBOL %output_port_symbol;
-//   %port_6_marker @TEXT("BUSOUT<15:0>", key="name");
+//   %port_6_marker @TEXT("BUSOUT<15:0>", key="netname");
 //   %bus_port_type_7 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"]]) {};
-//   %bus_port_type_7_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3])};
+//   %bus_port_type_7_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1", "p2"])};
 //   {&"ADDR_2" &"ADDR_1" &"ADDR_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_7 = %bus_port_type_7 @ATTACH &"ADDR_2" &"ADDR_1" &"ADDR_0" => @PLACE(-80, -11) => @ORIENT("R0");
 //   %port_7 @SET-SYMBOL %bus_port_type_7_symbol;
 //   %port_7_marker = $IO_PORT @ATTACH &"ADDR_2" => @PLACE(-80, -11) => @ORIENT("R0");
 //   %port_7_marker @SET-SYMBOL %input_port_symbol;
-//   %port_7_marker @TEXT("ADDR<2:0>", key="name");
+//   %port_7_marker @TEXT("ADDR<2:0>", key="netname");
 //   %bus_port_type_8 = @DEFINE(roles=[["p", "net"], ["p1", "net"]]) {};
-//   %bus_port_type_8_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2])};
+//   %bus_port_type_8_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1"])};
 //   {&"RDY_1" &"RDY_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_8 = %bus_port_type_8 @ATTACH &"RDY_1" &"RDY_0" => @PLACE(-80, -7) => @ORIENT("R0");
 //   %port_8 @SET-SYMBOL %bus_port_type_8_symbol;
 //   %port_8_marker = $IO_PORT @ATTACH &"RDY_1" => @PLACE(-80, -7) => @ORIENT("R0");
 //   %port_8_marker @SET-SYMBOL %input_port_symbol;
-//   %port_8_marker @TEXT("RDY<1:0>", key="name");
+//   %port_8_marker @TEXT("RDY<1:0>", key="netname");
 //   %port_9 = $IO_PORT @ATTACH &"UDI" => @PLACE(-80, -15) => @ORIENT("R0");
 //   %port_9 @SET-SYMBOL %input_port_symbol;
-//   %port_9 @TEXT("UDI", key="name");
+//   %port_9 @TEXT("UDI", key="netname");
 //   %port_10 = $IO_PORT @ATTACH &"UDO" => @PLACE(-82, -19) => @ORIENT("R0");
 //   %port_10 @SET-SYMBOL %output_port_symbol;
-//   %port_10 @TEXT("UDO", key="name");
+//   %port_10 @TEXT("UDO", key="netname");
 //   %wire_0 = &"net2" @WIRE(mode="straight") {#"I15":2 #"I10":1};
 //   %p0 = (-52, -36);
 //   %wire_1 = &"UDI" @WIRE(mode="straight") {#"I128":1 %p0};
@@ -673,18 +674,19 @@ subckt L3_data_bus BUSIN_15 BUSIN_14 BUSIN_13 BUSIN_12 BUSIN_11 BUSIN_10 \
 //   %wire_73 @TEXT("VDD", size=1, halign="start", valign="baseline", rotate=90) => @PLACE(-69.7, 20.4);
 //   %wire_65 @TEXT("VDD", size=1, halign="start", valign="baseline", rotate=90) => @PLACE(-61.7, 20.4);
 //   %wire_64 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(-42, -32.3);
-//   $JUNCTION @ATTACH %p3;
-//   $JUNCTION @ATTACH %p5;
-//   $JUNCTION @ATTACH %p12
+//   $JUNCTION @ATTACH %p3 => @PLACE(95, 3);
+//   $JUNCTION @ATTACH %p5 => @PLACE(-11, -18);
+//   $JUNCTION @ATTACH %p12 => @PLACE(-22, -18)
 // }
 // @RNL(author="gemini-4-argon") {
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
 //   /* L3_data_bus: 11-Bit SAR Serial-to-Parallel Deserializer & 16-Bit Daisy-Chained Readout Bus Multiplexer */
 //   {#"I3" #"I2" #"I9" #"I8" %bundle_4}(serial_shift_reg_10b) {#"I15" #"I10" #"I5" %bundle_5}(parallel_latch_bank_11b) {%bundle_8 %bundle_7}(rdy_synchronizers) {#"I128" %bundle_1 %bundle_6 %bundle_3}(daisy_chain_bus_mux_16b) @AS(role="11bit_SAR_deserializer_and_16bit_daisy_chain_bus_multiplexer") $SAR_DATA_DESERIALIZER_MUX;
 //   {%bundle_0 %bundle_2}(caps) @AS(role="data_bus_supply_decap", substrate_tap="8x_DCAP8_plus_11x_DCAP4") $MOM_DECAP;
-//   {#"I3" %bundle_4 %bundle_5 %bundle_3}(path) @AS(direction="left-to-right") $FLOW;
+//   {#"I3" %bundle_4 %bundle_5 %bundle_3}(path) @AS $SIGNAL_FLOW; {#I3 %bundle_4 %bundle_5 %bundle_3} @ORDER("left-to-right", priority="low");
 //   {%bundle_8 %bundle_7}(affected_objects) @AS(severity="harmless_internal_net_swap", category="cross_indexed_net_names", description="Delay cell I14_1 (on RDY_1) drives net1_0 into I12_1 (RDQ_1), while I14_0 (on RDY_0) drives net1_1 into I12_0 (RDQ_0)") $CIRCUIT_ANOMALY_NOTE;
-//   {#"I3" #"I15"}(members) @AS $BRANCH;
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"I3" #"I15"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-116, 107.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(-116, 78.03) (196.28, 104.23)} => @SET-STYLE $risca_note_box;

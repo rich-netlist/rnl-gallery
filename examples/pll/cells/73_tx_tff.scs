@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt tx_tff_pdk110_73 (clk reset q qb vdd vss)
@@ -11,7 +11,7 @@ XI (q qb vdd vss) pll_inv_pdk110_7
 //
 //   /* --- 1. Circuit Semantics --- */
 //   %tff = #XF(core_dff) {#XI}(feedback_inverter) @AS(division_ratio=2) $TOGGLE_FF_DIV2;
-//   {%pclk #XF %pq} @AS(direction="left-to-right") $FLOW;
+//   {%pclk #XF %pq} @AS $SIGNAL_FLOW; {%pclk #XF %pq} @ORDER("left-to-right", priority="low");
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
 //   %pclk = $IO_PORT @ATTACH &clk   => @PLACE(2, 11)  => @ORIENT("R0");
@@ -23,18 +23,18 @@ XI (q qb vdd vss) pll_inv_pdk110_7
 //   #XI @PLACE(16, 18) => @ORIENT("MY");
 //
 //   /* --- 3. Explicit Manhattan Wiring --- */
-//   &clk   @WIRE { %pclk:p #XF:clk };
-//   &reset @WIRE { %prst:p (16, 6) #XF:reset };
+//   &clk   @WIRE { %pclk::pin #XF:clk };
+//   &reset @WIRE { %prst::pin (16, 6) #XF:reset };
 //
 //   %jq = (24, 12);
-//   $JUNCTION @ATTACH %jq;
-//   &q @WIRE { #XF:q %jq %pq:p };
+//   $JUNCTION @ATTACH %jq => @PLACE(24, 12);
+//   &q @WIRE { #XF:q %jq %pq::pin };
 //   &q @WIRE { %jq (24, 18) #XI:a };
 //
 //   %jqb = (10, 18);
-//   $JUNCTION @ATTACH %jqb;
+//   $JUNCTION @ATTACH %jqb => @PLACE(10, 18);
 //   &qb @WIRE { #XI:y %jqb (10, 13) #XF:d };
-//   &qb @WIRE { %jqb (10, 21) (27, 21) (27, 18) %pqb:p };
+//   &qb @WIRE { %jqb (10, 21) (27, 21) (27, 18) %pqb::pin };
 //
 //   /* --- 4. Annotations --- */
 //   (16, 25) @TEXT("tx_tff_pdk110_73: Asynchronous Divide-by-2 Toggle Flip-Flop (14 Instances in FLL Ripple Counter)", halign="middle") => @SET-STYLE $title_style;

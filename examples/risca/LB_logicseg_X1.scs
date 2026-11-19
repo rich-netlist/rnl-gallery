@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/LB_logicseg_X1
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt LB_logicseg_X1 CMPN CMPO CMPP DON DOP ENB GND NEXTB RST VDD RDY
     I6 (CMPP net1 net14 DOP VDD GND) AOI21D1BWP12T30P140
     I30 (CMPN net1 net9 DON VDD GND) AOI21D1BWP12T30P140
@@ -206,41 +207,41 @@ subckt LB_logicseg_X1 CMPN CMPO CMPP DON DOP ENB GND NEXTB RST VDD RDY
 //   %port_1 = $IO_PORT @ATTACH &"GND" => @PLACE(-65, 44) => @ORIENT("R0");
 //   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="right");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="right");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(-1, 1.6)
 //     };
 //   %port_2 = $IO_PORT @ATTACH &"CMPP" => @PLACE(-64, 40) => @ORIENT("R0");
 //   %port_2 @SET-SYMBOL %input_port_symbol;
-//   %port_2 @TEXT("CMPP", key="name");
+//   %port_2 @TEXT("CMPP", key="netname");
 //   %port_3 = $IO_PORT @ATTACH &"CMPN" => @PLACE(-64, 36) => @ORIENT("R0");
 //   %port_3 @SET-SYMBOL %input_port_symbol;
-//   %port_3 @TEXT("CMPN", key="name");
+//   %port_3 @TEXT("CMPN", key="netname");
 //   %port_4 = $IO_PORT @ATTACH &"RST" => @PLACE(-64, 28) => @ORIENT("R0");
 //   %port_4 @SET-SYMBOL %input_port_symbol;
-//   %port_4 @TEXT("RST", key="name");
+//   %port_4 @TEXT("RST", key="netname");
 //   %output_port_symbol = @DEFINE-SYMBOL(box=[0, -1, 2, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(0, -0.9) (0, 0.9) (1.1, 0.9) (2, 0) (1.1, -0.9) (0, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="left");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="left");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(1, 1.6)
 //     };
 //   %port_5 = $IO_PORT @ATTACH &"DOP" => @PLACE(-66, 20) => @ORIENT("R0");
 //   %port_5 @SET-SYMBOL %output_port_symbol;
-//   %port_5 @TEXT("DOP", key="name");
+//   %port_5 @TEXT("DOP", key="netname");
 //   %port_6 = $IO_PORT @ATTACH &"DON" => @PLACE(-66, 16) => @ORIENT("R0");
 //   %port_6 @SET-SYMBOL %output_port_symbol;
-//   %port_6 @TEXT("DON", key="name");
+//   %port_6 @TEXT("DON", key="netname");
 //   %port_7 = $IO_PORT @ATTACH &"NEXTB" => @PLACE(-66, 12) => @ORIENT("R0");
 //   %port_7 @SET-SYMBOL %output_port_symbol;
-//   %port_7 @TEXT("NEXTB", key="name");
+//   %port_7 @TEXT("NEXTB", key="netname");
 //   %port_8 = $IO_PORT @ATTACH &"ENB" => @PLACE(-64, 24) => @ORIENT("R0");
 //   %port_8 @SET-SYMBOL %input_port_symbol;
-//   %port_8 @TEXT("ENB", key="name");
+//   %port_8 @TEXT("ENB", key="netname");
 //   %port_9 = $IO_PORT @ATTACH &"CMPO" => @PLACE(-64, 32) => @ORIENT("R0");
 //   %port_9 @SET-SYMBOL %input_port_symbol;
-//   %port_9 @TEXT("CMPO", key="name");
+//   %port_9 @TEXT("CMPO", key="netname");
 //   %port_10 = $IO_PORT @ATTACH &"RDY" => @PLACE(-66, 8) => @ORIENT("R0");
 //   %port_10 @SET-SYMBOL %output_port_symbol;
-//   %port_10 @TEXT("RDY", key="name");
+//   %port_10 @TEXT("RDY", key="netname");
 //   %p0 = (1, 48);
 //   %p1 = (1, 54);
 //   %wire_0 = &"net14" @WIRE(mode="straight") {%p0 %p1};
@@ -401,13 +402,13 @@ subckt LB_logicseg_X1 CMPN CMPO CMPP DON DOP ENB GND NEXTB RST VDD RDY
 //   %p60 = (-21, 11);
 //   %wire_71 = &"net2" @WIRE(mode="straight") {%p60 %p59};
 //   %wire_72 = &"net2" @WIRE(mode="straight") {%p60 #"I3":3};
-//   $JUNCTION @ATTACH %p5;
-//   $JUNCTION @ATTACH %p34;
-//   $JUNCTION @ATTACH %p35;
-//   $JUNCTION @ATTACH %p49;
-//   $JUNCTION @ATTACH %p50;
-//   $JUNCTION @ATTACH %p55;
-//   $JUNCTION @ATTACH %p56;
+//   $JUNCTION @ATTACH %p5 => @PLACE(7, -11);
+//   $JUNCTION @ATTACH %p34 => @PLACE(-33, -50);
+//   $JUNCTION @ATTACH %p35 => @PLACE(-23, -50);
+//   $JUNCTION @ATTACH %p49 => @PLACE(-23, 55);
+//   $JUNCTION @ATTACH %p50 => @PLACE(-33, 55);
+//   $JUNCTION @ATTACH %p55 => @PLACE(-15, -12);
+//   $JUNCTION @ATTACH %p56 => @PLACE(-8, -12);
 //   (71, 28) @TEXT("CMPP", size=3.2, halign="middle", valign="baseline");
 //   (154, -29) @TEXT("=ENB'+RDY'", size=3.2, halign="middle", valign="baseline");
 //   (170, -39) @TEXT("=RST at (RDY+CMPO')", size=3.2, halign="middle", valign="baseline");
@@ -441,11 +442,14 @@ subckt LB_logicseg_X1 CMPN CMPO CMPP DON DOP ENB GND NEXTB RST VDD RDY
 //   #"I8"(window_enable_gate) {#"I6" #"I7"}(dop_sr_latch) {#"I30" #"I36"}(don_sr_latch) {#"I2" #"I3" #"I4"}(completion_and_token_logic) @AS(role="asynchronous_SAR_bit_slice", drive_strength="X1_AOI21D1") $ASYNC_SAR_BIT_SLICE;
 //   {#"I6" #"I30"}(members) @AS $MATCHED;
 //   {#"I7" #"I36"}(members) @AS $MATCHED;
-//   {#"I8" #"I6" #"I2" #"I4"}(path) @AS(direction="left-to-right") $FLOW;
-//   {#"I8" #"I30" #"I2" #"I4"}(path) @AS(direction="left-to-right") $FLOW;
-//   {#"I3" #"I4" #"I2"}(members) @AS $BRANCH;
-//   {#"I7" #"I36"}(members) @AS $BRANCH;
-//   {#"I6" #"I30"}(members) @AS $BRANCH;
+//   {#"I8" #"I6" #"I2" #"I4"}(path) @AS $SIGNAL_FLOW; {#I8 #I6 #I2 #I4} @ORDER("left-to-right", priority="low");
+//   {#"I8" #"I30" #"I2" #"I4"}(path) @AS $SIGNAL_FLOW; {#I8 #I30 #I2 #I4} @ORDER("left-to-right", priority="low");
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"I3" #"I4" #"I2"} @ALIGN("x", priority="low");
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"I7" #"I36"} @ALIGN("x", priority="low");
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"I6" #"I30"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-99, 138.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(-99, 109.03) (95.79, 135.23)} => @SET-STYLE $risca_note_box;

@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/LB_vcmbooster_LV
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt LB_vcmbooster_LV AVDD AVSS CLK VBTSTP
     C0 (net3 net2) cfmom_2t nr=30 lr=5u w=50n s=50n stm=2 spm=7 multi=1
     M2 (VBTSTP AVDD net2 AVSS) nch_ulvt_mac l=30n w=2u multi=1 nf=4 \
@@ -151,21 +152,21 @@ subckt LB_vcmbooster_LV AVDD AVSS CLK VBTSTP
 //   %port_0 = $IO_PORT @ATTACH &"AVDD" => @PLACE(-2, 40) => @ORIENT("R0");
 //   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="right");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="right");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(-1, 1.6)
 //     };
 //   %port_1 = $IO_PORT @ATTACH &"CLK" => @PLACE(-11, 0) => @ORIENT("R0");
 //   %port_1 @SET-SYMBOL %input_port_symbol;
-//   %port_1 @TEXT("CLK", key="name");
+//   %port_1 @TEXT("CLK", key="netname");
 //   %port_2 = $IO_PORT @ATTACH &"AVSS" => @PLACE(-2, 36) => @ORIENT("R0");
 //   %output_port_symbol = @DEFINE-SYMBOL(box=[0, -1, 2, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(0, -0.9) (0, 0.9) (1.1, 0.9) (2, 0) (1.1, -0.9) (0, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="left");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="left");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(1, 1.6)
 //     };
 //   %port_3 = $IO_PORT @ATTACH &"VBTSTP" => @PLACE(75, 16) => @ORIENT("R0");
 //   %port_3 @SET-SYMBOL %output_port_symbol;
-//   %port_3 @TEXT("VBTSTP", key="name");
+//   %port_3 @TEXT("VBTSTP", key="netname");
 //   %p0 = (-6, 0);
 //   %p1 = (-6, 8);
 //   %wire_0 = &"CLK" @WIRE(mode="straight") {%p0 %p1};
@@ -174,9 +175,11 @@ subckt LB_vcmbooster_LV AVDD AVSS CLK VBTSTP
 //   %wire_2 = &"CLK" @WIRE(mode="straight") {%p2 #"M1":2};
 //   %wire_3 = &"CLK" @WIRE(mode="straight") {%p1 #"M0":2};
 //   %p3 = (-12, 0);
-//   %wire_4 = &"CLK" @WIRE(mode="straight") {%p3 %port_1:p %p0};
+//   %wire_4 = &"CLK" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+// %p3 %port_1:p %p0};
 //   %p4 = (67, 16);
-//   %wire_5 = &"VBTSTP" @WIRE(mode="straight") {%p4 %port_3:p};
+//   %wire_5 = &"VBTSTP" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+// %p4 %port_3:p};
 //   %p5 = (67, 0);
 //   %wire_6 = &"VBTSTP" @WIRE(mode="straight") {%p5 %p4};
 //   %p6 = (67, 32);
@@ -235,22 +238,22 @@ subckt LB_vcmbooster_LV AVDD AVSS CLK VBTSTP
 //   %wire_36 @TEXT("AVDD", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(42.3, 47);
 //   %wire_34 @TEXT("AVDD", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-0.7, 14);
 //   %wire_35 @TEXT("AVDD", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(58.3, 25);
-//   $JUNCTION @ATTACH %p0;
-//   $JUNCTION @ATTACH %p4;
-//   $JUNCTION @ATTACH %p6;
-//   $JUNCTION @ATTACH %p12;
-//   $JUNCTION @ATTACH %p13;
-//   $JUNCTION @ATTACH %p14
+//   $JUNCTION @ATTACH %p0 => @PLACE(-6, 0);
+//   $JUNCTION @ATTACH %p4 => @PLACE(67, 16);
+//   $JUNCTION @ATTACH %p6 => @PLACE(67, 32);
+//   $JUNCTION @ATTACH %p12 => @PLACE(43, 32);
+//   $JUNCTION @ATTACH %p13 => @PLACE(0, 0);
+//   $JUNCTION @ATTACH %p14 => @PLACE(43, 0)
 // }
 // @RNL(author="gemini-4-argon") {
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
 //   /* LB_vcmbooster_LV: Low-Voltage Capacitive Clock Voltage Doubler (CLK=0 -> VBTSTP=2*AVDD, CLK=1 -> VBTSTP=AVSS) */
 //   {#"M0" #"M1"}(driver_inverter) #"C0"(flying_cap) #"M7"(precharge_switch) #"M4"(boost_pass_switch) #"M2"(discharge_switch) @AS(role="capacitive_clock_voltage_doubler", boost_level="2x_AVDD_on_CLK_low") $CLK_VOLTAGE_DOUBLER;
-//   {#"M0" #"M1"}(members) @AS $BRANCH;
-//   {%port_1 #"M0" #"C0" #"M4" %port_3}(path) @AS(direction="left-to-right") $FLOW;
-//   #"M0":3(pin) @AS $SUPPLY_HIGH;
-//   #"M1":3(pin) @AS $SUPPLY_LOW;
-//   {#"M4" #"M2"}(members) @AS $BRANCH;
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"M0" #"M1"} @ALIGN("x", priority="low");
+//   {%port_1 #"M0" #"C0" #"M4" %port_3}(path) @AS $SIGNAL_FLOW; {%port_1 #M0 #C0 #M4 %port_3} @ORDER("left-to-right", priority="low");
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"M4" #"M2"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-41, 104.29) @TEXT("Comment by Gemini-4-Argon", size=2) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(-41, 87.02) (106.84, 102.29)} => @SET-STYLE $risca_note_box;

@@ -1,7 +1,7 @@
 /* Unified Circuit Semantics and Visual Styles Package for RISCA
    (6-Channel Reconfigurable Shared-Bus Pipelined / Zoom / Noise-Shaping SAR ADC in 28nm) */
-@RNL(type="header", author="gemini-4-argon") {
-  @VERSION("0.3");
+@RNL(type="header", author="gemini-4-argon") { @USE-PACKAGE(name="rnl-std-all", version="0.4");
+  @VERSION("0.4");
   @PACKAGE(name="risca-semantics", version="0.3");
 
   /* 28nm Primitive Transistors (Spectre terminal order: 1=d, 2=g, 3=s, 4=b) */

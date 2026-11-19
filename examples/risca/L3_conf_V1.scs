@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/L3_conf_V1
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt L3_conf_V1 GND OUT_21 OUT_20 OUT_19 OUT_18 OUT_17 OUT_16 OUT_15 \
         OUT_14 OUT_13 OUT_12 OUT_11 OUT_10 OUT_9 OUT_8 OUT_7 OUT_6 OUT_5 \
         OUT_4 OUT_3 OUT_2 OUT_1 OUT_0 RST SCKI SCKO SDI SDO VDD
@@ -266,37 +267,37 @@ subckt L3_conf_V1 GND OUT_21 OUT_20 OUT_19 OUT_18 OUT_17 OUT_16 OUT_15 \
 //   %port_1 = $IO_PORT @ATTACH &"GND" => @PLACE(-67, 22) => @ORIENT("R0");
 //   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="right");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="right");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(-1, 1.6)
 //     };
 //   %port_2 = $IO_PORT @ATTACH &"SDI" => @PLACE(-66, 14) => @ORIENT("R0");
 //   %port_2 @SET-SYMBOL %input_port_symbol;
-//   %port_2 @TEXT("SDI", key="name");
+//   %port_2 @TEXT("SDI", key="netname");
 //   %output_port_symbol = @DEFINE-SYMBOL(box=[0, -1, 2, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(0, -0.9) (0, 0.9) (1.1, 0.9) (2, 0) (1.1, -0.9) (0, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="left");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="left");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(1, 1.6)
 //     };
 //   %port_3 = $IO_PORT @ATTACH &"SDO" => @PLACE(-68, 10) => @ORIENT("R0");
 //   %port_3 @SET-SYMBOL %output_port_symbol;
-//   %port_3 @TEXT("SDO", key="name");
+//   %port_3 @TEXT("SDO", key="netname");
 //   %bus_port_type_4 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"], ["p3", "net"], ["p4", "net"], ["p5", "net"], ["p6", "net"], ["p7", "net"], ["p8", "net"], ["p9", "net"], ["p10", "net"], ["p11", "net"], ["p12", "net"], ["p13", "net"], ["p14", "net"], ["p15", "net"], ["p16", "net"], ["p17", "net"], ["p18", "net"], ["p19", "net"], ["p20", "net"], ["p21", "net"]]) {};
-//   %bus_port_type_4_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22])};
+//   %bus_port_type_4_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9", "p10", "p11", "p12", "p13", "p14", "p15", "p16", "p17", "p18", "p19", "p20", "p21"])};
 //   {&"OUT_21" &"OUT_20" &"OUT_19" &"OUT_18" &"OUT_17" &"OUT_16" &"OUT_15" &"OUT_14" &"OUT_13" &"OUT_12" &"OUT_11" &"OUT_10" &"OUT_9" &"OUT_8" &"OUT_7" &"OUT_6" &"OUT_5" &"OUT_4" &"OUT_3" &"OUT_2" &"OUT_1" &"OUT_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_4 = %bus_port_type_4 @ATTACH &"OUT_21" &"OUT_20" &"OUT_19" &"OUT_18" &"OUT_17" &"OUT_16" &"OUT_15" &"OUT_14" &"OUT_13" &"OUT_12" &"OUT_11" &"OUT_10" &"OUT_9" &"OUT_8" &"OUT_7" &"OUT_6" &"OUT_5" &"OUT_4" &"OUT_3" &"OUT_2" &"OUT_1" &"OUT_0" => @PLACE(-68, -2) => @ORIENT("R0");
 //   %port_4 @SET-SYMBOL %bus_port_type_4_symbol;
 //   %port_4_marker = $IO_PORT @ATTACH &"OUT_21" => @PLACE(-68, -2) => @ORIENT("R0");
 //   %port_4_marker @SET-SYMBOL %output_port_symbol;
-//   %port_4_marker @TEXT("OUT<21:0>", key="name");
+//   %port_4_marker @TEXT("OUT<21:0>", key="netname");
 //   %port_5 = $IO_PORT @ATTACH &"RST" => @PLACE(-66, 2) => @ORIENT("R0");
 //   %port_5 @SET-SYMBOL %input_port_symbol;
-//   %port_5 @TEXT("RST", key="name");
+//   %port_5 @TEXT("RST", key="netname");
 //   %port_6 = $IO_PORT @ATTACH &"SCKI" => @PLACE(-66, 18) => @ORIENT("R0");
 //   %port_6 @SET-SYMBOL %input_port_symbol;
-//   %port_6 @TEXT("SCKI", key="name");
+//   %port_6 @TEXT("SCKI", key="netname");
 //   %port_7 = $IO_PORT @ATTACH &"SCKO" => @PLACE(-68, 6) => @ORIENT("R0");
 //   %port_7 @SET-SYMBOL %output_port_symbol;
-//   %port_7 @TEXT("SCKO", key="name");
+//   %port_7 @TEXT("SCKO", key="netname");
 //   %p0 = (-21, 19);
 //   %wire_0 = &"net5" @WIRE(mode="straight") {%p0 #"I4":2};
 //   %wire_1 = &"net5" @WIRE(mode="straight") {%p0 %bundle_0:2};
@@ -386,17 +387,18 @@ subckt L3_conf_V1 GND OUT_21 OUT_20 OUT_19 OUT_18 OUT_17 OUT_16 OUT_15 \
 //   %wire_29 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(-38, -0.3);
 //   %wire_28 @TEXT("VDD", size=1, halign="end", valign="baseline") => @PLACE(38.6, 4.7);
 //   %wire_27 @TEXT("VDD", size=1, halign="end", valign="baseline") => @PLACE(25.6, 4.7);
-//   $JUNCTION @ATTACH %p4;
-//   $JUNCTION @ATTACH %p10
+//   $JUNCTION @ATTACH %p4 => @PLACE(12, 1);
+//   $JUNCTION @ATTACH %p10 => @PLACE(-23, 11)
 // }
 // @RNL(author="gemini-4-argon") {
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
 //   /* L3_conf_V1: 22-Bit SPI Serial-In Parallel-Out Static Configuration Register with Reset Masking & 100ps SCK Skew Buffer */
 //   %bundle_0(shift_reg_22b) {%bundle_2 #"I4"}(reset_mask_gates) {#"I129" #"I107" #"I1" #"I3"}(sck_delay_repeater) @AS(role="22bit_SPI_configuration_register_with_100ps_SCK_skew") $SPI_SHIFT_CONFIG_BANK;
 //   %bundle_1(caps) @AS(role="SPI_register_supply_decap", substrate_tap="10x_DCAP8_stdcell") $MOM_DECAP;
-//   {%bundle_0 %bundle_2}(path) @AS(direction="left-to-right") $FLOW;
-//   {#"I129" #"I107" #"I1"}(path) @AS(direction="right-to-left") $FLOW;
-//   {#"I4" #"I1"}(members) @AS $BRANCH;
+//   {%bundle_0 %bundle_2}(path) @AS $SIGNAL_FLOW; {%bundle_0 %bundle_2} @ORDER("left-to-right", priority="low");
+//   {#"I129" #"I107" #"I1"}(path) @AS $SIGNAL_FLOW; {#I129 #I107 #I1} @ORDER("right-to-left", priority="low");
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"I4" #"I1"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-106, 113.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(-106, 89.03) (135.48, 110.23)} => @SET-STYLE $risca_note_box;

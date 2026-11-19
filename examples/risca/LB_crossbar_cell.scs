@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/LB_crossbar_cell
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt LB_crossbar_cell COL GND PRE ROW SCK SDI SDO VDD BUS REP
     M22 (BUS REP SDO GND) nch_mac l=30n w=600n multi=1 nf=2 sd=100n \
         ad=3e-14 as=4.5e-14 pd=800n ps=1.5u nrd=0.910886 nrs=0.910886 \
@@ -253,34 +254,34 @@ subckt LB_crossbar_cell COL GND PRE ROW SCK SDI SDO VDD BUS REP
 //   %port_0 = $IO_PORT @ATTACH &"GND" => @PLACE(-30, 26) => @ORIENT("R0");
 //   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="right");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="right");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(-1, 1.6)
 //     };
 //   %port_1 = $IO_PORT @ATTACH &"SDI" => @PLACE(-29, 22) => @ORIENT("R0");
 //   %port_1 @SET-SYMBOL %input_port_symbol;
-//   %port_1 @TEXT("SDI", key="name");
+//   %port_1 @TEXT("SDI", key="netname");
 //   %output_port_symbol = @DEFINE-SYMBOL(box=[0, -1, 2, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(0, -0.9) (0, 0.9) (1.1, 0.9) (2, 0) (1.1, -0.9) (0, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="left");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="left");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(1, 1.6)
 //     };
 //   %port_2 = $IO_PORT @ATTACH &"SDO" => @PLACE(-31, 14) => @ORIENT("R0");
 //   %port_2 @SET-SYMBOL %output_port_symbol;
-//   %port_2 @TEXT("SDO", key="name");
+//   %port_2 @TEXT("SDO", key="netname");
 //   %port_3 = $IO_PORT @ATTACH &"ROW" => @PLACE(-29, 6) => @ORIENT("R0");
 //   %port_3 @SET-SYMBOL %input_port_symbol;
-//   %port_3 @TEXT("ROW", key="name");
+//   %port_3 @TEXT("ROW", key="netname");
 //   %port_4 = $IO_PORT @ATTACH &"BUS" => @PLACE(-30, -6) => @ORIENT("R0");
 //   %port_5 = $IO_PORT @ATTACH &"COL" => @PLACE(-30, 2) => @ORIENT("R0");
 //   %port_6 = $IO_PORT @ATTACH &"SCK" => @PLACE(-29, 18) => @ORIENT("R0");
 //   %port_6 @SET-SYMBOL %input_port_symbol;
-//   %port_6 @TEXT("SCK", key="name");
+//   %port_6 @TEXT("SCK", key="netname");
 //   %port_7 = $IO_PORT @ATTACH &"PRE" => @PLACE(-29, 10) => @ORIENT("R0");
 //   %port_7 @SET-SYMBOL %input_port_symbol;
-//   %port_7 @TEXT("PRE", key="name");
+//   %port_7 @TEXT("PRE", key="netname");
 //   %port_8 = $IO_PORT @ATTACH &"REP" => @PLACE(-29, -2) => @ORIENT("R0");
 //   %port_8 @SET-SYMBOL %input_port_symbol;
-//   %port_8 @TEXT("REP", key="name");
+//   %port_8 @TEXT("REP", key="netname");
 //   %port_9 = $IO_PORT @ATTACH &"VDD" => @PLACE(-30, 30) => @ORIENT("R0");
 //   %p0 = (66, -6);
 //   %wire_0 = &"net1" @WIRE(mode="straight") {#"M6":1 %p0};
@@ -440,19 +441,19 @@ subckt LB_crossbar_cell COL GND PRE ROW SCK SDI SDO VDD BUS REP
 //   %wire_73 @TEXT("GND", size=1, halign="middle", valign="top", rotate=90) => @PLACE(47.7, 26);
 //   %wire_56 @TEXT("GND", size=1, halign="middle", valign="baseline") => @PLACE(-10, -3.3);
 //   %wire_57 @TEXT("GND", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(7.3, -7);
-//   $JUNCTION @ATTACH %p0;
-//   $JUNCTION @ATTACH %p1;
-//   $JUNCTION @ATTACH %p3;
-//   $JUNCTION @ATTACH %p7;
-//   $JUNCTION @ATTACH %p8;
-//   $JUNCTION @ATTACH %p13;
-//   $JUNCTION @ATTACH %p14;
-//   $JUNCTION @ATTACH %p22;
-//   $JUNCTION @ATTACH %p24;
-//   $JUNCTION @ATTACH %p25;
-//   $JUNCTION @ATTACH %p30;
-//   $JUNCTION @ATTACH %p38;
-//   $JUNCTION @ATTACH %p46
+//   $JUNCTION @ATTACH %p0 => @PLACE(66, -6);
+//   $JUNCTION @ATTACH %p1 => @PLACE(56, -6);
+//   $JUNCTION @ATTACH %p3 => @PLACE(21, 25);
+//   $JUNCTION @ATTACH %p7 => @PLACE(57, 25);
+//   $JUNCTION @ATTACH %p8 => @PLACE(51, 25);
+//   $JUNCTION @ATTACH %p13 => @PLACE(27, 36);
+//   $JUNCTION @ATTACH %p14 => @PLACE(66, 36);
+//   $JUNCTION @ATTACH %p22 => @PLACE(40, -6);
+//   $JUNCTION @ATTACH %p24 => @PLACE(50, -6);
+//   $JUNCTION @ATTACH %p25 => @PLACE(45, 25);
+//   $JUNCTION @ATTACH %p30 => @PLACE(76, 9);
+//   $JUNCTION @ATTACH %p38 => @PLACE(57, 14);
+//   $JUNCTION @ATTACH %p46 => @PLACE(27, 14)
 // }
 // @RNL(author="gemini-4-argon") {
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
@@ -462,10 +463,13 @@ subckt LB_crossbar_cell COL GND PRE ROW SCK SDI SDO VDD BUS REP
 //   #"M4"(pmos_pass) #"M5"(nmos_pass) @AS(role="precharge_col_to_row_pullup_trangate", width="300nm") $CMOS_TRANGATE;
 //   #"I22"(caps) @AS(role="local_cell_supply_decap", substrate_tap="DCAP4_stdcell") $MOM_DECAP;
 //   {#"M2" #"M3" #"M4" #"M5"}(members) @AS $MATCHED;
-//   {#"I21" #"M3" #"M0"}(path) @AS(direction="left-to-right") $FLOW;
-//   {#"M5" #"M4"}(members) @AS $BRANCH;
-//   {#"M7" #"M3" #"M2"}(members) @AS $BRANCH;
-//   {#"M1" #"M0"}(members) @AS $BRANCH;
+//   {#"I21" #"M3" #"M0"}(path) @AS $SIGNAL_FLOW; {#I21 #M3 #M0} @ORDER("left-to-right", priority="low");
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"M5" #"M4"} @ALIGN("x", priority="low");
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"M7" #"M3" #"M2"} @ALIGN("x", priority="low");
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"M1" #"M0"}(members) @AS $BRANCH;
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-56, 111.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(-56, 77.03) (159.88, 108.23)} => @SET-STYLE $risca_note_box;

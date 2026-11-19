@@ -1,20 +1,19 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt pll_inv_pdk110_40 (a y vdd vss)
 MN (y a vss vss) nch w=8e-07 l=1.8e-07 nf=1 ad=3.84e-13 as=3.84e-13 pd=2.56e-06 ps=2.56e-06 nrd=0.3375 nrs=0.3375 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
 MP (y a vdd vdd) pch w=2e-06 l=1.8e-07 nf=1 ad=9.599999999999999e-13 as=9.599999999999999e-13 pd=4.96e-06 ps=4.96e-06 nrd=0.135 nrs=0.135 sa=4.8e-07 sb=4.8e-07 sd=5.4e-07 sca=0 scb=0 scc=0
 // @RNL(author="gemini-4-argon") {
-//   # @SET-SYMBOL $INVERTER;
+//   # @SET-SYMBOL(terminals=[[1, "a"], [2, "y"]]) $INVERTER;
 //
 //   /* --- 1. Circuit Semantics --- */
 //   %inv = #MP(pull_up) #MN(pull_down) @AS(role="ring_latch_fb", skew="weak_keeper", drive_strength="0.25x (Wp=0.6u/Wn=0.4u)", channel_length="180nm") $CMOS_INVERTER;
-//   {#MP #MN} @AS $BRANCH;
-//   #MP:s @AS $SUPPLY_HIGH;
-//   #MN:s @AS $SUPPLY_LOW;
-//   {%pa #MP %py} @AS(direction="left-to-right") $FLOW;
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#MP #MN} @ALIGN("x", priority="low");
+//   {%pa #MP %py} @AS $SIGNAL_FLOW; {%pa #MP %py} @ORDER("left-to-right", priority="low");
 //   /* Static CMOS inverter has zero quiescent DC current; no static DC current annotated */
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
@@ -27,18 +26,18 @@ MP (y a vdd vdd) pch w=2e-06 l=1.8e-07 nf=1 ad=9.599999999999999e-13 as=9.599999
 //
 //   /* --- 3. Explicit Manhattan Wiring --- */
 //   %jg = (7, 12);
-//   $JUNCTION @ATTACH %jg;
-//   &a @WIRE { %pa:p %jg };
+//   $JUNCTION @ATTACH %jg => @PLACE(7, 12);
+//   &a @WIRE { %pa::pin %jg };
 //   &a @WIRE { %jg (7, 16) #MP:g };
 //   &a @WIRE { %jg (7, 8)  #MN:g };
 //
 //   %jy = (12, 12);
-//   $JUNCTION @ATTACH %jy;
+//   $JUNCTION @ATTACH %jy => @PLACE(12, 12);
 //   &y @WIRE { #MP:d %jy #MN:d };
-//   &y @WIRE { %jy %py:p };
+//   &y @WIRE { %jy %py::pin };
 //
-//   &vdd @WIRE { %sup:p #MP:s };
-//   &vss @WIRE { #MN:s %gnd:p };
+//   &vdd @WIRE { %sup::pin #MP:s };
+//   &vss @WIRE { #MN:s %gnd::pin };
 //
 //   /* --- 4. Annotations & Parameter Labels --- */
 //   #MP @TEXT("W=${w} L=${l}", key="wl", dx=3.5, dy=0, halign="start") => @SET-STYLE $param_style;

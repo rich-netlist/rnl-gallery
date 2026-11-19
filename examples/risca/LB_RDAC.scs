@@ -1,9 +1,10 @@
 // RNL cell RISCA_JL/LB_RDAC
-// @RNL(type="header") {
-//   @VERSION("0.3");
-//   @USE-PACKAGE(name="eda-symbol", version="0.1", path="eda-symbol.rnl");
-//   @USE-PACKAGE(name="eda-style", version="0.1", path="eda-style.rnl")
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4");
+//   @VERSION("0.4");
+//   @USE-PACKAGE(name="eda-symbol", version="0.2", path="eda-symbol.rnl");
+//   @USE-PACKAGE(name="eda-style", version="0.2", path="eda-style.rnl")
 // }
+// @RNL { # @SELECT-PIN(recursive=true) => @REMOVE-FROM $LABEL_FILL_SET; $SUPPLY_NET_SET @REMOVE-FROM $PORT_FILL_SET; $GROUND_NET_SET @REMOVE-FROM $PORT_FILL_SET }
 subckt LB_RDAC DIN_3 DIN_2 DIN_1 DIN_0 EN GND VDD VOUTN VOUTP
     M14 (VOUTP net19 net50 GND) nch_mac l=30n w=500n multi=1 nf=1 sd=100n \
         ad=3.75e-14 as=3.75e-14 pd=1.15u ps=1.15u nrd=0.662935 \
@@ -239,7 +240,8 @@ R0_2__dmy0  (R0_1__dmy0 net7 ) rupolym l=6u w=140.0n m=1 multi=(1)
 //   %expanded_type_2 = @DEFINE(roles=["{parts}", ["p1", "terminal"], ["p2", "terminal"]]) {};
 //   %expanded_members_symbol = @DEFINE-SYMBOL {};
 //   {#"R2" #"R2_2__dmy0" #"R2_3__dmy0" #"R2_4__dmy0"} @SET-SYMBOL %expanded_members_symbol;
-//   {#"R2" #"R2_2__dmy0" #"R2_3__dmy0" #"R2_4__dmy0"} @PLACE(2, 34);
+//   /* rnl upgrade: placing a set now places every member; preserve the old collective placement with explicit points or usages (11.1) */
+// {#"R2" #"R2_2__dmy0" #"R2_3__dmy0" #"R2_4__dmy0"} @PLACE(2, 34);
 //   %expanded_0 = {#"R2" #"R2_2__dmy0" #"R2_3__dmy0" #"R2_4__dmy0"}(parts) #"R2":1(p1) #"R2_4__dmy0":2(p2) @AS %expanded_type_2;
 //   %symbol_3 = @DEFINE-SYMBOL(box=[-2, -6, 2, 0]) {
 //     @LINE {(0, -6) (0, -4.8) (-1, -4.5) (1, -3.9) (-1, -3.3) (1, -2.7) (-1, -2.1) (1, -1.5) (0, -1.2) (0, 0)};
@@ -259,7 +261,8 @@ R0_2__dmy0  (R0_1__dmy0 net7 ) rupolym l=6u w=140.0n m=1 multi=(1)
 //   #"M8" @SET-SYMBOL %symbol_0;
 //   #"M8" @PLACE(1, 17) => @ORIENT("MY");
 //   {#"R0" #"R0_2__dmy0"} @SET-SYMBOL %expanded_members_symbol;
-//   {#"R0" #"R0_2__dmy0"} @PLACE(-26, 29);
+//   /* rnl upgrade: placing a set now places every member; preserve the old collective placement with explicit points or usages (11.1) */
+// {#"R0" #"R0_2__dmy0"} @PLACE(-26, 29);
 //   %expanded_1 = {#"R0" #"R0_2__dmy0"}(parts) #"R0":1(p1) #"R0_2__dmy0":2(p2) @AS %expanded_type_2;
 //   %expanded_1 @SET-SYMBOL %symbol_3;
 //   %expanded_1 @PLACE(-26, 29) => @ORIENT("R0");
@@ -276,14 +279,16 @@ R0_2__dmy0  (R0_1__dmy0 net7 ) rupolym l=6u w=140.0n m=1 multi=(1)
 //   #"I14" @SET-SYMBOL %symbol_1;
 //   #"I14" @PLACE(25, -6) => @ORIENT("R90");
 //   {#"R1" #"R1_2__dmy0" #"R1_3__dmy0" #"R1_4__dmy0"} @SET-SYMBOL %expanded_members_symbol;
-//   {#"R1" #"R1_2__dmy0" #"R1_3__dmy0" #"R1_4__dmy0"} @PLACE(-3, 43);
+//   /* rnl upgrade: placing a set now places every member; preserve the old collective placement with explicit points or usages (11.1) */
+// {#"R1" #"R1_2__dmy0" #"R1_3__dmy0" #"R1_4__dmy0"} @PLACE(-3, 43);
 //   %expanded_2 = {#"R1" #"R1_2__dmy0" #"R1_3__dmy0" #"R1_4__dmy0"}(parts) #"R1":1(p1) #"R1_4__dmy0":2(p2) @AS %expanded_type_2;
 //   %expanded_2 @SET-SYMBOL %symbol_3;
 //   %expanded_2 @PLACE(-3, 43) => @ORIENT("R0");
 //   %expanded_2 @TEXT("R1", key="name");
 //   %expanded_2 @TEXT("rupolym", key="model");
 //   {#"R3" #"R3_2__dmy0" #"R3_3__dmy0" #"R3_4__dmy0"} @SET-SYMBOL %expanded_members_symbol;
-//   {#"R3" #"R3_2__dmy0" #"R3_3__dmy0" #"R3_4__dmy0"} @PLACE(-8, 34);
+//   /* rnl upgrade: placing a set now places every member; preserve the old collective placement with explicit points or usages (11.1) */
+// {#"R3" #"R3_2__dmy0" #"R3_3__dmy0" #"R3_4__dmy0"} @PLACE(-8, 34);
 //   %expanded_3 = {#"R3" #"R3_2__dmy0" #"R3_3__dmy0" #"R3_4__dmy0"}(parts) #"R3":1(p1) #"R3_4__dmy0":2(p2) @AS %expanded_type_2;
 //   %expanded_3 @SET-SYMBOL %symbol_3;
 //   %expanded_3 @PLACE(-8, 34) => @ORIENT("R0");
@@ -295,38 +300,42 @@ R0_2__dmy0  (R0_1__dmy0 net7 ) rupolym l=6u w=140.0n m=1 multi=(1)
 //   %port_1 = $IO_PORT @ATTACH &"GND" => @PLACE(-63, 10) => @ORIENT("R0");
 //   %input_port_symbol = @DEFINE-SYMBOL(box=[-2, -1, 0, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(-2, -0.9) (-2, 0.9) (-0.9, 0.9) (0, 0) (-0.9, -0.9) (-2, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="right");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(-1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="right");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(-1, 1.6)
 //     };
 //   %bus_port_type_2 = @DEFINE(roles=[["p", "net"], ["p1", "net"], ["p2", "net"], ["p3", "net"]]) {};
-//   %bus_port_type_2_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=[1, 2, 3, 4])};
+//   %bus_port_type_2_symbol = @DEFINE-SYMBOL {(0, 0) @PIN(terminal=["p", "p1", "p2", "p3"])};
 //   {&"DIN_3" &"DIN_2" &"DIN_1" &"DIN_0"} @REMOVE-FROM $PORT_FILL_SET;
 //   %port_2 = %bus_port_type_2 @ATTACH &"DIN_3" &"DIN_2" &"DIN_1" &"DIN_0" => @PLACE(-62, 6) => @ORIENT("R0");
 //   %port_2 @SET-SYMBOL %bus_port_type_2_symbol;
 //   %port_2_marker = $IO_PORT @ATTACH &"DIN_3" => @PLACE(-62, 6) => @ORIENT("R0");
 //   %port_2_marker @SET-SYMBOL %input_port_symbol;
-//   %port_2_marker @TEXT("DIN<3:0>", key="name");
+//   %port_2_marker @TEXT("DIN<3:0>", key="netname");
 //   %output_port_symbol = @DEFINE-SYMBOL(box=[0, -1, 2, 1]) {
 //       @LINE(fill="linecolor", linestyle="none") {(0, -0.9) (0, 0.9) (1.1, 0.9) (2, 0) (1.1, -0.9) (0, -0.9)};
-//       (0, 0) @PIN(terminal=1, direction="left");
-//       ? @TEXT("${name}", key="name", halign="middle") => @PLACE(1, 1.6)
+//       (0, 0) @PIN(terminal="p", direction="left");
+//       ? @TEXT("${p}", key="netname", halign="middle") => @PLACE(1, 1.6)
 //     };
 //   %port_3 = $IO_PORT @ATTACH &"VOUTP" => @PLACE(-64, -2) => @ORIENT("R0");
 //   %port_3 @SET-SYMBOL %output_port_symbol;
-//   %port_3 @TEXT("VOUTP", key="name");
+//   %port_3 @TEXT("VOUTP", key="netname");
 //   %port_4 = $IO_PORT @ATTACH &"VOUTN" => @PLACE(-64, -6) => @ORIENT("R0");
 //   %port_4 @SET-SYMBOL %output_port_symbol;
-//   %port_4 @TEXT("VOUTN", key="name");
+//   %port_4 @TEXT("VOUTN", key="netname");
 //   %port_5 = $IO_PORT @ATTACH &"EN" => @PLACE(-62, 2) => @ORIENT("R0");
 //   %port_5 @SET-SYMBOL %input_port_symbol;
-//   %port_5 @TEXT("EN", key="name");
+//   %port_5 @TEXT("EN", key="netname");
 //   %p0 = (-26, 38);
-//   %wire_0 = &"net2" @WIRE(mode="straight") {%expanded_1:p1 %p0};
+//   %wire_0 = &"net2" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+// %expanded_1:p1 %p0};
 //   %wire_1 = &"net2" @WIRE(mode="straight") {#"I18":2 %p0};
 //   %p1 = (-3, 34);
-//   %wire_2 = &"net1" @WIRE(mode="straight") {%p1 %expanded_2:p2};
-//   %wire_3 = &"net1" @WIRE(mode="straight") {%p1 %expanded_0:p1};
-//   %wire_4 = &"net1" @WIRE(mode="straight") {%expanded_3:p1 %p1};
+//   %wire_2 = &"net1" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+// %p1 %expanded_2:p2};
+//   %wire_3 = &"net1" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+// %p1 %expanded_0:p1};
+//   %wire_4 = &"net1" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+// %expanded_3:p1 %p1};
 //   %p2 = (6, -17);
 //   %p3 = (13, -17);
 //   %wire_5 = &"net55" @WIRE(mode="straight") {%p2 %p3};
@@ -393,7 +402,8 @@ R0_2__dmy0  (R0_1__dmy0 net7 ) rupolym l=6u w=140.0n m=1 multi=(1)
 //   %wire_46 = &"VOUTP" @WIRE(mode="straight") {#"M10":1 %p21};
 //   %p24 = (2, 25);
 //   %wire_47 = &"VOUTP" @WIRE(mode="straight") {%p24 %p21};
-//   %wire_48 = &"VOUTP" @WIRE(mode="straight") {%p24 %expanded_0:p2};
+//   %wire_48 = &"VOUTP" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+// %p24 %expanded_0:p2};
 //   %p25 = (-3, 25);
 //   %wire_49 = &"VOUTP" @WIRE(mode="straight") {%p25 %p24};
 //   %wire_50 = &"VOUTP" @WIRE(mode="straight") {#"M8":1 %p25};
@@ -407,7 +417,8 @@ R0_2__dmy0  (R0_1__dmy0 net7 ) rupolym l=6u w=140.0n m=1 multi=(1)
 //   %wire_53 = &"VOUTN" @WIRE(mode="straight") {%p29 %p27};
 //   %p30 = (-8, 23);
 //   %wire_54 = &"VOUTN" @WIRE(mode="straight") {%p30 %p29};
-//   %wire_55 = &"VOUTN" @WIRE(mode="straight") {%p30 %expanded_3:p2};
+//   %wire_55 = &"VOUTN" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+// %p30 %expanded_3:p2};
 //   %wire_56 = &"VOUTN" @WIRE(mode="straight") {#"M13":1 %p28};
 //   %wire_57 = &"VOUTN" @WIRE(mode="straight") {#"M12":1 %p27};
 //   %wire_58 = &"VOUTN" @WIRE(mode="straight") {#"M9":1 %p29};
@@ -425,7 +436,8 @@ R0_2__dmy0  (R0_1__dmy0 net7 ) rupolym l=6u w=140.0n m=1 multi=(1)
 //   %wire_65 = &"net7" @WIRE(mode="straight") {%p33 %p34};
 //   %wire_66 = &"net7" @WIRE(mode="straight") {#"M0":2 %p32};
 //   %wire_67 = &"net7" @WIRE(mode="straight") {%p32 %p34};
-//   %wire_68 = &"net7" @WIRE(mode="straight") {%p33 %expanded_1:p2};
+//   %wire_68 = &"net7" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+// %p33 %expanded_1:p2};
 //   %wire_69 = &"net7" @WIRE(mode="straight") {#"M0":1 %p33};
 //   %p35 = (12, 14);
 //   %wire_70 = &"net3" @WIRE(mode="straight") {#"M9":3 %p35};
@@ -550,7 +562,8 @@ R0_2__dmy0  (R0_1__dmy0 net7 ) rupolym l=6u w=140.0n m=1 multi=(1)
 //   %p78 = (-42, 41);
 //   %wire_132 = &"VDD" @WIRE(mode="straight") {%p78 #"I18":3};
 //   %p79 = (-3, 47);
-//   %wire_133 = &"VDD" @WIRE(mode="straight") {%expanded_2:p1 %p79};
+//   %wire_133 = &"VDD" @WIRE(mode="straight") {/* rnl upgrade: the usage terminal has no uniquely established target pin name; preserve its electrical binding and name the corresponding symbol pin before replacing the reference (9.2.4, 12.1) */
+// %expanded_2:p1 %p79};
 //   %wire_132 @TEXT("VDD", size=1, halign="middle", valign="baseline") => @PLACE(-40, 41.7);
 //   %wire_133 @TEXT("VDD", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-3.7, 45);
 //   %wire_131 @TEXT("VDD", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(-8.7, -13);
@@ -561,47 +574,52 @@ R0_2__dmy0  (R0_1__dmy0 net7 ) rupolym l=6u w=140.0n m=1 multi=(1)
 //   %wire_126 @TEXT("VDD", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(26.3, -13);
 //   %wire_125 @TEXT("VDD", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(44.3, -13);
 //   %wire_124 @TEXT("VDD", size=1, halign="middle", valign="baseline", rotate=90) => @PLACE(44.3, -26);
-//   $JUNCTION @ATTACH %p1;
-//   $JUNCTION @ATTACH %p3;
-//   $JUNCTION @ATTACH %p4;
-//   $JUNCTION @ATTACH %p5;
-//   $JUNCTION @ATTACH %p6;
-//   $JUNCTION @ATTACH %p8;
-//   $JUNCTION @ATTACH %p13;
-//   $JUNCTION @ATTACH %p18;
-//   $JUNCTION @ATTACH %p21;
-//   $JUNCTION @ATTACH %p22;
-//   $JUNCTION @ATTACH %p23;
-//   $JUNCTION @ATTACH %p24;
-//   $JUNCTION @ATTACH %p27;
-//   $JUNCTION @ATTACH %p28;
-//   $JUNCTION @ATTACH %p29;
-//   $JUNCTION @ATTACH %p30;
-//   $JUNCTION @ATTACH %p32;
-//   $JUNCTION @ATTACH %p33;
-//   $JUNCTION @ATTACH %p35;
-//   $JUNCTION @ATTACH %p49;
-//   $JUNCTION @ATTACH %p50;
-//   $JUNCTION @ATTACH %p51;
-//   $JUNCTION @ATTACH %p52;
-//   $JUNCTION @ATTACH %p53;
-//   $JUNCTION @ATTACH %p54;
-//   $JUNCTION @ATTACH %p55;
-//   $JUNCTION @ATTACH %p56;
-//   $JUNCTION @ATTACH %p59;
-//   $JUNCTION @ATTACH %p60;
-//   $JUNCTION @ATTACH %p61;
-//   $JUNCTION @ATTACH %p62
+//   $JUNCTION @ATTACH %p1 => @PLACE(-3, 34);
+//   $JUNCTION @ATTACH %p3 => @PLACE(13, -17);
+//   $JUNCTION @ATTACH %p4 => @PLACE(-6, 14);
+//   $JUNCTION @ATTACH %p5 => @PLACE(47, 14);
+//   $JUNCTION @ATTACH %p6 => @PLACE(29, 14);
+//   $JUNCTION @ATTACH %p8 => @PLACE(48, -17);
+//   $JUNCTION @ATTACH %p13 => @PLACE(30, -17);
+//   $JUNCTION @ATTACH %p18 => @PLACE(-5, -17);
+//   $JUNCTION @ATTACH %p21 => @PLACE(15, 25);
+//   $JUNCTION @ATTACH %p22 => @PLACE(32, 25);
+//   $JUNCTION @ATTACH %p23 => @PLACE(50, 25);
+//   $JUNCTION @ATTACH %p24 => @PLACE(2, 25);
+//   $JUNCTION @ATTACH %p27 => @PLACE(27, 23);
+//   $JUNCTION @ATTACH %p28 => @PLACE(45, 23);
+//   $JUNCTION @ATTACH %p29 => @PLACE(10, 23);
+//   $JUNCTION @ATTACH %p30 => @PLACE(-8, 23);
+//   $JUNCTION @ATTACH %p32 => @PLACE(-20, 8);
+//   $JUNCTION @ATTACH %p33 => @PLACE(-26, 13);
+//   $JUNCTION @ATTACH %p35 => @PLACE(12, 14);
+//   $JUNCTION @ATTACH %p49 => @PLACE(-26, 1);
+//   $JUNCTION @ATTACH %p50 => @PLACE(-6, 1);
+//   $JUNCTION @ATTACH %p51 => @PLACE(49, 16);
+//   $JUNCTION @ATTACH %p52 => @PLACE(-4, 7);
+//   $JUNCTION @ATTACH %p53 => @PLACE(-4, 16);
+//   $JUNCTION @ATTACH %p54 => @PLACE(14, 16);
+//   $JUNCTION @ATTACH %p55 => @PLACE(31, 16);
+//   $JUNCTION @ATTACH %p56 => @PLACE(29, 1);
+//   $JUNCTION @ATTACH %p59 => @PLACE(49, 7);
+//   $JUNCTION @ATTACH %p60 => @PLACE(12, 1);
+//   $JUNCTION @ATTACH %p61 => @PLACE(31, 7);
+//   $JUNCTION @ATTACH %p62 => @PLACE(14, 7)
 // }
 // @RNL(author="gemini-4-argon") {
 //   @USE-PACKAGE(name="risca-semantics", version="0.3", path="risca_semantics.rnl");
 //   /* LB_RDAC: 4-Bit Binary-Weighted Current-Steering Comparator Offset Calibration DAC */
 //   {#"I18" %expanded_3 #"M0"}(enable_and_ref_branch) {#"M6" #"M5" #"M3" #"M4"}(binary_current_sources) {#"M14" #"M13" #"M11" #"M12" #"M10" #"M9" #"M8" #"M7"}(differential_steering_switches) {%expanded_2 %expanded_0 %expanded_1}(resistive_load_network) @AS(role="binary_current_steering_offset_RDAC", bits=4) $BINARY_CURRENT_STEERING_RDAC;
-//   #"M0"(ref) {#"M4" #"M3" #"M5" #"M6"}(out) @AS $CURRENT_MIRROR;
-//   #"M8"(in_p) #"M7"(in_n) #"M4"(tail) @AS $DIFFERENTIAL_PAIR;
-//   #"M10"(in_p) #"M9"(in_n) #"M3"(tail) @AS $DIFFERENTIAL_PAIR;
-//   #"M11"(in_p) #"M12"(in_n) #"M5"(tail) @AS $DIFFERENTIAL_PAIR;
-//   #"M14"(in_p) #"M13"(in_n) #"M6"(tail) @AS $DIFFERENTIAL_PAIR;
+//   /* rnl upgrade: CURRENT_MIRROR was split into CURRENT_MIRROR_N and CURRENT_MIRROR_P, which add low-priority ALIGN y, orientation relations, the orientation of the source or emitter pins and model/topology assertions; choose the matching polarity or retain only the intended facts (16.3) */
+// {#"M0"}(ref) {#"M4" #"M3" #"M5" #"M6"}(out) @AS $CURRENT_MIRROR_N;
+//   /* rnl upgrade: DIFFERENTIAL_PAIR was split into DIFFERENTIAL_PAIR_N and DIFFERENTIAL_PAIR_P with left/right roles and a tail that must be filled; choose the matching polarity and side order explicitly, or PSEUDO_DIFFERENTIAL_PAIR for a pair with no tail (16.3) */
+// {#"M8" {#"M4"} #"M7"} @DISTRIBUTE("left-to-right", priority="low");
+//   /* rnl upgrade: DIFFERENTIAL_PAIR was split into DIFFERENTIAL_PAIR_N and DIFFERENTIAL_PAIR_P with left/right roles and a tail that must be filled; choose the matching polarity and side order explicitly, or PSEUDO_DIFFERENTIAL_PAIR for a pair with no tail (16.3) */
+// {#"M10" {#"M3"} #"M9"} @DISTRIBUTE("left-to-right", priority="low");
+//   /* rnl upgrade: DIFFERENTIAL_PAIR was split into DIFFERENTIAL_PAIR_N and DIFFERENTIAL_PAIR_P with left/right roles and a tail that must be filled; choose the matching polarity and side order explicitly, or PSEUDO_DIFFERENTIAL_PAIR for a pair with no tail (16.3) */
+// {#"M11" {#"M5"} #"M12"} @DISTRIBUTE("left-to-right", priority="low");
+//   /* rnl upgrade: DIFFERENTIAL_PAIR was split into DIFFERENTIAL_PAIR_N and DIFFERENTIAL_PAIR_P with left/right roles and a tail that must be filled; choose the matching polarity and side order explicitly, or PSEUDO_DIFFERENTIAL_PAIR for a pair with no tail (16.3) */
+// {#"M14" {#"M6"} #"M13"} @DISTRIBUTE("left-to-right", priority="low");
 //   {#"M0" #"M4" #"M3" #"M5" #"M6"}(members) @AS $MATCHED;
 //   {%expanded_0 %expanded_1}(members) @AS $MATCHED;
 //   /* Deterministic Static DC Currents (Active when EN=1) */
@@ -615,12 +633,18 @@ R0_2__dmy0  (R0_1__dmy0 net7 ) rupolym l=6u w=140.0n m=1 multi=(1)
 //   #"M5":3 @CURRENT("out");
 //   #"M6":1 @CURRENT("in");
 //   #"M6":3 @CURRENT("out");
-//   {#"I18" %expanded_3 #"M0"}(members) @AS $BRANCH;
-//   {%expanded_2 %expanded_0 %expanded_1}(members) @AS $BRANCH;
-//   {#"M8" #"M7" #"M4"}(members) @AS $BRANCH;
-//   {#"M10" #"M9" #"M3"}(members) @AS $BRANCH;
-//   {#"M11" #"M12" #"M5"}(members) @AS $BRANCH;
-//   {#"M14" #"M13" #"M6"}(members) @AS $BRANCH;
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"I18" %expanded_3 #"M0"} @ALIGN("x", priority="low");
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {%expanded_2 %expanded_0 %expanded_1} @ALIGN("x", priority="low");
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"M8" #"M7" #"M4"} @ALIGN("x", priority="low");
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"M10" #"M9" #"M3"} @ALIGN("x", priority="low");
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"M11" #"M12" #"M5"} @ALIGN("x", priority="low");
+//   /* rnl upgrade: BRANCH adds SERIES routing/topology and a low-priority top-to-bottom ORDER; the old definition only aligned x (16.3) */
+// {#"M14" #"M13" #"M6"} @ALIGN("x", priority="low");
 //   /* Note Box & Author Header (Placed in Empty Region Above Schematic) */
 //   (-85, 110.07) @TEXT("Comment by Gemini-4-Argon", size=2.8) => @SET-STYLE $risca_author_style;
 //   @RECTANGLE {(-85, 81.03) (179.08, 107.23)} => @SET-STYLE $risca_note_box;

@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt pll_tg_pdk110_18 (a b on off vdd vss)
@@ -12,7 +12,7 @@ MP (a off b vdd) pch w=4e-05 l=1.8e-07 ad=1.92e-11 as=1.92e-11 pd=8.096e-05 ps=8
 //   /* --- 1. Circuit Semantics --- */
 //   %tg = #MP(pmos_pass) #MN(nmos_pass) @AS(role="loop_filter_preset_switch", ron_class="analog_preset (Wp=2u/Wn=1u)") $TRANSMISSION_GATE;
 //   {#MP #MN} @AS $MATCHED;
-//   {%pa #MP %pb} @AS(direction="left-to-right") $FLOW;
+//   {%pa #MP %pb} @AS $SIGNAL_FLOW; {%pa #MP %pb} @ORDER("left-to-right", priority="low");
 //   /* Pass gate has no quiescent DC current; no static DC current annotated */
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
@@ -26,16 +26,16 @@ MP (a off b vdd) pch w=4e-05 l=1.8e-07 ad=1.92e-11 as=1.92e-11 pd=8.096e-05 ps=8
 //   /* --- 3. Explicit Manhattan Wiring --- */
 //   %ja = (9, 12);
 //   %jb = (19, 12);
-//   $JUNCTION @ATTACH %ja;
-//   $JUNCTION @ATTACH %jb;
-//   &a @WIRE { %pa:p %ja };
+//   $JUNCTION @ATTACH %ja => @PLACE(9, 12);
+//   $JUNCTION @ATTACH %jb => @PLACE(19, 12);
+//   &a @WIRE { %pa::pin %ja };
 //   &a @WIRE { %ja (9, 15) #MP:d };
 //   &a @WIRE { %ja (9, 9)  #MN:d };
 //   &b @WIRE { #MP:s (19, 15) %jb };
 //   &b @WIRE { #MN:s (19, 9)  %jb };
-//   &b @WIRE { %jb %pb:p };
-//   &off @WIRE { %poff:p (14, 20) #MP:g };
-//   &on  @WIRE { %pon:p  (14, 4)  #MN:g };
+//   &b @WIRE { %jb %pb::pin };
+//   &off @WIRE { %poff::pin (14, 20) #MP:g };
+//   &on  @WIRE { %pon::pin  (14, 4)  #MN:g };
 //
 //   /* --- 4. Annotations & Parameter Labels --- */
 //   #MP @TEXT("W=${w} L=${l}", key="wl", dx=2.5, dy=2.5, halign="start") => @SET-STYLE $param_style;

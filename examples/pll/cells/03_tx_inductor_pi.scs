@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt tx_inductor_pi_pdk110_3 (p n sub)
@@ -22,9 +22,9 @@ CSN (sn sub) capacitor c=5e-14
 //   {#RSP #RSN}   @AS $MATCHED;
 //   {#CSP #CSN}   @AS $MATCHED;
 //   %ax = (22, _);
-//   #COXP(a) #COXN(b) %ax(axis) @AS $MIRRORED;
-//   #RSP(a)  #RSN(b)  %ax(axis) @AS $MIRRORED;
-//   #CSP(a)  #CSN(b)  %ax(axis) @AS $MIRRORED;
+//   #COXP(left) #COXN(right) %ax(axis) @AS $MIRRORED_LAYOUT;
+//   #RSP(left)  #RSN(right)  %ax(axis) @AS $MIRRORED_LAYOUT;
+//   #CSP(left)  #CSN(right)  %ax(axis) @AS $MIRRORED_LAYOUT;
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
 //   %pp   = $IO_PORT @ATTACH &p   => @PLACE(4, 18)  => @ORIENT("R0");
@@ -43,38 +43,38 @@ CSN (sn sub) capacitor c=5e-14
 //
 //   /* --- 3. Explicit Manhattan Wiring --- */
 //   %jp = (11, 18);
-//   $JUNCTION @ATTACH %jp;
-//   &p @WIRE { %pp:p %jp #RW:1 };
+//   $JUNCTION @ATTACH %jp => @PLACE(11, 18);
+//   &p @WIRE { %pp::pin %jp #RW:1 };
 //   &p @WIRE { %jp #COXP:1 };
 //   &p @WIRE { %jp (11, 24) #CW:1 };
 //
 //   &x @WIRE { #RW:2 #LW:1 };
 //
 //   %jn = (33, 18);
-//   $JUNCTION @ATTACH %jn;
-//   &n @WIRE { #LW:2 %jn %pn:p };
+//   $JUNCTION @ATTACH %jn => @PLACE(33, 18);
+//   &n @WIRE { #LW:2 %jn %pn::pin };
 //   &n @WIRE { %jn #COXN:1 };
 //   &n @WIRE { %jn (33, 24) #CW:2 };
 //
 //   %jsp = (11, 9);
-//   $JUNCTION @ATTACH %jsp;
+//   $JUNCTION @ATTACH %jsp => @PLACE(11, 9);
 //   &sp @WIRE { #COXP:2 %jsp (6, 9)  #RSP:1 };
 //   &sp @WIRE { %jsp (15, 9) #CSP:1 };
 //
 //   %jsn = (33, 9);
-//   $JUNCTION @ATTACH %jsn;
+//   $JUNCTION @ATTACH %jsn => @PLACE(33, 9);
 //   &sn @WIRE { #COXN:2 %jsn (29, 9) #CSN:1 };
 //   &sn @WIRE { %jsn (38, 9) #RSN:1 };
 //
 //   %jg1 = (15, 2);
 //   %jg2 = (22, 2);
 //   %jg3 = (29, 2);
-//   $JUNCTION @ATTACH %jg1;
-//   $JUNCTION @ATTACH %jg2;
-//   $JUNCTION @ATTACH %jg3;
+//   $JUNCTION @ATTACH %jg1 => @PLACE(15, 2);
+//   $JUNCTION @ATTACH %jg2 => @PLACE(22, 2);
+//   $JUNCTION @ATTACH %jg3 => @PLACE(29, 2);
 //   &sub @WIRE { #RSP:2 (6, 2) %jg1 %jg2 %jg3 (38, 2) #RSN:2 };
 //   &sub @WIRE { %jg1 #CSP:2 };
-//   &sub @WIRE { %jg2 %gsub:p };
+//   &sub @WIRE { %jg2 %gsub::pin };
 //   &sub @WIRE { %jg3 #CSN:2 };
 //
 //   /* --- 4. Annotations --- */

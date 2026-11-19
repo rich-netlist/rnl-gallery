@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt tx_cp_timing_pdk110_78 (ref enable reset pulse vdd vss)
@@ -41,7 +41,7 @@ XRESET (enabled resetb pulse vdd vss) tx_and_pdk110_47
 //
 //   /* --- 1. Circuit Semantics --- */
 //   %pgen = {#XD0 #XD1 #XD2 #XD3 #XD4 #XD5 #XD6 #XD7 #XD8 #XD9 #XD10 #XD11 #XD12 #XD13 #XD14 #XD15 #XD16 #XD17 #XD18 #XD19 #XD20 #XD21 #XD22 #XD23 #XN}(delay_chain) {#XI #XR #XE #XP #XS #XEN}(gating_logic) {#XRESET}(output_buffers) @AS(delay_stages=24, stage_length="1000nm") $PULSE_GENERATOR_DELAY_LINE;
-//   {%pref #XD0 #XD11 #XP #XS #XEN #XRESET %ppulse} @AS(direction="left-to-right") $FLOW;
+//   {%pref #XD0 #XD11 #XP #XS #XEN #XRESET %ppulse} @AS $SIGNAL_FLOW; {%pref #XD0 #XD11 #XP #XS #XEN #XRESET %ppulse} @ORDER("left-to-right", priority="low");
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
 //   %pref   = $IO_PORT @ATTACH &ref    => @PLACE(2, 26)   => @ORIENT("R0");
@@ -83,10 +83,10 @@ XRESET (enabled resetb pulse vdd vss) tx_and_pdk110_47
 //   #XRESET @PLACE(122, 16) => @ORIENT("R0");
 //
 //   /* --- 3. Delay Chain Wiring & Flying-Wire Control Labels --- */
-//   &ref    @WIRE { %pref:p #XD0:a };
-//   &enable @WIRE { %pen:p (20, 10) #XE:d };
+//   &ref    @WIRE { %pref::pin #XD0:a };
+//   &enable @WIRE { %pen::pin (20, 10) #XE:d };
 //   &refb   @WIRE { #XI:y #XE:gate };
-//   &reset  @WIRE { %prst:p #XR:a };
+//   &reset  @WIRE { %prst::pin #XR:a };
 //   &resetb @WIRE { #XR:y (24, 2) #XE:resetb } => @TEXT("resetb") => @SET-STYLE $fly_label_style;
 //   &en_hold @WIRE { #XE:q (30, 8) } => @TEXT("en_hold") => @SET-STYLE $fly_label_style;
 //
@@ -119,7 +119,7 @@ XRESET (enabled resetb pulse vdd vss) tx_and_pdk110_47
 //   &d22 @WIRE { #XD21:y #XD22:a };
 //   &d23 @WIRE { #XD22:y #XD23:a };
 //   %jd12 = (82, 26);
-//   $JUNCTION @ATTACH %jd12;
+//   $JUNCTION @ATTACH %jd12 => @PLACE(82, 26);
 //   &d12 @WIRE { #XD11:y %jd12 (87, 26) (87, 20) #XP:a };
 //   &d12 @WIRE { %jd12 (82, 22) (8, 22) (8, 18) #XD12:a };
 //
@@ -128,7 +128,7 @@ XRESET (enabled resetb pulse vdd vss) tx_and_pdk110_47
 //   &raw     @WIRE { #XP:y #XS:a };
 //   &held    @WIRE { #XS:y #XEN:a };
 //   &enabled @WIRE { #XEN:y #XRESET:a };
-//   &pulse   @WIRE { #XRESET:y %ppulse:p };
+//   &pulse   @WIRE { #XRESET:y %ppulse::pin };
 //
 //   /* --- 4. Annotations --- */
 //   (66, 32) @TEXT("tx_cp_timing_pdk110_78: Non-Overlapping Sub-Sampling Charge-Pump Pulse Window Generator", halign="middle") => @SET-STYLE $title_style;

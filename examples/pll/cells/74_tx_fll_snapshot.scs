@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt tx_fll_snapshot_pdk110_74 (gate d0 d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 q0 q1 q2 q3 q4 q5 q6 q7 q8 q9 q10 q11 q12 q13 vdd vss)
@@ -31,9 +31,9 @@ XL13 (d13 openb hold q13 vdd vss) pll_latch_pdk110_72
 //   {&d1 &d2 &d3 &d4 &d5 &d6 &d7 &d8 &d9 &d10 &d11 &d12 &d13 &q1 &q2 &q3 &q4 &q5 &q6 &q7 &q8 &q9 &q10 &q11 &q12 &q13} @REMOVE-FROM $PORT_FILL_SET;
 //   %pgate = $IO_PORT @ATTACH &gate => @PLACE(2, 14)   => @ORIENT("R0");
 //   %pd    = $IO_PORT @ATTACH &d0   => @PLACE(12, 22)  => @ORIENT("R0");
-//   %pd @TEXT("d<13:0>", key="name");
+//   %pd @TEXT("d<13:0>", key="netname");
 //   %pq    = $IO_PORT @ATTACH &q0   => @PLACE(196, 6)  => @ORIENT("MY");
-//   %pq @TEXT("q<13:0>", key="name");
+//   %pq @TEXT("q<13:0>", key="netname");
 //
 //   #XI    @PLACE(8, 14)  => @ORIENT("R0");
 //   #XB    @PLACE(16, 14) => @ORIENT("R0");
@@ -53,9 +53,9 @@ XL13 (d13 openb hold q13 vdd vss) pll_latch_pdk110_72
 //   #XL13 @PLACE(184, 14) => @ORIENT("R0");
 //
 //   /* --- 3. Single-Line Buses D<13:0>, Q<13:0> & Flying-Wire Strobe Labels --- */
-//   {&d0 &d1 &d2 &d3 &d4 &d5 &d6 &d7 &d8 &d9 &d10 &d11 &d12 &d13} @WIRE { %pd:p (180, 22) } => @TEXT("D<13:0>") => @SET-STYLE $bus_label_style;
-//   {&q0 &q1 &q2 &q3 &q4 &q5 &q6 &q7 &q8 &q9 &q10 &q11 &q12 &q13} @WIRE { (32, 6) %pq:p }   => @TEXT("Q<13:0>") => @SET-STYLE $bus_label_style;
-//   &gate  @WIRE { %pgate:p #XI:a };
+//   {&d0 &d1 &d2 &d3 &d4 &d5 &d6 &d7 &d8 &d9 &d10 &d11 &d12 &d13} @WIRE { %pd::pin (180, 22) } => @TEXT("D<13:0>") => @SET-STYLE $bus_label_style;
+//   {&q0 &q1 &q2 &q3 &q4 &q5 &q6 &q7 &q8 &q9 &q10 &q11 &q12 &q13} @WIRE { (32, 6) %pq::pin }   => @TEXT("Q<13:0>") => @SET-STYLE $bus_label_style;
+//   &gate  @WIRE { %pgate::pin #XI:a };
 //   &openb @WIRE { #XI:y #XB:a } => @TEXT("openb") => @SET-STYLE $fly_label_style;
 //   &hold  @WIRE { #XB:y (21, 14) } => @TEXT("hold") => @SET-STYLE $fly_label_style;
 //   &d0 @WIRE { (24, 22) (24, 16) #XL0:d } => @TEXT("d0") => @SET-STYLE $fly_label_style;

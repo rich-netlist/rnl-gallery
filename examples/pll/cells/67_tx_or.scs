@@ -1,17 +1,18 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt tx_or_pdk110_67 (a b y vdd vss)
 XN (a b n vdd vss) pll_nor2_pdk110_68
 XI (n y vdd vss) pll_inv_pdk110_48
 // @RNL(author="gemini-4-argon") {
-//   # @SET-SYMBOL $OR_2INPUT;
+//   # @SET-SYMBOL(terminals=[[1, "a"], [2, "b"], [3, "y"]]) $OR_2INPUT;
 //
 //   /* --- 1. Circuit Semantics --- */
-//   #XN(source) {#XI}(chain) %py(load) @AS $CHAIN;
-//   {%pa #XN #XI %py} @AS(direction="left-to-right") $FLOW;
+//   /* rnl upgrade: CHAIN was removed in 0.4; retain the intended ordering or series topology explicitly (16.3) */
+// {#XN #XI %py} @ORDER("left-to-right", priority="low");
+//   {%pa #XN #XI %py} @AS $SIGNAL_FLOW; {%pa #XN #XI %py} @ORDER("left-to-right", priority="low");
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
 //   %pa = $IO_PORT @ATTACH &a => @PLACE(2, 11)  => @ORIENT("R0");
@@ -22,10 +23,10 @@ XI (n y vdd vss) pll_inv_pdk110_48
 //   #XI @PLACE(20, 10) => @ORIENT("R0");
 //
 //   /* --- 3. Explicit Manhattan Wiring --- */
-//   &a @WIRE { %pa:p #XN:a };
-//   &b @WIRE { %pb:p #XN:b };
+//   &a @WIRE { %pa::pin #XN:a };
+//   &b @WIRE { %pb::pin #XN:b };
 //   &n @WIRE { #XN:y #XI:a };
-//   &y @WIRE { #XI:y %py:p };
+//   &y @WIRE { #XI:y %py::pin };
 //
 //   /* --- 4. Annotations --- */
 //   (14, 16) @TEXT("tx_or_pdk110_67: 2-Input Static CMOS OR Gate (487 Instances in Synthesized Logic)", halign="middle") => @SET-STYLE $title_style;

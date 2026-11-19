@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt pll_control_recenter109_v14_pdk110_56 (refclk reset apply k0 k1 k2 k3 k4 k5 outclk acqclk phase_good frequency_good b0 b1 b2 b3 b4 b5 b6 b7 s0 s1 s2 s3 s4 s5 divider_reset enable pulse preset qualified range_error config_ready config_invalid restart count_gate count_reset vdd vss)
@@ -40,15 +40,15 @@ XW (refclk fll_reset acquired ak0 ak1 ak2 ak3 ak4 ak5 m0 m1 m2 m3 m4 m5 m6 m7 m8
 //   %prst   = $IO_PORT @ATTACH &reset          => @PLACE(2, 50) => @ORIENT("R0");
 //   %papply = $IO_PORT @ATTACH &apply          => @PLACE(2, 44) => @ORIENT("R0");
 //   %pk     = $IO_PORT @ATTACH &k0             => @PLACE(2, 41) => @ORIENT("R0");
-//   %pk @TEXT("k<5:0>", key="name");
+//   %pk @TEXT("k<5:0>", key="netname");
 //   %pacq   = $IO_PORT @ATTACH &acqclk         => @PLACE(2, 22) => @ORIENT("R0");
 //   %poutc  = $IO_PORT @ATTACH &outclk         => @PLACE(2, 16) => @ORIENT("R0");
 //   %pphok  = $IO_PORT @ATTACH &phase_good     => @PLACE(2, 7)  => @ORIENT("R0");
 //
 //   %pb     = $IO_PORT @ATTACH &b0             => @PLACE(128, 49) => @ORIENT("MY");
-//   %pb @TEXT("b<7:0>", key="name");
+//   %pb @TEXT("b<7:0>", key="netname");
 //   %ps     = $IO_PORT @ATTACH &s0             => @PLACE(128, 36) => @ORIENT("MY");
-//   %ps @TEXT("s<5:0>", key="name");
+//   %ps @TEXT("s<5:0>", key="netname");
 //   %pdrst  = $IO_PORT @ATTACH &divider_reset  => @PLACE(128, 32) => @ORIENT("MY");
 //   %ppre   = $IO_PORT @ATTACH &preset         => @PLACE(128, 44) => @ORIENT("MY");
 //   %pen    = $IO_PORT @ATTACH &enable         => @PLACE(128, 21) => @ORIENT("MY");
@@ -91,47 +91,47 @@ XW (refclk fll_reset acquired ak0 ak1 ak2 ak3 ak4 ak5 m0 m1 m2 m3 m4 m5 m6 m7 m8
 //
 //   /* --- 3. Single-Line Multi-Bit Buses & Clean Local / Flying-Wire Connections --- */
 //   /* 3.1 Multi-Bit Buses: K<5:0>, AK<5:0>, S<5:0>, B<7:0>, D<5:0>, Q<13:0>, M<13:0> */
-//   {&k0 &k1 &k2 &k3 &k4 &k5} @WIRE { %pk:p #XC:cfg_k0 } => @TEXT("K<5:0>") => @SET-STYLE $bus_label_style;
+//   {&k0 &k1 &k2 &k3 &k4 &k5} @WIRE { %pk::pin #XC:cfg_k0 } => @TEXT("K<5:0>") => @SET-STYLE $bus_label_style;
 //
-//   %jak = (34, 48); $JUNCTION @ATTACH %jak;
+//   %jak = (34, 48); $JUNCTION @ATTACH %jak => @PLACE(34, 48);
 //   {&ak0 &ak1 &ak2 &ak3 &ak4 &ak5} @WIRE { #XC:active_k0 %jak (34, 42) #XF:target_k0 } => @TEXT("AK<5:0>") => @SET-STYLE $bus_label_style;
 //   {&ak0 &ak1 &ak2 &ak3 &ak4 &ak5} @WIRE { %jak (34, -6) #XW:target_k0 } => @TEXT("AK<5:0>") => @SET-STYLE $bus_label_style;
 //
-//   {&s0 &s1 &s2 &s3 &s4 &s5} @WIRE { #XC:select_m0 (31, 46) (31, 56) (120, 56) (120, 36) %ps:p } => @TEXT("S<5:0>") => @SET-STYLE $bus_label_style;
-//   {&b0 &b1 &b2 &b3 &b4 &b5 &b6 &b7} @WIRE { #XF:coarse0 %pb:p } => @TEXT("B<7:0>") => @SET-STYLE $bus_label_style;
+//   {&s0 &s1 &s2 &s3 &s4 &s5} @WIRE { #XC:select_m0 (31, 46) (31, 56) (120, 56) (120, 36) %ps::pin } => @TEXT("S<5:0>") => @SET-STYLE $bus_label_style;
+//   {&b0 &b1 &b2 &b3 &b4 &b5 &b6 &b7} @WIRE { #XF:coarse0 %pb::pin } => @TEXT("B<7:0>") => @SET-STYLE $bus_label_style;
 //   {&d0 &d1 &d2 &d3 &d4 &d5} @WIRE { #XF:dac0 (90, 47) (90, 45) #XDAC:d0 } => @TEXT("D<5:0>") => @SET-STYLE $bus_label_style;
 //   {&q0 &q1 &q2 &q3 &q4 &q5 &q6 &q7 &q8 &q9 &q10 &q11 &q12 &q13} @WIRE { #XCOUNT:q0 (64, 19) (64, 18) #XSN:d0 } => @TEXT("Q<13:0>") => @SET-STYLE $bus_label_style;
 //
-//   %jm = (84, 19); $JUNCTION @ATTACH %jm;
+//   %jm = (84, 19); $JUNCTION @ATTACH %jm => @PLACE(84, 19);
 //   {&m0 &m1 &m2 &m3 &m4 &m5 &m6 &m7 &m8 &m9 &m10 &m11 &m12 &m13} @WIRE { #XSN:q0 %jm (84, 32) (62, 32) (62, 38) #XF:measured0 } => @TEXT("M<13:0>") => @SET-STYLE $bus_label_style;
 //   {&m0 &m1 &m2 &m3 &m4 &m5 &m6 &m7 &m8 &m9 &m10 &m11 &m12 &m13} @WIRE { %jm (84, -12) (62, -12) (62, -8) #XW:measured0 } => @TEXT("M<13:0>") => @SET-STYLE $bus_label_style;
 //
 //   /* 3.2 Local Direct Datapath Chains */
-//   &refclk @WIRE { %pref:p (9, 54) } => @TEXT("refclk") => @SET-STYLE $fly_label_style;
-//   &reset  @WIRE { %prst:p (9, 50) } => @TEXT("reset")  => @SET-STYLE $fly_label_style;
-//   &apply  @WIRE { %papply:p #XC:apply };
-//   &preset @WIRE { #XDAC:out %ppre:p };
-//   &pulse  @WIRE { #XP:pulse %ppulse:p };
-//   &enable    @WIRE { #XS:pll_enable %pen:p }      => @TEXT("enable") => @SET-STYLE $fly_label_style;
-//   &qualified @WIRE { #XS:qualified  %pqual:p };
-//   &restart   @WIRE { #XS:restart    %prestart:p } => @TEXT("restart") => @SET-STYLE $fly_label_style;
-//   &frequency_good @WIRE { #XW:frequency_good %pfrq:p } => @TEXT("frequency_good") => @SET-STYLE $fly_label_style;
-//   &divider_reset  @WIRE { (120, 32) %pdrst:p }  => @TEXT("divider_reset")  => @SET-STYLE $fly_label_style;
-//   &range_error    @WIRE { (120, 28) %prng:p }   => @TEXT("range_error")    => @SET-STYLE $fly_label_style;
-//   &config_ready   @WIRE { (120, 25) %prdy:p }   => @TEXT("config_ready")   => @SET-STYLE $fly_label_style;
-//   &config_invalid @WIRE { (120, 13) %pinv:p }   => @TEXT("config_invalid") => @SET-STYLE $fly_label_style;
-//   &count_gate     @WIRE { (120, 6)  %pcgate:p } => @TEXT("count_gate")     => @SET-STYLE $fly_label_style;
-//   &count_reset    @WIRE { (120, -8) %pcrst:p }  => @TEXT("count_reset")    => @SET-STYLE $fly_label_style;
+//   &refclk @WIRE { %pref::pin (9, 54) } => @TEXT("refclk") => @SET-STYLE $fly_label_style;
+//   &reset  @WIRE { %prst::pin (9, 50) } => @TEXT("reset")  => @SET-STYLE $fly_label_style;
+//   &apply  @WIRE { %papply::pin #XC:apply };
+//   &preset @WIRE { #XDAC:out %ppre::pin };
+//   &pulse  @WIRE { #XP:pulse %ppulse::pin };
+//   &enable    @WIRE { #XS:pll_enable %pen::pin }      => @TEXT("enable") => @SET-STYLE $fly_label_style;
+//   &qualified @WIRE { #XS:qualified  %pqual::pin };
+//   &restart   @WIRE { #XS:restart    %prestart::pin } => @TEXT("restart") => @SET-STYLE $fly_label_style;
+//   &frequency_good @WIRE { #XW:frequency_good %pfrq::pin } => @TEXT("frequency_good") => @SET-STYLE $fly_label_style;
+//   &divider_reset  @WIRE { (120, 32) %pdrst::pin }  => @TEXT("divider_reset")  => @SET-STYLE $fly_label_style;
+//   &range_error    @WIRE { (120, 28) %prng::pin }   => @TEXT("range_error")    => @SET-STYLE $fly_label_style;
+//   &config_ready   @WIRE { (120, 25) %prdy::pin }   => @TEXT("config_ready")   => @SET-STYLE $fly_label_style;
+//   &config_invalid @WIRE { (120, 13) %pinv::pin }   => @TEXT("config_invalid") => @SET-STYLE $fly_label_style;
+//   &count_gate     @WIRE { (120, 6)  %pcgate::pin } => @TEXT("count_gate")     => @SET-STYLE $fly_label_style;
+//   &count_reset    @WIRE { (120, -8) %pcrst::pin }  => @TEXT("count_reset")    => @SET-STYLE $fly_label_style;
 //
-//   &acqclk @WIRE { %pacq:p  #XACQ0:a };
-//   &outclk @WIRE { %poutc:p #XACQ1:a };
-//   %jacq_m = (26, 19); $JUNCTION @ATTACH %jacq_m;
+//   &acqclk @WIRE { %pacq::pin  #XACQ0:a };
+//   &outclk @WIRE { %poutc::pin #XACQ1:a };
+//   %jacq_m = (26, 19); $JUNCTION @ATTACH %jacq_m => @PLACE(26, 19);
 //   &clock_mux   @WIRE { #XACQ0:b (26, 22) %jacq_m #XACB0:a };
 //   &clock_mux   @WIRE { #XACQ1:b (26, 16) %jacq_m };
 //   &clock_b     @WIRE { #XACB0:y #XACB1:a };
 //   &count_clock @WIRE { #XACB1:y (45, 19) (45, 21) #XCOUNT:clk } => @TEXT("count_clock") => @SET-STYLE $fly_label_style;
 //
-//   &phase_good @WIRE { %pphok:p #XPH:d };
+//   &phase_good @WIRE { %pphok::pin #XPH:d };
 //   &ref_fall   @WIRE { #XPHCLK:y (20, 4) (20, 5) #XPH:clk };
 //   &phase_held @WIRE { #XPH:q (33, 6) } => @TEXT("phase_held") => @SET-STYLE $fly_label_style;
 //

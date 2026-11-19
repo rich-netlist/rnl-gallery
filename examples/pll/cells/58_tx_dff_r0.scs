@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt tx_dff_r0_pdk110_58 (d clk reset q vdd vss)
@@ -14,7 +14,7 @@ XS (qm clk clkb resetb q vdd vss) tx_latch_r_pdk110_60
 //   /* --- 1. Circuit Semantics --- */
 //   %dff = {#XC #XR}(clock_buffers) {#XM}(master_latch) {#XS}(slave_latch) @AS(edge="rising", async_reset="active_high_reset_to_0") $MASTER_SLAVE_DFF;
 //   {#XM #XS} @AS $MATCHED;
-//   {%pd #XM #XS %pq} @AS(direction="left-to-right") $FLOW;
+//   {%pd #XM #XS %pq} @AS $SIGNAL_FLOW; {%pd #XM #XS %pq} @ORDER("left-to-right", priority="low");
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
 //   %pd   = $IO_PORT @ATTACH &d     => @PLACE(2, 16)  => @ORIENT("R0");
@@ -28,13 +28,13 @@ XS (qm clk clkb resetb q vdd vss) tx_latch_r_pdk110_60
 //   #XS @PLACE(32, 14) => @ORIENT("R0");
 //
 //   /* --- 3. Primary Data Path Wiring & Flying-Wire Clock/Reset Labels --- */
-//   &d  @WIRE { %pd:p #XM:d };
+//   &d  @WIRE { %pd::pin #XM:d };
 //   &qm @WIRE { #XM:q (25, 14) (25, 16) #XS:d };
-//   &q  @WIRE { #XS:q %pq:p };
+//   &q  @WIRE { #XS:q %pq::pin };
 //
-//   &clk    @WIRE { %pclk:p #XC:a };
+//   &clk    @WIRE { %pclk::pin #XC:a };
 //   &clkb   @WIRE { #XC:y (16, 6) } => @TEXT("clkb") => @SET-STYLE $fly_label_style;
-//   &reset  @WIRE { %prst:p #XR:a };
+//   &reset  @WIRE { %prst::pin #XR:a };
 //   &resetb @WIRE { #XR:y (16, 2) } => @TEXT("resetb") => @SET-STYLE $fly_label_style;
 //
 //   #XM:gate   @TEXT("clkb",   dx=-0.5, dy=-0.3, halign="end")    => @SET-STYLE $fly_label_style;

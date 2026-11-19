@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt rf_light24s12_v14_pdk110_19 (rf clk vdd vss)
@@ -12,7 +12,7 @@ X0 (g0 clk vdd vss) pll_inv_pdk110_20
 //
 //   /* --- 1. Circuit Semantics --- */
 //   %rfbuf = #C0(ac_cap) #R0(bias_resistor) {#X0}(inverter_chain) @AS(coupling="single_ended_AC") $SELF_BIASED_RF_BUFFER;
-//   {%prf #C0 #X0 %pclk} @AS(direction="left-to-right") $FLOW;
+//   {%prf #C0 #X0 %pclk} @AS $SIGNAL_FLOW; {%prf #C0 #X0 %pclk} @ORDER("left-to-right", priority="low");
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
 //   %prf  = $IO_PORT @ATTACH &rf  => @PLACE(2, 10)  => @ORIENT("R0");
@@ -23,16 +23,16 @@ X0 (g0 clk vdd vss) pll_inv_pdk110_20
 //   #R0 @PLACE(18, 16) => @ORIENT("R90");
 //
 //   /* --- 3. Explicit Manhattan Wiring --- */
-//   &rf @WIRE { %prf:p #C0:1 };
+//   &rf @WIRE { %prf::pin #C0:1 };
 //
 //   %jg0 = (13, 10);
-//   $JUNCTION @ATTACH %jg0;
+//   $JUNCTION @ATTACH %jg0 => @PLACE(13, 10);
 //   &g0 @WIRE { #C0:2 %jg0 #X0:a };
 //   &g0 @WIRE { %jg0 (13, 16) #R0:1 };
 //
 //   %jclk = (23, 10);
-//   $JUNCTION @ATTACH %jclk;
-//   &clk @WIRE { #X0:y %jclk %pclk:p };
+//   $JUNCTION @ATTACH %jclk => @PLACE(23, 10);
+//   &clk @WIRE { #X0:y %jclk %pclk::pin };
 //   &clk @WIRE { %jclk (23, 16) #R0:2 };
 //
 //   /* --- 4. Annotations --- */

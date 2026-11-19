@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt pll_latch_pdk110_72 (d gate gateb q vdd vss)
@@ -13,7 +13,7 @@ XF (q x gateb gate vdd vss) pll_tg_pdk110_63
 //
 //   /* --- 1. Circuit Semantics --- */
 //   %lat = #XT(input_pass) #XF(feedback_pass) {#XI #XO}(loop_inverters) @AS(transparent_level="high", reset_type="none") $STATIC_LATCH;
-//   {%pd #XT #XI #XO %pq} @AS(direction="left-to-right") $FLOW;
+//   {%pd #XT #XI #XO %pq} @AS $SIGNAL_FLOW; {%pd #XT #XI #XO %pq} @ORDER("left-to-right", priority="low");
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
 //   %pd  = $IO_PORT @ATTACH &d     => @PLACE(2, 16)  => @ORIENT("R0");
@@ -27,18 +27,18 @@ XF (q x gateb gate vdd vss) pll_tg_pdk110_63
 //   #XF @PLACE(19, 8)  => @ORIENT("MY");
 //
 //   /* --- 3. Primary Latch Loop Wiring & Flying-Wire Gate Labels --- */
-//   &d @WIRE { %pd:p #XT:a };
+//   &d @WIRE { %pd::pin #XT:a };
 //
 //   %jx = (13, 16);
-//   $JUNCTION @ATTACH %jx;
+//   $JUNCTION @ATTACH %jx => @PLACE(13, 16);
 //   &x @WIRE { #XT:b %jx #XI:a };
 //   &x @WIRE { %jx (13, 8) #XF:b };
 //
 //   &qb @WIRE { #XI:y #XO:a };
 //
 //   %jq = (32, 16);
-//   $JUNCTION @ATTACH %jq;
-//   &q @WIRE { #XO:y %jq %pq:p };
+//   $JUNCTION @ATTACH %jq => @PLACE(32, 16);
+//   &q @WIRE { #XO:y %jq %pq::pin };
 //   &q @WIRE { %jq (32, 8) #XF:a };
 //
 //   #XT:on  @TEXT("gate",  dx=0, dy=-1.1, halign="middle") => @SET-STYLE $fly_label_style;

@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt tx_pll_config_pdk110_57 (refclk reset apply cfg_k0 cfg_k1 cfg_k2 cfg_k3 cfg_k4 cfg_k5 active_k0 active_k1 active_k2 active_k3 active_k4 active_k5 select_m0 select_m1 select_m2 select_m3 select_m4 select_m5 ready invalid divider_reset vdd vss)
@@ -250,7 +250,7 @@ X240 (n174 n225 vdd vss) pll_inv_pdk110_7
 //
 //   /* --- 1. Circuit Semantics --- */
 //   %fsm = {#X0 #X1 #X2 #X3 #X4 #X5 #X6 #X7 #X8 #X9 #X10 #X11 #X12 #X13 #X14 #X15 #X16 #X17 #X18 #X19 #X20 #X21}(state_ffs) {#X22 #X23 #X24 #X25 #X26 #X27 #X28 #X29 #X30 #X31 #X32 #X33 #X34 #X35 #X36 #X37 #X38 #X39 #X212 #X213 #X214 #X215 #X216 #X217 #X218 #X219 #X220 #X221 #X222 #X223 #X224 #X225 #X226 #X227 #X228 #X229 #X230 #X231}(datapath_muxes) {#X40 #X41 #X42 #X43 #X44 #X45 #X46 #X47 #X48 #X49 #X50 #X51 #X52 #X53 #X54 #X55 #X56 #X57 #X58 #X59 #X60 #X61 #X62 #X63 #X64 #X65 #X66 #X67 #X68 #X69 #X70 #X71 #X72 #X73 #X74 #X75 #X76 #X77 #X78 #X79 #X80 #X81 #X82 #X83 #X84 #X85 #X86 #X87 #X88 #X89 #X90 #X91 #X92 #X93 #X94 #X95 #X96 #X97 #X98 #X99 #X100 #X101 #X102 #X103 #X104 #X105 #X106 #X107 #X108 #X109 #X110 #X111 #X112 #X113 #X114 #X115 #X116 #X117 #X118 #X119 #X120 #X121 #X122 #X123 #X124 #X125 #X126 #X127 #X128 #X129 #X130 #X131 #X132 #X133 #X134 #X135 #X136 #X137 #X138 #X139 #X140 #X141 #X142 #X143 #X144 #X145 #X146 #X147 #X148 #X149 #X150 #X151 #X152 #X153 #X154 #X155 #X156 #X157 #X158 #X159 #X160 #X161 #X162 #X163 #X164 #X165 #X166 #X167 #X168 #X169 #X170 #X171 #X172 #X173 #X174 #X175 #X176 #X177 #X178 #X179 #X180 #X181 #X182 #X183 #X184 #X185 #X186 #X187 #X188 #X189 #X190 #X191 #X192 #X193 #X194 #X195 #X196 #X197 #X198 #X199 #X200 #X201 #X202 #X203 #X204 #X205 #X206 #X207 #X208 #X209 #X210 #X211 #X232 #X233 #X234 #X235 #X236 #X237 #X238 #X239 #X240}(comb_logic) @AS(controller_name="57_tx_pll_config", clock_domain="refclk") $SYNTHESIZED_FSM_CONTROLLER;
-//   {%p_refclk #X0 #X22 #X40 %p_active_k0} @AS(direction="left-to-right") $FLOW;
+//   {%p_refclk #X0 #X22 #X40 %p_active_k0} @AS $SIGNAL_FLOW; {%p_refclk #X0 #X22 #X40 %p_active_k0} @ORDER("left-to-right", priority="low");
 //   %defect_nx = {#X214 #X215 #X216 #X217 #X218 #X219 #X220 #X221 #X226 #X227 #X229 #X230}(culprit_devices) {&nx}(affected_nets) @AS(
 //     severity="critical",
 //     category="undriven_floating_net_nx_from_synthesis_tie_cell_omission",
@@ -264,11 +264,11 @@ X240 (n174 n225 vdd vss) pll_inv_pdk110_7
 //   %p_reset = $IO_PORT @ATTACH &reset => @PLACE(2, 92) => @ORIENT("R0");
 //   %p_apply = $IO_PORT @ATTACH &apply => @PLACE(2, 62) => @ORIENT("R0");
 //   %p_cfg_k0 = $IO_PORT @ATTACH &cfg_k0 => @PLACE(2, 32) => @ORIENT("R0");
-//   %p_cfg_k0 @TEXT("cfg_k<5:0>", key="name");
+//   %p_cfg_k0 @TEXT("cfg_k<5:0>", key="netname");
 //   %p_active_k0 = $IO_PORT @ATTACH &active_k0 => @PLACE(300, 127) => @ORIENT("MY");
-//   %p_active_k0 @TEXT("active_k<5:0>", key="name");
+//   %p_active_k0 @TEXT("active_k<5:0>", key="netname");
 //   %p_select_m0 = $IO_PORT @ATTACH &select_m0 => @PLACE(300, 102) => @ORIENT("MY");
-//   %p_select_m0 @TEXT("select_m<5:0>", key="name");
+//   %p_select_m0 @TEXT("select_m<5:0>", key="netname");
 //   %p_ready = $IO_PORT @ATTACH &ready => @PLACE(300, 77) => @ORIENT("MY");
 //   %p_invalid = $IO_PORT @ATTACH &invalid => @PLACE(300, 52) => @ORIENT("MY");
 //   %p_divider_reset = $IO_PORT @ATTACH &divider_reset => @PLACE(300, 27) => @ORIENT("MY");
@@ -513,25 +513,25 @@ X240 (n174 n225 vdd vss) pll_inv_pdk110_7
 //   #X238 @PLACE(264, 16) => @ORIENT("R0");
 //   #X239 @PLACE(264, 8) => @ORIENT("R0");
 //   #X240 @PLACE(280, 144) => @ORIENT("R0");
-//   $GROUND @ATTACH #X212:a;
-//   $SUPPLY @ATTACH #X213:b;
-//   $GROUND @ATTACH #X222:b;
-//   $GROUND @ATTACH #X223:b;
-//   $GROUND @ATTACH #X224:b;
-//   $GROUND @ATTACH #X225:b;
-//   $GROUND @ATTACH #X228:b;
-//   $GROUND @ATTACH #X231:b;
+//   $GROUND @ATTACH #X212:a::net => %rnl_upgrade_usage_848 ; {%rnl_upgrade_usage_848::position #X212:a} @ALIGN("x"); {%rnl_upgrade_usage_848::position #X212:a} @ALIGN("y");
+//   $SUPPLY @ATTACH #X213:b::net => %rnl_upgrade_usage_849 ; {%rnl_upgrade_usage_849::position #X213:b} @ALIGN("x"); {%rnl_upgrade_usage_849::position #X213:b} @ALIGN("y");
+//   $GROUND @ATTACH #X222:b::net => %rnl_upgrade_usage_850 ; {%rnl_upgrade_usage_850::position #X222:b} @ALIGN("x"); {%rnl_upgrade_usage_850::position #X222:b} @ALIGN("y");
+//   $GROUND @ATTACH #X223:b::net => %rnl_upgrade_usage_851 ; {%rnl_upgrade_usage_851::position #X223:b} @ALIGN("x"); {%rnl_upgrade_usage_851::position #X223:b} @ALIGN("y");
+//   $GROUND @ATTACH #X224:b::net => %rnl_upgrade_usage_852 ; {%rnl_upgrade_usage_852::position #X224:b} @ALIGN("x"); {%rnl_upgrade_usage_852::position #X224:b} @ALIGN("y");
+//   $GROUND @ATTACH #X225:b::net => %rnl_upgrade_usage_853 ; {%rnl_upgrade_usage_853::position #X225:b} @ALIGN("x"); {%rnl_upgrade_usage_853::position #X225:b} @ALIGN("y");
+//   $GROUND @ATTACH #X228:b::net => %rnl_upgrade_usage_854 ; {%rnl_upgrade_usage_854::position #X228:b} @ALIGN("x"); {%rnl_upgrade_usage_854::position #X228:b} @ALIGN("y");
+//   $GROUND @ATTACH #X231:b::net => %rnl_upgrade_usage_855 ; {%rnl_upgrade_usage_855::position #X231:b} @ALIGN("x"); {%rnl_upgrade_usage_855::position #X231:b} @ALIGN("y");
 //
 //   /* --- 3. Single-Line Port Buses & Flying-Wire Terminal Labels --- */
-//   &refclk @WIRE { %p_refclk:p (12, 122) } => @TEXT("refclk") => @SET-STYLE $fly_label_style;
-//   &reset @WIRE { %p_reset:p (12, 92) } => @TEXT("reset") => @SET-STYLE $fly_label_style;
-//   &apply @WIRE { %p_apply:p (12, 62) } => @TEXT("apply") => @SET-STYLE $fly_label_style;
-//   {&cfg_k0 &cfg_k1 &cfg_k2 &cfg_k3 &cfg_k4 &cfg_k5} @WIRE { %p_cfg_k0:p (14, 32) } => @TEXT("CFG_K<5:0>") => @SET-STYLE $bus_label_style;
-//   {&active_k0 &active_k1 &active_k2 &active_k3 &active_k4 &active_k5} @WIRE { (288, 127) %p_active_k0:p } => @TEXT("ACTIVE_K<5:0>") => @SET-STYLE $bus_label_style;
-//   {&select_m0 &select_m1 &select_m2 &select_m3 &select_m4 &select_m5} @WIRE { (288, 102) %p_select_m0:p } => @TEXT("SELECT_M<5:0>") => @SET-STYLE $bus_label_style;
-//   &ready @WIRE { (290, 77) %p_ready:p } => @TEXT("ready") => @SET-STYLE $fly_label_style;
-//   &invalid @WIRE { (290, 52) %p_invalid:p } => @TEXT("invalid") => @SET-STYLE $fly_label_style;
-//   &divider_reset @WIRE { (290, 27) %p_divider_reset:p } => @TEXT("divider_reset") => @SET-STYLE $fly_label_style;
+//   &refclk @WIRE { %p_refclk::pin (12, 122) } => @TEXT("refclk") => @SET-STYLE $fly_label_style;
+//   &reset @WIRE { %p_reset::pin (12, 92) } => @TEXT("reset") => @SET-STYLE $fly_label_style;
+//   &apply @WIRE { %p_apply::pin (12, 62) } => @TEXT("apply") => @SET-STYLE $fly_label_style;
+//   {&cfg_k0 &cfg_k1 &cfg_k2 &cfg_k3 &cfg_k4 &cfg_k5} @WIRE { %p_cfg_k0::pin (14, 32) } => @TEXT("CFG_K<5:0>") => @SET-STYLE $bus_label_style;
+//   {&active_k0 &active_k1 &active_k2 &active_k3 &active_k4 &active_k5} @WIRE { (288, 127) %p_active_k0::pin } => @TEXT("ACTIVE_K<5:0>") => @SET-STYLE $bus_label_style;
+//   {&select_m0 &select_m1 &select_m2 &select_m3 &select_m4 &select_m5} @WIRE { (288, 102) %p_select_m0::pin } => @TEXT("SELECT_M<5:0>") => @SET-STYLE $bus_label_style;
+//   &ready @WIRE { (290, 77) %p_ready::pin } => @TEXT("ready") => @SET-STYLE $fly_label_style;
+//   &invalid @WIRE { (290, 52) %p_invalid::pin } => @TEXT("invalid") => @SET-STYLE $fly_label_style;
+//   &divider_reset @WIRE { (290, 27) %p_divider_reset::pin } => @TEXT("divider_reset") => @SET-STYLE $fly_label_style;
 //   #X0:d @TEXT("n26", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
 //   #X0:clk @TEXT("refclk", dx=-0.4, dy=-0.25, halign="end") => @SET-STYLE $fly_label_style;
 //   #X0:reset @TEXT("reset", dx=0, dy=-1.0, halign="middle") => @SET-STYLE $fly_label_style;

@@ -1,6 +1,6 @@
 simulator lang=spectre
-// @RNL(type="header") {
-//   @VERSION("0.3");
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4");
+//   @VERSION("0.4");
 //   @USE-PACKAGE(name="pll-semantics", version="0.3", path="../pll_semantics.rnl")
 // }
 subckt tx_fll_counter_pdk110_71 (clk gate reset q0 q1 q2 q3 q4 q5 q6 q7 q8 q9 q10 q11 q12 q13 vdd vss)
@@ -26,7 +26,7 @@ XF13 (qb12 reset q13 qb13 vdd vss) tx_tff_pdk110_73
 //
 //   /* --- 1. Circuit Semantics --- */
 //   %cnt = {#XCI #XGE #XG}(clock_gating) {#XF0 #XF1 #XF2 #XF3 #XF4 #XF5 #XF6 #XF7 #XF8 #XF9 #XF10 #XF11 #XF12 #XF13}(toggle_stages) @AS(bits=14, architecture="asynchronous_ripple_carry") $RIPPLE_COUNTER;
-//   {%pclk #XG #XF0 #XF1 #XF2 #XF3 #XF4 #XF5 #XF6 #XF7 #XF8 #XF9 #XF10 #XF11 #XF12 #XF13 %pq} @AS(direction="left-to-right") $FLOW;
+//   {%pclk #XG #XF0 #XF1 #XF2 #XF3 #XF4 #XF5 #XF6 #XF7 #XF8 #XF9 #XF10 #XF11 #XF12 #XF13 %pq} @AS $SIGNAL_FLOW; {%pclk #XG #XF0 #XF1 #XF2 #XF3 #XF4 #XF5 #XF6 #XF7 #XF8 #XF9 #XF10 #XF11 #XF12 #XF13 %pq} @ORDER("left-to-right", priority="low");
 //   $NO_CONNECT @ATTACH #XF13:qb;
 //
 //   /* --- 2. Schematic Placement & Orientation --- */
@@ -35,7 +35,7 @@ XF13 (qb12 reset q13 qb13 vdd vss) tx_tff_pdk110_73
 //   %pgate  = $IO_PORT @ATTACH &gate  => @PLACE(2, 12)   => @ORIENT("R0");
 //   %preset = $IO_PORT @ATTACH &reset => @PLACE(2, 5)    => @ORIENT("R0");
 //   %pq     = $IO_PORT @ATTACH &q0    => @PLACE(204, 22) => @ORIENT("MY");
-//   %pq @TEXT("q<13:0>", key="name");
+//   %pq @TEXT("q<13:0>", key="netname");
 //
 //   #XCI @PLACE(8, 10)  => @ORIENT("R0");
 //   #XGE @PLACE(16, 10) => @ORIENT("R0");
@@ -56,18 +56,18 @@ XF13 (qb12 reset q13 qb13 vdd vss) tx_tff_pdk110_73
 //   #XF13 @PLACE(192, 14) => @ORIENT("R0");
 //
 //   /* --- 3. Explicit Manhattan, Single-Line Bus & Flying-Wire Wiring --- */
-//   {&q0 &q1 &q2 &q3 &q4 &q5 &q6 &q7 &q8 &q9 &q10 &q11 &q12 &q13} @WIRE { (40, 22) %pq:p } => @TEXT("Q<13:0>") => @SET-STYLE $bus_label_style;
+//   {&q0 &q1 &q2 &q3 &q4 &q5 &q6 &q7 &q8 &q9 &q10 &q11 &q12 &q13} @WIRE { (40, 22) %pq::pin } => @TEXT("Q<13:0>") => @SET-STYLE $bus_label_style;
 //   %jclk1 = (5, 16);
 //   %jclk2 = (5, 10);
-//   $JUNCTION @ATTACH %jclk1;
-//   $JUNCTION @ATTACH %jclk2;
-//   &clk @WIRE { %pclk:p %jclk1 (22, 16) #XG:a };
+//   $JUNCTION @ATTACH %jclk1 => @PLACE(5, 16);
+//   $JUNCTION @ATTACH %jclk2 => @PLACE(5, 10);
+//   &clk @WIRE { %pclk::pin %jclk1 (22, 16) #XG:a };
 //   &clk @WIRE { %jclk1 %jclk2 #XCI:a };
 //   &clk @WIRE { %jclk2 (5, 8) (12, 8) #XGE:gateb };
 //
 //   &clkb      @WIRE { #XCI:y #XGE:gate };
-//   &gate      @WIRE { %pgate:p (12, 12) #XGE:d };
-//   &reset     @WIRE { %preset:p (8, 5) } => @TEXT("reset") => @SET-STYLE $fly_label_style;
+//   &gate      @WIRE { %pgate::pin (12, 12) #XGE:d };
+//   &reset     @WIRE { %preset::pin (8, 5) } => @TEXT("reset") => @SET-STYLE $fly_label_style;
 //   &safe_gate @WIRE { #XGE:q (21, 10) (21, 14) #XG:b };
 //   &gclk      @WIRE { #XG:y #XF0:clk };
 //   &q0 @WIRE { #XF0:q (40, 22) } => @TEXT("q0") => @SET-STYLE $fly_label_style;
