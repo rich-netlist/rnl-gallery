@@ -1,0 +1,237 @@
+// Continuous-time linear equalizer (CTLE): source RC-degenerated NMOS differential pair
+// The RC bridge RS || CS between the two sources gives the peaking; matched resistor loads and matched tail current
+// sinks. The top level drives it with differential sine sources.
+// @RNL(type="header") { @USE-PACKAGE(name="rnl-std-all", version="0.4"); @USE-PACKAGE(name="rnl-std-no-instance-labels", version="0.4"); @USE-PACKAGE(name="rnl-std-semantics", version="0.4"); @VERSION("0.4")}
+simulator lang=spectre
+
+model nch mos1 type=n vto=0.45 kp=200u lambda=0.05
+
+subckt ctle inp inn outp outn vdd vss vb
+RD1 (vdd outn) resistor r=1.5k
+RD2 (vdd outp) resistor r=1.5k
+M1 (outn inp s1 vss) nch w=60u l=0.3u
+M2 (outp inn s2 vss) nch w=60u l=0.3u
+RS (s1 s2) resistor r=1k
+CS (s1 s2) capacitor c=200f
+MT1 (s1 vb vss vss) nch w=30u l=0.3u
+MT2 (s2 vb vss vss) nch w=30u l=0.3u
+// @RNL {
+//   &vdd @ADD-TO $SUPPLY_NET_SET;
+//   &vss @ADD-TO $GROUND_NET_SET;
+//   &vb @ADD-TO $BIAS_NET_SET;
+//   $IO_PORT @ATTACH &inp => %p_inp;
+//   $IO_PORT @ATTACH &inn => %p_inn;
+//   $IO_PORT @ATTACH &outn => %p_outn;
+//   $IO_PORT @ATTACH &outp => %p_outp;
+//   %routed_nets = # @SELECT-NET;
+//   %routed_nets @ROUTE-NET;
+//
+//   {#RD1:p #RD2:p #M1:d #M2:d #MT1:d #MT2:d} @CURRENT("in");
+//   {#RD1:n #RD2:n #M1:s #M2:s #MT1:s #MT2:s} @CURRENT("out");
+//
+//   /* what the circuit is: a differential pair whose sources are bridged by RS || CS, giving a zero (the equalizer's
+//      boost), loaded by matched resistors, with a matched tail current sink for each side */
+//   %rc_deg = {#RS #CS} @AS $PARALLEL_VERTICAL;
+//   %dp_h = #M1(left) #M2(right) #MT1(tailleft) #MT2(tailright) %rc_deg(bridge) @AS $DEGENERATED_DIFFERENTIAL_PAIR_TYPE_H;
+//   %rd = {#RD1 #RD2} @AS $MATCHED_RESISTOR;
+//   %amp = %dp_h(transconductor) %rd(load) @AS $TRANSCONDUCTOR_Z_AMPLIFIER;
+//   %flow = {%dp_h #RD1 #RD2}(path) {%p_inp %p_inn}(source) {%p_outn %p_outp}(load) @AS $SIGNAL_FLOW;
+//
+//   /* the two columns are branches from the supply to the ground: the load resistor on top, the input NMOS in the
+//      middle, the matched tail current sink at the bottom */
+//   %br_left = {#RD1 #M1 #MT1} @AS $BRANCH;
+//   %br_right = {#RD2 #M2 #MT2} @AS $BRANCH;
+//
+//   /* the parallel degeneration bridge RS and CS lies vertically across the H between the two source nodes, RS above
+//      CS, between the two columns */
+//   %bridge_order = {%br_left %rc_deg %br_right} @ORDER("left-to-right");
+//
+//   /* the two tail current sinks are mirror images of each other, the gate of the left one facing left: both
+//      gates face outwards, like those of the input pair */
+//   %tails_mirrored = #MT1 #MT2 @ORIENT-RELATION("MY");
+//   %mt1_gate_left = #MT1:g @ORIENT("left");
+//
+//   /* the two output ports are mirror images of each other, like the input ports */
+//   %out_ports_mirrored = %p_outn %p_outp @ORIENT-RELATION("MY");
+//
+//   /* the block symbol drawn for the instances of ctle */
+//   $CTLE_SYM = @DEFINE-SYMBOL(box=[-5, -3, 5, 3]) {
+//     (-5, 1) @PIN(terminal="inp", direction="left");
+//     (-5, -1) @PIN(terminal="inn", direction="left");
+//     (5, 1) @PIN(terminal="outp", direction="right");
+//     (5, -1) @PIN(terminal="outn", direction="right");
+//     (0, 3) @PIN(terminal="vdd", direction="up");
+//     (0, -3) @PIN(terminal="vss", direction="down");
+//     (-2, 3) @PIN(terminal="vb", direction="up");
+//     @LINE {(-4, 2.5) (-4, -2.5) (4, -1.5) (4, 1.5) (-4, 2.5)};
+//     @LINE {(-5, 1) (-4, 1)};
+//     @LINE {(-5, -1) (-4, -1)};
+//     @LINE {(4, 1) (5, 1)};
+//     @LINE {(4, -1) (5, -1)};
+//     @LINE {(0, 2.0) (0, 3)};
+//     @LINE {(0, -2.0) (0, -3)};
+//     @LINE {(-2, 2.25) (-2, 3)};
+//     ? @TEXT("${name}", key="name") => @PLACE(1.0, 2.8)
+//   };
+//   # @SET-SYMBOL $CTLE_SYM
+// }
+// @RNL(type="generated", priority="high", author="rnl-solver 0.1", hash="sig2:ea3416f6d5825c9f.a50ff5d245a6be38", numbering="26b3c2dde745d01c") {
+//   %ground_stub_MT1_s = $GROUND_STUB @ATTACH(gap=3) #MT1::s;
+//   %ground_stub_MT2_s = $GROUND_STUB @ATTACH(gap=3) #MT2::s;
+//   %supply_stub_RD1_p = $SUPPLY_STUB @ATTACH(gap=3) #RD1::p;
+//   %supply_stub_RD2_p = $SUPPLY_STUB @ATTACH(gap=3) #RD2::p;
+//   %bias_stub_MT1_g = $BIAS_STUB @ATTACH #MT1::g;
+//   %bias_stub_MT2_g = $BIAS_STUB @ATTACH #MT2::g;
+//   %io_port_vdd = $IO_PORT @ATTACH &vdd;
+//   %io_port_vss = $IO_PORT @ATTACH &vss;
+//   %io_port_vb = $IO_PORT @ATTACH &vb;
+//   %rt1 = (23, 24);
+//   %rt2 = (12, 24);
+//   %rt3 = (12, 12);
+//   %rt4 = (14.5, 12);
+//   %rt5 = (20.5, 12);
+//   %rt6 = (23, 12);
+//   #RD1 @PLACE(12, 29) => @ORIENT("R0");
+//   #RD2 @PLACE(23, 29) => @ORIENT("R0");
+//   #M1 @PLACE(12, 19) => @ORIENT("R0");
+//   #M2 @PLACE(23, 19) => @ORIENT("MY");
+//   #RS @PLACE(17.5, 17) => @ORIENT("R90");
+//   #CS @PLACE(17.5, 12) => @ORIENT("R90");
+//   #MT1 @PLACE(12, 9) => @ORIENT("R0");
+//   #MT2 @PLACE(23, 9) => @ORIENT("MY");
+//   %p_inp @PLACE(4, 19) => @ORIENT("R0");
+//   %p_inn @PLACE(28, 19) => @ORIENT("MY");
+//   %p_outn @PLACE(11, 24) => @ORIENT("R0");
+//   %p_outp @PLACE(24, 24) => @ORIENT("MY");
+//   %rc_deg @PLACE(17.5, 14.5);
+//   %#1 @PLACE(4, -1.73);
+//   %dp_h @PLACE(17.5, 19);
+//   %#2 @PLACE(4, -1.73);
+//   %#3 @PLACE(4, -1.73);
+//   %rd @PLACE(4, -1.73);
+//   %#4 @PLACE(4, -1.73);
+//   %amp @PLACE(4, -1.73);
+//   %flow @PLACE(4, -1.73);
+//   %br_left @PLACE(12, -0.95);
+//   %#5 @PLACE(4, -1.73);
+//   %br_right @PLACE(23, -0.95);
+//   %#6 @PLACE(4, -1.73);
+//   %ground_stub_MT1_s @PLACE(4, -1.73);
+//   %ground_stub_MT1_s::g @PLACE(12, 5) => @ORIENT("R0");
+//   %ground_stub_MT2_s @PLACE(4, -1.73);
+//   %ground_stub_MT2_s::g @PLACE(23, 5) => @ORIENT("R0");
+//   %supply_stub_RD1_p @PLACE(4, -1.73);
+//   %supply_stub_RD1_p::s @PLACE(12, 33) => @ORIENT("R0");
+//   %supply_stub_RD2_p @PLACE(4, -1.73);
+//   %supply_stub_RD2_p::s @PLACE(23, 33) => @ORIENT("R0");
+//   %bias_stub_MT1_g @PLACE(4, -1.73);
+//   %bias_stub_MT1_g::b @PLACE(9, 9) => @ORIENT("MYR90");
+//   %bias_stub_MT2_g @PLACE(4, -1.73);
+//   %bias_stub_MT2_g::b @PLACE(26, 9) => @ORIENT("R270");
+//   %io_port_vdd @PLACE(4, 9) => @ORIENT("R0");
+//   %io_port_vss @PLACE(4, 5) => @ORIENT("R0");
+//   %io_port_vb @PLACE(4, 1) => @ORIENT("R0");
+//   &inp @WIRE(mode="straight") {%p_inp::pin #M1::g};
+//   &inn @WIRE(mode="straight") {#M2::g %p_inn::pin};
+//   &outp @WIRE(mode="straight") {#M2::d %rt1};
+//   &outp @WIRE(mode="straight") {%rt1 #RD2::n};
+//   &outp @WIRE(mode="straight") {%rt1 %p_outp::pin};
+//   &outn @WIRE(mode="straight") {%p_outn::pin %rt2};
+//   &outn @WIRE(mode="straight") {#M1::d %rt2};
+//   &outn @WIRE(mode="straight") {%rt2 #RD1::n};
+//   &s1 @WIRE(mode="straight") {#MT1::d %rt3};
+//   &s1 @WIRE(mode="straight") {%rt3 #M1::s};
+//   &s1 @WIRE(mode="straight") {%rt3 %rt4};
+//   &s1 @WIRE(mode="straight") {%rt4 (14.5, 17) #RS::p};
+//   &s1 @WIRE(mode="straight") {%rt4 #CS::p};
+//   &s2 @WIRE(mode="straight") {#CS::n %rt5};
+//   &s2 @WIRE(mode="straight") {#RS::n (20.5, 17) %rt5};
+//   &s2 @WIRE(mode="straight") {%rt5 %rt6};
+//   &s2 @WIRE(mode="straight") {#MT2::d %rt6};
+//   &s2 @WIRE(mode="straight") {%rt6 #M2::s};
+//   $JUNCTION @ATTACH %rt1 => @PLACE(23, 24);
+//   $JUNCTION @ATTACH %rt2 => @PLACE(12, 24);
+//   $JUNCTION @ATTACH %rt3 => @PLACE(12, 12);
+//   $JUNCTION @ATTACH %rt4 => @PLACE(14.5, 12);
+//   $JUNCTION @ATTACH %rt5 => @PLACE(20.5, 12);
+//   $JUNCTION @ATTACH %rt6 => @PLACE(23, 12)
+// }
+ends ctle
+
+VDD (vdd 0) vsource dc=1.8
+VB (vb 0) vsource dc=0.65
+VIP (inp 0) vsource dc=1.0 mag=0.5
+VIN (inn 0) vsource dc=1.0 mag=0.5 phase=180
+X1 (inp inn outp outn vdd 0 vb) ctle
+CLD (outp outn) capacitor c=50f
+// @RNL {
+//   {#VIP #VIN} @SET-SYMBOL $SINE_VOLTAGE_SOURCE;
+//   &vdd @ADD-TO $SUPPLY_NET_SET;
+//   &vb @ADD-TO $BIAS_NET_SET;
+//   $NET_LABEL @ATTACH &outp => %p_outp;
+//   $NET_LABEL @ATTACH &outn => %p_outn;
+//   %routed_nets = # @SELECT-NET;
+//   %routed_nets @ROUTE-NET;
+//
+//   /* what the circuit is: the CTLE driven by the differential sine sources, loaded by the capacitor CLD */
+//   %flow = {#X1}(path) {#VIP #VIN}(source) {#CLD %p_outp %p_outn}(load) @AS $SIGNAL_FLOW;
+//
+//   /* signal flow left to right: the supply and bias sources, the differential input sources VIP and VIN, X1, the
+//      differential load capacitor CLD, the output tags; the sources stand in one row, X1 and CLD too */
+//   %testbench_order = {#VDD #VB #VIP #VIN #X1 #CLD {%p_outp %p_outn}} @ORDER("left-to-right");
+//   %source_align = {#VDD #VB #VIP #VIN} @ALIGN("y");
+//   %amp_load_align = #X1 #CLD @ALIGN("y");
+//
+//   /* only the amplifier, the sources and the load are oriented */
+//   %upright_parts = {#X1 #VIP #VIN #CLD #VDD #VB} @ORIENT("R0");
+// }
+// @RNL(type="generated", priority="high", author="rnl-solver 0.1", hash="sig2:de1e94840bd8705c.6bfa8c77b26a3be4") {
+//   %ground_stub_VDD_n = $GROUND_STUB @ATTACH(gap=3) #VDD::n;
+//   %ground_stub_VB_n = $GROUND_STUB @ATTACH(gap=3) #VB::n;
+//   %ground_stub_VIP_n = $GROUND_STUB @ATTACH(gap=3) #VIP::n;
+//   %ground_stub_VIN_n = $GROUND_STUB @ATTACH(gap=3) #VIN::n;
+//   %ground_stub_X1_vss = $GROUND_STUB @ATTACH(gap=3) #X1:vss;
+//   %supply_stub_VDD_p = $SUPPLY_STUB @ATTACH(gap=3) #VDD::p;
+//   %supply_stub_X1_vdd = $SUPPLY_STUB @ATTACH(gap=3) #X1:vdd;
+//   %bias_stub_VB_p = $BIAS_STUB @ATTACH #VB::p;
+//   %bias_stub_X1_vb = $BIAS_STUB @ATTACH #X1:vb;
+//   %rt1 = (31, 14);
+//   %rt2 = (31, 2);
+//   #VDD @PLACE(0, 0) => @ORIENT("R0");
+//   #VB @PLACE(6, 0) => @ORIENT("R0");
+//   #VIP @PLACE(11, 0) => @ORIENT("R0");
+//   #VIN @PLACE(16, 0) => @ORIENT("R0");
+//   #X1 @PLACE(22, 9) => @ORIENT("R0");
+//   #CLD @PLACE(31, 9) => @ORIENT("R0");
+//   %p_outp @PLACE(32, 14) => @ORIENT("MY");
+//   %p_outn @PLACE(32, 2) => @ORIENT("MY");
+//   %flow @PLACE(6, 0);
+//   %ground_stub_VDD_n @PLACE(6, 0);
+//   %ground_stub_VDD_n::g @PLACE(0, -4) => @ORIENT("R0");
+//   %ground_stub_VB_n @PLACE(6, 0);
+//   %ground_stub_VB_n::g @PLACE(6, -4) => @ORIENT("R0");
+//   %ground_stub_VIP_n @PLACE(6, 0);
+//   %ground_stub_VIP_n::g @PLACE(11, -4) => @ORIENT("R0");
+//   %ground_stub_VIN_n @PLACE(6, 0);
+//   %ground_stub_VIN_n::g @PLACE(16, -4) => @ORIENT("R0");
+//   %ground_stub_X1_vss @PLACE(6, 0);
+//   %ground_stub_X1_vss::g @PLACE(22, 4) => @ORIENT("R0");
+//   %supply_stub_VDD_p @PLACE(6, 0);
+//   %supply_stub_VDD_p::s @PLACE(0, 4) => @ORIENT("R0");
+//   %supply_stub_X1_vdd @PLACE(6, 0);
+//   %supply_stub_X1_vdd::s @PLACE(22, 14) => @ORIENT("R0");
+//   %bias_stub_VB_p @PLACE(6, 0);
+//   %bias_stub_VB_p::b @PLACE(6, 2) => @ORIENT("R0");
+//   %bias_stub_X1_vb @PLACE(6, 0);
+//   %bias_stub_X1_vb::b @PLACE(20, 12) => @ORIENT("R0");
+//   &inp @WIRE(mode="straight") {#VIP::p (11, 10) #X1:inp};
+//   &inn @WIRE(mode="straight") {#VIN::p (16, 8) #X1:inn};
+//   &outp @WIRE(mode="straight") {#X1:outp (28, 10) (28, 14) %rt1};
+//   &outp @WIRE(mode="straight") {#CLD::p %rt1};
+//   &outp @WIRE(mode="straight") {%rt1 %p_outp::pin};
+//   &outn @WIRE(mode="straight") {#X1:outn (28, 8) (28, 2) %rt2};
+//   &outn @WIRE(mode="straight") {%rt2 %p_outn::pin};
+//   &outn @WIRE(mode="straight") {%rt2 #CLD::n};
+//   $JUNCTION @ATTACH %rt1 => @PLACE(31, 14);
+//   $JUNCTION @ATTACH %rt2 => @PLACE(31, 2)
+// }
